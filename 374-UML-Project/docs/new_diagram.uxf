@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>130</y>
-      <w>290</w>
-      <h>190</h>
+      <x>168</x>
+      <y>32</y>
+      <w>232</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>ClassContainer
 --
@@ -18,26 +18,95 @@
 +void addClass()
 +void resolveDependencies()
 +JClass getClass()
++void addField(String, String)
++void addMethod(String, Arraylist&lt;String&gt;)
+
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
-      <y>380</y>
-      <w>210</w>
-      <h>190</h>
+      <x>184</x>
+      <y>240</y>
+      <w>200</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>JClass
 --
 -name: String
+-extends: JClass
+-implements: ArrayList&lt;JInterface&gt;
 -fields: ArrayList&lt;JField&gt;
 -methods: ArrayList&lt;JMethod&gt;
 --
 +String getName()
-+ArrayList&lt;JField&gt; 
-</panel_attributes>
++JClass getParent()
++ArrayList&lt;JInterface&gt; getInterfaces()
++JField getField(String)
++JMethod getMethod(String)</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>424</x>
+      <y>240</y>
+      <w>168</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>JField
+--
+-name: String
+-type: JClass</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>448</y>
+      <w>168</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>JMethod
+--
+-name: String
+-fields: ArrayList&lt;JClass&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>376</x>
+      <y>312</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>392</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>176</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
 </diagram>
