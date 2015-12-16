@@ -1,14 +1,9 @@
 
-public class JField {
-	private String name;
+public class JField extends JType {
 	private JClass type;
 	
-	public JField(String name, JClass type) {
-		this.name = name;
+	public JField(String name, String access, JClass type) {
+		super(name,access);
 		this.type = type;
-	}
-	
-	public String getName() {
-		return this.name;
 	}
 }

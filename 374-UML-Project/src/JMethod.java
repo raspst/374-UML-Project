@@ -1,15 +1,10 @@
 import java.util.ArrayList;
 
-public class JMethod {
-	String name;
+public class JMethod extends JType {
 	ArrayList<JClass> parameters;
 	
-	public JMethod(String name, ArrayList<JClass> parameters) {
-		this.name = name;
+	public JMethod(String name, String access, ArrayList<JClass> parameters) {
+		super(name, access);
 		this.parameters = parameters;
-	}
-	
-	public String getName() {
-		return this.name;
 	}
 }
