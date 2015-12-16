@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>8</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>216</x>
-      <y>40</y>
-      <w>232</w>
-      <h>152</h>
+      <x>308</x>
+      <y>504</y>
+      <w>203</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>ClassContainer
 --
 -classes: Arraylist&lt;JClass&gt;
--extends: HashMap&lt;String, String&gt;
+-superclasses: HashMap&lt;String, String&gt;
 -inherits: HashMap&lt;String, ArrayList&lt;String&gt;&gt;
 --
 +void addClass()
 +void resolveDependencies()
 +JClass getClass()
-+void addField(String, String)
-+void addMethod(String, Arraylist&lt;String&gt;)
++void addField(String, String, String)
++void addMethod(String, String, ArrayList&lt;String&gt;)
 
 
 </panel_attributes>
@@ -28,14 +28,96 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>232</x>
-      <y>248</y>
-      <w>200</w>
-      <h>160</h>
+      <x>322</x>
+      <y>343</y>
+      <w>175</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>JClass
 --
--name: String
+-extends: JClass
+-implements: ArrayList&lt;JInterface&gt;
+-fields: ArrayList&lt;JField&gt;
+--
++JClass getParent()
++ArrayList&lt;JInterface&gt; getInterfaces()
++JField getField(String)
++void addField(String, JClass)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>623</x>
+      <y>343</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>JField
+--
+-type: JClass
+--
++JClass getType()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>49</x>
+      <y>350</y>
+      <w>168</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>JMethod
+--
+-parameters: ArrayList&lt;JClass&gt;
+--
++ArrayList&lt;JClass&gt; getParameters()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>406</y>
+      <w>147</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>190.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>413</y>
+      <w>126</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>399</x>
+      <y>476</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>308</x>
+      <y>175</y>
+      <w>203</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>JInterface
+--
 -extends: JClass
 -implements: ArrayList&lt;JInterface&gt;
 -fields: ArrayList&lt;JField&gt;
@@ -45,78 +127,69 @@
 +JClass getParent()
 +ArrayList&lt;JInterface&gt; getInterfaces()
 +JField getField(String)
-+JMethod getMethod(String)</panel_attributes>
++JMethod getMethod(String)
++void addMethod(String, ArrayList&lt;JClass&gt;)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>472</x>
-      <y>248</y>
-      <w>168</w>
-      <h>152</h>
+      <x>336</x>
+      <y>0</y>
+      <w>147</w>
+      <h>133</h>
     </coordinates>
-    <panel_attributes>JField
+    <panel_attributes>JType
 --
 -name: String
 -access: String
--type: JClass
 --
 +String getName()
-+String getAccess()
-+JClass getType()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>240</x>
-      <y>456</y>
-      <w>192</w>
-      <h>152</h>
-    </coordinates>
-    <panel_attributes>JMethod
---
--name: String
--access: String
--parameters: ArrayList&lt;JClass&gt;
---
-+String getName()
-+String getAccess()
-+ArrayList&lt;JClass&gt; getParameters()</panel_attributes>
++String getAccess()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>424</x>
-      <y>320</y>
-      <w>64</w>
-      <h>24</h>
+      <x>399</x>
+      <y>308</y>
+      <w>21</w>
+      <h>49</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>400</y>
-      <w>24</w>
-      <h>72</h>
+      <x>476</x>
+      <y>56</y>
+      <w>238</w>
+      <h>301</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;320.0;410.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>184</y>
-      <w>24</w>
-      <h>80</h>
+      <x>126</x>
+      <y>56</y>
+      <w>224</w>
+      <h>308</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>300.0;10.0;10.0;420.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>399</x>
+      <y>126</y>
+      <w>21</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
 </diagram>
