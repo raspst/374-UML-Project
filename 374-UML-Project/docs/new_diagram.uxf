@@ -5,17 +5,18 @@
     <id>UMLClass</id>
     <coordinates>
       <x>308</x>
-      <y>504</y>
+      <y>511</y>
       <w>203</w>
       <h>133</h>
     </coordinates>
     <panel_attributes>ClassContainer
 --
--classes: Arraylist&lt;JClass&gt;
+-classes: ArrayList&lt;JClass&gt;
 -superclasses: HashMap&lt;String, String&gt;
 -inherits: HashMap&lt;String, ArrayList&lt;String&gt;&gt;
 --
-+void addClass()
++void addClass(String, String, String, ArrayList&lt;String&gt;)
++void addInterface(String, String, ArrayList&lt;String&gt;)
 +void resolveDependencies()
 +JClass getClass()
 +void addField(String, String, String)
@@ -42,7 +43,7 @@
 +JClass getParent()
 +ArrayList&lt;JInterface&gt; getInterfaces()
 +JField getField(String)
-+void addField(String, JClass)</panel_attributes>
++void addField(JField)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -63,8 +64,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>49</x>
-      <y>350</y>
+      <x>70</x>
+      <y>175</y>
       <w>168</w>
       <h>133</h>
     </coordinates>
@@ -89,13 +90,13 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>413</y>
-      <w>126</w>
+      <x>231</x>
+      <y>231</y>
+      <w>91</w>
       <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -103,10 +104,10 @@
       <x>399</x>
       <y>476</y>
       <w>21</w>
-      <h>42</h>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -128,14 +129,14 @@
 +ArrayList&lt;JInterface&gt; getInterfaces()
 +JField getField(String)
 +JMethod getMethod(String)
-+void addMethod(String, ArrayList&lt;JClass&gt;)</panel_attributes>
++void addMethod(JMethod)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>336</x>
-      <y>0</y>
+      <y>7</y>
       <w>147</w>
       <h>133</h>
     </coordinates>
@@ -163,33 +164,33 @@
     <id>Relation</id>
     <coordinates>
       <x>476</x>
-      <y>56</y>
+      <y>63</y>
       <w>238</w>
-      <h>301</h>
+      <h>294</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;320.0;410.0</additional_attributes>
+    <additional_attributes>10.0;10.0;320.0;400.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>126</x>
-      <y>56</y>
-      <w>224</w>
-      <h>308</h>
+      <x>147</x>
+      <y>63</y>
+      <w>203</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>300.0;10.0;10.0;420.0</additional_attributes>
+    <additional_attributes>270.0;10.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>399</x>
-      <y>126</y>
+      <y>133</y>
       <w>21</w>
-      <h>63</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
 </diagram>
