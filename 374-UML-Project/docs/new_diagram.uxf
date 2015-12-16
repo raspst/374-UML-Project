@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>130</y>
+      <w>290</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>ClassContainer
+--
+-classes: Arraylist&lt;JClass&gt;
+-extends: HashMap&lt;String, String&gt;
+-inherits: HashMap&lt;String, ArrayList&lt;String&gt;&gt;
+--
++void addClass()
++void resolveDependencies()
++JClass getClass()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>380</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>JClass
+--
+-name: String
+-fields: ArrayList&lt;JField&gt;
+-methods: ArrayList&lt;JMethod&gt;
+--
++String getName()
++ArrayList&lt;JField&gt; 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
