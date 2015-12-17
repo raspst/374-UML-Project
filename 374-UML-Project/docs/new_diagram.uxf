@@ -73,7 +73,8 @@
 --
 -parameters: ArrayList&lt;JClass&gt;
 --
-+ArrayList&lt;JClass&gt; getParameters()</panel_attributes>
++ArrayList&lt;JClass&gt; getParameters()
++void addParameter(ArrayList&lt;JClass&gt;)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -149,7 +150,9 @@
 -access: String
 --
 +String getName()
-+String getAccess()</panel_attributes>
++String getAccess()
++String setName()
++String setAccess()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

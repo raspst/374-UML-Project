@@ -1,11 +1,17 @@
+import java.util.HashMap;
+
+import org.objectweb.asm.Opcodes;
 
 public class JType {
 	private String name;
 	private String access;
-	
-	public JType(String name, String access) {
+	private HashMap<Integer,String> accessTypes;
+	public JType(String name) {
 		this.name = name;
-		this.access = access;
+		accessTypes = new HashMap<Integer,String>();
+		accessTypes.put(Opcodes.ACC_PRIVATE, "-");
+		accessTypes.put(Opcodes.ACC_PROTECTED, "#");
+		accessTypes.put(Opcodes.ACC_PUBLIC, "+");
 	}
 	
 	public String getName() {
@@ -14,5 +20,9 @@ public class JType {
 	
 	public String getAccess() {
 		return this.access;
+	}
+
+	public void setAccess(int access){
+		this.access=accessTypes.get(access);
 	}
 }

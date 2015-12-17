@@ -6,12 +6,8 @@ public class JInterface extends JType {
 	private ArrayList<JField> constants;
 	private ArrayList<JMethod> methods;
 	
-	public JInterface(String name, String access, JClass superclass, 
-			ArrayList<JInterface> interfaces, ArrayList<JField> fields,
-			ArrayList<JMethod> methods) {
-		super(name, access);
-		this.superclass= superclass;
-		this.interfaces = interfaces;
+	public JInterface(String name) {
+		super(name);
 		this.constants = new ArrayList<JField>();
 		this.methods = new ArrayList<JMethod>();
 	}
@@ -47,5 +43,10 @@ public class JInterface extends JType {
 	
 	public void addField(JField field) {
 		this.constants.add(field);
+	}
+	
+	public void setDependencies(JClass superclass, ArrayList<JInterface> interfaces){
+		this.superclass= superclass;
+		this.interfaces = interfaces;
 	}
 }

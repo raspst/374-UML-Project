@@ -2,61 +2,41 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ClassContainer {
-	private ArrayList<JClass> classes;
+	private HashMap<String, JClass> classes;
 	private HashMap<String, String> superclasses;
 	private HashMap<String, ArrayList<String>> interfaces;
-	
+
 	public ClassContainer() {
-		this.classes = new ArrayList<JClass>();
+		this.classes = new HashMap<String, JClass>();
 		this.superclasses = new HashMap<String, String>();
 		this.interfaces = new HashMap<String, ArrayList<String>>();
 	}
-	
-	public void addClass(JClass a_class) {
-		this.classes.add(a_class);
-	}
-	
+
 	public JClass getClass(String name) {
-		for(JClass c: this.classes) {
-			if(c.getName().equals(name)) {
-				return c;
-			}
+		JClass theclass = classes.get(name);
+		if (theclass == null) {
+			theclass = new JClass(name);
+			classes.put(name, theclass);
 		}
-		return null;
+		return theclass;
 	}
-	
-	void addField(String fieldName, String className, String access, String type) {
+
+	void addField(String fieldName, String className, int access, String type) {
 		JClass currentClass = null;
 		JClass currentType = null;
-		for(JClass c: this.classes) {
-			if(c.getName().equals(className)) {
-				currentClass = c;
-				break;
-			}
-		}
-		for(JClass j: this.classes) {
-			if(j.getName().equals(type)) {
-				currentType = j;
-			}
-		}
+
+		currentClass = getClass(className);
+		currentType = getClass(type);
+
 		currentClass.addField(new JField(fieldName, access, currentType));
 	}
-	
+
 	void addMethod(String methodName, String className, String access, ArrayList<String> parameters) {
 		JClass currentClass = null;
 		ArrayList<JClass> new_parameters = null;
-		for(JClass c: this.classes) {
-			if(c.getName().equals(className)) {
-				currentClass = c;
-				break;
-			}
-		}
-		for(JClass j: this.classes) {
-			for(String s: parameters) {
-				if(j.getName().equals(s)) {
-					new_parameters.add(j);
-				}
-			}
+		currentClass = getClass(className);
+		for (String s : parameters) {
+			new_parameters.add(getClass(s));
 		}
 		currentClass.addMethod(new JMethod(methodName, access, new_parameters));
 	}
