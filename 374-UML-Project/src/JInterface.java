@@ -37,6 +37,10 @@ public class JInterface extends JType {
 		return null;
 	}
 	
+	public ArrayList<JField> getFields() {
+		return this.constants;
+	}
+	
 	public void addMethod(JMethod method) {
 		this.methods.add(method);
 	}

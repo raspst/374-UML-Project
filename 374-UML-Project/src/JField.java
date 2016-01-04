@@ -7,4 +7,8 @@ public class JField extends JType {
 		this.setAccess(access);
 		this.type = type;
 	}
+	
+	public String getGraphViz() {
+		return this.getAccess() + " " + this.getName() + " : " + this.type.getName();
+	}
 }
