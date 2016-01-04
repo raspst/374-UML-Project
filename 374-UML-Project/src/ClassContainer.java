@@ -5,6 +5,7 @@ public class ClassContainer {
 	private HashMap<String, JClass> classes;
 	private HashMap<String, String> superclasses;
 	private HashMap<String, ArrayList<String>> interfaces;
+	private HashMap<String, JInterface> interfacelist;
 
 	public ClassContainer() {
 		this.classes = new HashMap<String, JClass>();
@@ -21,6 +22,15 @@ public class ClassContainer {
 		return theclass;
 	}
 
+	public JInterface getInterface(String name) {
+		JInterface theInterface = interfacelist.get(name);
+		if(theInterface == null){
+			theInterface = new JInterface(name);
+			interfacelist.put(name, theInterface);
+		}
+		return theInterface;
+	}
+	
 	void addField(String fieldName, String className, int access, String type) {
 		JClass currentClass = null;
 		JClass currentType = null;

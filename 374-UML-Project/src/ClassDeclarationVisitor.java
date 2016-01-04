@@ -3,6 +3,7 @@
 import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 public class ClassDeclarationVisitor extends ClassContainerVisitor {
 
@@ -15,6 +16,11 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 			String[] interfaces) {
 		JClass c = container.getClass(name);
 		c.setAccess(access);
+		boolean isClass=true;
+        if((access&Opcodes.ACC_INTERFACE)!=0){
+            isClass=false;
+        }
+		JInterface inter = container.getInterface(name);
 		JClass superClass = container.getClass(superName);
 		System.out.println("Class: " + name +" extends "+superName+" implements "+Arrays.toString(interfaces));
 		
