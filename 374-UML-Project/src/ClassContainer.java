@@ -31,13 +31,13 @@ public class ClassContainer {
 		currentClass.addField(new JField(fieldName, access, currentType));
 	}
 
-	void addMethod(String methodName, String className, String access, ArrayList<String> parameters) {
+	void addMethod(String methodName, String className, int access, JClass returnType, ArrayList<String> parameters) {
 		JClass currentClass = null;
 		ArrayList<JClass> new_parameters = null;
 		currentClass = getClass(className);
 		for (String s : parameters) {
 			new_parameters.add(getClass(s));
 		}
-		currentClass.addMethod(new JMethod(methodName, access, new_parameters));
+		currentClass.addMethod(new JMethod(methodName, access, returnType, new_parameters));
 	}
 }
