@@ -11,6 +11,7 @@ public class ClassContainer {
 		this.classes = new HashMap<String, JClass>();
 		this.superclasses = new HashMap<String, String>();
 		this.interfaces = new HashMap<String, ArrayList<String>>();
+		this.interfacelist = new HashMap<String, JInterface>();
 	}
 
 	public JClass getClass(String name) {

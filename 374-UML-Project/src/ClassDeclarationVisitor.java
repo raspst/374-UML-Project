@@ -14,16 +14,23 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName,
 			String[] interfaces) {
-		JClass c = container.getClass(name);
-		c.setAccess(access);
 		boolean isClass=true;
         if((access&Opcodes.ACC_INTERFACE)!=0){
             isClass=false;
         }
+        if(!isClass){
 		JInterface inter = container.getInterface(name);
+        }
+        else{
+    	JClass c = container.getClass(name);
+    	c.setAccess(access);
 		JClass superClass = container.getClass(superName);
-		System.out.println("Class: " + name +" extends "+superName+" implements "+Arrays.toString(interfaces));
-		
+		c.setSuper(superClass);
+		for(String i:interfaces){
+		c.addInterface(container.getInterface(i));
+		}
+		System.out.println("Class: " + c.getName() +" extends "+c.getSuper().getName()+" implements "+Arrays.toString(c.getInterfaces().toArray()));
+        }
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 

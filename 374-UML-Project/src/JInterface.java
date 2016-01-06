@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class JInterface extends JType {
-	private JClass superclass;
 	private ArrayList<JInterface> interfaces;
 	private ArrayList<JField> constants;
 	private ArrayList<JMethod> methods;
@@ -10,9 +9,11 @@ public class JInterface extends JType {
 		super(name);
 		this.constants = new ArrayList<JField>();
 		this.methods = new ArrayList<JMethod>();
+		interfaces = new ArrayList<JInterface>();
 	}
-	public JClass getParent() {
-		return this.superclass;
+	
+	public void addInterface(JInterface i){
+		interfaces.add(i);
 	}
 	
 	public ArrayList<JInterface> getInterfaces() {
@@ -37,6 +38,10 @@ public class JInterface extends JType {
 		return null;
 	}
 	
+	public ArrayList<JMethod> getMethods(){
+		return methods;
+	}
+	
 	public ArrayList<JField> getFields() {
 		return this.constants;
 	}
@@ -50,7 +55,8 @@ public class JInterface extends JType {
 	}
 	
 	public void setDependencies(JClass superclass, ArrayList<JInterface> interfaces){
-		this.superclass= superclass;
 		this.interfaces = interfaces;
 	}
+	
+	
 }

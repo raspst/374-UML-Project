@@ -2,27 +2,27 @@ import java.util.ArrayList;
 
 public class JClass extends JInterface {
 	private ArrayList<JField> fields;
-	private ArrayList<JMethod> methods;
 	private JClass superclass;
-	private ArrayList<JInterface> interfaces;
-
+	
 	public JClass(String name) {
 		super(name);
 		fields = new ArrayList<JField>();
-		methods = new ArrayList<JMethod>();
 	}
 	
 	public void addField(JField f) {
 		fields.add(f);
 	}
 	
-	public void addMethod(JMethod m) {
-		methods.add(m);
+	public void setSuper(JClass s) {
+		superclass=s;
+	}
+	
+	public JClass getSuper() {
+		return this.superclass;
 	}
 	
 	public void setDependencies(JClass superclass, ArrayList<JInterface> interfaces) {
 		this.superclass = superclass;
-		this.interfaces = interfaces;
 	}
 	
 	public String getGraphViz() {
@@ -32,8 +32,8 @@ public class JClass extends JInterface {
 			s.append(fields.get(i).getGraphViz() + "\\l");
 		}
 		s.append("|");
-		for(int i = 0; i < methods.size(); i++) {
-			s.append(methods.get(i).getGraphViz() + "\\l");
+		for(int i = 0; i < getMethods().size(); i++) {
+			s.append(getMethods().get(i).getGraphViz() + "\\l");
 		}
 		s.append("}\"\n]");
 		return s.toString();
