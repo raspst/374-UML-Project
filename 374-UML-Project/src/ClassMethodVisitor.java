@@ -33,6 +33,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		else if(((access & Opcodes.ACC_PROTECTED) != 0)) {
 			symbol="#";
 		}
+		System.out.println("desc"+name);
 		System.out.println("    method "+ symbol+name + " " + Arrays.toString(classNames) + Type.getReturnType(desc).getClassName());
 		return toDecorate;
 	}

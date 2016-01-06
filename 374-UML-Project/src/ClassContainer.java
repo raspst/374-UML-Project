@@ -7,13 +7,22 @@ public class ClassContainer {
 	private HashMap<String, ArrayList<String>> interfaces;
 	private HashMap<String, JInterface> interfacelist;
 
+	private JClass activeClass;
+	
 	public ClassContainer() {
 		this.classes = new HashMap<String, JClass>();
 		this.superclasses = new HashMap<String, String>();
 		this.interfaces = new HashMap<String, ArrayList<String>>();
 		this.interfacelist = new HashMap<String, JInterface>();
 	}
+	
+	public void setActiveClass(JClass c){
+		activeClass=c;
+	}
 
+	public JClass getActiveClass(){
+		return activeClass;
+	}
 	public JClass getClass(String name) {
 		JClass theclass = classes.get(name);
 		if (theclass == null) {

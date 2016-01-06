@@ -23,6 +23,7 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
         }
         else{
     	JClass c = container.getClass(name);
+    	container.setActiveClass(c);
     	c.setAccess(access);
 		JClass superClass = container.getClass(superName);
 		c.setSuper(superClass);
