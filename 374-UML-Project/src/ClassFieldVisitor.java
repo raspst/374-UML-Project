@@ -5,9 +5,11 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
 
 public class ClassFieldVisitor extends ClassVisitor {
+	private ClassContainer container;
 
-	public ClassFieldVisitor(int arg0, ClassVisitor arg1) {
+	public ClassFieldVisitor(int arg0, ClassVisitor arg1, ClassContainer container) {
 		super(arg0, arg1);
+		this.container = container;
 	}
 	
 	@Override
@@ -16,6 +18,9 @@ public class ClassFieldVisitor extends ClassVisitor {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
 		System.out.println("    "+type+" "+name);
+		JClass c = container.getActiveClass();
+		JField toAdd = new JField(name, access, container.getClass(desc));
+		c.addField(toAdd);
 		return toDecorate;
 	}
 

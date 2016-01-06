@@ -13,9 +13,11 @@ public class DesignParser {
 		for(String className: args) {
 			ClassReader reader = new ClassReader(className);
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,container);		
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor);
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor);
+			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor,container);
+			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor,container);
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			JClass c = container.getClass(className);
+			System.out.println(c.getGraphViz());
 		}
 		/*ArrayList<JInterface> interfaces = new ArrayList<JInterface>();
 		interfaces.add(new JInterface("Interface1"));

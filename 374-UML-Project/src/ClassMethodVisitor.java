@@ -1,5 +1,6 @@
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
@@ -8,9 +9,11 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 public class ClassMethodVisitor extends ClassVisitor {
+	private ClassContainer container;
 
-	public ClassMethodVisitor(int arg0, ClassVisitor arg1) {
+	public ClassMethodVisitor(int arg0, ClassVisitor arg1, ClassContainer container) {
 		super(arg0, arg1);
+		this.container = container;
 	}
 	
 	@Override
@@ -35,6 +38,13 @@ public class ClassMethodVisitor extends ClassVisitor {
 		}
 		System.out.println("desc"+name);
 		System.out.println("    method "+ symbol+name + " " + Arrays.toString(classNames) + Type.getReturnType(desc).getClassName());
+		JClass c = container.getActiveClass();
+		ArrayList<JClass> parameters = new ArrayList<JClass>();
+		for(String s: classNames) {
+			parameters.add(container.getClass(s));
+		}
+		JMethod toAdd = new JMethod(name, access, container.getClass(desc), parameters);
+		c.addMethod(toAdd);
 		return toDecorate;
 	}
 
