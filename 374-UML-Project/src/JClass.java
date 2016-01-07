@@ -39,4 +39,8 @@ public class JClass extends JInterface {
 		return s.toString();
 	}
 	
+	public String printInheritance() {
+		return this.getName() + "->" + this.superclass.getName();
+	}
+	
 }

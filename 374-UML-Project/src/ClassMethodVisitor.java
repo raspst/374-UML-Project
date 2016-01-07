@@ -36,14 +36,14 @@ public class ClassMethodVisitor extends ClassVisitor {
 		else if(((access & Opcodes.ACC_PROTECTED) != 0)) {
 			symbol="#";
 		}
-		System.out.println("desc"+name);
-		System.out.println("    method "+ symbol+name + " " + Arrays.toString(classNames) + Type.getReturnType(desc).getClassName());
+//		System.out.println("desc"+name);
+//		System.out.println("    method "+ symbol+name + " " + Arrays.toString(classNames) + Type.getReturnType(desc).getClassName());
 		JClass c = container.getActiveClass();
 		ArrayList<JClass> parameters = new ArrayList<JClass>();
 		for(String s: classNames) {
 			parameters.add(container.getClass(s));
 		}
-		JMethod toAdd = new JMethod(name, access, container.getClass(desc), parameters);
+		JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()), parameters);
 		c.addMethod(toAdd);
 		return toDecorate;
 	}

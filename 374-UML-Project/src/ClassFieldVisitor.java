@@ -17,7 +17,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 			Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
-		System.out.println("    "+type+" "+name);
+//		System.out.println("    "+type+" "+name);
 		JClass c = container.getActiveClass();
 		JField toAdd = new JField(name, access, container.getClass(desc));
 		c.addField(toAdd);
