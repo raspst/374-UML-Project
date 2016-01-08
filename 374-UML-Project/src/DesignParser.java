@@ -24,6 +24,11 @@ public class DesignParser {
 			c = container.getClass(className);
 			System.out.println(c.printInheritance());
 		}
+		System.out.println("edge [style = dotted]");
+		for(String className: args) {
+			c = container.getClass(className);
+			System.out.println(c.printImplements());
+		}
 		/*ArrayList<JInterface> interfaces = new ArrayList<JInterface>();
 		interfaces.add(new JInterface("Interface1"));
 		JClass testClass = new JClass("TestClass");

@@ -28,7 +28,7 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 		JClass superClass = container.getClass(superName);
 		c.setSuper(superClass);
 		for(String i:interfaces){
-		c.addInterface(container.getInterface(i));
+			c.addInterface(container.getInterface(i));
 		}
 //		System.out.println("Class: " + c.getName() +" extends "+c.getSuper().getName()+" implements "+Arrays.toString(c.getInterfaces().toArray()));
         }

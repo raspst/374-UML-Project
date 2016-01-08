@@ -49,4 +49,11 @@ public class JClass extends JInterface {
 		}
 	}
 	
+	public String printImplements() {
+		StringBuilder s = new StringBuilder();
+		for(JInterface j: this.getInterfaces()) {
+			s.append(this.getName() + "->" + j.getName() + "\n");
+		}
+		return s.toString();
+	}
 }
