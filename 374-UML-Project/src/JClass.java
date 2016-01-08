@@ -40,7 +40,13 @@ public class JClass extends JInterface {
 	}
 	
 	public String printInheritance() {
-		return this.getName() + "->" + this.superclass.getName();
+		// Don't want to print Object in UML diagram
+		if(!this.superclass.getName().equals(Object.class.getName().replace(".", "/"))) {
+			return this.getName() + "->" + this.superclass.getName();
+		}
+		else {
+			return "";
+		}
 	}
 	
 }

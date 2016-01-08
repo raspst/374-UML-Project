@@ -43,8 +43,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for(String s: classNames) {
 			parameters.add(container.getClass(s));
 		}
-		JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()), parameters);
-		c.addMethod(toAdd);
+		if(!name.equals("<init>")) {
+			JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()), parameters);
+			c.addMethod(toAdd);
+		}
 		return toDecorate;
 	}
 
