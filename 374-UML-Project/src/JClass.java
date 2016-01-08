@@ -19,7 +19,7 @@ public class JClass extends JInterface {
 
 	public void addField(JField f) {
 		String name = f.getType().getName();
-		if (name != "void" && name != "int" && name != "float" && name != "double" && name != "boolean"
+		if (name != this.getName() && name != "void" && name != "int" && name != "float" && name != "double" && name != "boolean"
 				&& name != "short" && name != "byte" && name != "char" && name != "long") {
 			associates.add(f.getType());
 		}
@@ -95,7 +95,9 @@ public class JClass extends JInterface {
 	}
 
 	public void addUses(JClass usedClass) {
-		this.uses.put(this.getName(), usedClass);
+		if(this.getName() != usedClass.getName() ) {
+			this.uses.put(this.getName(), usedClass);
+		}
 	}
 
 	public String getUses() {
