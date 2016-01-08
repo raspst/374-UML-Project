@@ -30,7 +30,7 @@ public class DesignParser {
 			c = container.getClass(className);
 			System.out.println(c.printInheritance());
 		}
-		System.out.println("edge [color = red]");
+		System.out.println("edge [style = dotted]");
 		for(String className: args) {
 			c = container.getClass(className);
 			System.out.println(c.printImplements());
@@ -40,7 +40,7 @@ public class DesignParser {
 			c = container.getClass(className);
 			System.out.println(c.printAssociates());
 		}
-//		System.out.println("edge [style = dotted]");
+		System.out.println("edge [color = red]");
 		for(String className: args) {
 			c = container.getClass(className);
 			System.out.println(c.getUses());
