@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 public class JClass extends JInterface {
@@ -7,10 +8,12 @@ public class JClass extends JInterface {
 	private JClass superclass;
 	public boolean isInterface;
 	private HashMap<String, JClass> uses;
+	private HashSet<JClass> associates;
 	public JClass(String name) {
 		super(name);
 		fields = new ArrayList<JField>();
 		uses = new HashMap<String, JClass>();
+		associates = new HashSet<JClass>();
 	}
 	
 	public void addField(JField f) {

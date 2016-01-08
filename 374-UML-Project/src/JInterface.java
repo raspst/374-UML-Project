@@ -1,69 +1,42 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class JInterface extends JType {
 	private ArrayList<JInterface> interfaces;
-	private ArrayList<JField> constants;
 	private ArrayList<JMethod> methods;
-	protected HashSet<JClass> associates;
-	
+
 	public JInterface(String name) {
 		super(name);
-		this.constants = new ArrayList<JField>();
 		this.methods = new ArrayList<JMethod>();
-		associates = new HashSet<JClass>();
 		interfaces = new ArrayList<JInterface>();
 	}
-	
-	public void addInterface(JInterface i){
+
+	public void addInterface(JInterface i) {
 		interfaces.add(i);
 	}
-	
+
 	public ArrayList<JInterface> getInterfaces() {
 		return this.interfaces;
 	}
-	
-	public void addAssociation(JClass c){
-		associates.add(c);
-	}
-	
-	public JField getField(String name) {
-		for(JField f: this.constants){
-			if(f.getName().equals(name)) {
-				return f;
-			}
-		}
-		return null;
-	}
-	
+
 	public JMethod getMethod(String name) {
-		for(JMethod m: methods) {
-			if(m.getName().equals(name)) {
+		for (JMethod m : methods) {
+			if (m.getName().equals(name)) {
 				return m;
 			}
 		}
 		return null;
 	}
-	
-	public ArrayList<JMethod> getMethods(){
+
+	public ArrayList<JMethod> getMethods() {
 		return methods;
 	}
-	
-	public ArrayList<JField> getFields() {
-		return this.constants;
-	}
-	
+
 	public void addMethod(JMethod method) {
 		this.methods.add(method);
 	}
-	
-	public void addField(JField field) {
-		this.constants.add(field);
-	}
-	
-	public void setDependencies(JClass superclass, ArrayList<JInterface> interfaces){
+
+	public void setDependencies(JClass superclass, ArrayList<JInterface> interfaces) {
 		this.interfaces = interfaces;
 	}
-	
-	
+
 }

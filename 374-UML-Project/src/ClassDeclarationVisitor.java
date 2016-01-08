@@ -1,8 +1,5 @@
 
 
-import java.util.Arrays;
-
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 public class ClassDeclarationVisitor extends ClassContainerVisitor {
@@ -31,7 +28,7 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 			i = packages[packages.length-1];
 			packages = i.split("\\.");
 			i = packages[packages.length-1];
-			c.addInterface(container.getInterface(i));
+			c.addInterface(container.getClass(i));
 		}
 //		System.out.println("Class: " + c.getName() +" extends "+c.getSuper().getName()+" implements "+Arrays.toString(c.getInterfaces().toArray()));
 		super.visit(version, access, name, signature, superName, interfaces);
