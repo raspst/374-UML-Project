@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class JClass extends JInterface {
 	private ArrayList<JField> fields;
 	private JClass superclass;
-	
+	public boolean isInterface;
 	public JClass(String name) {
 		super(name);
 		fields = new ArrayList<JField>();
@@ -41,6 +41,9 @@ public class JClass extends JInterface {
 	
 	public String printInheritance() {
 		// Don't want to print Object in UML diagram
+		if(this.superclass == null) {
+			return "";
+		}
 		if(!this.superclass.getName().equals("Object")) {
 			return this.getName() + "->" + this.superclass.getName();
 		}

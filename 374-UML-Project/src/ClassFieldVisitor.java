@@ -21,7 +21,6 @@ public class ClassFieldVisitor extends ClassVisitor {
 		type = packages[packages.length-1];
 //		System.out.println("    "+type+" "+name);
 		JClass c = container.getActiveClass();
-		//System.out.println("Tyyyype:"+type);
 		JField toAdd = new JField(name, access, container.getClass(type));
 		c.addField(toAdd);
 		return toDecorate;
