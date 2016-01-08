@@ -35,6 +35,11 @@ public class DesignParser {
 			c = container.getClass(className);
 			System.out.println(c.printImplements());
 		}
+		System.out.println("edge [color = green]");
+		for(String className: args) {
+			c = container.getClass(className);
+			System.out.println(c.printAssociates());
+		}
 //		System.out.println("edge [style = dotted]");
 		for(String className: args) {
 			c = container.getClass(className);

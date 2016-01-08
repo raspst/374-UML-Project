@@ -1,14 +1,17 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class JInterface extends JType {
 	private ArrayList<JInterface> interfaces;
 	private ArrayList<JField> constants;
 	private ArrayList<JMethod> methods;
+	protected HashSet<JClass> associates;
 	
 	public JInterface(String name) {
 		super(name);
 		this.constants = new ArrayList<JField>();
 		this.methods = new ArrayList<JMethod>();
+		associates = new HashSet<JClass>();
 		interfaces = new ArrayList<JInterface>();
 	}
 	
@@ -18,6 +21,10 @@ public class JInterface extends JType {
 	
 	public ArrayList<JInterface> getInterfaces() {
 		return this.interfaces;
+	}
+	
+	public void addAssociation(JClass c){
+		associates.add(c);
 	}
 	
 	public JField getField(String name) {

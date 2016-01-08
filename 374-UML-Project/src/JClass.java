@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class JClass extends JInterface {
 	private ArrayList<JField> fields;
@@ -64,6 +65,16 @@ public class JClass extends JInterface {
 		StringBuilder s = new StringBuilder();
 		for(JInterface j: this.getInterfaces()) {
 			s.append(this.getName() + "->" + j.getName() + "\n");
+		}
+		return s.toString();
+	}
+	
+	public String printAssociates(){
+		StringBuilder s = new StringBuilder();
+		Iterator<JClass> it = associates.iterator();
+		while(it.hasNext()){
+			JClass cl = it.next();
+			s.append(getName() + "->" +cl.getName()+"\n");
 		}
 		return s.toString();
 	}
