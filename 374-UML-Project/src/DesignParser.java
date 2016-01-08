@@ -30,10 +30,15 @@ public class DesignParser {
 			c = container.getClass(className);
 			System.out.println(c.printInheritance());
 		}
-		System.out.println("edge [style = dotted]");
+		System.out.println("edge [color = red]");
 		for(String className: args) {
 			c = container.getClass(className);
 			System.out.println(c.printImplements());
+		}
+//		System.out.println("edge [style = dotted]");
+		for(String className: args) {
+			c = container.getClass(className);
+			System.out.println(c.getUses());
 		}
 		System.out.println("}");
 		/*ArrayList<JInterface> interfaces = new ArrayList<JInterface>();

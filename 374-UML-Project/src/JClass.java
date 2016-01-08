@@ -1,12 +1,15 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class JClass extends JInterface {
 	private ArrayList<JField> fields;
 	private JClass superclass;
 	public boolean isInterface;
+	private HashMap<String, JClass> uses;
 	public JClass(String name) {
 		super(name);
 		fields = new ArrayList<JField>();
+		uses = new HashMap<String, JClass>();
 	}
 	
 	public void addField(JField f) {
@@ -61,6 +64,18 @@ public class JClass extends JInterface {
 		StringBuilder s = new StringBuilder();
 		for(JInterface j: this.getInterfaces()) {
 			s.append(this.getName() + "->" + j.getName() + "\n");
+		}
+		return s.toString();
+	}
+	
+	public void addUses(JClass usedClass) {
+		this.uses.put(this.getName(), usedClass);
+	}
+	
+	public String getUses() {
+		StringBuilder s = new StringBuilder();
+		for(JClass c: this.uses.values()) {
+			s.append(this.getName() + "->" + c.getName() + "\n");
 		}
 		return s.toString();
 	}

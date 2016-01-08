@@ -41,7 +41,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 		JClass c = container.getActiveClass();
 		ArrayList<JClass> parameters = new ArrayList<JClass>();
 		for(String s: classNames) {
-			parameters.add(container.getClass(s));
+			JClass par = container.getClass(s);
+			parameters.add(par);
+			c.addUses(par);
 		}
 		if(!name.equals("<init>")) {
 			JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()), parameters);
