@@ -27,7 +27,12 @@ public class JClass extends JInterface {
 	
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
-		s.append(this.getName() + " [\n\tlabel = \"{" + this.getName() + "|");
+		if(!this.isInterface) {
+			s.append(this.getName() + " [\n\tlabel = \"{" + this.getName() + "|");
+		}
+		else {
+			s.append(this.getName() + " [\n\tlabel = \"{interface\n" + this.getName() + "|");
+		}
 		for(int i = 0; i < fields.size(); i++) {
 			s.append(fields.get(i).getGraphViz() + "\\l");
 		}
