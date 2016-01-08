@@ -14,6 +14,7 @@ public class JClass extends JInterface {
 	}
 	
 	public void addField(JField f) {
+		associates.add(f.getType());
 		fields.add(f);
 	}
 	
