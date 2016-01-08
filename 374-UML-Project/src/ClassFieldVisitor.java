@@ -17,9 +17,12 @@ public class ClassFieldVisitor extends ClassVisitor {
 			Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
+		String[] packages = type.split("\\.");
+		type = packages[packages.length-1];
 //		System.out.println("    "+type+" "+name);
 		JClass c = container.getActiveClass();
-		JField toAdd = new JField(name, access, container.getClass(desc));
+		//System.out.println("Tyyyype:"+type);
+		JField toAdd = new JField(name, access, container.getClass(type));
 		c.addField(toAdd);
 		return toDecorate;
 	}
