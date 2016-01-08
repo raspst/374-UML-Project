@@ -35,8 +35,4 @@ public class JInterface extends JType {
 		this.methods.add(method);
 	}
 
-	public void setDependencies(JClass superclass, ArrayList<JInterface> interfaces) {
-		this.interfaces = interfaces;
-	}
-
 }

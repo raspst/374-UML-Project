@@ -11,7 +11,7 @@ public class JMethod extends JType {
 		this.parameters = parameters;
 	}
 	
-	public String getTopLevelParameter(JClass c){
+	private String getTopLevelParameter(JClass c){
 		String[] packages = c.getName().split("\\.");
 		return packages[packages.length-1];
 	}
