@@ -11,6 +11,12 @@ public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		ClassContainer container = new ClassContainer();
 		JClass c;
+		System.out.println("digraph G {\nfontname = \"Bitstream Vera Sans\"\n"
+		+"fontsize = 8\n"
+
+		+"node [\nfontname = \"Bitstream Vera Sans\"fontsize = 8\nshape = \"record\"\n]" +
+
+		"edge [\nfontname = \"Bitstream Vera Sans\"\nfontsize = 8\n]");
 		for(String className: args) {
 			ClassReader reader = new ClassReader(className);
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,container);		
@@ -29,6 +35,7 @@ public class DesignParser {
 			c = container.getClass(className);
 			System.out.println(c.printImplements());
 		}
+		System.out.println("}");
 		/*ArrayList<JInterface> interfaces = new ArrayList<JInterface>();
 		interfaces.add(new JInterface("Interface1"));
 		JClass testClass = new JClass("TestClass");
