@@ -14,7 +14,11 @@ public class JClass extends JInterface {
 	}
 	
 	public void addField(JField f) {
-		associates.add(f.getType());
+		String name = f.getType().getName();
+		if(name!="void"&&name!="int"&&name!="float"&&name!="double"&&name!="boolean"&&
+				name!="short"&&name!="byte"&&name!="char"&&name!="long") {
+			associates.add(f.getType());
+				}
 		fields.add(f);
 	}
 	
