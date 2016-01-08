@@ -18,6 +18,12 @@ public class JType {
 		return this.name;
 	}
 	
+	public String getTopLevelName(){
+		String[] packages = name.split("/");
+		//if(packages.length==1)return name.substring(1);
+		return packages[packages.length-1].replace("()L", "").replace("(L", "").replace(";", "").replace(")V", "");
+	}
+	
 	public String getAccess() {
 		return this.access;
 	}

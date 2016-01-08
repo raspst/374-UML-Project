@@ -9,6 +9,6 @@ public class JField extends JType {
 	}
 	
 	public String getGraphViz() {
-		return this.getAccess() + " " + this.getName() + " : " + this.type.getName();
+		return this.getAccess() + " " + this.getName() + " : " + this.type.getTopLevelName();
 	}
 }

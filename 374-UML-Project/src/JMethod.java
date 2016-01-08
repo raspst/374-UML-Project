@@ -11,13 +11,18 @@ public class JMethod extends JType {
 		this.parameters = parameters;
 	}
 	
+	public String getTopLevelParameter(JClass c){
+		String[] packages = c.getName().split("\\.");
+		return packages[packages.length-1];
+	}
+	
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
 		s.append(this.getAccess() + " " + this.getName() + "(");
 		for(int i = 0; i < parameters.size(); i++) {
-			s.append(parameters.get(i).getName() + ",");
+			s.append(getTopLevelParameter(parameters.get(i))+ ",");
 		}
-		s.append(") : " + this.returnType.getName());
+		s.append(") : " + getTopLevelParameter(returnType));
 		return s.toString();
 	}
 }
