@@ -41,6 +41,9 @@ public class JClass extends JInterface {
 	
 	public String printInheritance() {
 		// Don't want to print Object in UML diagram
+		if(this.superclass == null) {
+			return "";
+		}
 		if(!this.superclass.getName().equals("Object")) {
 			return this.getName() + "->" + this.superclass.getName();
 		}
