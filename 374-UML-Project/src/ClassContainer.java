@@ -25,7 +25,9 @@ public class ClassContainer {
 	}
 	public JClass getClass(String name) 
 	{
-		String[] packages = name.split("/");
+		String[] packages = name.split("\\.");
+		name = packages[packages.length-1];
+		packages = name.split("/");
 		name = packages[packages.length-1];
 		packages = name.split("\\.");
 		name = packages[packages.length-1];
