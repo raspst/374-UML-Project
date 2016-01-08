@@ -22,19 +22,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
-		String symbol = "";
 		for(int i=0; i < argTypes.length; i++) {
 			classNames[i] = argTypes[i].getClassName();
-		}
-		
-		if(((access & Opcodes.ACC_PUBLIC) != 0)) {
-			symbol="+";
-		}
-		else if(((access & Opcodes.ACC_PRIVATE) != 0)) {
-			symbol="-";
-		}
-		else if(((access & Opcodes.ACC_PROTECTED) != 0)) {
-			symbol="#";
 		}
 //		System.out.println("desc"+name);
 //		System.out.println("    method "+ symbol+name + " " + Arrays.toString(classNames) + Type.getReturnType(desc).getClassName());

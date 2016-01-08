@@ -13,6 +13,7 @@ public class JField extends JType {
 	}
 	
 	public String getGraphViz() {
+//		System.out.println("Access is: " + this.getAccess());
 		return this.getAccess() + " " + this.getName() + " : " + this.type.getTopLevelName();
 	}
 }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
-
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		ClassContainer container = new ClassContainer();
