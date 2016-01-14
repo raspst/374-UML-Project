@@ -8,6 +8,8 @@ import org.objectweb.asm.Opcodes;
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		ClassContainer container = new ClassContainer();
+		PrintFactory pf = new PrintFactory(container, args);
+		container.whitelist("problem/");
 		JClass c;
 		System.out.println("digraph G {\nfontname = \"Bitstream Vera Sans\"\n" + "fontsize = 8\n"
 
@@ -23,25 +25,13 @@ public class DesignParser {
 			c = container.getClass(className);
 			System.out.println(c.getGraphViz());
 		}
-		for (String className : args) {
-			c = container.getClass(className);
-			System.out.println(c.printInheritance());
-		}
+		System.out.println(pf.printInheritance());
 		System.out.println("edge [style = dotted]");
-		for (String className : args) {
-			c = container.getClass(className);
-			System.out.println(c.printImplements());
-		}
+		System.out.println(pf.printImplements());
 		System.out.println("edge [color = green]");
-		for (String className : args) {
-			c = container.getClass(className);
-			System.out.println(c.printAssociates());
-		}
+		System.out.println(pf.printAssociates());
 		System.out.println("edge [color = red]");
-		for (String className : args) {
-			c = container.getClass(className);
-			System.out.println(c.getUses());
-		}
+ 		System.out.println(pf.printUses());
 		System.out.println("}");
 		/*
 		 * ArrayList<JInterface> interfaces = new ArrayList<JInterface>();

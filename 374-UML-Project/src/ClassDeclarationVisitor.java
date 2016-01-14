@@ -22,10 +22,10 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 		JClass superClass = container.getClass(superName);
 		c.setSuper(superClass);
 		for (String i : interfaces) {
-			String[] packages = i.split("/");
+		/*	String[] packages = i.split("/");
 			i = packages[packages.length - 1];
 			packages = i.split("\\.");
-			i = packages[packages.length - 1];
+			i = packages[packages.length - 1];*/
 			c.addInterface(container.getClass(i));
 		}
 		// System.out.println("Class: " + c.getName() +" extends

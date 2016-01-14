@@ -18,6 +18,10 @@ public class JType {
 	public String getName() {
 		return this.name;
 	}
+	
+	public String getTopName(){
+		return name.substring(name.lastIndexOf('/')+1);
+	}
 
 	public String getAccess() {
 		return this.access;

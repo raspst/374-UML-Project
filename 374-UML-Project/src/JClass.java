@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class JClass extends JInterface {
 	private ArrayList<JField> fields;
@@ -19,8 +18,8 @@ public class JClass extends JInterface {
 
 	public void addField(JField f) {
 		String name = f.getType().getName();
-		if (name != this.getName() && name != "void" && name != "int" && name != "float" && name != "double" && name != "boolean"
-				&& name != "short" && name != "byte" && name != "char" && name != "long") {
+		if (name != this.getName() && name != "void" && name != "int" && name != "float" && name != "double"
+				&& name != "boolean" && name != "short" && name != "byte" && name != "char" && name != "long") {
 			associates.add(f.getType());
 		}
 		fields.add(f);
@@ -36,6 +35,10 @@ public class JClass extends JInterface {
 
 	public void setSuper(JClass s) {
 		superclass = s;
+	}
+
+	public HashSet<JClass> getAssociates() {
+		return associates;
 	}
 
 	public JClass getSuper() {
@@ -64,47 +67,13 @@ public class JClass extends JInterface {
 		return s.toString();
 	}
 
-	public String printInheritance() {
-		// Don't want to print Object in UML diagram
-		if (this.superclass == null) {
-			return "";
-		}
-		if (!this.superclass.getName().equals("Object")) {
-			return this.getName() + "->" + this.superclass.getName();
-		} else {
-			return "";
-		}
-	}
-
-	public String printImplements() {
-		StringBuilder s = new StringBuilder();
-		for (JInterface j : this.getInterfaces()) {
-			s.append(this.getName() + "->" + j.getName() + "\n");
-		}
-		return s.toString();
-	}
-
-	public String printAssociates() {
-		StringBuilder s = new StringBuilder();
-		Iterator<JClass> it = associates.iterator();
-		while (it.hasNext()) {
-			JClass cl = it.next();
-			s.append(getName() + "->" + cl.getName() + "\n");
-		}
-		return s.toString();
-	}
-
 	public void addUses(JClass usedClass) {
-		if(this.getName() != usedClass.getName() ) {
+		if (this.getName() != usedClass.getName()) {
 			this.uses.put(this.getName(), usedClass);
 		}
 	}
 
-	public String getUses() {
-		StringBuilder s = new StringBuilder();
-		for (JClass c : this.uses.values()) {
-			s.append(this.getName() + "->" + c.getName() + "\n");
-		}
-		return s.toString();
+	public HashMap<String, JClass> getUses() {
+		return uses;
 	}
 }
