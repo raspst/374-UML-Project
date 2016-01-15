@@ -26,10 +26,12 @@ Alex Crowley - Alex did the manual UML diagrams, coming up with the
 main ideas for the structure of the program in the progress. He also
 added in a couple of classes (i.e. ClassContainer). Alex  also
 refactored a lot of code after it was written to make it more efficient.
+Added a file parser and a recursive package visitor that gets all classes in a package.
 
 Steven Rasp - Steven implemented the classes that hold the information about
 classes, fields, methods, etc. He also handled the code dealing with outputting
 the text necessary for GraphViz UML diagrams.
+Added test code.
 
 INSTRUCTIONS FOR USE
 
@@ -39,3 +41,8 @@ e.g. java DesignParser Class1 Class2 Class3 ...
 This outputs GraphViz code to the console, which can then be pasted
 into a dot file and turned into a png UML diagram using the command
 dot -T png -o file.png file.dot
+
+FILE FORMAT
+-w <the/package/.../> --Whitelists a package so it association arrows are drawn to all Classes in package.
+<package/.../>* --Adds all files in package to be parsed.
+<packge/.../Class> --Adds the class to be parsed.
