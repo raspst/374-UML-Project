@@ -13,13 +13,13 @@ public class JMethod extends JType {
 	}
 	
 	private String getTopLevelParameter(JClass c){
-		String[] packages = c.getName().split("\\.");
+		String[] packages = c.getName().split("/");
 		return packages[packages.length-1];
 	}
 	
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
-		s.append(this.getAccess() + " " + this.getName() + "(");
+		s.append(this.getAccess() + " " + this.getTopName() + "(");
 		for(int i = 0; i < parameters.size(); i++) {
 			s.append(getTopLevelParameter(parameters.get(i))+ ",");
 		}

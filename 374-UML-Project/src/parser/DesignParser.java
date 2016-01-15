@@ -32,7 +32,7 @@ public class DesignParser {
 		 */
 	}
 
-	private static void parseDesign(String[] args, ClassContainer container) throws IOException {
+	public static void parseDesign(String[] args, ClassContainer container) throws IOException {
 		JClass c;
 		System.out.println("digraph G {\nfontname = \"Bitstream Vera Sans\"\n" + "fontsize = 8\n"
 

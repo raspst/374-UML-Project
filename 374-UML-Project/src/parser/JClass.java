@@ -54,7 +54,7 @@ public class JClass extends JInterface {
 
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
-		String name = this.getName();
+		String name = this.getTopName();
 		if (!this.isInterface) {
 			s.append(name + " [\n\tlabel = \"{" + name + "|");
 		} else {
