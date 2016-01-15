@@ -1,6 +1,9 @@
-package parser;
+package uml.parser;
 
 import java.util.Iterator;
+
+import uml.types.JClass;
+import uml.types.JInterface;
 
 public class PrintFactory {
 	private Design d;

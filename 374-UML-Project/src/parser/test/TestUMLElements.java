@@ -11,13 +11,13 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import parser.ClassContainer;
-import parser.Design;
-import parser.DesignParser;
-import parser.JClass;
-import parser.JField;
-import parser.JMethod;
-import parser.PrintFactory;
+import uml.parser.ClassContainer;
+import uml.parser.Design;
+import uml.parser.DesignParser;
+import uml.parser.PrintFactory;
+import uml.types.JClass;
+import uml.types.JField;
+import uml.types.JMethod;
 
 public class TestUMLElements {
 	ClassContainer container;

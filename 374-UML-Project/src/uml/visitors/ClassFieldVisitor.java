@@ -1,8 +1,12 @@
-package parser;
+package uml.visitors;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
+
+import uml.parser.ClassContainer;
+import uml.types.JClass;
+import uml.types.JField;
 
 public class ClassFieldVisitor extends ClassVisitor {
 	private ClassContainer container;

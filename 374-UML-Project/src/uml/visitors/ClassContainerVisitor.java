@@ -1,5 +1,7 @@
-package parser;
+package uml.visitors;
 import org.objectweb.asm.ClassVisitor;
+
+import uml.parser.ClassContainer;
 
 public class ClassContainerVisitor extends ClassVisitor {
 	protected ClassContainer container;

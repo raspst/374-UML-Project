@@ -1,8 +1,11 @@
-package parser;
+package uml.parser;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import uml.types.JClass;
+import uml.types.JInterface;
 
 public class Design {
 	private List<String> whitelist = new LinkedList<String>();

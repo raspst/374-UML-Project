@@ -1,7 +1,9 @@
-package parser;
+package uml.parser;
 import java.util.HashMap;
 
 import org.objectweb.asm.Type;
+
+import uml.types.JClass;
 
 public class ClassContainer {
 	private HashMap<String, JClass> classes;

@@ -1,6 +1,9 @@
-package parser;
+package uml.visitors;
 
 import org.objectweb.asm.Opcodes;
+
+import uml.parser.ClassContainer;
+import uml.types.JClass;
 
 public class ClassDeclarationVisitor extends ClassContainerVisitor {
 

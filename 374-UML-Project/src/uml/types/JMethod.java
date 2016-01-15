@@ -1,4 +1,4 @@
-package parser;
+package uml.types;
 import java.util.ArrayList;
 
 public class JMethod extends JType {

@@ -1,10 +1,14 @@
-package parser;
+package uml.visitors;
 
 import java.util.ArrayList;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
+
+import uml.parser.ClassContainer;
+import uml.types.JClass;
+import uml.types.JMethod;
 
 public class ClassMethodVisitor extends ClassVisitor {
 	private ClassContainer container;

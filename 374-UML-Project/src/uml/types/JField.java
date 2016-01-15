@@ -1,4 +1,4 @@
-package parser;
+package uml.types;
 
 public class JField extends JType {
 	private JClass type;

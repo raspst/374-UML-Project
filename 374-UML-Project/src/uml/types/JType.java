@@ -1,4 +1,4 @@
-package parser;
+package uml.types;
 import java.util.HashMap;
 
 import org.objectweb.asm.Opcodes;

@@ -1,4 +1,4 @@
-package parser;
+package uml.parser;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
+
+import uml.visitors.ClassDeclarationVisitor;
+import uml.visitors.ClassFieldVisitor;
+import uml.visitors.ClassMethodVisitor;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
