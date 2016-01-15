@@ -19,9 +19,9 @@ public class PrintFactory {
 		System.out.println("edge [style = dotted]");
 		System.out.println(printImplements());
 		System.out.println("edge [arrowhead = vee]");
-		System.out.println(printAssociates());
+		System.out.println(printUses());
 		System.out.println("edge [style = solid]");
- 		System.out.println(printUses());
+		System.out.println(printAssociates());
 		System.out.println("}");
 	}
 

@@ -1,7 +1,7 @@
 package parser.test;
 public class Bone extends Toy {
 	private String color;
-	private boolean squeaks;
+	protected boolean squeaks;
 	
 	public Bone(String color, boolean squeaks) {
 		super(color);

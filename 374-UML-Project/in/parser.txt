@@ -1,2 +1,2 @@
--w headfirst/factory/pizzas/
-headfirst/factory/pizzas/*
+-w parser/test/
+parser/test/*

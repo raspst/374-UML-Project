@@ -2,11 +2,12 @@ package parser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import org.objectweb.asm.Type;
 
 public class JClass extends JInterface {
-	private ArrayList<JField> fields;
+	private HashSet<JField> fields;
 	private JClass superclass;
 	private boolean isInterface;
 	private HashMap<String, JClass> uses;
@@ -14,7 +15,7 @@ public class JClass extends JInterface {
 
 	public JClass(String name) {
 		super(name);
-		fields = new ArrayList<JField>();
+		fields = new HashSet<JField>();
 		uses = new HashMap<String, JClass>();
 		associates = new HashSet<JClass>();
 	}
@@ -60,8 +61,9 @@ public class JClass extends JInterface {
 		} else {
 			s.append(name + " [\n\tlabel = \"{interface\n" + name + "|");
 		}
-		for (int i = 0; i < fields.size(); i++) {
-			s.append(fields.get(i).getGraphViz() + "\\l");
+		Iterator<JField> it = fields.iterator();
+		while(it.hasNext()) {
+			s.append(it.next().getGraphViz() + "\\l");
 		}
 		s.append("|");
 		for (int i = 0; i < getMethods().size(); i++) {
@@ -79,5 +81,18 @@ public class JClass extends JInterface {
 
 	public HashMap<String, JClass> getUses() {
 		return uses;
+	}
+	
+	public HashSet<JField> getFields() {
+		return fields;
+	}
+	
+	public JField getField(String name) {
+		for(JField f: fields) {
+			if(f.getTopName().equals(name)) {
+				return f;
+			}
+		}
+		return null;
 	}
 }

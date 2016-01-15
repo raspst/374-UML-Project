@@ -1,10 +1,10 @@
 package parser.test;
 public class Dog implements Animal {
-	private Bone bone;
-	private String species;
+	public Bone bone;
+	private String breed;
 	
-	public Dog(String species) {
-		this.species = species;
+	public Dog(String breed) {
+		this.breed = breed;
 	}
 	
 	@Override
@@ -13,8 +13,8 @@ public class Dog implements Animal {
 		System.out.println("Woof woof");
 	}
 	
-	public String getSpecies() {
-		return this.species;
+	public String getBreed() {
+		return this.breed;
 	}
 	
 	public void giveBone(Bone bone) {
@@ -26,6 +26,10 @@ public class Dog implements Animal {
 			System.out.println("Woof yum yum");
 			this.bone = null;
 		}
+	}
+	
+	private Cat getEnemy() {
+		return new Cat();
 	}
 
 	

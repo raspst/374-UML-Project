@@ -25,8 +25,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 		// System.out.println("desc"+name);
 		// System.out.println(" method "+ symbol+name + " " +
 		// Arrays.toString(classNames) +
-		// Type.getReturnType(desc).getClassName());
+		
 		JClass c = container.getActiveClass();
+		JClass returnClass = container.getClass(Type.getReturnType(desc).getClassName());
+		c.addUses(returnClass);
 		ArrayList<JClass> parameters = new ArrayList<JClass>();
 		for (String s : classNames) {
 			JClass par = container.getClass(s);
