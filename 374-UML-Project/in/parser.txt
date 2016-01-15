@@ -1,0 +1,2 @@
+-w headfirst/factory/pizzas/
+headfirst/factory/pizzas/*

@@ -3,12 +3,9 @@ package parser;
 import java.util.Iterator;
 
 public class PrintFactory {
-	ClassContainer container;
-	String[] classes;
-
-	public PrintFactory(ClassContainer container, String[] args) {
-		this.container = container;
-		classes = args;
+	private Design d;
+	public PrintFactory(Design d) {
+		this.d=d;
 	}
 
 	public void printContainer() {
@@ -30,8 +27,8 @@ public class PrintFactory {
 
 	public String printGraphViz(){
 		StringBuilder sb = new StringBuilder();
-		for (String name : classes) {
-			JClass c = container.getClass(name);
+		for (String name : d.getClassNames()) {
+			JClass c = d.getClass(name);
 			sb.append(c.getGraphViz()+'\n');
 		}
 		return sb.toString();
@@ -39,9 +36,9 @@ public class PrintFactory {
 	
 	public String printInheritance() {
 		StringBuilder sb = new StringBuilder();
-		for (String className : classes) {
-			JClass c = container.getClass(className);
-			if (container.isWhitelisted(c.getSuper())) {
+		for (String className : d.getClassNames()) {
+			JClass c = d.getClass(className);
+			if (d.isWhitelisted(c.getSuper())) {
 				// Don't want to print Object in UML diagram
 				sb.append(c.getTopName() + "->" + c.getSuper().getTopName() + '\n');
 			}
@@ -51,10 +48,10 @@ public class PrintFactory {
 
 	public String printImplements() {
 		StringBuilder sb = new StringBuilder();
-		for (String className : classes) {
-			JClass c = container.getClass(className);
+		for (String className : d.getClassNames()) {
+			JClass c = d.getClass(className);
 			for (JInterface j : c.getInterfaces()) {
-				if (container.isWhitelisted(j)) {
+				if (d.isWhitelisted(j)) {
 					sb.append(c.getTopName() + "->" + j.getTopName() + "\n");
 				}
 			}
@@ -64,12 +61,12 @@ public class PrintFactory {
 
 	public String printAssociates() {
 		StringBuilder sb = new StringBuilder();
-		for (String className : classes) {
-			JClass c = container.getClass(className);
+		for (String className : d.getClassNames()) {
+			JClass c = d.getClass(className);
 			Iterator<JClass> it = c.getAssociates().iterator();
 			while (it.hasNext()) {
 				JClass cl = it.next();
-				if (container.isWhitelisted(cl))
+				if (d.isWhitelisted(cl))
 					sb.append(c.getTopName() + "->" + cl.getTopName() + "\n");
 			}
 		}
@@ -78,10 +75,10 @@ public class PrintFactory {
 
 	public String printUses() {
 		StringBuilder sb = new StringBuilder();
-		for (String className : classes) {
-			JClass c = container.getClass(className);
+		for (String className : d.getClassNames()) {
+			JClass c = d.getClass(className);
 			for (JClass cl : c.getUses().values()) {
-				if (container.isWhitelisted(cl))
+				if (d.isWhitelisted(cl))
 					if (!c.getAssociates().contains(cl)) {
 						sb.append(c.getTopName() + "->" + cl.getTopName() + "\n");
 					}
