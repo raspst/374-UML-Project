@@ -3,7 +3,7 @@ Repository for CSSE374 project to parse code and create UML diagram
 
 DESIGN
 
-The current design has 11 classes total.
+The current design has 13 classes total.
 
 DesignParser is the class containing the main method, which handles
 initiating the code parsing and prints the GraphViz output to the console.
@@ -20,6 +20,12 @@ ClassContainer - ClassContainer holds all of the various class information
 as classes are created so that they can be accessed elsewhere and prevent
 duplication of JClasses.
 
+Design - Design objects handle which packages are used and whitelisted for
+the UML generation by parsing a text file
+
+PrintFactory - PrintFactory handles printing out all of the various
+elements of the GraphViz output
+
 WHO DID WHAT
 
 Alex Crowley - Alex did the manual UML diagrams, coming up with the
@@ -30,14 +36,15 @@ Added a file parser and a recursive package visitor that gets all classes in a p
 
 Steven Rasp - Steven implemented the classes that hold the information about
 classes, fields, methods, etc. He also handled the code dealing with outputting
-the text necessary for GraphViz UML diagrams.
-Added test code.
+the text necessary for GraphViz UML diagrams. He also added some test code
+to run the parser on some test classes to ensure that the various items
+were being read in correctly.
 
 INSTRUCTIONS FOR USE
 
-Currently, any class that you want to have more than just a box for needs
-to be included as an argument to the main method.
-e.g. java DesignParser Class1 Class2 Class3 ...
+To use the tool, begin by specifying which packages to whitelist and use
+in in/parser.txt, according to the file format section below. This removed
+the need for arguments, so you just run the program without any arguments.
 This outputs GraphViz code to the console, which can then be pasted
 into a dot file and turned into a png UML diagram using the command
 dot -T png -o file.png file.dot
