@@ -1,3 +1,4 @@
+package parser;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +21,9 @@ public class ClassContainer {
 	
 	public boolean isWhitelisted(JInterface c){
 		for(String pack : whitelist){
-			if(c.getName().startsWith(pack))return true;
+			if(c.getName().startsWith(pack)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -36,11 +39,11 @@ public class ClassContainer {
 	public JClass getClass(String name) {
 		name = Type.getType(name).getInternalName();
 		name = name.replace('.', '/');
-		//String[] packages = name.split("/");
-		//System.out.println(packages.toString());
-		//name = packages[packages.length - 1];
-		//packages = name.split("/");
-		//name = packages[packages.length - 1];
+//		String[] packages = name.split("/");
+//		System.out.println(packages.toString());
+//		name = packages[packages.length - 1];
+//		packages = name.split("/");
+//		name = packages[packages.length - 1];
 		JClass theclass = classes.get(name);
 		if (theclass == null) {
 			theclass = new JClass(name);

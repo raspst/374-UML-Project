@@ -1,6 +1,9 @@
+package parser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+
+import org.objectweb.asm.Type;
 
 public class JClass extends JInterface {
 	private ArrayList<JField> fields;
@@ -51,10 +54,11 @@ public class JClass extends JInterface {
 
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
+		String name = this.getName();
 		if (!this.isInterface) {
-			s.append(this.getName() + " [\n\tlabel = \"{" + this.getName() + "|");
+			s.append(name + " [\n\tlabel = \"{" + name + "|");
 		} else {
-			s.append(this.getName() + " [\n\tlabel = \"{interface\n" + this.getName() + "|");
+			s.append(name + " [\n\tlabel = \"{interface\n" + name + "|");
 		}
 		for (int i = 0; i < fields.size(); i++) {
 			s.append(fields.get(i).getGraphViz() + "\\l");

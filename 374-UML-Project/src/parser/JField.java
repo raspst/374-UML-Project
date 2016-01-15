@@ -1,3 +1,4 @@
+package parser;
 
 public class JField extends JType {
 	private JClass type;

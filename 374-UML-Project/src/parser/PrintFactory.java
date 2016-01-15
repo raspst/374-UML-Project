@@ -1,3 +1,4 @@
+package parser;
 import java.util.Iterator;
 
 public class PrintFactory {
@@ -54,7 +55,9 @@ public class PrintFactory {
 			JClass c = container.getClass(className);
 			for (JClass cl : c.getUses().values()) {
 				if (container.isWhitelisted(cl))
-					sb.append(c.getTopName() + "->" + cl.getTopName() + "\n");
+					if(!c.getAssociates().contains(cl)) {
+						sb.append(c.getTopName() + "->" + cl.getTopName() + "\n");
+					}
 			}
 		}
 		return sb.toString();

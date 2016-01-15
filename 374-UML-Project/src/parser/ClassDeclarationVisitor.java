@@ -1,3 +1,4 @@
+package parser;
 
 import org.objectweb.asm.Opcodes;
 
