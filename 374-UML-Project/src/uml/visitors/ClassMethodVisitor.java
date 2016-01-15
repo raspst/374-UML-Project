@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 import uml.parser.ClassContainer;
@@ -43,8 +44,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 			JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()),
 					parameters);
 			c.addMethod(toAdd);
+			System.out.println(name);
 		}
-		return toDecorate;
+		return new SequenceVisitor(Opcodes.ASM5,toDecorate);
 	}
 
 }
