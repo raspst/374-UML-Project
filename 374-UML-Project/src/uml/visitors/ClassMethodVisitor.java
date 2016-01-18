@@ -44,7 +44,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 					parameters);
 			c.addMethod(toAdd);
 			System.out.println(name);
-		return new SequenceVisitor(Opcodes.ASM5,toDecorate);
+			container.setActiveMethod(toAdd);
+		return new SequenceVisitor(Opcodes.ASM5,toDecorate,container);
 	}
 
 }

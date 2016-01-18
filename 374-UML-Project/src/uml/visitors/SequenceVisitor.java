@@ -3,24 +3,28 @@ package uml.visitors;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class SequenceVisitor extends MethodVisitor {
-	
-	public SequenceVisitor(int arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
+import uml.parser.ClassContainer;
+import uml.types.JClass;
+import uml.types.JMethod;
+
+public class SequenceVisitor extends MethodContainerVisitor {
+	private JClass created;
+	public SequenceVisitor(int arg0, ClassContainer container) {
+		super(arg0,container);
 	}
-	public SequenceVisitor(int arg0, MethodVisitor arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
+	public SequenceVisitor(int arg0, MethodVisitor arg1,ClassContainer container) {
+		super(arg0, arg1,container);
 	}
 
 	@Override
 	public void visitMethodInsn(int opCode, String owner, String name, String desc, boolean itf) {
 		super.visitMethodInsn(opCode, owner, name, desc, itf);
 		String op = "SPECIAL";
-		if(opCode==Opcodes.INVOKEVIRTUAL)op="VIRTUAL";
+		if(opCode==Opcodes.INVOKEVIRTUAL){op="VIRTUAL";
+			System.out.println("VIRTUAL"+ created.getName());
+		}
 		else if(opCode==Opcodes.INVOKEDYNAMIC)op="DYNAMIC";
-		System.out.println(op+"    "+owner+"    "+name);
+		//System.out.println(op+"    "+owner+"    "+name);
 	}
 	
 	@Override
@@ -29,6 +33,9 @@ public class SequenceVisitor extends MethodVisitor {
             String name,
             String desc) {
 		String op = "GETSTATIC";
+		if(opcode==Opcodes.GETSTATIC){
+			created=getContainer().getClass(owner);
+		}
 		if(opcode==Opcodes.PUTSTATIC)op="PUTSTATIC";
 		else if(opcode==Opcodes.GETFIELD)op="GETFIELD";
 		else if(opcode==Opcodes.PUTFIELD)op="PUTFIELD";
@@ -41,23 +48,34 @@ public class SequenceVisitor extends MethodVisitor {
             String type) {
 		super.visitTypeInsn(opcode, type);
 		String op = "";
-		if(opcode == Opcodes.NEW)op="NEW";
+		if(opcode == Opcodes.NEW){
+			op="NEW";
+			created = getContainer().getClass(type);
+		}
 		System.out.println(op+"    "+type);
 	}
 	
 	@Override
 	public void visitVarInsn(int opcode, int var) {
 		super.visitVarInsn(opcode, var);
+		ClassContainer container = getContainer();
 		String op = "ILOAD";
 		if(opcode==Opcodes.LLOAD)op="LLOAD";
 		else if(opcode==Opcodes.FLOAD)op="FLOAD";
 		else if(opcode==Opcodes.DLOAD)op="DLOAD";
-		else if(opcode==Opcodes.ALOAD)op="ALOAD";
+		else if(opcode==Opcodes.ALOAD){op="ALOAD";
+		created = container.getActiveMethod().getStack(var);
+		}
 		else if(opcode==Opcodes.ISTORE)op="ISTORE";
 		else if(opcode==Opcodes.LSTORE)op="LSTORE";
 		else if(opcode==Opcodes.FSTORE)op="FSTORE";
 		else if(opcode==Opcodes.DSTORE)op="DSTORE";
-		else if(opcode==Opcodes.ASTORE)op="ASTORE";
+		else if(opcode==Opcodes.ASTORE){op="ASTORE";
+			JMethod m = container.getActiveMethod();
+			if(m.getStack(var)==null){
+				m.setStack(var, created);
+			}
+		}
 		else if(opcode==Opcodes.RET)op="RET";
 		System.out.println(op+"    "+var);
 	}
