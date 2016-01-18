@@ -9,8 +9,12 @@ public class Bone extends Toy {
 	}
 	
 	public void squeak() {
+		int i = 5;
 		if(this.squeaks) {
 			System.out.println("squeak squeak");
 		}
+		System.out.println("asdf");
+		this.color="blah";
+		i=6;
 	}
 }

@@ -25,6 +25,7 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 		c.setAccess(access);
 		JClass superClass = container.getClass(superName);
 		c.setSuper(superClass);
+		System.out.println(name);
 		for (String i : interfaces) {
 		/*	String[] packages = i.split("/");
 			i = packages[packages.length - 1];

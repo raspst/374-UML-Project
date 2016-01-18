@@ -29,7 +29,11 @@ public class Dog implements Animal {
 	}
 	
 	private Cat getEnemy() {
-		return new Cat();
+		Cat c = new Cat();
+		c.makeSound();
+			Dog d = new Dog("asfd");
+		//d.makeSound();
+		return c;
 	}
 
 	

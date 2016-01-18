@@ -67,6 +67,7 @@ public class JClass extends JInterface {
 		}
 		s.append("|");
 		for (int i = 0; i < getMethods().size(); i++) {
+			if(!getMethods().get(i).getName().equals("<init>"))
 			s.append(getMethods().get(i).getGraphViz() + "\\l");
 		}
 		s.append("}\"\n]");

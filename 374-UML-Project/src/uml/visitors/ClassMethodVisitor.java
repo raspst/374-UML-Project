@@ -40,12 +40,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 			parameters.add(par);
 			c.addUses(par);
 		}
-		if (!name.equals("<init>")) {
 			JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()),
 					parameters);
 			c.addMethod(toAdd);
 			System.out.println(name);
-		}
 		return new SequenceVisitor(Opcodes.ASM5,toDecorate);
 	}
 

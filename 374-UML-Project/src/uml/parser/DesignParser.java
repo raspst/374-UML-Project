@@ -23,7 +23,7 @@ public class DesignParser {
 		Design d = parseFile("parser.txt");
 		parseDesign(d);
 		PrintFactory pf = new PrintFactory(d);
-		pf.printContainer();
+		//pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));
 	}
 
