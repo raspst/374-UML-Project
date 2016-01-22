@@ -5,6 +5,7 @@ import org.objectweb.asm.Opcodes;
 
 import uml.parser.ClassContainer;
 import uml.types.JClass;
+import uml.types.JField;
 import uml.types.JMethod;
 
 public class SequenceVisitor extends MethodContainerVisitor {
@@ -21,10 +22,16 @@ public class SequenceVisitor extends MethodContainerVisitor {
 		super.visitMethodInsn(opCode, owner, name, desc, itf);
 		String op = "SPECIAL";
 		if(opCode==Opcodes.INVOKEVIRTUAL){op="VIRTUAL";
-			System.out.println("VIRTUAL"+ created.getName());
+		JClass c = getContainer().getActiveClass();
+		//System.out.println(owner);
+		if(created==null)created=getContainer().getClass("java/lang/Object");
+			System.out.println("VIRTUAL "+ created.getName());
 		}
 		else if(opCode==Opcodes.INVOKEDYNAMIC)op="DYNAMIC";
-		//System.out.println(op+"    "+owner+"    "+name);
+		else{
+			created = getContainer().getClass(owner);
+		}
+		System.out.println(op+"    "+owner+"    "+name);
 	}
 	
 	@Override
@@ -34,9 +41,12 @@ public class SequenceVisitor extends MethodContainerVisitor {
             String desc) {
 		String op = "GETSTATIC";
 		if(opcode==Opcodes.GETSTATIC){
-			created=getContainer().getClass(owner);
+			created=getContainer().getClass(desc);
 		}
-		if(opcode==Opcodes.PUTSTATIC)op="PUTSTATIC";
+		if(opcode==Opcodes.PUTSTATIC){
+			op="PUTSTATIC";
+			getContainer().getActiveClass().addStaticField(new JField(name, 0, getContainer().getClass(desc)));
+		}
 		else if(opcode==Opcodes.GETFIELD)op="GETFIELD";
 		else if(opcode==Opcodes.PUTFIELD)op="PUTFIELD";
 		super.visitFieldInsn(opcode, owner, name, desc);
@@ -64,6 +74,11 @@ public class SequenceVisitor extends MethodContainerVisitor {
 		else if(opcode==Opcodes.FLOAD)op="FLOAD";
 		else if(opcode==Opcodes.DLOAD)op="DLOAD";
 		else if(opcode==Opcodes.ALOAD){op="ALOAD";
+		if(var == 0){
+			created=container.getActiveClass().getSuper();
+			System.out.println(created.getName());
+			container.getActiveMethod().setStack(0, created);
+		}
 		created = container.getActiveMethod().getStack(var);
 		}
 		else if(opcode==Opcodes.ISTORE)op="ISTORE";

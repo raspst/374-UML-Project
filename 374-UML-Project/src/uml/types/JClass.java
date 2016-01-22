@@ -12,12 +12,14 @@ public class JClass extends JInterface {
 	private boolean isInterface;
 	private HashMap<String, JClass> uses;
 	private HashSet<JClass> associates;
+	private HashSet<JField> statics;
 
 	public JClass(String name) {
 		super(name);
 		fields = new HashSet<JField>();
 		uses = new HashMap<String, JClass>();
 		associates = new HashSet<JClass>();
+		statics = new HashSet<JField>();
 	}
 
 	public void addField(JField f) {
@@ -29,6 +31,15 @@ public class JClass extends JInterface {
 		fields.add(f);
 	}
 
+	public void addStaticField(JField f) {
+		String name = f.getType().getName();
+		if (name != this.getName() && name != "void" && name != "int" && name != "float" && name != "double"
+				&& name != "boolean" && name != "short" && name != "byte" && name != "char" && name != "long") {
+			associates.add(f.getType());
+		}
+		statics.add(f);
+	}
+	
 	public void setInterface(boolean isInterface) {
 		this.isInterface = isInterface;
 	}
@@ -90,6 +101,15 @@ public class JClass extends JInterface {
 	
 	public JField getField(String name) {
 		for(JField f: fields) {
+			if(f.getTopName().equals(name)) {
+				return f;
+			}
+		}
+		return null;
+	}
+	
+	public JField getStaticField(String name) {
+		for(JField f: statics) {
 			if(f.getTopName().equals(name)) {
 				return f;
 			}

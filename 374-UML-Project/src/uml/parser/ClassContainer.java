@@ -34,7 +34,8 @@ public class ClassContainer {
 	}
 	
 	public JClass getClass(String name) {
-		name = Type.getType(name).getInternalName();
+		//name = Type.getType(name).getInternalName();
+		name = Type.getObjectType(name).getClassName();
 		name = name.replace('.', '/');
 		JClass theclass = classes.get(name);
 		if (theclass == null) {
