@@ -21,11 +21,12 @@ public class DesignParser {
 		System.out.println("Types:");
 		System.out.println("B-byte C-char D-double F-float I-int J-long");
 		System.out.println("S-short V-void Z-boolean [-array L<class>;");
-//		JMethod m = d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
-		JMethod m = d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
+		JMethod m = d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
+//		JMethod m = d.getContainer().parseCalls("DesignParser","printStack","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
 		PrintFactory pf = new PrintFactory(d);
 		initialized.clear();
-		printStack("parser/test/Dog",m,0);
+		printStack("java/util/Collections",m,0);
+		System.out.println("\n");
 		printCalls(m,0);
 		//pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));
@@ -67,18 +68,20 @@ public class DesignParser {
 	public static void printCalls(JMethod m, int depth) {
 		for(MethodInvokation in: m.virtuals) {
 			if(in.caller != null) {
-				StringBuilder s = new StringBuilder();
-				s.append(in.caller.getName() + ":" + in.owner + ".");
-				if(in.method.equals("<init>")) {
-					s.append("new");
-				}
-				else {
-					s.append(in.method);
-				}
-				s.append(in.params.toString().replace("[", "(").replace("]", ")"));
-				System.out.println(s.toString());
-				if(in.m!=null) {
-					printCalls(in.m,depth+1);
+				if(!in.owner.equals("java/io/PrintStream")) {
+					StringBuilder s = new StringBuilder();
+					s.append(in.caller.getName() + ":" + in.owner + ".");
+					if(in.method.equals("<init>")) {
+						s.append("new");
+					}
+					else {
+						s.append(in.method);
+					}
+					s.append(in.params.toString().replace("[", "(").replace("]", ")"));
+					System.out.println(s.toString());
+					if(in.m!=null) {
+						printCalls(in.m,depth+1);
+					}
 				}
 			}
 		}
