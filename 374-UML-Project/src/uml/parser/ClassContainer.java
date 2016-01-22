@@ -88,11 +88,14 @@ public class ClassContainer {
 	public JMethod parseCalls(String c, String method,String desc,int depth){
 		if(depth==0)return null;
 		try{
+			JMethod m = getClass(c).getMethod(method,desc);
+			if(m!=null&&m.stackFramed())return m;
 		ClassReader reader = new ClassReader(c);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, this);
 		ClassVisitor sequenceDeclarationVisitor = new SequenceDeclarationVisitor(Opcodes.ASM5, declVisitor,this,"",method,"","");
 		reader.accept(sequenceDeclarationVisitor, ClassReader.EXPAND_FRAMES);
-		for(MethodInvokation in : getClass(c).getMethod(method,desc).virtuals){
+		getClass(c).getMethod(method, desc).setStackFramed(true);
+		for(MethodInvokation in : getClass(c).getMethod(method, desc).virtuals){
 			in.caller=getClass(c);
 			in.m = parseCalls(in.owner, in.method,in.desc,depth-1);
 		}

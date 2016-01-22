@@ -17,6 +17,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	private JClass created;
 	private int index = 1;
 	private int prevOp;
+	private boolean init;
 	private LinkedList<Integer> arguments = new LinkedList<Integer>();
 	public SequenceVisitor(int arg0, ClassContainer container) {
 		super(arg0, container);
@@ -52,7 +53,19 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			System.out.println("DYNAMIC" + "    " + owner + "    " + name);
 		} else {
 			if (name.equals("<init>")) {
+				init=true;
 				created = getContainer().getClass(owner);
+			}
+			else{
+				init=false;
+				created = getContainer().getClass(owner);
+			Type[] argTypes = Type.getArgumentTypes(desc);
+			ArrayList<String> params = new ArrayList<String>();
+			for (Type arg : argTypes) {
+				params.add(arg.getClassName());
+			}
+			String returnType = Type.getReturnType(desc).getClassName();
+			getContainer().getActiveMethod().addVirtual(owner, name, params, returnType,desc, arguments.getFirst());
 			}
 			//System.out.println("SPECIAL" + "    " + owner + "    " + name);
 		}
@@ -64,11 +77,13 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
 		String op = "GETSTATIC";
 		if (opcode == Opcodes.GETSTATIC) {
+			index=0;
 			created = getContainer().getClass(desc);
 		}
 		if (opcode == Opcodes.PUTSTATIC) {
 			op = "PUTSTATIC";
 			getContainer().getActiveClass().addStaticField(new JField(name, 0, getContainer().getClass(desc)));
+			//if(prevOp==Opcodes.INVOKESPECIAL&&init)getContainer().getActiveMethod().addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(),"", index);
 		} else if (opcode == Opcodes.GETFIELD)
 			op = "GETFIELD";
 		else if (opcode == Opcodes.PUTFIELD)
@@ -127,7 +142,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			index = var;
 			JMethod m = container.getActiveMethod();
 			m.setStack(var, created);
-			if(prevOp==Opcodes.INVOKESPECIAL)m.addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(),"", index);
+			if(prevOp==Opcodes.INVOKESPECIAL&&init)m.addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(),"", index);
 		} else if (opcode == Opcodes.RET)
 			op = "RET";
 		// System.out.println(op+" "+var);

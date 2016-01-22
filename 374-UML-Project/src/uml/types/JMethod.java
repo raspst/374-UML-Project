@@ -7,6 +7,7 @@ public class JMethod extends JType {
 	ArrayList<JClass> parameters;
 	ArrayList<String> params;
 	private String desc;
+	boolean framed;
 	HashMap<Integer,JClass> callStack = new HashMap<Integer,JClass>();
 	public ArrayList<MethodInvokation> virtuals = new ArrayList<>();
 	public JMethod(String name, int access, JClass returnType, ArrayList<JClass> parameters,String desc) {
@@ -66,5 +67,12 @@ public class JMethod extends JType {
 			return(((JMethod) obj).desc.equals(desc) && ((JMethod) obj).getName().equals(getName()));
 		}
 		return false;
+	}
+
+	public boolean stackFramed() {
+		return framed;
+	}
+	public void setStackFramed(boolean framed){
+		this.framed=framed;
 	}
 }

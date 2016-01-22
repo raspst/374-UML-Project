@@ -29,17 +29,23 @@ public class DesignParser {
 		System.out.println("Types:");
 		System.out.println("B-byte C-char D-double F-float I-int J-long");
 		System.out.println("S-short V-void Z-boolean [-array L<class>;");
-		JMethod m = d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
+		JMethod m = d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
+		//JMethod m = d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
 		PrintFactory pf = new PrintFactory(d);
-		printStack(m);
+		printStack(m,0);
 		//pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));
 	}
-	public static void printStack(JMethod m){
+	public static void printStack(JMethod m,int depth){
 		for(MethodInvokation in : m.virtuals){
-		System.out.println(in.caller.getName()+"    "+in.owner+"    "+ in.method + "   " + in.params.toString().replaceAll("\\[|\\]", "") + "   " + in.returnType+"    "+in.index);
-		if(in.m!=null)
-		printStack(in.m);
+			if(in.caller!=null){		
+				for (int i = 0; i < depth; i++) {
+					System.out.print(" ");
+				}
+				System.out.println(in.caller.getName()+"    "+in.owner+"    "+ in.method + "   " + in.desc + "   " + in.returnType+"    "+in.index);
+				if(in.m!=null)
+				printStack(in.m,depth+1);
+			}
 		}
 		}
 
