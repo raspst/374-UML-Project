@@ -41,11 +41,11 @@ public class ClassMethodVisitor extends ClassVisitor {
 			c.addUses(par);
 		}
 			JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()),
-					parameters);
-			if(c.getMethod(toAdd.getName())==null){
+					parameters,desc);
+			if(c.getMethod(toAdd.getName(),desc)==null){
 			c.addMethod(toAdd);
 			container.setActiveMethod(toAdd);}
-			else container.setActiveMethod(c.getMethod(toAdd.getName()));
+			else container.setActiveMethod(c.getMethod(toAdd.getName(),desc));
 		return toDecorate;//new SequenceVisitor(Opcodes.ASM5,toDecorate,container);
 	}
 

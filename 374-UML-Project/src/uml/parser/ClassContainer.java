@@ -85,24 +85,24 @@ public class ClassContainer {
 		}
 	}
 	private Queue<String> active;
-	public JMethod parseCalls(String c, String method,int depth){
+	public JMethod parseCalls(String c, String method,String desc,int depth){
 		if(depth==0)return null;
 		try{
 		ClassReader reader = new ClassReader(c);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, this);
 		ClassVisitor sequenceDeclarationVisitor = new SequenceDeclarationVisitor(Opcodes.ASM5, declVisitor,this,"",method,"","");
 		reader.accept(sequenceDeclarationVisitor, ClassReader.EXPAND_FRAMES);
-		for(MethodInvokation in : getClass(c).getMethod(method).virtuals){
+		for(MethodInvokation in : getClass(c).getMethod(method,desc).virtuals){
 			for (int i = 0; i < 3-depth; i++) {
 				System.out.print(" ");
 			}
 			System.out.println(c+"    "+in.owner+"    "+ in.method + "   " + in.params.toString().replaceAll("\\[|\\]", "") + "   " + in.returnType+"    "+in.index);
-			in.m = parseCalls(in.owner, in.method,depth-1);
+			in.m = parseCalls(in.owner, in.method,in.desc,depth-1);
 		}
 		}
 		catch(Exception e){
 			
 		}
-		return getClass(c).getMethod(method);
+		return getClass(c).getMethod(method,desc);
 	}
 }

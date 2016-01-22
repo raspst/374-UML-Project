@@ -9,11 +9,15 @@ public class MethodInvokation {
 	public String returnType;
 	public JMethod m;
 	public int index;
-	public MethodInvokation(String owner, String method, ArrayList<String> params, String returnType,int index){
-		this.owner=owner;
-		this.method=method;
+	public String desc;
+
+	public MethodInvokation(String owner, String method, ArrayList<String> params, String returnType, String desc,
+			int index) {
+		this.owner = owner;
+		this.method = method;
 		this.params = params;
 		this.returnType = returnType;
 		this.index = index;
+		this.desc = desc;
 	}
 }

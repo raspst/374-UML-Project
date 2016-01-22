@@ -6,13 +6,15 @@ public class JMethod extends JType {
 	JClass returnType;
 	ArrayList<JClass> parameters;
 	ArrayList<String> params;
+	private String desc;
 	HashMap<Integer,JClass> callStack = new HashMap<Integer,JClass>();
 	public ArrayList<MethodInvokation> virtuals = new ArrayList<>();
-	public JMethod(String name, int access, JClass returnType, ArrayList<JClass> parameters) {
+	public JMethod(String name, int access, JClass returnType, ArrayList<JClass> parameters,String desc) {
 		super(name);
 		super.setAccess(access);
 		this.returnType = returnType;
 		this.parameters = parameters;
+		this.desc=desc;
 	}
 	
 	private String getTopLevelParameter(JClass c){
@@ -20,8 +22,8 @@ public class JMethod extends JType {
 		return packages[packages.length-1];
 	}
 	
-	public void addVirtual(String c, String name, ArrayList<String> params, String returnType, int index){
-		virtuals.add(new MethodInvokation(c, name, params, returnType,index));
+	public void addVirtual(String c, String name, ArrayList<String> params, String returnType, String desc,int index){
+		virtuals.add(new MethodInvokation(c, name, params, returnType,desc,index));
 	}
 	
 	public void addParamStrings(ArrayList<String> params) {
@@ -52,5 +54,17 @@ public class JMethod extends JType {
 	
 	public JClass getStack(int index){
 		return callStack.get(index);
+	}
+	
+	public String getDesc(){
+		return desc;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof JMethod){
+			return(((JMethod) obj).desc.equals(desc) && ((JMethod) obj).getName().equals(getName()));
+		}
+		return false;
 	}
 }

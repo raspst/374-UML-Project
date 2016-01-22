@@ -19,9 +19,9 @@ public class JInterface extends JType {
 		return this.interfaces;
 	}
 
-	public JMethod getMethod(String name, ArrayList<String> params) {
+	public JMethod getMethod(String name, String desc) {
 		for (JMethod m : methods) {
-			if (m.getName().equals(name) && m.getParams().size() == params.size()) {
+			if (m.getName().equals(name) && desc.equals(m.getDesc())) {
 				return m;
 			}
 		}

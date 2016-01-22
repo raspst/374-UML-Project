@@ -22,7 +22,12 @@ public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		Design d = parseFile("parser.txt");
 		parseDesign(d);
-		d.getContainer().parseCalls("parser/test/Dog","getEnemy",2);
+		System.out.println("Method Signature formatting: ");
+		System.out.println("(<args>)<return>");
+		System.out.println("Types:");
+		System.out.println("B-byte C-char D-double F-float I-int J-long");
+		System.out.println("S-short V-void Z-boolean [-array L<class>;");
+		d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
 		PrintFactory pf = new PrintFactory(d);
 		//pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));

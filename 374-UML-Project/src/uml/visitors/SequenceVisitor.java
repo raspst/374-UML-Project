@@ -1,6 +1,7 @@
 package uml.visitors;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -16,6 +17,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	private JClass created;
 	private int index = 1;
 	private int prevOp;
+	private LinkedList<Integer> arguments = new LinkedList<Integer>();
 	public SequenceVisitor(int arg0, ClassContainer container) {
 		super(arg0, container);
 	}
@@ -41,7 +43,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			}
 			String returnType = Type.getReturnType(desc).getClassName();
 			getContainer().getActiveMethod().addParamStrings(params);
-			getContainer().getActiveMethod().addVirtual(owner, name, params, returnType, index);
+			getContainer().getActiveMethod().addVirtual(owner, name, params, returnType,desc, arguments.getFirst());
 			// JMethod m = getContainer().getActiveClass().getMethod(name);
 			// System.out.println("VIRTUAL "+ created.getName());
 			// System.out.println(desc);
@@ -101,6 +103,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			op = "DLOAD";
 		else if (opcode == Opcodes.ALOAD) {
 			op = "ALOAD";
+			if(prevOp!=Opcodes.ALOAD)arguments.clear();
 			if (var == 0) {
 				created = container.getActiveClass().getSuper();
 				// System.out.println(created.getName());
@@ -110,6 +113,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 				index = var;
 				created = container.getActiveMethod().getStack(var);
 			}
+			arguments.add(index);
 		} else if (opcode == Opcodes.ISTORE)
 			op = "ISTORE";
 		else if (opcode == Opcodes.LSTORE)
@@ -123,7 +127,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			index = var;
 			JMethod m = container.getActiveMethod();
 			m.setStack(var, created);
-			if(prevOp==Opcodes.INVOKESPECIAL)m.addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(), index);
+			if(prevOp==Opcodes.INVOKESPECIAL)m.addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(),"", index);
 		} else if (opcode == Opcodes.RET)
 			op = "RET";
 		// System.out.println(op+" "+var);
