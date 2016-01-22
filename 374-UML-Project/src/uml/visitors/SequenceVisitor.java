@@ -40,6 +40,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 				params.add(arg.getClassName());
 			}
 			String returnType = Type.getReturnType(desc).getClassName();
+			getContainer().getActiveMethod().addParamStrings(params);
 			getContainer().getActiveMethod().addVirtual(owner, name, params, returnType, index);
 			// JMethod m = getContainer().getActiveClass().getMethod(name);
 			// System.out.println("VIRTUAL "+ created.getName());

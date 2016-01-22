@@ -5,6 +5,7 @@ import java.util.HashMap;
 public class JMethod extends JType {
 	JClass returnType;
 	ArrayList<JClass> parameters;
+	ArrayList<String> params;
 	HashMap<Integer,JClass> callStack = new HashMap<Integer,JClass>();
 	public ArrayList<MethodInvokation> virtuals = new ArrayList<>();
 	public JMethod(String name, int access, JClass returnType, ArrayList<JClass> parameters) {
@@ -21,6 +22,14 @@ public class JMethod extends JType {
 	
 	public void addVirtual(String c, String name, ArrayList<String> params, String returnType, int index){
 		virtuals.add(new MethodInvokation(c, name, params, returnType,index));
+	}
+	
+	public void addParamStrings(ArrayList<String> params) {
+		this.params = params;
+	}
+	
+	public ArrayList<String> getParams() {
+		return this.params;
 	}
 	
 	public void printVirtuals(){
