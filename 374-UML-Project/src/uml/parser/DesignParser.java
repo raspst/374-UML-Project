@@ -44,13 +44,14 @@ public class DesignParser {
 //				}
 //				System.out.println(in.caller.getName()+"    "+in.owner+"    "+ in.method + "   " + in.desc + "   " + in.returnType+"    "+in.index);
 				StringBuilder s = new StringBuilder();
-				if(in.method.equals("<init>")) {
+				if(in.method.equals("<init>")||in.method.equals("<stinit>")) {
 					if(!initialized.contains(in.returnType)){
 						initialized.add(in.returnType);
 					s.append("/");
 					s.append(in.returnType + ":" + in.returnType);
 					}
 				}
+	
 				//else
 					//s.append(in.caller.getName() + ":" + in.caller.getName());
 //				if(in.index == 2) {
@@ -74,11 +75,13 @@ public class DesignParser {
 					if(in.method.equals("<init>")) {
 						s.append("new");
 					}
-					else {
+					else if(!in.method.equals("<stinit>")){
 						s.append(in.method);
 					}
+					if(!in.method.equals("<stinit>")){
 					s.append(in.params.toString().replace("[", "(").replace("]", ")"));
 					System.out.println(s.toString());
+					}
 					if(in.m!=null) {
 						printCalls(in.m,depth+1);
 					}

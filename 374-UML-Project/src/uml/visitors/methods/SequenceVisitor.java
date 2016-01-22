@@ -70,7 +70,8 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
 		if (opcode == Opcodes.GETSTATIC) {
 			index = 0;
-			created = getContainer().getClass(desc);
+			//getContainer().getActiveMethod().addVirtual(desc, "<stinit>", new ArrayList<String>(), desc, desc, 1);
+			//System.out.println("DESC"+desc);
 		}
 		if (opcode == Opcodes.PUTSTATIC) {
 			getContainer().getActiveClass().addStaticField(new JField(name, 0, getContainer().getClass(desc)));
