@@ -1,7 +1,10 @@
 package uml.visitors;
 
+import java.util.ArrayList;
+
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
 import uml.parser.ClassContainer;
 import uml.types.JClass;
@@ -25,7 +28,13 @@ public class SequenceVisitor extends MethodContainerVisitor {
 		JClass c = getContainer().getActiveClass();
 		//System.out.println(owner +"    "+ name);
 		if(created==null)created=getContainer().getClass("java/lang/Object");
-		getContainer().getActiveMethod().addVirtual(owner,name);
+		Type[] argTypes = Type.getArgumentTypes(desc);
+		ArrayList<String> params = new ArrayList<String>();
+		for(Type arg: argTypes) {
+			params.add(arg.getClassName());
+		}
+		String returnType = Type.getReturnType(desc).getClassName();
+		getContainer().getActiveMethod().addVirtual(owner,name, params, returnType);
 		//JMethod m = getContainer().getActiveClass().getMethod(name);
 			//System.out.println("VIRTUAL "+ created.getName());
 			//System.out.println(desc);

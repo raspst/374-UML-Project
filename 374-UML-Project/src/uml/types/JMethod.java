@@ -19,8 +19,8 @@ public class JMethod extends JType {
 		return packages[packages.length-1];
 	}
 	
-	public void addVirtual(String c, String name){
-		virtuals.add(new MethodInvokation(c, name));
+	public void addVirtual(String c, String name, ArrayList<String> params, String returnType){
+		virtuals.add(new MethodInvokation(c, name, params, returnType));
 	}
 	
 	public void printVirtuals(){

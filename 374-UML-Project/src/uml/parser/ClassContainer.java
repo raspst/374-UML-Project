@@ -96,7 +96,7 @@ public class ClassContainer {
 			for (int i = 0; i < 3-depth; i++) {
 				System.out.print(" ");
 			}
-			System.out.println(c+"    "+in.owner+"    "+ in.method);
+			System.out.println(c+"    "+in.owner+"    "+ in.method + "   " + in.params.toString().replaceAll("\\[|\\]", "") + "   " + in.returnType);
 			in.m = parseCalls(in.owner, in.method,depth-1);
 		}
 		}
