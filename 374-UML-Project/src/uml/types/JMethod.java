@@ -6,6 +6,7 @@ public class JMethod extends JType {
 	JClass returnType;
 	ArrayList<JClass> parameters;
 	HashMap<Integer,JClass> callStack = new HashMap<Integer,JClass>();
+	public ArrayList<MethodInvokation> virtuals = new ArrayList<>();
 	public JMethod(String name, int access, JClass returnType, ArrayList<JClass> parameters) {
 		super(name);
 		super.setAccess(access);
@@ -16,6 +17,14 @@ public class JMethod extends JType {
 	private String getTopLevelParameter(JClass c){
 		String[] packages = c.getName().split("/");
 		return packages[packages.length-1];
+	}
+	
+	public void addVirtual(String c, String name){
+		virtuals.add(new MethodInvokation(c, name));
+	}
+	
+	public void printVirtuals(){
+		//for(String s:virtuals)System.out.println(s);
 	}
 	
 	public String getGraphViz() {

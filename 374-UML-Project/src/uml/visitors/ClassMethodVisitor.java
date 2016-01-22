@@ -12,7 +12,7 @@ import uml.types.JClass;
 import uml.types.JMethod;
 
 public class ClassMethodVisitor extends ClassVisitor {
-	private ClassContainer container;
+	protected ClassContainer container;
 
 	public ClassMethodVisitor(int arg0, ClassVisitor arg1, ClassContainer container) {
 		super(arg0, arg1);
@@ -42,8 +42,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 		}
 			JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()),
 					parameters);
+			if(c.getMethod(toAdd.getName())==null){
 			c.addMethod(toAdd);
-			container.setActiveMethod(toAdd);
+			container.setActiveMethod(toAdd);}
+			else container.setActiveMethod(c.getMethod(toAdd.getName()));
 		return toDecorate;//new SequenceVisitor(Opcodes.ASM5,toDecorate,container);
 	}
 

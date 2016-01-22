@@ -10,9 +10,11 @@ import org.objectweb.asm.Type;
 
 import uml.types.JClass;
 import uml.types.JMethod;
+import uml.types.MethodInvokation;
 import uml.visitors.ClassDeclarationVisitor;
 import uml.visitors.ClassFieldVisitor;
 import uml.visitors.ClassMethodVisitor;
+import uml.visitors.SequenceDeclarationVisitor;
 
 public class ClassContainer {
 	private HashMap<String, JClass> classes;
@@ -81,5 +83,26 @@ public class ClassContainer {
 				e.printStackTrace();
 			}
 		}
+	}
+	private Queue<String> active;
+	public JMethod parseCalls(String c, String method,int depth){
+		if(depth==0)return null;
+		try{
+		ClassReader reader = new ClassReader(c);
+		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, this);
+		ClassVisitor sequenceDeclarationVisitor = new SequenceDeclarationVisitor(Opcodes.ASM5, declVisitor,this,"",method,"","");
+		reader.accept(sequenceDeclarationVisitor, ClassReader.EXPAND_FRAMES);
+		for(MethodInvokation in : getClass(c).getMethod(method).virtuals){
+			for (int i = 0; i < 3-depth; i++) {
+				System.out.print(" ");
+			}
+			System.out.println(c+"    "+in.owner+"    "+ in.method);
+			in.m = parseCalls(in.owner, in.method,depth-1);
+		}
+		}
+		catch(Exception e){
+			
+		}
+		return getClass(c).getMethod(method);
 	}
 }

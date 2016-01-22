@@ -22,8 +22,9 @@ public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		Design d = parseFile("parser.txt");
 		parseDesign(d);
+		d.getContainer().parseCalls("parser/test/Dog","getEnemy",2);
 		PrintFactory pf = new PrintFactory(d);
-		pf.printContainer();
+		//pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));
 	}
 

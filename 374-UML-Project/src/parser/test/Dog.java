@@ -10,10 +10,13 @@ public class Dog implements Animal {
 	@Override
 	public void makeSound() {
 		// TODO Auto-generated method stub
-		System.out.println("Woof woof");
+		getBreed();
+		//System.err.println("Woof woof");
+		//System.out.println("Woof woof");
 	}
 	
 	public String getBreed() {
+		new Object().getClass();
 		return this.breed;
 	}
 	
@@ -32,7 +35,7 @@ public class Dog implements Animal {
 		Cat c = new Cat();
 		c.makeSound();
 			Dog d = new Dog("asfd");
-		//d.makeSound();
+		d.makeSound();
 		return c;
 	}
 

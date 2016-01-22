@@ -23,15 +23,18 @@ public class SequenceVisitor extends MethodContainerVisitor {
 		String op = "SPECIAL";
 		if(opCode==Opcodes.INVOKEVIRTUAL){op="VIRTUAL";
 		JClass c = getContainer().getActiveClass();
-		//System.out.println(owner);
+		//System.out.println(owner +"    "+ name);
 		if(created==null)created=getContainer().getClass("java/lang/Object");
-			System.out.println("VIRTUAL "+ created.getName());
+		getContainer().getActiveMethod().addVirtual(owner,name);
+		//JMethod m = getContainer().getActiveClass().getMethod(name);
+			//System.out.println("VIRTUAL "+ created.getName());
+			//System.out.println(desc);
 		}
 		else if(opCode==Opcodes.INVOKEDYNAMIC)op="DYNAMIC";
 		else{
 			created = getContainer().getClass(owner);
 		}
-		System.out.println(op+"    "+owner+"    "+name);
+		//System.out.println(op+"    "+owner+"    "+name);
 	}
 	
 	@Override
@@ -50,7 +53,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 		else if(opcode==Opcodes.GETFIELD)op="GETFIELD";
 		else if(opcode==Opcodes.PUTFIELD)op="PUTFIELD";
 		super.visitFieldInsn(opcode, owner, name, desc);
-		System.out.println(op+"    "+owner+"    "+name);
+		//System.out.println(op+"    "+owner+"    "+name);
 	}
 	
 	@Override
@@ -62,7 +65,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			op="NEW";
 			created = getContainer().getClass(type);
 		}
-		System.out.println(op+"    "+type);
+		//System.out.println(op+"    "+type);
 	}
 	
 	@Override
@@ -76,7 +79,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 		else if(opcode==Opcodes.ALOAD){op="ALOAD";
 		if(var == 0){
 			created=container.getActiveClass().getSuper();
-			System.out.println(created.getName());
+			//System.out.println(created.getName());
 			container.getActiveMethod().setStack(0, created);
 		}
 		created = container.getActiveMethod().getStack(var);
@@ -92,12 +95,12 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			}
 		}
 		else if(opcode==Opcodes.RET)op="RET";
-		System.out.println(op+"    "+var);
+		//System.out.println(op+"    "+var);
 	}
 	
 	@Override
 	public void visitInsn(int arg0) {
 		super.visitInsn(arg0);
-		if(arg0==Opcodes.ARETURN)System.out.println("ARETURN");
+		//if(arg0==Opcodes.ARETURN)System.out.println("ARETURN");
 	}
 }
