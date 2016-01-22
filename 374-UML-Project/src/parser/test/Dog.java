@@ -15,7 +15,7 @@ public class Dog implements Animal {
 		// TODO Auto-generated method stub
 		getBreed();
 		//System.err.println("Woof woof");
-		//System.out.println("Woof woof");
+		System.out.println("Woof woof");
 	}
 	
 	public String getBreed() {
@@ -37,11 +37,11 @@ public class Dog implements Animal {
 	
 	private Cat getEnemy(ArrayList<String> s) {
 		Cat c = new Cat();
-			Dog d = new Dog("asfd");
+			//Dog d = new Dog("asfd");
 			c.makeSound();
 		Bone b = new Bone("blue", false);
-		d.giveBone(b);
-		d.makeSound();
+		this.giveBone(b);
+		this.makeSound();
 		return c;
 	}
 

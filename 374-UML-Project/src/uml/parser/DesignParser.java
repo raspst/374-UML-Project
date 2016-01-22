@@ -5,7 +5,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
+import uml.types.JClass;
 import uml.types.JMethod;
 import uml.types.MethodInvokation;
 
@@ -21,11 +24,17 @@ public class DesignParser {
 //		JMethod m = d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
 		JMethod m = d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
 		PrintFactory pf = new PrintFactory(d);
-		printStack(m,0);
+		initialized.clear();
+		printStack("parser/test/Dog",m,0);
 		printCalls(m,0);
 		//pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));
 	}
+	private static void printStack(String string, JMethod m, int i) {
+		System.out.println(string+":"+string+"[a]");
+		printStack(m, i);
+	}
+	private static HashSet<String> initialized = new HashSet<String>();
 	public static void printStack(JMethod m,int depth){
 		for(MethodInvokation in : m.virtuals){
 			if(in.caller!=null){		
@@ -35,12 +44,18 @@ public class DesignParser {
 //				System.out.println(in.caller.getName()+"    "+in.owner+"    "+ in.method + "   " + in.desc + "   " + in.returnType+"    "+in.index);
 				StringBuilder s = new StringBuilder();
 				if(in.method.equals("<init>")) {
+					if(!initialized.contains(in.returnType)){
+						initialized.add(in.returnType);
 					s.append("/");
+					s.append(in.returnType + ":" + in.returnType);
+					}
 				}
-				s.append(in.caller.getName() + ":" + in.caller.getName());
-				if(in.index == 2) {
-					s.append("[a]");
-				}
+				//else
+					//s.append(in.caller.getName() + ":" + in.caller.getName());
+//				if(in.index == 2) {
+//					s.append("[a]");
+//				}
+				if(s.length()!=0)
 				System.out.println(s.toString());
 				if(in.m!=null) {
 					printStack(in.m,depth+1);
@@ -62,6 +77,9 @@ public class DesignParser {
 				}
 				s.append(in.params.toString().replace("[", "(").replace("]", ")"));
 				System.out.println(s.toString());
+				if(in.m!=null) {
+					printCalls(in.m,depth+1);
+				}
 			}
 		}
 	}
