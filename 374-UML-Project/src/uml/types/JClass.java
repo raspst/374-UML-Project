@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import org.objectweb.asm.Type;
-
 public class JClass extends JInterface {
 	private HashSet<JField> fields;
 	private JClass superclass;

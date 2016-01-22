@@ -1,4 +1,4 @@
-package uml.visitors;
+package uml.visitors.methods;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
-import org.omg.CORBA.Current;
 
 import uml.parser.ClassContainer;
 import uml.types.JClass;
@@ -19,6 +18,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	private int prevOp;
 	private boolean init;
 	private LinkedList<Integer> arguments = new LinkedList<Integer>();
+
 	public SequenceVisitor(int arg0, ClassContainer container) {
 		super(arg0, container);
 	}
@@ -30,11 +30,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	@Override
 	public void visitMethodInsn(int opCode, String owner, String name, String desc, boolean itf) {
 		super.visitMethodInsn(opCode, owner, name, desc, itf);
-		String op = "SPECIAL";
 		if (opCode == Opcodes.INVOKEVIRTUAL) {
-			op = "VIRTUAL";
-			JClass c = getContainer().getActiveClass();
-			// System.out.println(owner +" "+ name);
 			if (created == null)
 				created = getContainer().getClass("java/lang/Object");
 			Type[] argTypes = Type.getArgumentTypes(desc);
@@ -44,51 +40,44 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			}
 			String returnType = Type.getReturnType(desc).getClassName();
 			getContainer().getActiveMethod().addParamStrings(params);
-			getContainer().getActiveMethod().addVirtual(owner, name, params, returnType,desc, arguments.getFirst());
+			getContainer().getActiveMethod().addVirtual(owner, name, params, returnType, desc, arguments.getFirst());
 			// JMethod m = getContainer().getActiveClass().getMethod(name);
 			// System.out.println("VIRTUAL "+ created.getName());
 			// System.out.println(desc);
 		} else if (opCode == Opcodes.INVOKEDYNAMIC) {
-			op = "DYNAMIC";
 			System.out.println("DYNAMIC" + "    " + owner + "    " + name);
 		} else {
 			if (name.equals("<init>")) {
-				init=true;
+				init = true;
 				created = getContainer().getClass(owner);
-			}
-			else{
-				init=false;
+			} else {
+				init = false;
 				created = getContainer().getClass(owner);
-			Type[] argTypes = Type.getArgumentTypes(desc);
-			ArrayList<String> params = new ArrayList<String>();
-			for (Type arg : argTypes) {
-				params.add(arg.getClassName());
+				Type[] argTypes = Type.getArgumentTypes(desc);
+				ArrayList<String> params = new ArrayList<String>();
+				for (Type arg : argTypes) {
+					params.add(arg.getClassName());
+				}
+				String returnType = Type.getReturnType(desc).getClassName();
+				getContainer().getActiveMethod().addVirtual(owner, name, params, returnType, desc,
+						arguments.getFirst());
 			}
-			String returnType = Type.getReturnType(desc).getClassName();
-			getContainer().getActiveMethod().addVirtual(owner, name, params, returnType,desc, arguments.getFirst());
-			}
-			//System.out.println("SPECIAL" + "    " + owner + "    " + name);
 		}
-		// System.out.println(op+" "+owner+" "+name);
-		prevOp=opCode;
+		prevOp = opCode;
 	}
 
 	@Override
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
-		String op = "GETSTATIC";
 		if (opcode == Opcodes.GETSTATIC) {
-			index=0;
+			index = 0;
 			created = getContainer().getClass(desc);
 		}
 		if (opcode == Opcodes.PUTSTATIC) {
-			op = "PUTSTATIC";
 			getContainer().getActiveClass().addStaticField(new JField(name, 0, getContainer().getClass(desc)));
-			//if(prevOp==Opcodes.INVOKESPECIAL&&init)getContainer().getActiveMethod().addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(),"", index);
-		} else if (opcode == Opcodes.GETFIELD)
-			op = "GETFIELD";
-		else if (opcode == Opcodes.PUTFIELD)
-			op = "PUTFIELD";
-		prevOp=opcode;
+		} else if (opcode == Opcodes.GETFIELD) {
+		} else if (opcode == Opcodes.PUTFIELD) {
+		}
+		prevOp = opcode;
 		super.visitFieldInsn(opcode, owner, name, desc);
 		// System.out.println(op+" "+owner+" "+name);
 	}
@@ -96,29 +85,23 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	@Override
 	public void visitTypeInsn(int opcode, String type) {
 		super.visitTypeInsn(opcode, type);
-		String op = "";
 		if (opcode == Opcodes.NEW) {
-			op = "NEW";
 			created = getContainer().getClass(type);
 		}
 		// System.out.println(op+" "+type);
-		prevOp=opcode;
+		prevOp = opcode;
 	}
 
 	@Override
 	public void visitVarInsn(int opcode, int var) {
 		super.visitVarInsn(opcode, var);
 		ClassContainer container = getContainer();
-		String op = "ILOAD";
-		if (opcode == Opcodes.LLOAD)
-			op = "LLOAD";
-		else if (opcode == Opcodes.FLOAD)
-			op = "FLOAD";
-		else if (opcode == Opcodes.DLOAD)
-			op = "DLOAD";
-		else if (opcode == Opcodes.ALOAD) {
-			op = "ALOAD";
-			if(prevOp!=Opcodes.ALOAD)arguments.clear();
+		if (opcode == Opcodes.LLOAD) {
+		} else if (opcode == Opcodes.FLOAD) {
+		} else if (opcode == Opcodes.DLOAD) {
+		} else if (opcode == Opcodes.ALOAD) {
+			if (prevOp != Opcodes.ALOAD)
+				arguments.clear();
 			if (var == 0) {
 				created = container.getActiveClass().getSuper();
 				// System.out.println(created.getName());
@@ -129,24 +112,19 @@ public class SequenceVisitor extends MethodContainerVisitor {
 				created = container.getActiveMethod().getStack(var);
 			}
 			arguments.add(index);
-		} else if (opcode == Opcodes.ISTORE)
-			op = "ISTORE";
-		else if (opcode == Opcodes.LSTORE)
-			op = "LSTORE";
-		else if (opcode == Opcodes.FSTORE)
-			op = "FSTORE";
-		else if (opcode == Opcodes.DSTORE)
-			op = "DSTORE";
-		else if (opcode == Opcodes.ASTORE) {
-			op = "ASTORE";
+		} else if (opcode == Opcodes.ISTORE) {
+		} else if (opcode == Opcodes.LSTORE) {
+		} else if (opcode == Opcodes.FSTORE) {
+		} else if (opcode == Opcodes.DSTORE) {
+		} else if (opcode == Opcodes.ASTORE) {
 			index = var;
 			JMethod m = container.getActiveMethod();
 			m.setStack(var, created);
-			if(prevOp==Opcodes.INVOKESPECIAL&&init)m.addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(),"", index);
+			if (prevOp == Opcodes.INVOKESPECIAL && init)
+				m.addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(), "", index);
 		} else if (opcode == Opcodes.RET)
-			op = "RET";
-		// System.out.println(op+" "+var);
-		prevOp=opcode;
+			// System.out.println(op+" "+var);
+			prevOp = opcode;
 	}
 
 	@Override
