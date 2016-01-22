@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>588</x>
-      <y>510</y>
+      <x>858</x>
+      <y>492</y>
       <w>216</w>
-      <h>114</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>ClassContainer
 --
@@ -17,7 +17,11 @@
 +void getClass(String, String, String, ArrayList&lt;String&gt;)
 +void setActiveClass(JClass)
 +JClass getActiveClass()
-
++void setActiveMethod(JMethod)
++JMethod getActiveMethod()
++JClass addClass(String)
++void parse()
++void parseCalls()
 
 </panel_attributes>
     <additional_attributes/>
@@ -25,8 +29,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>624</x>
-      <y>288</y>
+      <x>894</x>
+      <y>270</y>
       <w>150</w>
       <h>186</h>
     </coordinates>
@@ -54,8 +58,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>882</x>
-      <y>318</y>
+      <x>1152</x>
+      <y>300</y>
       <w>126</w>
       <h>114</h>
     </coordinates>
@@ -70,8 +74,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>390</x>
-      <y>162</y>
+      <x>660</x>
+      <y>144</y>
       <w>162</w>
       <h>114</h>
     </coordinates>
@@ -89,8 +93,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>768</x>
-      <y>372</y>
+      <x>1038</x>
+      <y>354</y>
       <w>126</w>
       <h>18</h>
     </coordinates>
@@ -100,8 +104,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>546</x>
-      <y>210</y>
+      <x>816</x>
+      <y>192</y>
       <w>78</w>
       <h>18</h>
     </coordinates>
@@ -111,8 +115,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>468</y>
+      <x>960</x>
+      <y>450</y>
       <w>18</w>
       <h>54</h>
     </coordinates>
@@ -122,8 +126,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>612</x>
-      <y>150</y>
+      <x>882</x>
+      <y>132</y>
       <w>174</w>
       <h>120</h>
     </coordinates>
@@ -145,8 +149,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>636</x>
-      <y>18</y>
+      <x>906</x>
+      <y>0</y>
       <w>156</w>
       <h>114</h>
     </coordinates>
@@ -165,8 +169,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>264</y>
+      <x>960</x>
+      <y>246</y>
       <w>18</w>
       <h>36</h>
     </coordinates>
@@ -176,8 +180,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>786</x>
-      <y>66</y>
+      <x>1056</x>
+      <y>48</y>
       <w>174</w>
       <h>264</h>
     </coordinates>
@@ -187,8 +191,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>474</x>
-      <y>66</y>
+      <x>744</x>
+      <y>48</y>
       <w>174</w>
       <h>108</h>
     </coordinates>
@@ -198,8 +202,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>126</y>
+      <x>960</x>
+      <y>108</y>
       <w>18</w>
       <h>36</h>
     </coordinates>
@@ -209,44 +213,23 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>0</y>
-      <w>126</w>
-      <h>114</h>
-    </coordinates>
-    <panel_attributes>ClassContainer
---
--classes: HashMap&lt;String,JClass&gt;
--activeClass: JClass
---
-+JClass getClass(String)
-+JClass getActiveClass()
-+JClass setActiveClass(JClass)
---
-Responsibilities
--- Resp1
-*-- Resp2*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>420</x>
-      <y>300</y>
+      <x>516</x>
+      <y>282</y>
       <w>126</w>
       <h>114</h>
     </coordinates>
     <panel_attributes>ClassContainerVisitor
 --
-#container: ClassContainer
---</panel_attributes>
+-container: ClassContainer
+--
++ClassContainer getContainer()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>468</y>
+      <x>690</x>
+      <y>450</y>
       <w>126</w>
       <h>114</h>
     </coordinates>
@@ -259,21 +242,21 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>474</x>
-      <y>408</y>
-      <w>18</w>
+      <x>570</x>
+      <y>390</y>
+      <w>192</w>
       <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;300.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
-      <y>300</y>
+      <x>480</x>
+      <y>450</y>
       <w>204</w>
-      <h>114</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>ClassFieldVisitor
 --
@@ -284,9 +267,29 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>300</y>
-      <w>204</w>
+      <x>6</x>
+      <y>474</y>
+      <w>228</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;abstract&gt;
+MethodDeclarationVisitor
+--
+-methodName
+-desc
+--
++MethodVisitor visitMethod(int,String,String,String,String[])
++String getMethod()
++String getDesc()
++abstract MethodVisitor invokeVisitors(MethodVisitor,String,String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>246</x>
+      <y>450</y>
+      <w>228</w>
       <h>108</h>
     </coordinates>
     <panel_attributes>ClassMethodVisitor
@@ -294,5 +297,144 @@ Responsibilities
 --
 +MethodVisitor visitMethod(int,String,String,String,String[])</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>642</y>
+      <w>228</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>StackFrameVisitor
+--
+--
++abstract MethodVisitor invokeVisitors(MethodVisitor,String,String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>108</x>
+      <y>576</y>
+      <w>18</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>606</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>MethodContainerVisitor
+--
+-container: ClassContainer
+--
++ClassContainer getContainer()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>768</y>
+      <w>222</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>SequenceVisitor
+--
++void visitMethodInsn(int, String, String, String, boolean)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>714</y>
+      <w>18</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>390</y>
+      <w>30</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;30.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>348</x>
+      <y>390</y>
+      <w>228</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>360.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>222</x>
+      <y>690</y>
+      <w>420</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>680.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>942</x>
+      <y>660</y>
+      <w>126</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>MethodInvocation
+--
++caller:JClass
++owner:String
++method:String
++params:ArrayList&lt;String&gt;
++returnType:String
++m:JMethod
++index:int
++desc:String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>846</x>
+      <y>768</y>
+      <w>108</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1002</x>
+      <y>606</y>
+      <w>18</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
