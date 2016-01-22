@@ -1,20 +1,28 @@
 package uml.parser;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 import uml.types.JClass;
 import uml.types.JMethod;
+import uml.visitors.ClassDeclarationVisitor;
+import uml.visitors.ClassFieldVisitor;
+import uml.visitors.ClassMethodVisitor;
 
 public class ClassContainer {
 	private HashMap<String, JClass> classes;
-	
+	private Queue<String> toParse;
 	private JClass activeClass;
-
 	private JMethod activeMethod;
 
 	public ClassContainer() {
 		this.classes = new HashMap<String, JClass>();
+		toParse = new LinkedList<String>();
 	}
 	
 	public void setActiveClass(JClass c) {
@@ -35,14 +43,43 @@ public class ClassContainer {
 	
 	public JClass getClass(String name) {
 		//name = Type.getType(name).getInternalName();
+/*		if(name==null)
+		System.out.println(name);*/
 		name = Type.getObjectType(name).getClassName();
 		name = name.replace('.', '/');
+		name = name.replace("[]", "");
 		JClass theclass = classes.get(name);
 		if (theclass == null) {
-			theclass = new JClass(name);
-			classes.put(name, theclass);
-		}
+			theclass = addClass(name);
+			}
+		return theclass;
+	}
+	
+	public JClass addClass(String name){
+		name = Type.getObjectType(name).getClassName();
+		name = name.replace('.', '/');
+		JClass theclass = new JClass(name);
+		classes.put(name, theclass);
+		if(!name.equals("void") && !name.equals("int") && !name.equals("float") && !name.equals("double")
+				&& !name.equals("boolean") && !name.equals("short") && !name.equals("byte") && !name.equals("char") && !name.equals("long"))
+		toParse.add(name);
 		return theclass;
 	}
 
+	public void parse(){
+		while(!toParse.isEmpty()){
+			String c = toParse.remove();
+			try{
+			ClassReader reader = new ClassReader(c);
+			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, this);
+			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, this);
+			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, this);
+			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			}
+			catch(Exception e){
+				System.out.println(c);
+				e.printStackTrace();
+			}
+		}
+	}
 }

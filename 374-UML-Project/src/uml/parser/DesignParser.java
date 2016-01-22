@@ -23,7 +23,7 @@ public class DesignParser {
 		Design d = parseFile("parser.txt");
 		parseDesign(d);
 		PrintFactory pf = new PrintFactory(d);
-		//pf.printContainer();
+		pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));
 	}
 
@@ -84,12 +84,10 @@ public class DesignParser {
 	public static void parseDesign(Design d) throws IOException {
 		for (String className : d.getClassNames()) {
 			// System.out.println(className);
-			ClassReader reader = new ClassReader(className);
-			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, d.getContainer());
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, d.getContainer());
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, d.getContainer());
-			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			d.getContainer().addClass(className);
+			//d.getContainer().getClass(className);
 			// System.out.println(className);
 		}
+		d.getContainer().parse();
 	}
 }

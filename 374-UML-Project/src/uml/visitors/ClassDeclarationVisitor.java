@@ -23,9 +23,10 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 		}
 		container.setActiveClass(c);
 		c.setAccess(access);
+		if(!c.getName().equals("java/lang/Object")){
 		JClass superClass = container.getClass(superName);
 		c.setSuper(superClass);
-		System.out.println(name);
+		}
 		for (String i : interfaces) {
 		/*	String[] packages = i.split("/");
 			i = packages[packages.length - 1];
