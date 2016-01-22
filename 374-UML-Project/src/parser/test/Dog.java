@@ -33,8 +33,8 @@ public class Dog implements Animal {
 	
 	private Cat getEnemy() {
 		Cat c = new Cat();
-		c.makeSound();
 			Dog d = new Dog("asfd");
+			c.makeSound();
 		d.makeSound();
 		return c;
 	}
