@@ -29,25 +29,53 @@ public class DesignParser {
 		System.out.println("Types:");
 		System.out.println("B-byte C-char D-double F-float I-int J-long");
 		System.out.println("S-short V-void Z-boolean [-array L<class>;");
-		JMethod m = d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
-		//JMethod m = d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
+//		JMethod m = d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
+		JMethod m = d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
 		PrintFactory pf = new PrintFactory(d);
 		printStack(m,0);
+		printCalls(m,0);
 		//pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));
 	}
 	public static void printStack(JMethod m,int depth){
 		for(MethodInvokation in : m.virtuals){
 			if(in.caller!=null){		
-				for (int i = 0; i < depth; i++) {
-					System.out.print(" ");
+//				for (int i = 0; i < depth; i++) {
+//					System.out.print(" ");
+//				}
+//				System.out.println(in.caller.getName()+"    "+in.owner+"    "+ in.method + "   " + in.desc + "   " + in.returnType+"    "+in.index);
+				StringBuilder s = new StringBuilder();
+				if(in.method.equals("<init>")) {
+					s.append("/");
 				}
-				System.out.println(in.caller.getName()+"    "+in.owner+"    "+ in.method + "   " + in.desc + "   " + in.returnType+"    "+in.index);
-				if(in.m!=null)
-				printStack(in.m,depth+1);
+				s.append(in.caller.getName() + ":" + in.caller.getName());
+				if(in.index == 2) {
+					s.append("[a]");
+				}
+				System.out.println(s.toString());
+				if(in.m!=null) {
+					printStack(in.m,depth+1);
+				}
 			}
 		}
+	}
+	
+	public static void printCalls(JMethod m, int depth) {
+		for(MethodInvokation in: m.virtuals) {
+			if(in.caller != null) {
+				StringBuilder s = new StringBuilder();
+				s.append(in.caller.getName() + ":" + in.owner + ".");
+				if(in.method.equals("<init>")) {
+					s.append("new");
+				}
+				else {
+					s.append(in.method);
+				}
+				s.append(in.params.toString().replace("[", "(").replace("]", ")"));
+				System.out.println(s.toString());
+			}
 		}
+	}
 
 	public static void visitFiles(String pref, File dir, ArrayList<String> files) {
 		for (File f : dir.listFiles()) {
