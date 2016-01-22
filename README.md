@@ -26,19 +26,31 @@ the UML generation by parsing a text file
 PrintFactory - PrintFactory handles printing out all of the various
 elements of the GraphViz output
 
+MethodInvokation - holds items needed to print out SDEdit representations
+of methods.
+
+SequenceVisitor - visits the method instructions and such to
+get the information about methods out of the bytecode.
+
+MethodContainerVisitor - similar to the ClassContainerVisitor for the UML
+parsing.
+
 WHO DID WHAT
 
 Alex Crowley - Alex did the manual UML diagrams, coming up with the
 main ideas for the structure of the program in the progress. He also
 added in a couple of classes (i.e. ClassContainer). Alex  also
 refactored a lot of code after it was written to make it more efficient.
-Added a file parser and a recursive package visitor that gets all classes in a package.
+Added a file parser and a recursive package visitor that gets all classes in a package. Alex did most of the heavy ASM lifting for Milestone 3 and added
+the visitors and classes required to do so.
 
 Steven Rasp - Steven implemented the classes that hold the information about
 classes, fields, methods, etc. He also handled the code dealing with outputting
 the text necessary for GraphViz UML diagrams. He also added some test code
 to run the parser on some test classes to ensure that the various items
-were being read in correctly.
+were being read in correctly. For Milestone 3, Steven mostly caught small
+mistakes, and then wrote the code to print out the SDEdit formatted text,
+though it's not perfect at all.
 
 INSTRUCTIONS FOR USE
 
@@ -53,3 +65,6 @@ FILE FORMAT
 -w <the/package/.../> --Whitelists a package so it association arrows are drawn to all Classes in package.
 <package/.../>* --Adds all files in package to be parsed.
 <packge/.../Class> --Adds the class to be parsed.
+
+To use the Sequence Diagram creator, the parameters (Class name, method name,
+method signature) are passed in main for now.
