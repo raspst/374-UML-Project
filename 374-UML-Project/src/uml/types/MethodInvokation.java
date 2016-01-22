@@ -3,6 +3,7 @@ package uml.types;
 import java.util.ArrayList;
 
 public class MethodInvokation {
+	public JClass caller;
 	public String owner;
 	public String method;
 	public ArrayList<String> params;

@@ -93,10 +93,7 @@ public class ClassContainer {
 		ClassVisitor sequenceDeclarationVisitor = new SequenceDeclarationVisitor(Opcodes.ASM5, declVisitor,this,"",method,"","");
 		reader.accept(sequenceDeclarationVisitor, ClassReader.EXPAND_FRAMES);
 		for(MethodInvokation in : getClass(c).getMethod(method,desc).virtuals){
-			for (int i = 0; i < 3-depth; i++) {
-				System.out.print(" ");
-			}
-			System.out.println(c+"    "+in.owner+"    "+ in.method + "   " + in.params.toString().replaceAll("\\[|\\]", "") + "   " + in.returnType+"    "+in.index);
+			in.caller=getClass(c);
 			in.m = parseCalls(in.owner, in.method,in.desc,depth-1);
 		}
 		}

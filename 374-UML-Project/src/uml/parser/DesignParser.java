@@ -14,6 +14,8 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import uml.types.JMethod;
+import uml.types.MethodInvokation;
 import uml.visitors.ClassDeclarationVisitor;
 import uml.visitors.ClassFieldVisitor;
 import uml.visitors.ClassMethodVisitor;
@@ -27,11 +29,19 @@ public class DesignParser {
 		System.out.println("Types:");
 		System.out.println("B-byte C-char D-double F-float I-int J-long");
 		System.out.println("S-short V-void Z-boolean [-array L<class>;");
-		d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
+		JMethod m = d.getContainer().parseCalls("parser/test/Dog","getEnemy","(Ljava/util/ArrayList;)Lparser/test/Cat;",3);
 		PrintFactory pf = new PrintFactory(d);
+		printStack(m);
 		//pf.printContainer();
 		//BufferedReader b = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[2])));
 	}
+	public static void printStack(JMethod m){
+		for(MethodInvokation in : m.virtuals){
+		System.out.println(in.caller.getName()+"    "+in.owner+"    "+ in.method + "   " + in.params.toString().replaceAll("\\[|\\]", "") + "   " + in.returnType+"    "+in.index);
+		if(in.m!=null)
+		printStack(in.m);
+		}
+		}
 
 	public static void visitFiles(String pref, File dir, ArrayList<String> files) {
 		for (File f : dir.listFiles()) {
