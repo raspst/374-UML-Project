@@ -2,6 +2,8 @@ package uml.types;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.objectweb.asm.Type;
+
 public class JMethod extends JType {
 	JClass returnType;
 	ArrayList<JClass> parameters;
@@ -59,6 +61,10 @@ public class JMethod extends JType {
 	
 	public String getDesc(){
 		return desc;
+	}
+	
+	public String getReturn(){
+		return Type.getObjectType(Type.getReturnType(desc).getClassName()).getClassName().replace('.', '/');
 	}
 	
 	@Override
