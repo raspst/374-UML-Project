@@ -7,7 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Type;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.LocalVariableNode;
+import org.objectweb.asm.tree.MethodNode;
+
+import uml.node.NodeContainer;
 import uml.types.JClass;
 import uml.types.JMethod;
 import uml.types.MethodInvokation;
@@ -30,7 +38,10 @@ public class DesignParser {
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");
 		//printCalls(m, 0);
-		new SingletonDetector(d).printFields();
+		//new SingletonDetector(d).printFields();
+		NodeContainer nc = new NodeContainer();
+		nc.addClass("parser/test/Dog");
+		nc.parse();
 		// pf.printContainer();
 		// BufferedReader b = new BufferedReader(new InputStreamReader(new
 		// ByteArrayInputStream(new byte[2])));
