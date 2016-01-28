@@ -35,13 +35,13 @@ public class ClassMethodVisitor extends ClassContainerVisitor {
 			parameters.add(par);
 			c.addUses(par);
 		}
-		JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()),
-				parameters, desc);
-		if (c.getMethod(toAdd.getName(), desc) == null) {
-			c.addMethod(toAdd);
-			container.setActiveMethod(toAdd);
-		} else
-			container.setActiveMethod(c.getMethod(toAdd.getName(), desc));
+//		JMethod toAdd = new JMethod(name, access, container.getClass(Type.getReturnType(desc).getClassName()),
+//				parameters, desc);
+//		if (c.getMethod(toAdd.getName(), desc) == null) {
+//			c.addMethod(toAdd);
+//			container.setActiveMethod(toAdd);
+//		} else
+//			container.setActiveMethod(c.getMethod(toAdd.getName(), desc));
 		return toDecorate;
 	}
 

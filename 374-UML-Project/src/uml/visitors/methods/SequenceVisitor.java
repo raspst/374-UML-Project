@@ -39,7 +39,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 				params.add(arg.getClassName());
 			}
 			String returnType = Type.getReturnType(desc).getClassName();
-			getContainer().getActiveMethod().addParamStrings(params);
+			//getContainer().getActiveMethod().addParamStrings(params);
 			getContainer().getActiveMethod().addVirtual(owner, name, params, returnType, desc, arguments.getFirst());
 			// JMethod m = getContainer().getActiveClass().getMethod(name);
 			// System.out.println("VIRTUAL "+ created.getName());
@@ -106,11 +106,11 @@ public class SequenceVisitor extends MethodContainerVisitor {
 			if (var == 0) {
 				created = container.getActiveClass().getSuper();
 				// System.out.println(created.getName());
-				container.getActiveMethod().setStack(0, created);
+				//container.getActiveMethod().setStack(0, created);
 				index = 0;
 			} else {
 				index = var;
-				created = container.getActiveMethod().getStack(var);
+				//created = container.getActiveMethod().getStack(var);
 			}
 			arguments.add(index);
 		} else if (opcode == Opcodes.ISTORE) {
@@ -120,7 +120,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 		} else if (opcode == Opcodes.ASTORE) {
 			index = var;
 			JMethod m = container.getActiveMethod();
-			m.setStack(var, created);
+			//m.setStack(var, created);
 			if (prevOp == Opcodes.INVOKESPECIAL && init)
 				m.addVirtual(created.getName(), "<init>", new ArrayList<String>(), created.getName(), "", index);
 		} else if (opcode == Opcodes.RET)

@@ -1,23 +1,25 @@
 package uml.types;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.objectweb.asm.Type;
 
 public class JMethod extends JType {
+	JClass owner;
+	ArrayList<JField> parameters;
 	JClass returnType;
-	ArrayList<JClass> parameters;
-	ArrayList<String> params;
 	private String desc;
-	boolean framed;
-	HashMap<Integer,JClass> callStack = new HashMap<Integer,JClass>();
+	ArrayList<JField> localVars = new ArrayList<JField>();
 	public ArrayList<MethodInvokation> virtuals = new ArrayList<>();
-	public JMethod(String name, int access, JClass returnType, ArrayList<JClass> parameters,String desc) {
+	public JMethod(JClass owner, String name, int access, JClass returnType, ArrayList<JField> parameters,ArrayList<JField> locals,String desc) {
 		super(name);
 		super.setAccess(access);
+		this.owner=owner;
 		this.returnType = returnType;
 		this.parameters = parameters;
 		this.desc=desc;
+		localVars=locals;
 	}
 	
 	private String getTopLevelParameter(JClass c){
@@ -29,12 +31,8 @@ public class JMethod extends JType {
 		virtuals.add(new MethodInvokation(c, name, params, returnType,desc,index));
 	}
 	
-	public void addParamStrings(ArrayList<String> params) {
-		this.params = params;
-	}
-	
-	public ArrayList<String> getParams() {
-		return this.params;
+	public ArrayList<JField> getParams() {
+		return parameters;
 	}
 	
 	public void printVirtuals(){
@@ -45,26 +43,23 @@ public class JMethod extends JType {
 		StringBuilder s = new StringBuilder();
 		s.append(this.getAccess() + " " + this.getTopName() + "(");
 		for(int i = 0; i < parameters.size(); i++) {
-			s.append(getTopLevelParameter(parameters.get(i))+ ",");
+			//TODO: may break
+			s.append(getTopLevelParameter(parameters.get(i).getType())+ ",");
 		}
 		s.append(") : " + getTopLevelParameter(returnType));
 		return s.toString();
 	}
 	
-	public void setStack(int index, JClass type){
-		callStack.put(index, type);
-	}
-	
-	public JClass getStack(int index){
-		return callStack.get(index);
+	public JField getVar(int index){
+		return parameters.get(index);
 	}
 	
 	public String getDesc(){
 		return desc;
 	}
 	
-	public String getReturn(){
-		return Type.getObjectType(Type.getReturnType(desc).getClassName()).getClassName().replace('.', '/');
+	public JClass getReturn(){
+		return returnType;
 	}
 	
 	@Override
@@ -73,12 +68,5 @@ public class JMethod extends JType {
 			return(((JMethod) obj).desc.equals(desc) && ((JMethod) obj).getName().equals(getName()));
 		}
 		return false;
-	}
-
-	public boolean stackFramed() {
-		return framed;
-	}
-	public void setStackFramed(boolean framed){
-		this.framed=framed;
 	}
 }
