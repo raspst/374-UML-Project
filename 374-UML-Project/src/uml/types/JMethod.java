@@ -69,4 +69,8 @@ public class JMethod extends JType {
 		}
 		return false;
 	}
+
+	public ArrayList<JField> getLocalVars() {
+		return localVars;
+	}
 }
