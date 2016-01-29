@@ -40,7 +40,7 @@ public class DesignParser {
 		//printCalls(m, 0);
 		//new SingletonDetector(d).printFields();
 		NodeContainer nc = new NodeContainer();
-		nc.addClass("parser/test/Dog");
+		nc.addClass("java/lang/Runtime");
 		nc.parse();
 		// pf.printContainer();
 		// BufferedReader b = new BufferedReader(new InputStreamReader(new

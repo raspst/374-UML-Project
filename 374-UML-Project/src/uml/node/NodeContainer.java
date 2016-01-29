@@ -11,28 +11,22 @@ import java.util.ListIterator;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
-import javax.xml.transform.Source;
-
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.ParameterNode;
 import org.objectweb.asm.tree.analysis.Analyzer;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.objectweb.asm.tree.analysis.Frame;
 import org.objectweb.asm.tree.analysis.SourceInterpreter;
-import org.objectweb.asm.tree.analysis.SourceValue;
 import org.objectweb.asm.util.Printer;
 import org.objectweb.asm.util.Textifier;
 import org.objectweb.asm.util.TraceMethodVisitor;
 
 import uml.types.JClass;
 import uml.types.JField;
-import uml.types.JInterface;
 import uml.types.JMethod;
 
 public class NodeContainer {
@@ -96,7 +90,7 @@ public class NodeContainer {
 				System.out.println(c.getSuper().getName());
 				// for (JInterface i : c.getInterfaces())
 				// System.out.println(i.getTopName());
-				if (c.getTopName().equals("Dog"))
+				if (c.getTopName().equals("Runtime"))
 					for (MethodNode method : (List<MethodNode>) classNode.methods) {
 						List<LocalVariableNode> vars = (List<LocalVariableNode>) method.localVariables;
 						ArrayList<JField> localVars = new ArrayList<JField>();
@@ -112,8 +106,7 @@ public class NodeContainer {
 							} else
 								localVars.add(new JField(vars.get(i).name, 1,
 										getClass(Type.getType(vars.get(i).desc).getClassName())));
-							System.out.println(
-									localVars.get(i).getName() + "    " + localVars.get(i).getType().getName());
+							//System.out.println(localVars.get(i).getName() + "    " + localVars.get(i).getType().getName());
 						}
 						int varLength = vars.size();
 						for(int i = paramLength; i<varLength;++i)
@@ -135,26 +128,31 @@ public class NodeContainer {
 							e.printStackTrace();
 						}
 						ListIterator<AbstractInsnNode> it = method.instructions.iterator();
+						ArrayList<String>commands = new ArrayList<String>();
 						while (it.hasNext()) {
 							AbstractInsnNode insn = it.next();
 							String s = getInsnString(insn);
 							if(s.startsWith("LINENUMBER"))continue;
 							int val;
 							if ((val = lineInstuction(s)) != -1){
-								//it.next();
+								if(!commands.isEmpty()){
+								ArrayList<String> arr =new ArrayList<String>();
+										arr.addAll(commands);
+								new MethodInstruction(this,arr,localVars);
+								commands.clear();
+								}
 								System.out.println("Instruction: " + lineInstuction(s));
 							}
-								else if((val = loadInstruction(s)) != -1){
-								System.out.println("Loaded "+ localVars.get(val).getName());
-								}else if(isSpecial(s)){
-								String[] call = specialCall(s);
-								//System.out.println("Special: "+call[0]+"."+call[1]+"()");
+							else{
+								commands.add(s);
 							}
-								else if(isPutField(s)){
-									putFieldCall(s);
-								}
-							else System.out.println(s);
 						}
+						if(!commands.isEmpty()){
+							ArrayList<String> arr =new ArrayList<String>();
+									arr.addAll(commands);
+							new MethodInstruction(this,arr,localVars);
+							commands.clear();
+							}
 						// method.parameters
 						int i = 0;
 						// System.out.println(len);
@@ -162,9 +160,6 @@ public class NodeContainer {
 						// System.out.println(vars.size());
 						// System.out.println(method.desc);
 						// if(vars!=null&&len<=vars.size())
-						int len = 1;
-						// int sz = 0;
-						// if(vars!=null)sz=vars.size();
 						// JMethod m = new JMethod(c, method.name,
 						// method.access,
 						// getClass(Type.getReturnType(method.desc).getClassName()),
@@ -174,10 +169,6 @@ public class NodeContainer {
 						// for (JField f : m.getLocalVars())
 						// System.out.println(f.getName() + " " +
 						// f.getType().getTopName());
-						// for (LocalVariableNode var :
-						// (List<LocalVariableNode>) method.localVariables) {
-						// // System.out.println(var.name + " " + var.desc);
-						// }
 					}
 			}
 		} catch (IOException e) {
@@ -186,44 +177,11 @@ public class NodeContainer {
 		}
 	}
 
-	public boolean isPutField(String in) {
-		return in.startsWith("PUTFIELD");
-	}
-	
-	public void putFieldCall(String in){
-		in = in.substring(9);
-		String[] call = in.split(" : ");
-		in = call[0];
-		call = in.split("\\.");
-		System.out.println(call[1]);
-	}
-
 	public int lineInstuction(String in) {
 		String pattern = "^(L)([0-9]+)$";
 		if (Pattern.matches(pattern, in))
 			return Integer.parseInt(in.substring(1));
 		return -1;
-	}
-
-	public int loadInstruction(String in) {
-		if (in.startsWith("ALOAD"))
-			return Integer.parseInt(in.substring(6));
-		return -1;
-	}
-	
-	public boolean isSpecial(String in){
-		return in.startsWith("INVOKESPECIAL");
-	}
-	
-	public String[] specialCall(String in){
-		in = in.substring(14);
-		String[] call = in.split("\\s+");
-		String[] callOwner = call[0].split("\\.");
-		String[] ret = new String[3];
-		ret[0] = callOwner[0];
-		ret[1] = callOwner[1];
-		ret[2] = call[1];
-		return ret;
 	}
 
 	public String getInsnString(AbstractInsnNode node) {
