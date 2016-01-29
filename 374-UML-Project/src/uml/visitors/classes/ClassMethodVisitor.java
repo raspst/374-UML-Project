@@ -6,21 +6,21 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
-import uml.node.NodeContainer;
-import uml.parser.ClassContainer;
+import uml.node.ClassContainer;
+import uml.parser.ClassContainer1;
 import uml.types.JClass;
 import uml.types.JMethod;
 
 public class ClassMethodVisitor extends ClassContainerVisitor {
 
-	public ClassMethodVisitor(int arg0, ClassVisitor arg1, NodeContainer container) {
+	public ClassMethodVisitor(int arg0, ClassVisitor arg1, ClassContainer container) {
 		super(arg0, arg1, container);
 	}
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		NodeContainer container = getContainer();
+		ClassContainer container = getContainer();
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		String[] classNames = new String[argTypes.length];
 		for (int i = 0; i < argTypes.length; i++) {

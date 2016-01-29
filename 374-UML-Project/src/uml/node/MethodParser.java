@@ -7,16 +7,16 @@ import org.objectweb.asm.Type;
 import uml.types.JField;
 
 public class MethodParser {
-	private NodeContainer container;
+/*	private ClassContainer container;
 	private ArrayList<Instruction> instructions;
-	private ArrayList<JField> localVars;
-	private String ret;
+	private ArrayList<JField> localVars;*/
 
-	public MethodParser(NodeContainer container, ArrayList<Instruction> instructions, ArrayList<JField> localVars,
+	public MethodParser(ClassContainer container, ArrayList<Instruction> instructions, ArrayList<JField> localVars,
 			int start) {
-		this.container = container;
+		String ret=null;
+/*		this.container = container;
 		this.instructions = instructions;
-		this.localVars = localVars;
+		this.localVars = localVars;*/
 		for (int i = start; i < instructions.size(); ++i) {
 			Instruction s = instructions.get(i);
 			int val;

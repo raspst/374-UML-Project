@@ -12,7 +12,8 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import uml.detector.SingletonDetector;
-import uml.parser.ClassContainer;
+import uml.parser.ClassContainer1;
+
 import uml.parser.Design;
 import uml.parser.DesignParser;
 import uml.parser.PrintFactory;

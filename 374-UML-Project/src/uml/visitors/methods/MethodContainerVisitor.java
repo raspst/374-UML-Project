@@ -2,22 +2,22 @@ package uml.visitors.methods;
 
 import org.objectweb.asm.MethodVisitor;
 
-import uml.parser.ClassContainer;
+import uml.parser.ClassContainer1;
 
 public class MethodContainerVisitor extends MethodVisitor {
-	private ClassContainer container;
+	private ClassContainer1 container;
 
-	public MethodContainerVisitor(int arg0, ClassContainer container) {
+	public MethodContainerVisitor(int arg0, ClassContainer1 container) {
 		super(arg0);
 		this.container = container;
 	}
 
-	public MethodContainerVisitor(int arg0, MethodVisitor arg1, ClassContainer container) {
+	public MethodContainerVisitor(int arg0, MethodVisitor arg1, ClassContainer1 container) {
 		super(arg0, arg1);
 		this.container = container;
 	}
 
-	public ClassContainer getContainer() {
+	public ClassContainer1 getContainer() {
 		return container;
 	}
 }

@@ -29,13 +29,13 @@ import uml.types.JMethod;
 import uml.visitors.classes.ClassDeclarationVisitor;
 import uml.visitors.classes.ClassFieldVisitor;
 
-public class NodeContainer {
+public class ClassContainer {
 	private HashMap<String, JClass> classes;
 	private Queue<String> toParse;
 	private JClass activeClass;
 	private List<String> whitelist;
 
-	public NodeContainer(List<String> whitelist) {
+	public ClassContainer(List<String> whitelist) {
 		this.classes = new HashMap<String, JClass>();
 		this.whitelist = whitelist;
 		toParse = new LinkedList<String>();

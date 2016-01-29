@@ -7,7 +7,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import uml.parser.ClassContainer;
+import uml.parser.ClassContainer1;
 import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
@@ -19,11 +19,11 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	private boolean init;
 	private LinkedList<Integer> arguments = new LinkedList<Integer>();
 
-	public SequenceVisitor(int arg0, ClassContainer container) {
+	public SequenceVisitor(int arg0, ClassContainer1 container) {
 		super(arg0, container);
 	}
 
-	public SequenceVisitor(int arg0, MethodVisitor arg1, ClassContainer container) {
+	public SequenceVisitor(int arg0, MethodVisitor arg1, ClassContainer1 container) {
 		super(arg0, arg1, container);
 	}
 
@@ -96,7 +96,7 @@ public class SequenceVisitor extends MethodContainerVisitor {
 	@Override
 	public void visitVarInsn(int opcode, int var) {
 		super.visitVarInsn(opcode, var);
-		ClassContainer container = getContainer();
+		ClassContainer1 container = getContainer();
 		if (opcode == Opcodes.LLOAD) {
 		} else if (opcode == Opcodes.FLOAD) {
 		} else if (opcode == Opcodes.DLOAD) {
