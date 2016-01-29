@@ -11,19 +11,13 @@ import java.util.ListIterator;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
-import org.objectweb.asm.Attribute;
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.analysis.Analyzer;
-import org.objectweb.asm.tree.analysis.AnalyzerException;
-import org.objectweb.asm.tree.analysis.Frame;
-import org.objectweb.asm.tree.analysis.SourceInterpreter;
 import org.objectweb.asm.util.Printer;
 import org.objectweb.asm.util.Textifier;
 import org.objectweb.asm.util.TraceMethodVisitor;
@@ -92,16 +86,18 @@ public class NodeContainer {
 				System.out.println(c.getName());
 				System.out.println(c.getSuper().getName());
 				List<FieldNode> fields = classNode.fields;
-				for(FieldNode f : fields){
+				for (FieldNode f : fields) {
 					System.out.println(f.name);
 					System.out.println(f.access);
-					//for(Attribute a : (List<Attribute>)f.attrs)System.out.println(a.);
+					// for(Attribute a :
+					// (List<Attribute>)f.attrs)System.out.println(a.);
 				}
 				// for (JInterface i : c.getInterfaces())
 				// System.out.println(i.getTopName());
 				if (c.getTopName().equals("SingletonTest"))
 					for (MethodNode method : (List<MethodNode>) classNode.methods) {
-						if(!Type.getReturnType(method.desc).getClassName().replace(".", "/").equals(c.getName()))continue;
+						if (!Type.getReturnType(method.desc).getClassName().replace(".", "/").equals(c.getName()))
+							continue;
 						List<LocalVariableNode> vars = (List<LocalVariableNode>) method.localVariables;
 						ArrayList<JField> localVars = new ArrayList<JField>();
 						Type[] argTypes = Type.getArgumentTypes(method.desc);
@@ -116,63 +112,40 @@ public class NodeContainer {
 							} else
 								localVars.add(new JField(vars.get(i).name, 1,
 										getClass(Type.getType(vars.get(i).desc).getClassName())));
-							//System.out.println(localVars.get(i).getName() + "    " + localVars.get(i).getType().getName());
+							// System.out.println(localVars.get(i).getName() + "
+							// " + localVars.get(i).getType().getName());
 						}
 						int varLength = vars.size();
-						for(int i = paramLength; i<varLength;++i)
-							localVars.add(new JField(vars.get(i).name, 2, getClass(Type.getType(vars.get(i).desc).getClassName())));
+						for (int i = paramLength; i < varLength; ++i)
+							localVars.add(new JField(vars.get(i).name, 2,
+									getClass(Type.getType(vars.get(i).desc).getClassName())));
 						// System.out.println(Type.getType(vars.get(1).desc).getClassName());
-						Analyzer a = new Analyzer(new SourceInterpreter());
-
-						try {
-							Frame[] frames = a.analyze(c.getName(), method);
-							for (Frame f : frames) {
-								if (f != null) {
-									// if(locals>=0&&locals<=paramLength)System.out.println(localVars.get(locals).getName());
-								}
-								// if(locals>0)System.out.println(f.getLocal(locals-1).);
-								// System.out.println(f.toString());
-							}
-						} catch (AnalyzerException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
 						int start = 0;
 						int temp = 0;
 						ListIterator<AbstractInsnNode> it = method.instructions.iterator();
-						ArrayList<String>commands = new ArrayList<String>();
+						ArrayList<String> commands = new ArrayList<String>();
+						HashMap<Integer, Integer> labels = new HashMap<Integer, Integer>();
 						while (it.hasNext()) {
 							AbstractInsnNode insn = it.next();
 							String s = getInsnString(insn);
-							if(s.startsWith("LINENUMBER"))continue;
+							if (s.startsWith("LINENUMBER"))
+								continue;
 							int val;
-							if ((val = lineInstuction(s)) != -1){
-								if(!commands.isEmpty()){
-								ArrayList<String> arr =new ArrayList<String>();
-										arr.addAll(commands);
-								new MethodInstruction(this,arr,localVars,start);
-								start=temp;
-								}
-								System.out.println("Instruction: " + lineInstuction(s));
-							}
-							else{
+							if ((val = lineInstuction(s)) != -1) {
+								if (start == 0 && temp != 0)
+									start = temp;
+								labels.put(val, start);
+								start = temp;
+								System.out.println("Instruction: " + lineInstuction(s) + " " + start);
+							} else {
 								commands.add(s);
 								++temp;
 							}
 						}
-						if(!commands.isEmpty()){
-							ArrayList<String> arr =new ArrayList<String>();
-									arr.addAll(commands);
-							new MethodInstruction(this,arr,localVars,start);
-							start=temp;
-							}
-						// method.parameters
-						int i = 0;
-						// System.out.println(len);
-						// if(len>0)System.out.println(argTypes[0]);
-						// System.out.println(vars.size());
-						// System.out.println(method.desc);
-						// if(vars!=null&&len<=vars.size())
+						if (!commands.isEmpty()) {
+							new MethodInstruction(this, commands, localVars, 0);
+							start = temp;
+						}
 						// JMethod m = new JMethod(c, method.name,
 						// method.access,
 						// getClass(Type.getReturnType(method.desc).getClassName()),
