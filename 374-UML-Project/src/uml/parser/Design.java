@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import uml.node.NodeContainer;
+import uml.node.ClassContainer;
 import uml.types.JClass;
 import uml.types.JInterface;
 
 public class Design {
 	private List<String> whitelist = new LinkedList<String>();
 	private ArrayList<String> classes = new ArrayList<String>();
-	private NodeContainer container = new NodeContainer(whitelist);
+	private ClassContainer container = new ClassContainer(whitelist);
 	
 	public void addClass(String c){
 		classes.add(c);
@@ -38,7 +38,7 @@ public class Design {
 		return container.getClass(name);
 	}
 	
-	public NodeContainer getContainer(){
+	public ClassContainer getContainer(){
 		return container;
 	}
 }

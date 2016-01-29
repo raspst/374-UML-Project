@@ -3,16 +3,16 @@ package uml.visitors.classes;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
-import uml.node.NodeContainer;
+import uml.node.ClassContainer;
 import uml.types.JClass;
 
 public class ClassDeclarationVisitor extends ClassContainerVisitor {
 
-	public ClassDeclarationVisitor(int arg0, NodeContainer container) {
+	public ClassDeclarationVisitor(int arg0, ClassContainer container) {
 		super(arg0, container);
 	}
 
-	public ClassDeclarationVisitor(int asm5, ClassNode classNode, NodeContainer container) {
+	public ClassDeclarationVisitor(int asm5, ClassNode classNode, ClassContainer container) {
 		super(asm5, classNode, container);
 	}
 
@@ -22,7 +22,7 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 		if ((access & Opcodes.ACC_INTERFACE) != 0) {
 			isClass = false;
 		}
-		NodeContainer container = getContainer();
+		ClassContainer container = getContainer();
 		JClass c = container.getClass(name);
 		container.setActiveClass(c);
 		if (!isClass) {

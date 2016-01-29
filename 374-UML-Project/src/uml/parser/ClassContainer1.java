@@ -17,13 +17,13 @@ import uml.visitors.classes.ClassFieldVisitor;
 import uml.visitors.classes.ClassMethodVisitor;
 import uml.visitors.classes.StackFrameVisitor;
 
-public class ClassContainer {
+public class ClassContainer1 {
 	private HashMap<String, JClass> classes;
 	private Queue<String> toParse;
 	private JClass activeClass;
 	private JMethod activeMethod;
 
-	public ClassContainer() {
+	public ClassContainer1() {
 		this.classes = new HashMap<String, JClass>();
 		toParse = new LinkedList<String>();
 	}
