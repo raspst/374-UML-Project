@@ -11,6 +11,7 @@ public class JClass extends JInterface {
 	private HashMap<String, JClass> uses;
 	private HashSet<JClass> associates;
 	private HashSet<JField> statics;
+	private boolean isSingleton = false;
 
 	public JClass(String name) {
 		super(name);
@@ -67,7 +68,11 @@ public class JClass extends JInterface {
 		StringBuilder s = new StringBuilder();
 		String name = this.getTopName();
 		if (!this.isInterface) {
-			s.append(name + " [\n\tlabel = \"{" + name + "|");
+			s.append(name + " [\n\tlabel = \"{");
+			if(this.isSingleton) {
+				s.append("\tSingleton\\l");
+			}
+			s.append(name + "|");
 		} else {
 			s.append(name + " [\n\tlabel = \"{interface\n" + name + "|");
 		}
@@ -80,7 +85,7 @@ public class JClass extends JInterface {
 			if(!getMethods().get(i).getName().equals("<init>"))
 			s.append(getMethods().get(i).getGraphViz() + "\\l");
 		}
-		s.append("}\"\n]");
+		s.append("}\"\n");
 		return s.toString();
 	}
 
@@ -115,5 +120,13 @@ public class JClass extends JInterface {
 			}
 		}
 		return null;
+	}
+	
+	public void setSingleton(boolean value) {
+		this.isSingleton = value;
+	}
+	
+	public boolean isSingleton() {
+		return this.isSingleton;
 	}
 }

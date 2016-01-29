@@ -33,6 +33,10 @@ public class PrintFactory {
 		for (String name : d.getClassNames()) {
 			JClass c = d.getClass(name);
 			sb.append(c.getGraphViz()+'\n');
+			if(c.isSingleton()) {
+				sb.append("\tcolor=blue\n");
+			}
+			sb.append("]\n");
 		}
 		return sb.toString();
 	}

@@ -1,0 +1,6 @@
+-w parser/test/
+parser/test/*
+java/lang/Runtime
+java/util/Calendar
+java/io/FilterStreamInput
+java/awt/Desktop

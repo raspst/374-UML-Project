@@ -11,6 +11,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import uml.detector.SingletonDetector;
 import uml.parser.ClassContainer;
 import uml.parser.Design;
 import uml.parser.DesignParser;
@@ -125,5 +126,43 @@ public class TestUMLElements {
 //		c = container.getClass("parser/test/Dog");
 //		assert(c.getAssociates().contains(container.getClass("parser/test/Bone")));
 //	}
-
+	Design d;
+	PrintFactory pf;
+	@Before
+	public void setup() {
+		d = DesignParser.parseFile("testcases.txt");
+		try {
+			DesignParser.parseDesign(d);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		pf = new PrintFactory(d);
+		new SingletonDetector(d);
+	}
+	@Test
+	public void checkSingleton() {
+		JClass bone = d.getClass("parser/test/Bone");
+		assertFalse(bone.isSingleton());
+		JClass cat = d.getClass("parser/test/Cat");
+		assertFalse(cat.isSingleton());
+		JClass boiler = d.getClass("parser/test/ChocolateBoiler");
+		assertTrue(boiler.isSingleton());
+		JClass dog = d.getClass("parser/test/Dog");
+		assertFalse(dog.isSingleton());
+		JClass singletonTest = d.getClass("parser/test/SingletonTest");
+		assertTrue(singletonTest.isSingleton());
+		JClass toy = d.getClass("parser/test/Toy");
+		assertFalse(toy.isSingleton());
+		
+		JClass calendar = d.getClass("java/util/Calendar");
+		assertFalse(calendar.isSingleton());
+		JClass runtime = d.getClass("java/lang/Runtime");
+		assertTrue(runtime.isSingleton());
+		JClass desktop = d.getClass("java/awt/Desktop");
+		assertFalse(desktop.isSingleton());
+		JClass filter = d.getClass("java/io/FilterInputStream");
+		assertFalse(filter.isSingleton());
+		
+	}
 }

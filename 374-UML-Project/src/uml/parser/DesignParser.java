@@ -25,8 +25,8 @@ public class DesignParser {
 		/*JMethod m = d.getContainer().parseCalls("DesignParser", "printStack",
 				"(Ljava/util/ArrayList;)Lparser/test/Cat;", 3);*/
 		PrintFactory pf = new PrintFactory(d);
-		pf.printContainer();
 		new SingletonDetector(d);
+		pf.printContainer();
 		initialized.clear();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");
