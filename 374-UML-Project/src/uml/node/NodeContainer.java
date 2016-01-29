@@ -28,15 +28,16 @@ import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
 import uml.visitors.classes.ClassDeclarationVisitor;
+import uml.visitors.classes.ClassFieldVisitor;
 
 public class NodeContainer {
 	private HashMap<String, JClass> classes;
 	private Queue<String> toParse;
 	private JClass activeClass;
-	private JMethod activeMethod;
-
-	public NodeContainer() {
+	private List<String> whitelist;
+	public NodeContainer(List<String> whitelist) {
 		this.classes = new HashMap<String, JClass>();
+		this.whitelist=whitelist;
 		toParse = new LinkedList<String>();
 	}
 
@@ -45,7 +46,9 @@ public class NodeContainer {
 		name = name.replace('.', '/');
 		JClass theclass = new JClass(name);
 		classes.put(name, theclass);
-		if (!name.equals("V") && !name.equals("I") && !name.equals("F") && !name.equals("D") && !name.equals("Z")
+		boolean listed = false;
+		for(String w : whitelist)if(name.startsWith(w)){listed=true;break;}
+		if (listed&&!name.equals("V") && !name.equals("I") && !name.equals("F") && !name.equals("D") && !name.equals("Z")
 				&& !name.equals("S") && !name.equals("B") && !name.equals("C") && !name.equals("J")
 				&& !name.equals("void") && !name.equals("int") && !name.equals("float") && !name.equals("double")
 				&& !name.equals("boolean") && !name.equals("short") && !name.equals("byte") && !name.equals("char")
@@ -73,7 +76,8 @@ public class NodeContainer {
 				cr = new ClassReader(toParse.remove());
 				ClassNode classNode = new ClassNode();
 				ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,classNode,this);
-				cr.accept(declVisitor, 0);
+				ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, this);
+				cr.accept(fieldVisitor, 0);
 				JClass c = getClass(classNode.name);
 				System.out.println(c.getName());
 				System.out.println(c.getSuper().getName());
@@ -86,16 +90,16 @@ public class NodeContainer {
 				}
 				// for (JInterface i : c.getInterfaces())
 				// System.out.println(i.getTopName());
-				if (c.getTopName().equals("SingletonTest"))
 					for (MethodNode method : (List<MethodNode>) classNode.methods) {
-						if (!Type.getReturnType(method.desc).getClassName().replace(".", "/").equals(c.getName()))
-							continue;
+						/*if (!Type.getReturnType(method.desc).getClassName().replace(".", "/").equals(c.getName()))
+							continue;*/
 						List<LocalVariableNode> vars = (List<LocalVariableNode>) method.localVariables;
 						ArrayList<JField> localVars = new ArrayList<JField>();
 						Type[] argTypes = Type.getArgumentTypes(method.desc);
 						int paramLength = argTypes.length;
 						localVars.add(new JField("this", 0, c));
 						System.out.println(method.name + "    " + paramLength);
+						if(vars!=null){
 						for (int i = 1; i <= paramLength; ++i) {
 							if (vars == null) {
 								localVars.add(new JField("o" + i, 1, getClass(argTypes[i - 1].getClassName())));
@@ -111,6 +115,7 @@ public class NodeContainer {
 						for (int i = paramLength; i < varLength; ++i)
 							localVars.add(new JField(vars.get(i).name, 2,
 									getClass(Type.getType(vars.get(i).desc).getClassName())));
+						}
 						// System.out.println(Type.getType(vars.get(1).desc).getClassName());
 						int start = 0;
 						int temp = 0;
@@ -138,10 +143,11 @@ public class NodeContainer {
 							new MethodInstruction(this, commands, localVars, 0);
 							start = temp;
 						}
-						// JMethod m = new JMethod(c, method.name,
-						// method.access,
-						// getClass(Type.getReturnType(method.desc).getClassName()),
-						// params, localVars, method.desc);
+						 JMethod m = new JMethod(c, method.name,
+						 method.access,
+						 getClass(Type.getReturnType(method.desc).getClassName()),
+						  localVars, commands,method.desc);
+						 c.addMethod(m);
 						// System.out.println(m.getAccess() + " " +
 						// m.getReturn().getTopName() + " " + m.getName());
 						// for (JField f : m.getLocalVars())

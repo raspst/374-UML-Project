@@ -11,7 +11,7 @@ import uml.types.JInterface;
 public class Design {
 	private List<String> whitelist = new LinkedList<String>();
 	private ArrayList<String> classes = new ArrayList<String>();
-	private NodeContainer container = new NodeContainer();
+	private NodeContainer container = new NodeContainer(whitelist);
 	
 	public void addClass(String c){
 		classes.add(c);

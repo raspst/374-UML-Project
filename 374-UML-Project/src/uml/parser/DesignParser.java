@@ -40,12 +40,12 @@ public class DesignParser {
 		System.out.println("\n");
 		//printCalls(m, 0);
 		//new SingletonDetector(d).printFields();
-		NodeContainer nc = new NodeContainer();
+		//NodeContainer nc = new NodeContainer();
 		//java/lang/Runtime
 		//java/awt/Desktop
 		//java/util/Calendar
 		//nc.addClass("parser/test/SingletonTest");
-		nc.parse();
+		//nc.parse();
 		// pf.printContainer();
 		// BufferedReader b = new BufferedReader(new InputStreamReader(new
 		// ByteArrayInputStream(new byte[2])));
