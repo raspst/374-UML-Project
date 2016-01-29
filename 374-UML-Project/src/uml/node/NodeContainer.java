@@ -12,6 +12,8 @@ import java.util.Queue;
 import java.util.regex.Pattern;
 
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
@@ -25,6 +27,7 @@ import org.objectweb.asm.util.TraceMethodVisitor;
 import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
+import uml.visitors.classes.ClassDeclarationVisitor;
 
 public class NodeContainer {
 	private HashMap<String, JClass> classes;
@@ -69,20 +72,9 @@ public class NodeContainer {
 				ClassReader cr;
 				cr = new ClassReader(toParse.remove());
 				ClassNode classNode = new ClassNode();
-				cr.accept(classNode, 0);
+				ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,classNode,this);
+				cr.accept(declVisitor, 0);
 				JClass c = getClass(classNode.name);
-				// must be java/lang/Object
-				if (classNode.superName == null)
-					c.setSuper(c);
-				else
-					c.setSuper(getClass(classNode.superName));
-				// if(classNode.interfaces!=null)
-				/*
-				 * for (String n : (List<String>) classNode.interfaces) { JClass
-				 * cl =
-				 * getClass(Type.getObjectType(classNode.name).getClassName());
-				 * cl.setInterface(true); c.addInterface(cl); }
-				 */
 				System.out.println(c.getName());
 				System.out.println(c.getSuper().getName());
 				List<FieldNode> fields = classNode.fields;
@@ -180,4 +172,12 @@ public class NodeContainer {
 
 	private static Printer printer = new Textifier();
 	private static TraceMethodVisitor mp = new TraceMethodVisitor(printer);
+
+	public JClass getActiveClass() {
+		return activeClass;
+	}
+
+	public void setActiveClass(JClass c) {
+		activeClass = c;		
+	}
 }

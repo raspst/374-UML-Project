@@ -1,14 +1,19 @@
 package uml.visitors.classes;
 
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.ClassNode;
 
-import uml.parser.ClassContainer;
+import uml.node.NodeContainer;
 import uml.types.JClass;
 
 public class ClassDeclarationVisitor extends ClassContainerVisitor {
 
-	public ClassDeclarationVisitor(int arg0, ClassContainer container) {
+	public ClassDeclarationVisitor(int arg0, NodeContainer container) {
 		super(arg0, container);
+	}
+
+	public ClassDeclarationVisitor(int asm5, ClassNode classNode, NodeContainer container) {
+		super(asm5, classNode, container);
 	}
 
 	@Override
@@ -17,14 +22,16 @@ public class ClassDeclarationVisitor extends ClassContainerVisitor {
 		if ((access & Opcodes.ACC_INTERFACE) != 0) {
 			isClass = false;
 		}
-		ClassContainer container = getContainer();
+		NodeContainer container = getContainer();
 		JClass c = container.getClass(name);
+		container.setActiveClass(c);
 		if (!isClass) {
 			c.setInterface(true);
 		}
-		container.setActiveClass(c);
 		c.setAccess(access);
-		if (!c.getName().equals("java/lang/Object")) {
+		if (c.getName().equals("java/lang/Object"))
+			c.setSuper(c);
+		else {
 			JClass superClass = container.getClass(superName);
 			c.setSuper(superClass);
 		}

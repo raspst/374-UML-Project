@@ -76,10 +76,10 @@ public class ClassContainer {
 			String c = toParse.remove();
 			try {
 				ClassReader reader = new ClassReader(c);
-				ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, this);
+				/*ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, this);
 				ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, this);
 				ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, this);
-				reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+				reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);*/
 			} catch (Exception e) {
 				System.out.println(c);
 				e.printStackTrace();
@@ -95,11 +95,11 @@ public class ClassContainer {
 //			if (m != null && m.stackFramed())
 //				return m;
 			ClassReader reader = new ClassReader(c);
-			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, this);
+			/*ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, this);
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, declVisitor, this);
 			ClassVisitor sequenceDeclarationVisitor = new StackFrameVisitor(Opcodes.ASM5, methodVisitor, this,
-					method, desc);
-			reader.accept(sequenceDeclarationVisitor, ClassReader.EXPAND_FRAMES);
+					method, desc);*/
+			//reader.accept(sequenceDeclarationVisitor, ClassReader.EXPAND_FRAMES);
 //			getClass(c).getMethod(method, desc).setStackFramed(true);
 			for (MethodInvokation in : getClass(c).getMethod(method, desc).virtuals) {
 				in.caller = getClass(c);

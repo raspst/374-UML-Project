@@ -31,9 +31,10 @@ public class DesignParser {
 		System.out.println("S-short V-void Z-boolean [-array L<class>;");
 		// JMethod m =
 		// d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
-		JMethod m = d.getContainer().parseCalls("DesignParser", "printStack",
-				"(Ljava/util/ArrayList;)Lparser/test/Cat;", 3);
+		/*JMethod m = d.getContainer().parseCalls("DesignParser", "printStack",
+				"(Ljava/util/ArrayList;)Lparser/test/Cat;", 3);*/
 		PrintFactory pf = new PrintFactory(d);
+		pf.printContainer();
 		initialized.clear();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");
@@ -43,7 +44,7 @@ public class DesignParser {
 		//java/lang/Runtime
 		//java/awt/Desktop
 		//java/util/Calendar
-		nc.addClass("parser/test/SingletonTest");
+		//nc.addClass("parser/test/SingletonTest");
 		nc.parse();
 		// pf.printContainer();
 		// BufferedReader b = new BufferedReader(new InputStreamReader(new
