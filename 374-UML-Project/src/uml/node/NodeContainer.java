@@ -17,7 +17,6 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.util.Printer;
@@ -79,15 +78,6 @@ public class NodeContainer {
 				ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, this);
 				cr.accept(fieldVisitor, 0);
 				JClass c = getClass(classNode.name);
-				System.out.println(c.getName());
-				System.out.println(c.getSuper().getName());
-				List<FieldNode> fields = classNode.fields;
-				for (FieldNode f : fields) {
-					System.out.println(f.name);
-					System.out.println(f.access);
-					// for(Attribute a :
-					// (List<Attribute>)f.attrs)System.out.println(a.);
-				}
 				// for (JInterface i : c.getInterfaces())
 				// System.out.println(i.getTopName());
 					for (MethodNode method : (List<MethodNode>) classNode.methods) {
@@ -98,7 +88,7 @@ public class NodeContainer {
 						Type[] argTypes = Type.getArgumentTypes(method.desc);
 						int paramLength = argTypes.length;
 						localVars.add(new JField("this", 0, c));
-						System.out.println(method.name + "    " + paramLength);
+						//System.out.println(method.name + "    " + paramLength);
 						if(vars!=null){
 						for (int i = 1; i <= paramLength; ++i) {
 							if (vars == null) {
@@ -133,7 +123,7 @@ public class NodeContainer {
 									start = temp;
 								labels.put(val, start);
 								start = temp;
-								System.out.println("Instruction: " + lineInstuction(s) + " " + start);
+								//System.out.println("Instruction: " + lineInstuction(s) + " " + start);
 							} else {
 								commands.add(s);
 								++temp;

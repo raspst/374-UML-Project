@@ -26,31 +26,30 @@ public class MethodInstruction {
 				if(val>localVars.size())continue;
 				if(val==localVars.size())localVars.add(new JField("lv"+val, 2, container.getClass(ret)));
 				else if(container.getClass(ret)!=localVars.get(val).getType())localVars.add(val,new JField("lv"+val, 2, container.getClass(ret)));
-				System.out.println("Stored " + localVars.get(val).getName());
+				//System.out.println("Stored " + localVars.get(val).getName());
 			} else if (isSpecial(s)) {
 				String[] call = specialCall(s);
-				System.out.println("Special: " + call[0] + "." + call[1] + "()");
+				//System.out.println("Special: " + call[0] + "." + call[1] + "()");
 			} else if (isPutField(s)) {
 				String[] call = putFieldCall(s);
-				System.out.println("Put Field: " + call[0] + " " + call[1] + " " + call[2]);
+				//System.out.println("Put Field: " + call[0] + " " + call[1] + " " + call[2]);
 			} else if (isInvokeStatic(s)){
 				String[] call = invokeStaticCall(s);
 				ret = Type.getReturnType(call[2]).getClassName().replace(".", "/");
-				System.out.println("Static call: "+call[0]+" "+ret);
+				//System.out.println("Static call: "+call[0]+" "+ret);
 			}
 			else if (isgetStatic(s)){
 				String[] call = getStatic(s);
-				ret = Type.getReturnType(call[2]).getClassName().replace(".", "/");
-				System.out.println("Static get: "+call[0]+" "+ret);
+				ret = call[2];
+				//System.out.println("Static get: "+call[0]+" "+ret);
 			}
 			else if(s.equals("ARETURN")){
-				if(isgetStatic(instructions.get(i-1)))System.out.println("SINGLETON!");
+				//if(isgetStatic(instructions.get(i-1)))System.out.println("SINGLETON!");
 			}
-			else
-				System.out.println(s);
+			//else System.out.println(s);
 		}
 	}
-	public int loadInstruction(String in) {
+	public static int loadInstruction(String in) {
 		if (in.startsWith("ALOAD")){
 			 int i = Integer.parseInt(in.substring(6));
 			//if(localVars.get(i)==null)localVars.add(new JField(name, access, type));
@@ -59,7 +58,7 @@ public class MethodInstruction {
 		return -1;
 	}
 	
-	public int storeInstruction(String in) {
+	public static int storeInstruction(String in) {
 		if (in.startsWith("ASTORE")){
 			 int i = Integer.parseInt(in.substring(7));
 			//if(localVars.get(i)==null)localVars.add(new JField(name, access, type));
@@ -68,14 +67,14 @@ public class MethodInstruction {
 		return -1;
 	}
 
-	public boolean isSpecial(String in) {
+	public static boolean isSpecial(String in) {
 		return in.startsWith("INVOKESPECIAL");
 	}
 
 	/*
 	 * Returns 0:owner of call, 1:method called, 2:method description
 	 */
-	public String[] specialCall(String in) {
+	public static String[] specialCall(String in) {
 		in = in.substring(14);
 		String[] call = in.split("\\s+");
 		String[] callOwner = call[0].split("\\.");
@@ -86,13 +85,13 @@ public class MethodInstruction {
 		return ret;
 	}
 	
-	public boolean isPutField(String in) {
+	public static boolean isPutField(String in) {
 		return in.startsWith("PUTFIELD");
 	}
 	/*
 	 * Returns 0:owner of field, 1:field name, 2:field type
 	 */
-	public String[] putFieldCall(String in) {
+	public static String[] putFieldCall(String in) {
 		in = in.substring(9);
 		String[] call = in.split(" : ");
 		String[] ret = new String[3];
@@ -104,18 +103,18 @@ public class MethodInstruction {
 		return ret;
 	}
 	
-	public boolean isInvokeStatic(String in) {
+	public static boolean isInvokeStatic(String in) {
 		return in.startsWith("INVOKESTATIC");
 	}
 	
-	public boolean isgetStatic(String in) {
+	public static boolean isgetStatic(String in) {
 		return in.startsWith("GETSTATIC");
 	}
 	
 	/*
 	 * Returns 0:owner of call, 1:method called, 2:method description
 	 */
-	public String[] invokeStaticCall(String in) {
+	public static String[] invokeStaticCall(String in) {
 		in = in.substring(13);
 		String[] call = in.split("\\s+");
 		String[] callOwner = call[0].split("\\.");
@@ -129,14 +128,14 @@ public class MethodInstruction {
 	/*
 	 * Returns 0:owner of call, 1:method called, 2:method description
 	 */
-	public String[] getStatic(String in) {
+	public static String[] getStatic(String in) {
 		in = in.substring(10);
 		String[] call = in.split(" : ");
 		String[] callOwner = call[0].split("\\.");
 		String[] ret = new String[3];
 		ret[0] = callOwner[0];
 		ret[1] = callOwner[1];
-		ret[2] = call[1];
+		ret[2] = Type.getType(call[1]).getClassName().replace(".", "/");
 		return ret;
 	}
 }

@@ -11,12 +11,14 @@ public class JMethod extends JType {
 	JClass returnType;
 	private String desc;
 	ArrayList<JField> localVars = new ArrayList<JField>();
+	private ArrayList<String>instructions;
 	public ArrayList<MethodInvokation> virtuals = new ArrayList<>();
 	public JMethod(JClass owner, String name, int access, JClass returnType,ArrayList<JField> locals,ArrayList<String> instructions,String desc) {
 		super(name);
 		super.setAccess(access);
 		this.owner=owner;
 		this.returnType = returnType;
+		this.instructions = instructions;
 		localVars=locals;
 		this.parameters = new ArrayList<JField>();
 		for(JField f:locals){
@@ -76,5 +78,9 @@ public class JMethod extends JType {
 
 	public ArrayList<JField> getLocalVars() {
 		return localVars;
+	}
+
+	public ArrayList<String> getInstructions() {
+		return instructions;
 	}
 }
