@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Dog implements Animal {
 	public Bone bone;
 	private String breed;
-	
+	public static String s;
 	public Dog(String breed) {
 		this.breed = breed;
 	}

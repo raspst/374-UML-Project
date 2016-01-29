@@ -11,10 +11,13 @@ import java.util.ListIterator;
 import java.util.Queue;
 import java.util.regex.Pattern;
 
+import org.objectweb.asm.Attribute;
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.analysis.Analyzer;
@@ -88,10 +91,17 @@ public class NodeContainer {
 				 */
 				System.out.println(c.getName());
 				System.out.println(c.getSuper().getName());
+				List<FieldNode> fields = classNode.fields;
+				for(FieldNode f : fields){
+					System.out.println(f.name);
+					System.out.println(f.access);
+					//for(Attribute a : (List<Attribute>)f.attrs)System.out.println(a.);
+				}
 				// for (JInterface i : c.getInterfaces())
 				// System.out.println(i.getTopName());
-				if (c.getTopName().equals("Runtime"))
+				if (c.getTopName().equals("SingletonTest"))
 					for (MethodNode method : (List<MethodNode>) classNode.methods) {
+						if(!Type.getReturnType(method.desc).getClassName().replace(".", "/").equals(c.getName()))continue;
 						List<LocalVariableNode> vars = (List<LocalVariableNode>) method.localVariables;
 						ArrayList<JField> localVars = new ArrayList<JField>();
 						Type[] argTypes = Type.getArgumentTypes(method.desc);
@@ -127,6 +137,8 @@ public class NodeContainer {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						int start = 0;
+						int temp = 0;
 						ListIterator<AbstractInsnNode> it = method.instructions.iterator();
 						ArrayList<String>commands = new ArrayList<String>();
 						while (it.hasNext()) {
@@ -138,20 +150,21 @@ public class NodeContainer {
 								if(!commands.isEmpty()){
 								ArrayList<String> arr =new ArrayList<String>();
 										arr.addAll(commands);
-								new MethodInstruction(this,arr,localVars);
-								commands.clear();
+								new MethodInstruction(this,arr,localVars,start);
+								start=temp;
 								}
 								System.out.println("Instruction: " + lineInstuction(s));
 							}
 							else{
 								commands.add(s);
+								++temp;
 							}
 						}
 						if(!commands.isEmpty()){
 							ArrayList<String> arr =new ArrayList<String>();
 									arr.addAll(commands);
-							new MethodInstruction(this,arr,localVars);
-							commands.clear();
+							new MethodInstruction(this,arr,localVars,start);
+							start=temp;
 							}
 						// method.parameters
 						int i = 0;
