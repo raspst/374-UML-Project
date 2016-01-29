@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Queue;
+import java.util.regex.Pattern;
+
+import javax.xml.transform.Source;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Type;
@@ -21,6 +25,7 @@ import org.objectweb.asm.tree.analysis.Analyzer;
 import org.objectweb.asm.tree.analysis.AnalyzerException;
 import org.objectweb.asm.tree.analysis.Frame;
 import org.objectweb.asm.tree.analysis.SourceInterpreter;
+import org.objectweb.asm.tree.analysis.SourceValue;
 import org.objectweb.asm.util.Printer;
 import org.objectweb.asm.util.Textifier;
 import org.objectweb.asm.util.TraceMethodVisitor;
@@ -42,21 +47,21 @@ public class NodeContainer {
 	}
 
 	public void addClass(String name) {
-		//name = Type.getType(name).getClassName();
+		// name = Type.getType(name).getClassName();
 		name = name.replace('.', '/');
 		JClass theclass = new JClass(name);
 		classes.put(name, theclass);
-		if (!name.equals("V") && !name.equals("I") && !name.equals("F") && !name.equals("D")
-				&& !name.equals("Z") && !name.equals("S") && !name.equals("B") && !name.equals("C")
-				&& !name.equals("J")&&!name.equals("void") && !name.equals("int") && !name.equals("float") && !name.equals("double")
+		if (!name.equals("V") && !name.equals("I") && !name.equals("F") && !name.equals("D") && !name.equals("Z")
+				&& !name.equals("S") && !name.equals("B") && !name.equals("C") && !name.equals("J")
+				&& !name.equals("void") && !name.equals("int") && !name.equals("float") && !name.equals("double")
 				&& !name.equals("boolean") && !name.equals("short") && !name.equals("byte") && !name.equals("char")
 				&& !name.equals("long"))
 			toParse.add(name);
 	}
 
 	public JClass getClass(String name) {
-		//getObjectType
-			//name = Type.getType(name).getClassName();
+		// getObjectType
+		// name = Type.getType(name).getClassName();
 		name = name.replace('.', '/');
 		name = name.replace("[]", "");
 		JClass theClass = classes.get(name);
@@ -75,101 +80,158 @@ public class NodeContainer {
 				ClassNode classNode = new ClassNode();
 				cr.accept(classNode, 0);
 				JClass c = getClass(classNode.name);
-				//must be java/lang/Object
+				// must be java/lang/Object
 				if (classNode.superName == null)
 					c.setSuper(c);
 				else
 					c.setSuper(getClass(classNode.superName));
 				// if(classNode.interfaces!=null)
-/*				for (String n : (List<String>) classNode.interfaces) {
-					JClass cl = getClass(Type.getObjectType(classNode.name).getClassName());
-					cl.setInterface(true);
-					c.addInterface(cl);
-				}*/
+				/*
+				 * for (String n : (List<String>) classNode.interfaces) { JClass
+				 * cl =
+				 * getClass(Type.getObjectType(classNode.name).getClassName());
+				 * cl.setInterface(true); c.addInterface(cl); }
+				 */
 				System.out.println(c.getName());
 				System.out.println(c.getSuper().getName());
-//				for (JInterface i : c.getInterfaces())
-//					System.out.println(i.getTopName());
-				for (MethodNode method : (List<MethodNode>) classNode.methods) {
-					List<LocalVariableNode> vars = (List<LocalVariableNode>) method.localVariables;
-					ArrayList<JField> localVars = new ArrayList<JField>();
-					Type[] argTypes = Type.getArgumentTypes(method.desc);
-					int paramLength = argTypes.length;
-					localVars.add(new JField("this", 0, c));
-					System.out.println(method.name+"    "+paramLength);
-					for(int i=1;i<=paramLength;++i){
-						if(vars==null){
-							localVars.add(new JField("o"+i, 1, getClass(argTypes[i-1].getClassName())));
+				// for (JInterface i : c.getInterfaces())
+				// System.out.println(i.getTopName());
+				if (c.getTopName().equals("Dog"))
+					for (MethodNode method : (List<MethodNode>) classNode.methods) {
+						List<LocalVariableNode> vars = (List<LocalVariableNode>) method.localVariables;
+						ArrayList<JField> localVars = new ArrayList<JField>();
+						Type[] argTypes = Type.getArgumentTypes(method.desc);
+						int paramLength = argTypes.length;
+						localVars.add(new JField("this", 0, c));
+						System.out.println(method.name + "    " + paramLength);
+						for (int i = 1; i <= paramLength; ++i) {
+							if (vars == null) {
+								localVars.add(new JField("o" + i, 1, getClass(argTypes[i - 1].getClassName())));
+							} else if (i >= vars.size()) {
+								localVars.add(new JField("o" + i, 1, getClass(argTypes[i - 1].getClassName())));
+							} else
+								localVars.add(new JField(vars.get(i).name, 1,
+										getClass(Type.getType(vars.get(i).desc).getClassName())));
+							System.out.println(
+									localVars.get(i).getName() + "    " + localVars.get(i).getType().getName());
 						}
-						else if(i>=vars.size()){
-							localVars.add(new JField("o"+i, 1, getClass(argTypes[i-1].getClassName())));
+						int varLength = vars.size();
+						for(int i = paramLength; i<varLength;++i)
+							localVars.add(new JField(vars.get(i).name, 2, getClass(Type.getType(vars.get(i).desc).getClassName())));
+						// System.out.println(Type.getType(vars.get(1).desc).getClassName());
+						Analyzer a = new Analyzer(new SourceInterpreter());
+
+						try {
+							Frame[] frames = a.analyze(c.getName(), method);
+							for (Frame f : frames) {
+								if (f != null) {
+									// if(locals>=0&&locals<=paramLength)System.out.println(localVars.get(locals).getName());
+								}
+								// if(locals>0)System.out.println(f.getLocal(locals-1).);
+								// System.out.println(f.toString());
+							}
+						} catch (AnalyzerException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-						else
-						localVars.add(new JField(vars.get(i).name, 1, getClass(Type.getType(vars.get(i).desc).getClassName())));
-						System.out.println(localVars.get(i).getName()+"    "+localVars.get(i).getType().getName());
-					}
-					//System.out.println(Type.getType(vars.get(1).desc).getClassName());
-					Analyzer a = new Analyzer(new SourceInterpreter());
-					
-					try {
-						Frame[] frames = a.analyze(c.getName(), method);
-					for(Frame f:frames){
-						if(f!=null){
-							int locals = f.getLocals()-1;
-							//if(locals>=0&&locals<=paramLength)System.out.println(localVars.get(locals).getName());
+						ListIterator<AbstractInsnNode> it = method.instructions.iterator();
+						while (it.hasNext()) {
+							AbstractInsnNode insn = it.next();
+							String s = getInsnString(insn);
+							if(s.startsWith("LINENUMBER"))continue;
+							int val;
+							if ((val = lineInstuction(s)) != -1){
+								//it.next();
+								System.out.println("Instruction: " + lineInstuction(s));
+							}
+								else if((val = loadInstruction(s)) != -1){
+								System.out.println("Loaded "+ localVars.get(val).getName());
+								}else if(isSpecial(s)){
+								String[] call = specialCall(s);
+								//System.out.println("Special: "+call[0]+"."+call[1]+"()");
+							}
+								else if(isPutField(s)){
+									putFieldCall(s);
+								}
+							else System.out.println(s);
 						}
-						//if(locals>0)System.out.println(f.getLocal(locals-1).);
-						//System.out.println(f.toString());
+						// method.parameters
+						int i = 0;
+						// System.out.println(len);
+						// if(len>0)System.out.println(argTypes[0]);
+						// System.out.println(vars.size());
+						// System.out.println(method.desc);
+						// if(vars!=null&&len<=vars.size())
+						int len = 1;
+						// int sz = 0;
+						// if(vars!=null)sz=vars.size();
+						// JMethod m = new JMethod(c, method.name,
+						// method.access,
+						// getClass(Type.getReturnType(method.desc).getClassName()),
+						// params, localVars, method.desc);
+						// System.out.println(m.getAccess() + " " +
+						// m.getReturn().getTopName() + " " + m.getName());
+						// for (JField f : m.getLocalVars())
+						// System.out.println(f.getName() + " " +
+						// f.getType().getTopName());
+						// for (LocalVariableNode var :
+						// (List<LocalVariableNode>) method.localVariables) {
+						// // System.out.println(var.name + " " + var.desc);
+						// }
 					}
-					} catch (AnalyzerException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					// System.out.println(method.signature);
-					InsnList insns = method.instructions;
-					AbstractInsnNode node = insns.getFirst();
-					while (node != null) {
-						node.accept(mp);
-						StringWriter writer = new StringWriter();
-						printer.print(new PrintWriter(writer));
-						printer.getText().clear();
-						// System.out.println(writer.toString());
-						node = node.getNext();
-					}
-					//method.parameters
-					int i = 0;
-					//System.out.println(len);
-					//if(len>0)System.out.println(argTypes[0]);
-					//System.out.println(vars.size());
-					//System.out.println(method.desc);
-					//if(vars!=null&&len<=vars.size())
-						int len =1;
-//					for (; i < len; ++i) {
-//						LocalVariableNode n = vars.get(i);
-//						localVars.add(new JField(n.name, 1, getClass(Type.getType(n.desc).getClassName())));
-//						//params.add(new JField(n.name, 1, getClass(Type.getType(n.desc).getClassName())));
-//					}
-//					int sz = 0;
-//					if(vars!=null)sz=vars.size();
-//					//if(len==0)len+=1;
-//					for (i = len; i < sz; ++i) {
-//						LocalVariableNode n = vars.get(i);
-//						localVars.add(new JField(n.name, 2, getClass(Type.getType(n.desc).getClassName())));
-//					}
-//					JMethod m = new JMethod(c, method.name, method.access,
-//							getClass(Type.getReturnType(method.desc).getClassName()), params, localVars, method.desc);
-					//System.out.println(m.getAccess() + " " + m.getReturn().getTopName() + "    " + m.getName());
-//					for (JField f : m.getLocalVars())
-//						System.out.println(f.getName() + "    " + f.getType().getTopName());
-//					for (LocalVariableNode var : (List<LocalVariableNode>) method.localVariables) {
-//						// System.out.println(var.name + " " + var.desc);
-//					}
-				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isPutField(String in) {
+		return in.startsWith("PUTFIELD");
+	}
+	
+	public void putFieldCall(String in){
+		in = in.substring(9);
+		String[] call = in.split(" : ");
+		in = call[0];
+		call = in.split("\\.");
+		System.out.println(call[1]);
+	}
+
+	public int lineInstuction(String in) {
+		String pattern = "^(L)([0-9]+)$";
+		if (Pattern.matches(pattern, in))
+			return Integer.parseInt(in.substring(1));
+		return -1;
+	}
+
+	public int loadInstruction(String in) {
+		if (in.startsWith("ALOAD"))
+			return Integer.parseInt(in.substring(6));
+		return -1;
+	}
+	
+	public boolean isSpecial(String in){
+		return in.startsWith("INVOKESPECIAL");
+	}
+	
+	public String[] specialCall(String in){
+		in = in.substring(14);
+		String[] call = in.split("\\s+");
+		String[] callOwner = call[0].split("\\.");
+		String[] ret = new String[3];
+		ret[0] = callOwner[0];
+		ret[1] = callOwner[1];
+		ret[2] = call[1];
+		return ret;
+	}
+
+	public String getInsnString(AbstractInsnNode node) {
+		node.accept(mp);
+		StringWriter writer = new StringWriter();
+		printer.print(new PrintWriter(writer));
+		printer.getText().clear();
+		return writer.toString().trim();
 	}
 
 	private static Printer printer = new Textifier();
