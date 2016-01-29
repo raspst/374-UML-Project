@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import uml.detector.SingletonDetector;
 import uml.types.JMethod;
 import uml.types.MethodInvokation;
 
