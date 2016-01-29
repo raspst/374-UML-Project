@@ -1,9 +1,10 @@
-package uml.parser;
+package uml.detector;
 
+import uml.node.Instruction;
+import uml.parser.Design;
 import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
-import static uml.node.MethodInstruction.*;
 
 public class SingletonDetector extends PatternDetector{
 
@@ -30,10 +31,10 @@ public class SingletonDetector extends PatternDetector{
 			if (!m.getReturn().getName().equals(c.getName()))
 				continue;
 			for (int i = 0; i < m.getInstructions().size(); ++i) {
-				String s = m.getInstructions().get(i);
-				if(s.equals("ARETURN")){
+				Instruction s = m.getInstructions().get(i);
+				if(s.isAReturn()){
 					s = m.getInstructions().get(i-1);
-					if(isgetStatic(s)&&getStatic(s)[2].equals(c.getName()))
+					if(s.isgetStatic()&&s.getStatic()[2].equals(c.getName()))
 					return true;
 				}
 			}

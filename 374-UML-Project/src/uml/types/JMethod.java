@@ -5,15 +5,17 @@ import java.util.HashSet;
 
 import org.objectweb.asm.Type;
 
+import uml.node.Instruction;
+
 public class JMethod extends JType {
 	JClass owner;
 	ArrayList<JField> parameters;
 	JClass returnType;
 	private String desc;
 	ArrayList<JField> localVars = new ArrayList<JField>();
-	private ArrayList<String>instructions;
+	private ArrayList<Instruction>instructions;
 	public ArrayList<MethodInvokation> virtuals = new ArrayList<>();
-	public JMethod(JClass owner, String name, int access, JClass returnType,ArrayList<JField> locals,ArrayList<String> instructions,String desc) {
+	public JMethod(JClass owner, String name, int access, JClass returnType,ArrayList<JField> locals,ArrayList<Instruction> instructions,String desc) {
 		super(name);
 		super.setAccess(access);
 		this.owner=owner;
@@ -80,7 +82,7 @@ public class JMethod extends JType {
 		return localVars;
 	}
 
-	public ArrayList<String> getInstructions() {
+	public ArrayList<Instruction> getInstructions() {
 		return instructions;
 	}
 }

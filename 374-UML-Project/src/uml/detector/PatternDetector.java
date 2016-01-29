@@ -1,5 +1,6 @@
-package uml.parser;
+package uml.detector;
 
+import uml.parser.Design;
 import uml.types.JClass;
 
 public abstract class PatternDetector {
