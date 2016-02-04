@@ -1,2 +1,2 @@
 -w parser/test/
-parser/test/*
+parser/test/ChocolateBoiler

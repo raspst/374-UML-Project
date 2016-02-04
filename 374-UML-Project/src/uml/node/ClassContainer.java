@@ -19,6 +19,8 @@ import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.analysis.Analyzer;
+import org.objectweb.asm.tree.analysis.SimpleVerifier;
 import org.objectweb.asm.util.Printer;
 import org.objectweb.asm.util.Textifier;
 import org.objectweb.asm.util.TraceMethodVisitor;
@@ -91,6 +93,8 @@ public class ClassContainer {
 					 * (!Type.getReturnType(method.desc).getClassName().replace(
 					 * ".", "/").equals(c.getName())) continue;
 					 */
+					//new Analyzer(new SimpleVerifier())
+					//newControlFlowEdge()
 					List<LocalVariableNode> vars = (List<LocalVariableNode>) method.localVariables;
 					ArrayList<JField> localVars = new ArrayList<JField>();
 					Type[] argTypes = Type.getArgumentTypes(method.desc);

@@ -90,10 +90,10 @@ public class JClass extends JInterface {
 	}
 
 	public void addUses(JClass usedClass) {
-		if (this.getName() != 
-				usedClass.getName()) {
+//		if (this.getName() != 
+//				usedClass.getName()) {
 			this.uses.put(this.getName(), usedClass);
-		}
+//		}
 	}
 
 	public HashMap<String, JClass> getUses() {

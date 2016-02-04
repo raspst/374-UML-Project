@@ -3,7 +3,7 @@ package parser.test;
 public class ChocolateBoiler {
 	private boolean empty;
 	private boolean boiled;
-	private static final ChocolateBoiler boiler = new ChocolateBoiler();
+	private static ChocolateBoiler boiler = new ChocolateBoiler();
 	
 	private ChocolateBoiler() {
 		empty = true;

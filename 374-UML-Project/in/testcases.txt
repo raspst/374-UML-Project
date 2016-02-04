@@ -1,4 +1,7 @@
 -w parser/test/
+-w java/lang/
+-w java/awt/
+-w java/util/
 parser/test/*
 java/lang/Runtime
 java/util/Calendar
