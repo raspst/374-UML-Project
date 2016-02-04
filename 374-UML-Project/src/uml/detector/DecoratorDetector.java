@@ -55,7 +55,7 @@ public class DecoratorDetector extends PatternDetector {
 							JField loc = m.getLocalVars().get(local);
 							//Checks to see if the loaded variable is a parameter and same type as the field getting set
 							if (loc.isParameter() && loc.getType().getName().equals(type.getName()))
-								System.out.println("FUCK YEA: " + c.getName());
+								System.out.println("DECORATOR: " + c.getName());
 							return true;
 						}
 					}

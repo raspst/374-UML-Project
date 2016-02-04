@@ -1,0 +1,3 @@
+-w transformer/
+transformer/*
+java/util/ArrayList

@@ -6,12 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import uml.detector.AdapterDetector;
 import uml.detector.DecoratorDetector;
 import uml.detector.SingletonDetector;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
-		Design d = parseFile("parser.txt");
+		Design d = parseFile("adaptee.txt");
 		parseDesign(d);
 		System.out.println("Method Signature formatting: ");
 		System.out.println("(<args>)<return>");
@@ -25,6 +26,7 @@ public class DesignParser {
 		PrintFactory pf = new PrintFactory(d);
 		new SingletonDetector(d);
 		new DecoratorDetector(d);
+		new AdapterDetector(d);
 		//pf.printContainer();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");

@@ -63,7 +63,12 @@ public class Instruction {
 	public boolean isInvokeStatic() {
 		return in.startsWith("INVOKESTATIC");
 	}
-	
+	public boolean isInvokeVirtual() {
+		return in.startsWith("INVOKEVIRTUAL");
+	}
+	public boolean isInvokeInterface(){
+		return in.startsWith("INVOKEINTERFACE");
+	}
 	public boolean isgetStatic() {
 		return in.startsWith("GETSTATIC");
 	}
@@ -73,6 +78,32 @@ public class Instruction {
 	 */
 	public String[] invokeStaticCall() {
 		String in = this.in.substring(13);
+		String[] call = in.split("\\s+");
+		String[] callOwner = call[0].split("\\.");
+		String[] ret = new String[3];
+		ret[0] = callOwner[0];
+		ret[1] = callOwner[1];
+		ret[2] = call[1];
+		return ret;
+	}
+	/*
+	 * Returns 0:owner of call, 1:method called, 2:method description
+	 */
+	public String[] invokeVirtualCall() {
+		String in = this.in.substring(14);
+		String[] call = in.split("\\s+");
+		String[] callOwner = call[0].split("\\.");
+		String[] ret = new String[3];
+		ret[0] = callOwner[0];
+		ret[1] = callOwner[1];
+		ret[2] = call[1];
+		return ret;
+	}
+	/*
+	 * Returns 0:owner of call, 1:method called, 2:method description
+	 */
+	public String[] invokeInterfaceCall() {
+		String in = this.in.substring(16);
 		String[] call = in.split("\\s+");
 		String[] callOwner = call[0].split("\\.");
 		String[] ret = new String[3];
