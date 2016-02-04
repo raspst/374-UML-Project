@@ -6,7 +6,6 @@ import java.util.List;
 
 import uml.node.ClassContainer;
 import uml.types.JClass;
-import uml.types.JInterface;
 
 public class Design {
 	private List<String> whitelist = new LinkedList<String>();
@@ -21,7 +20,7 @@ public class Design {
 		whitelist.add(pack);
 	}
 	
-	public boolean isWhitelisted(JInterface c){
+	public boolean isWhitelisted(JClass c){
 		for(String pack : whitelist){
 			if(c.getName().startsWith(pack)) {
 				return true;

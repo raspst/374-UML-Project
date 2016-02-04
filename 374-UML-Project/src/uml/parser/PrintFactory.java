@@ -3,7 +3,6 @@ package uml.parser;
 import java.util.Iterator;
 
 import uml.types.JClass;
-import uml.types.JInterface;
 
 public class PrintFactory {
 	private Design d;
@@ -57,7 +56,7 @@ public class PrintFactory {
 		StringBuilder sb = new StringBuilder();
 		for (String className : d.getClassNames()) {
 			JClass c = d.getClass(className);
-			for (JInterface j : c.getInterfaces()) {
+			for (JClass j : c.getInterfaces()) {
 				if (d.isWhitelisted(j)) {
 					sb.append(c.getTopName() + "->" + j.getTopName() + "\n");
 				}

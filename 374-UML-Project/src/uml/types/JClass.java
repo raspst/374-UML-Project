@@ -4,23 +4,52 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class JClass extends JInterface {
+public class JClass extends JType{
 	private HashSet<JField> fields;
 	private JClass superclass;
 	private boolean isInterface;
 	private HashMap<String, JClass> uses;
 	private HashSet<JClass> associates;
 	private HashSet<JField> statics;
+	private ArrayList<JClass> interfaces;
+	private ArrayList<JMethod> methods;
 	private boolean isSingleton = false;
 
 	public JClass(String name) {
-		super(name);
+			super(name);
 		fields = new HashSet<JField>();
 		uses = new HashMap<String, JClass>();
 		associates = new HashSet<JClass>();
 		statics = new HashSet<JField>();
+		this.methods = new ArrayList<JMethod>();
+		interfaces = new ArrayList<JClass>();
 	}
 
+	public void addInterface(JClass i) {
+		interfaces.add(i);
+	}
+
+	public ArrayList<JClass> getInterfaces() {
+		return this.interfaces;
+	}
+
+	public JMethod getMethod(String name, String desc) {
+		for (JMethod m : methods) {
+			if (m.getName().equals(name) && desc.equals(m.getDesc())) {
+				return m;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<JMethod> getMethods() {
+		return methods;
+	}
+
+	public void addMethod(JMethod method) {
+		this.methods.add(method);
+	}
+	
 	public void addField(JField f) {
 		String name = f.getType()
 				.getName();
@@ -60,7 +89,7 @@ public class JClass extends JInterface {
 		return this.superclass;
 	}
 
-	public void setDependencies(JClass superclass, ArrayList<JInterface> interfaces) {
+	public void setDependencies(JClass superclass, ArrayList<JClass> interfaces) {
 		this.superclass = superclass;
 	}
 
