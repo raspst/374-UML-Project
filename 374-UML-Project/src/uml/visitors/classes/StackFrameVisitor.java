@@ -2,11 +2,8 @@ package uml.visitors.classes;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 
 import uml.node.ClassContainer;
-import uml.parser.ClassContainer1;
-import uml.visitors.methods.SequenceVisitor;
 
 public class StackFrameVisitor extends MethodDeclarationVisitor{
 

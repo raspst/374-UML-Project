@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>lib/coolest-editor.jar</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/lab2-1-solution/lab2-1-solution/lib/coolest-editor.jar</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

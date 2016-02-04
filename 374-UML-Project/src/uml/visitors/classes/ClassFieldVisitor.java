@@ -5,7 +5,6 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
 
 import uml.node.ClassContainer;
-import uml.parser.ClassContainer1;
 import uml.types.JClass;
 import uml.types.JField;
 

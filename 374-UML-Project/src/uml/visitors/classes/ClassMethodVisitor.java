@@ -7,9 +7,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
 import uml.node.ClassContainer;
-import uml.parser.ClassContainer1;
 import uml.types.JClass;
-import uml.types.JMethod;
 
 public class ClassMethodVisitor extends ClassContainerVisitor {
 

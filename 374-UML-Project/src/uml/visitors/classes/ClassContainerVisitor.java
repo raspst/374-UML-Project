@@ -1,10 +1,8 @@
 package uml.visitors.classes;
 
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.tree.ClassNode;
 
 import uml.node.ClassContainer;
-import uml.parser.ClassContainer1;
 
 public class ClassContainerVisitor extends ClassVisitor {
 	private ClassContainer container;

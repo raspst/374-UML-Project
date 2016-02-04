@@ -5,11 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
+import uml.detector.DecoratorDetector;
 import uml.detector.SingletonDetector;
-import uml.types.JMethod;
-import uml.types.MethodInvokation;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
@@ -26,8 +24,8 @@ public class DesignParser {
 				"(Ljava/util/ArrayList;)Lparser/test/Cat;", 3);*/
 		PrintFactory pf = new PrintFactory(d);
 		new SingletonDetector(d);
-		pf.printContainer();
-		initialized.clear();
+		new DecoratorDetector(d);
+		//pf.printContainer();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");
 		//printCalls(m, 0);
@@ -43,67 +41,6 @@ public class DesignParser {
 		// ByteArrayInputStream(new byte[2])));
 	}
 
-	private static void printStack(String string, JMethod m, int i) {
-		System.out.println(string + ":" + string + "[a]");
-		printStack(m, i);
-	}
-
-	private static HashSet<String> initialized = new HashSet<String>();
-
-	public static void printStack(JMethod m, int depth) {
-		for (MethodInvokation in : m.virtuals) {
-			if (in.caller != null) {
-				// for (int i = 0; i < depth; i++) {
-				// System.out.print(" ");
-				// }
-				// System.out.println(in.caller.getName()+" "+in.owner+" "+
-				// in.method + " " + in.desc + " " + in.returnType+"
-				// "+in.index);
-				StringBuilder s = new StringBuilder();
-				if (in.method.equals("<init>") || in.method.equals("<stinit>")) {
-					if (!initialized.contains(in.returnType)) {
-						initialized.add(in.returnType);
-						s.append("/");
-						s.append(in.returnType + ":" + in.returnType);
-					}
-				}
-
-				// else
-				// s.append(in.caller.getName() + ":" + in.caller.getName());
-				// if(in.index == 2) {
-				// s.append("[a]");
-				// }
-				if (s.length() != 0)
-					System.out.println(s.toString());
-				if (in.m != null) {
-					printStack(in.m, depth + 1);
-				}
-			}
-		}
-	}
-
-	public static void printCalls(JMethod m, int depth) {
-		for (MethodInvokation in : m.virtuals) {
-			if (in.caller != null) {
-				if (!in.owner.equals("java/io/PrintStream")) {
-					StringBuilder s = new StringBuilder();
-					s.append(in.caller.getName() + ":" + in.owner + ".");
-					if (in.method.equals("<init>")) {
-						s.append("new");
-					} else if (!in.method.equals("<stinit>")) {
-						s.append(in.method);
-					}
-					if (!in.method.equals("<stinit>")) {
-						s.append(in.params.toString().replace("[", "(").replace("]", ")"));
-						System.out.println(s.toString());
-					}
-					if (in.m != null) {
-						printCalls(in.m, depth + 1);
-					}
-				}
-			}
-		}
-	}
 
 	public static void visitFiles(String pref, File dir, ArrayList<String> files) {
 		for (File f : dir.listFiles()) {

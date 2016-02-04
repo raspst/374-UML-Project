@@ -1,10 +1,11 @@
 package uml.types;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class JClass extends JType{
+public class JClass extends JType {
 	private HashSet<JField> fields;
 	private JClass superclass;
 	private boolean isInterface;
@@ -16,7 +17,7 @@ public class JClass extends JType{
 	private boolean isSingleton = false;
 
 	public JClass(String name) {
-			super(name);
+		super(name);
 		fields = new HashSet<JField>();
 		uses = new HashMap<String, JClass>();
 		associates = new HashSet<JClass>();
@@ -49,12 +50,12 @@ public class JClass extends JType{
 	public void addMethod(JMethod method) {
 		this.methods.add(method);
 	}
-	
+
 	public void addField(JField f) {
-		String name = f.getType()
-				.getName();
-		if (name != this.getName() && !name.equals("void") && !name.equals("int") && !name.equals("float") && !name.equals("double")
-				&& !name.equals("boolean") && !name.equals("short") && !name.equals("byte") && !name.equals("char") && !name.equals("long")) {
+		String name = f.getType().getName();
+		if (name != this.getName() && !name.equals("void") && !name.equals("int") && !name.equals("float")
+				&& !name.equals("double") && !name.equals("boolean") && !name.equals("short") && !name.equals("byte")
+				&& !name.equals("char") && !name.equals("long")) {
 			associates.add(f.getType());
 		}
 		fields.add(f);
@@ -68,7 +69,7 @@ public class JClass extends JType{
 		}
 		statics.add(f);
 	}
-	
+
 	public void setInterface(boolean isInterface) {
 		this.isInterface = isInterface;
 	}
@@ -98,7 +99,7 @@ public class JClass extends JType{
 		String name = this.getTopName();
 		if (!this.isInterface) {
 			s.append(name + " [\n\tlabel = \"{");
-			if(this.isSingleton) {
+			if (this.isSingleton) {
 				s.append("\tSingleton\\l");
 			}
 			s.append(name + "|");
@@ -106,55 +107,55 @@ public class JClass extends JType{
 			s.append(name + " [\n\tlabel = \"{interface\n" + name + "|");
 		}
 		Iterator<JField> it = fields.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			s.append(it.next().getGraphViz() + "\\l");
 		}
 		s.append("|");
 		for (int i = 0; i < getMethods().size(); i++) {
-			if(!getMethods().get(i).getName().equals("<init>"))
-			s.append(getMethods().get(i).getGraphViz() + "\\l");
+			if (!getMethods().get(i).getName().equals("<init>"))
+				s.append(getMethods().get(i).getGraphViz() + "\\l");
 		}
 		s.append("}\"\n");
 		return s.toString();
 	}
 
 	public void addUses(JClass usedClass) {
-//		if (this.getName() != 
-//				usedClass.getName()) {
-			this.uses.put(this.getName(), usedClass);
-//		}
+		// if (this.getName() !=
+		// usedClass.getName()) {
+		this.uses.put(this.getName(), usedClass);
+		// }
 	}
 
 	public HashMap<String, JClass> getUses() {
 		return uses;
 	}
-	
+
 	public HashSet<JField> getFields() {
 		return fields;
 	}
-	
+
 	public JField getField(String name) {
-		for(JField f: fields) {
-			if(f.getTopName().equals(name)) {
+		for (JField f : fields) {
+			if (f.getTopName().equals(name)) {
 				return f;
 			}
 		}
 		return null;
 	}
-	
+
 	public JField getStaticField(String name) {
-		for(JField f: statics) {
-			if(f.getTopName().equals(name)) {
+		for (JField f : statics) {
+			if (f.getTopName().equals(name)) {
 				return f;
 			}
 		}
 		return null;
 	}
-	
+
 	public void setSingleton(boolean value) {
 		this.isSingleton = value;
 	}
-	
+
 	public boolean isSingleton() {
 		return this.isSingleton;
 	}

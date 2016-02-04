@@ -1,25 +1,18 @@
 package parser.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
 
 import uml.detector.SingletonDetector;
-import uml.parser.ClassContainer1;
-
 import uml.parser.Design;
 import uml.parser.DesignParser;
 import uml.parser.PrintFactory;
 import uml.types.JClass;
-import uml.types.JField;
-import uml.types.JMethod;
 
 public class TestUMLElements {
 //	ClassContainer container;

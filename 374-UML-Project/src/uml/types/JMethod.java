@@ -1,9 +1,5 @@
 package uml.types;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-
-import org.objectweb.asm.Type;
 
 import uml.node.Instruction;
 
@@ -14,7 +10,6 @@ public class JMethod extends JType {
 	private String desc;
 	ArrayList<JField> localVars = new ArrayList<JField>();
 	private ArrayList<Instruction>instructions;
-	public ArrayList<MethodInvokation> virtuals = new ArrayList<>();
 	public JMethod(JClass owner, String name, int access, JClass returnType,ArrayList<JField> locals,ArrayList<Instruction> instructions,String desc) {
 		super(name);
 		super.setAccess(access);
@@ -33,10 +28,6 @@ public class JMethod extends JType {
 	private String getTopLevelParameter(JClass c){
 		String[] packages = c.getName().split("/");
 		return packages[packages.length-1];
-	}
-	
-	public void addVirtual(String c, String name, ArrayList<String> params, String returnType, String desc,int index){
-		virtuals.add(new MethodInvokation(c, name, params, returnType,desc,index));
 	}
 	
 	public ArrayList<JField> getParams() {

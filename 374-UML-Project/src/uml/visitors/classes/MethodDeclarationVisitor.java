@@ -4,7 +4,6 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
 import uml.node.ClassContainer;
-import uml.parser.ClassContainer1;
 
 public abstract class MethodDeclarationVisitor extends ClassContainerVisitor {
 	private String methodName;

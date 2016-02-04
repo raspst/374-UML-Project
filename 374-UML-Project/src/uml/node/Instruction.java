@@ -99,4 +99,9 @@ public class Instruction {
 	public boolean isAReturn() {
 		return in.equals("ARETURN");
 	}
+	
+	@Override
+	public String toString() {
+		return in;
+	}
 }
