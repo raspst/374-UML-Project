@@ -16,7 +16,8 @@ public class DecoratorDetector extends PatternDetector {
 		c.setSingleton(true);
 		// System.out.println(c.getName());
 	}
-
+	//BufferedReader
+	//ClassVisitor
 	public boolean hasPattern(JClass c) {
 		for (JMethod m : c.getMethods()) {
 			if (m.getName().equals("<init>")) {// && m.getAccess().equals("+")

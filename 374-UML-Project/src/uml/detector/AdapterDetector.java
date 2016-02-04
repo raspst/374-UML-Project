@@ -30,6 +30,7 @@ public class AdapterDetector extends PatternDetector {
 				//System.out.println(m.getName());
 				if(m.getName().equals("<init>"))continue;
 				boolean has = false;
+				//InputStreamReader
 				for(Instruction in : m.getInstructions()){
 					//System.out.println(in.toString());
 					//if(in.isInvokeVirtual())System.out.println(in.invokeVirtualCall()[0]);
