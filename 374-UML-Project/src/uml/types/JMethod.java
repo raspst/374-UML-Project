@@ -1,70 +1,69 @@
 package uml.types;
+
 import java.util.ArrayList;
 
 import uml.node.Instruction;
 
 public class JMethod extends JType {
-	JClass owner;
-	ArrayList<JField> parameters;
-	JClass returnType;
+	private JClass owner;
+	private ArrayList<JField> parameters;
+	private JClass returnType;
 	private String desc;
-	ArrayList<JField> localVars = new ArrayList<JField>();
-	private ArrayList<Instruction>instructions;
-	public JMethod(JClass owner, String name, int access, JClass returnType,ArrayList<JField> locals,ArrayList<Instruction> instructions,String desc) {
+	private ArrayList<JField> localVars = new ArrayList<JField>();
+	private ArrayList<Instruction> instructions;
+
+	public JMethod(JClass owner, String name, int access, JClass returnType, ArrayList<JField> locals,
+			ArrayList<Instruction> instructions, String desc) {
 		super(name);
 		super.setAccess(access);
-		this.owner=owner;
+		this.owner = owner;
 		this.returnType = returnType;
 		this.instructions = instructions;
-		localVars=locals;
+		localVars = locals;
 		this.parameters = new ArrayList<JField>();
-		for(JField f:locals){
-			if(f.isParameter())parameters.add(f);
+		for (JField f : locals) {
+			if (f.isParameter())
+				parameters.add(f);
 		}
-		this.desc=desc;
-		localVars=locals;
+		this.desc = desc;
+		localVars = locals;
 	}
-	
-	private String getTopLevelParameter(JClass c){
-		String[] packages = c.getName().split("/");
-		return packages[packages.length-1];
+
+	public JClass getOwner() {
+		return owner;
 	}
-	
+
 	public ArrayList<JField> getParams() {
 		return parameters;
 	}
-	
-	public void printVirtuals(){
-		//for(String s:virtuals)System.out.println(s);
-	}
-	
+
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
 		s.append(this.getAccess() + " " + this.getTopName() + "(");
-		for(int i = 0; i < parameters.size(); i++) {
-			//TODO: may break
-			s.append(getTopLevelParameter(parameters.get(i).getType())+ ",");
+		for (int i = 0; i < parameters.size(); i++) {
+			// TODO: may break
+			s.append(parameters.get(i).getType().getTopName() + ",");
 		}
-		s.append(") : " + getTopLevelParameter(returnType));
+		s.append(") : " + returnType.getTopName());
 		return s.toString();
 	}
-	
-	public JField getVar(int index){
+
+	public JField getVar(int index) {
 		return parameters.get(index);
 	}
-	
-	public String getDesc(){
+
+	public String getDesc() {
 		return desc;
 	}
-	
-	public JClass getReturn(){
+
+	public JClass getReturn() {
 		return returnType;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof JMethod){
-			return(((JMethod) obj).desc.equals(desc) && ((JMethod) obj).getName().equals(getName()));
+		if (obj instanceof JMethod) {
+			return (((JMethod) obj).desc.equals(desc) && ((JMethod) obj).getName().equals(getName()));
 		}
 		return false;
 	}
