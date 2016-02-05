@@ -34,19 +34,6 @@ public class DecoratorDetector extends PatternDetector {
 		return c;
 	}
 	
-	public ArrayList<JClass> getDecendants(JClass c){
-		ArrayList<JClass> decendants = new ArrayList<JClass>();
-		for(String s : design.getClassNames()){
-			JClass cl = design.getClass(s);
-			if(cl.getSuper()==c) {
-				decendants.add(cl);
-				cl.addPattern("Decorator");
-				cl.addFillColor("Decorator", "green");
-			}
-		}
-		return decendants;
-	}
-	
 	public void applyChange(JClass c) {
 //		c.setSingleton(true);
 		// System.out.println(c.getName());
@@ -129,7 +116,11 @@ public class DecoratorDetector extends PatternDetector {
 			System.out.println("DECORATEE: "+getDecoratee(c.getSuper()).getName());
 			System.out.println("DECORATOR: " + getTopDecorator(c).getName());
 			System.out.println("Subclasses: ");
-			for(JClass cl:getDecendants(getTopDecorator(c)))System.out.println(cl.getName());
+			for(JClass cl:getTopDecorator(c).getDescendants()){
+				cl.addPattern("Decorator");
+				cl.addFillColor("Decorator", "green");
+				System.out.println(cl.getName());
+			}
 			//System.out.println(c.getSuper().getName());
 			return true;
 		}
