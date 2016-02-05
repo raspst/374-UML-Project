@@ -1,5 +1,9 @@
 package uml.detector;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+
 import uml.node.Instruction;
 import uml.parser.Design;
 import uml.types.JClass;
@@ -7,18 +11,44 @@ import uml.types.JField;
 import uml.types.JMethod;
 
 public class DecoratorDetector extends PatternDetector {
-
+	public ArrayList<HashSet<String>> patterns = new ArrayList<HashSet<String>>();
 	public DecoratorDetector(Design d) {
 		super(d);
 	}
-
+	
+	public boolean inPattern(String cl){
+		for(HashSet<String> s : patterns){
+			if(s.contains(cl))return true;
+		}
+			return false;
+	}
+	
+	public JClass getDecoratee(JClass c){
+		if(hasPattern(c))return getDecoratee(c.getSuper());
+		return c;
+	}
+	
+	public JClass getTopDecorator(JClass c){
+		if(hasPattern(c.getSuper()))return getDecoratee(c.getSuper());
+		return c;
+	}
+	
+	public ArrayList<JClass> getDecendants(JClass c){
+		ArrayList<JClass> decendants = new ArrayList<JClass>();
+		for(String s : design.getClassNames()){
+			JClass cl = design.getClass(s);
+			if(cl.getSuper()==c)decendants.add(cl);
+		}
+		return decendants;
+	}
+	
 	public void applyChange(JClass c) {
 //		c.setSingleton(true);
 		// System.out.println(c.getName());
 	}
 	//BufferedReader
 	//ClassVisitor
-	public boolean hasPattern(JClass c) {
+	public boolean isDecorator(JClass c){
 		for (JMethod m : c.getMethods()) {
 			if (m.getName().equals("<init>")) {// && m.getAccess().equals("+")
 
@@ -45,7 +75,7 @@ public class DecoratorDetector extends PatternDetector {
 				for (int i = 0; i < m.getInstructions().size(); ++i) {
 					Instruction in = m.getInstructions().get(i);
 					if (in.isPutField()) {
-						System.out.println(in.putFieldCall()[2]);
+						//System.out.println(in.putFieldCall()[2]);
 						JClass type = container.getClass(in.putFieldCall()[2]);
 						Instruction prev = m.getInstructions().get(i - 1);
 						int local;
@@ -55,14 +85,26 @@ public class DecoratorDetector extends PatternDetector {
 								&& (local = prev.loadInstruction()) != -1) {
 							JField loc = m.getLocalVars().get(local);
 							//Checks to see if the loaded variable is a parameter and same type as the field getting set
-							if (loc.isParameter() && loc.getType().getName().equals(type.getName()))
-								System.out.println("DECORATOR: " + c.getName());
-							return true;
+							if (loc.isParameter() && loc.getType().getName().equals(type.getName())){
+								return true;
+							}
 						}
 					}
 				}
 			}
 
+		}
+		return false;
+	}
+	
+	public boolean hasPattern(JClass c) {
+		if(isDecorator(c)){
+			System.out.println("DECORATEE: "+getDecoratee(c.getSuper()).getName());
+			System.out.println("DECORATOR: " + getTopDecorator(c).getName());
+			System.out.println("Subclasses: ");
+			for(JClass cl:getDecendants(getTopDecorator(c)))System.out.println(cl.getName());
+			//System.out.println(c.getSuper().getName());
+			return true;
 		}
 		return false;
 	}

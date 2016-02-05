@@ -22,8 +22,10 @@ public class AdapterDetector extends PatternDetector {
 		//System.out.println(c.getName());
 		for(JClass inter : c.getInterfaces()){
 			//System.out.println(inter.);
-			if(c.getMethods().size()!=inter.getMethods().size())return false;
+			if(c.getMethods().size()-1!=inter.getMethods().size())return false;
 		}
+		System.out.println(c.getName());
+		//if(c.getInterfaces().size()==0)return false;
 		for(JField f:c.getFields()){
 			for(JMethod m:c.getMethods()){
 				passed=true;

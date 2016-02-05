@@ -25,7 +25,7 @@ public class DesignParser {
 				"(Ljava/util/ArrayList;)Lparser/test/Cat;", 3);*/
 		PrintFactory pf = new PrintFactory(d);
 		new SingletonDetector(d);
-		new DecoratorDetector(d);
+		//new DecoratorDetector(d);
 		new AdapterDetector(d);
 		//pf.printContainer();
 		//printStack("java/util/Collections", m, 0);
