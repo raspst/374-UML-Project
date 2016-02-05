@@ -49,11 +49,11 @@ public class PrintFactory {
 			JClass c = d.getClass(className);
 			if (d.isWhitelisted(c.getSuper())) {
 				// Don't want to print Object in UML diagram
-				sb.append(c.getTopName() + "->" + c.getSuper().getTopName() + "[label=");
-				for(String s: c.getPatterns()) {
-					sb.append(c.getArrowAnnotation(s) + " ");
-				}
-				sb.append("]\n");
+				sb.append(c.getTopName() + "->" + c.getSuper().getTopName() + "\n");
+//				for(String s: c.getPatterns()) {
+//					sb.append(c.getArrowAnnotation(s) + " ");
+//				}
+//				sb.append("]\n");
 			}
 		}
 		return sb.toString();

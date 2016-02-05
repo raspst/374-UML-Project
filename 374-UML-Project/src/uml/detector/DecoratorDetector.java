@@ -25,6 +25,7 @@ public class DecoratorDetector extends PatternDetector {
 	
 	public JClass getDecoratee(JClass c){
 		if(hasPattern(c))return getDecoratee(c.getSuper());
+		c.addPattern("Component");
 		return c;
 	}
 	
@@ -37,7 +38,11 @@ public class DecoratorDetector extends PatternDetector {
 		ArrayList<JClass> decendants = new ArrayList<JClass>();
 		for(String s : design.getClassNames()){
 			JClass cl = design.getClass(s);
-			if(cl.getSuper()==c)decendants.add(cl);
+			if(cl.getSuper()==c) {
+				decendants.add(cl);
+				cl.addPattern("Decorator");
+				cl.addFillColor("Decorator", "green");
+			}
 		}
 		return decendants;
 	}
@@ -45,6 +50,12 @@ public class DecoratorDetector extends PatternDetector {
 	public void applyChange(JClass c) {
 //		c.setSingleton(true);
 		// System.out.println(c.getName());
+		if(c.getPatterns().contains("Decorator")) {
+			c.addFillColor("Decorator", "green");
+		}
+		if(c.getPatterns().contains("Component")) {
+			c.addFillColor("Component", "green");
+		}
 	}
 	//BufferedReader
 	//ClassVisitor
@@ -86,6 +97,7 @@ public class DecoratorDetector extends PatternDetector {
 							JField loc = m.getLocalVars().get(local);
 							//Checks to see if the loaded variable is a parameter and same type as the field getting set
 							if (loc.isParameter() && loc.getType().getName().equals(type.getName())){
+								c.addPattern("Decorator");
 								return true;
 							}
 						}

@@ -108,9 +108,16 @@ public class JClass extends JType {
 //			if (this.isSingleton) {
 //				s.append("\tSingleton\\l");
 //			}
+			for(String st: patterns) {
+				s.append("\t" + st + "\\l");
+			}
 			s.append(name + "|");
 		} else {
-			s.append(name + " [\n\tlabel = \"{interface\n" + name + "|");
+			s.append(name + " [\n\tlabel = \"{interface\n"); //name + "|");
+			for(String st: patterns) {
+				s.append("\t" + st + "\\l");
+			}
+			s.append(name + "|");
 		}
 		Iterator<JField> it = fields.iterator();
 		while (it.hasNext()) {
@@ -171,7 +178,7 @@ public class JClass extends JType {
 	}
 	
 	public void addFillColor(String pattern, String color) {
-		patternToColor.put(pattern, "fillcolor=" + color);
+		patternToColor.put(pattern, "style=filled\n\tfillcolor=" + color);
 	}
 	
 	public void addArrowAnnotation(String pattern, String annotation) {
