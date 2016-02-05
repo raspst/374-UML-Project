@@ -61,6 +61,7 @@ public class DecoratorDetector extends PatternDetector {
 	//BufferedReader
 	//ClassVisitor
 	public boolean isDecorator(JClass c){
+		boolean decorated=false;
 		for (JMethod m : c.getMethods()) {
 			if (m.getName().equals("<init>")) {// && m.getAccess().equals("+")
 
@@ -98,17 +99,29 @@ public class DecoratorDetector extends PatternDetector {
 							JField loc = m.getLocalVars().get(local);
 							//Checks to see if the loaded variable is a parameter and same type as the field getting set
 							if (loc.isParameter() && loc.getType().getName().equals(type.getName())){
-								c.addPattern("Decorator");
-								c.addAssociatesArrowAnnotation("Decorator", "decorates");
-								return true;
+								has=true;
+								break;
 							}
 						}
 					}
+					if(!has) return false;
 				}
 			}
-
+			else{
+				//Check to see if we have made a decorator like call in at least one of our methods.
+				for (Instruction in : m.getInstructions()) {
+					if(in.isInvokeVirtual()&&in.invokeVirtualCall()[2].equals(m.getDesc())){
+						decorated = true;
+						break;
+					}
+				}
+			}
 		}
-		return false;
+		if(decorated){
+			c.addPattern("Decorator");
+			c.addAssociatesArrowAnnotation("Decorator", "decorates");
+		}
+		return decorated;
 	}
 	
 	public boolean hasPattern(JClass c) {
