@@ -3,21 +3,22 @@ package uml.visitors.classes;
 import org.objectweb.asm.ClassVisitor;
 
 import uml.node.ClassContainer;
+import uml.parser.Design;
 
 public class ClassContainerVisitor extends ClassVisitor {
-	private ClassContainer container;
+	protected Design design;
 
-	public ClassContainerVisitor(int arg0, ClassContainer container) {
+	public ClassContainerVisitor(int arg0, Design d) {
 		super(arg0);
-		this.container = container;
+		design=d;
 	}
 
-	public ClassContainerVisitor(int arg0, ClassVisitor arg1, ClassContainer container) {
+	public ClassContainerVisitor(int arg0, ClassVisitor arg1, Design d) {
 		super(arg0, arg1);
-		this.container = container;
+		design = d;
 	}
 
 	public ClassContainer getContainer() {
-		return container;
+		return design.getContainer();
 	}
 }

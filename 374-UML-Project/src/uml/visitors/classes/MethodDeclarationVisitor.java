@@ -4,14 +4,15 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
 import uml.node.ClassContainer;
+import uml.parser.Design;
 
 public abstract class MethodDeclarationVisitor extends ClassContainerVisitor {
 	private String methodName;
 	private String desc;
 
-	public MethodDeclarationVisitor(int arg0, ClassVisitor arg1, ClassContainer container, String methodName,
+	public MethodDeclarationVisitor(int arg0, ClassVisitor arg1, Design d, String methodName,
 			String desc) {
-		super(arg0, arg1, container);
+		super(arg0, arg1, d);
 		this.methodName = methodName;
 		this.desc = desc;
 	}

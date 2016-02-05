@@ -74,12 +74,12 @@ public class ClassContainer {
 		try {
 			while (!toParse.isEmpty()) {
 				ClassReader cr;
-				cr = new ClassReader(toParse.remove());
+				JClass c = getClass(toParse.remove());
+				cr = new ClassReader(c.getName());
 				ClassNode classNode = new ClassNode();
-				ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, classNode, this);
-				ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, this);
+				ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, classNode, design);
+				ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, design,c);
 				cr.accept(fieldVisitor, 0);
-				JClass c = getClass(classNode.name);
 				// for (JInterface i : c.getInterfaces())
 				// System.out.println(i.getTopName());
 				for (MethodNode method : (List<MethodNode>) classNode.methods) {

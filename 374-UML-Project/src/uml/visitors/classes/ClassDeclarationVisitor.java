@@ -4,16 +4,17 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 
 import uml.node.ClassContainer;
+import uml.parser.Design;
 import uml.types.JClass;
 
 public class ClassDeclarationVisitor extends ClassContainerVisitor {
 
-	public ClassDeclarationVisitor(int arg0, ClassContainer container) {
-		super(arg0, container);
+	public ClassDeclarationVisitor(int arg0, Design d) {
+		super(arg0, d);
 	}
 
-	public ClassDeclarationVisitor(int asm5, ClassNode classNode, ClassContainer container) {
-		super(asm5, classNode, container);
+	public ClassDeclarationVisitor(int asm5, ClassNode classNode, Design d) {
+		super(asm5, classNode, d);
 	}
 
 	@Override
