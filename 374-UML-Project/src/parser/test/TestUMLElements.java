@@ -125,12 +125,7 @@ public class TestUMLElements {
 	@Before
 	public void setup() {
 		d = DesignParser.parseFile("testcases.txt");
-		try {
-			DesignParser.parseDesign(d);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			d.parse();
 		pf = new PrintFactory(d);
 		new SingletonDetector(d);
 	}

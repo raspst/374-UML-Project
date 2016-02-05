@@ -7,13 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import uml.detector.AdapterDetector;
-import uml.detector.DecoratorDetector;
 import uml.detector.SingletonDetector;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		Design d = parseFile("adaptee.txt");
-		parseDesign(d);
+		d.parse();
 		System.out.println("Method Signature formatting: ");
 		System.out.println("(<args>)<return>");
 		System.out.println("Types:");
@@ -96,15 +95,5 @@ public class DesignParser {
 			e.printStackTrace();
 		}
 		return d;
-	}
-
-	public static void parseDesign(Design d) throws IOException {
-		for (String className : d.getClassNames()) {
-			// System.out.println(className);
-			d.getContainer().addClass(className);
-			// d.getContainer().getClass(className);
-			// System.out.println(className);
-		}
-		d.getContainer().parse();
 	}
 }

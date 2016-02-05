@@ -1,17 +1,24 @@
 package uml.parser;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import uml.node.ClassContainer;
 import uml.types.JClass;
 
 public class Design {
 	private List<String> whitelist = new LinkedList<String>();
-	private ArrayList<String> classes = new ArrayList<String>();
-	private ClassContainer container = new ClassContainer(whitelist);
+	private HashSet<String> classes = new HashSet<String>();
+	private ClassContainer container = new ClassContainer(this);
 	
+	public void parse(){
+			for (String className : classes) {
+				container.addClass(className);
+			}
+			container.parse();
+	}
 	public void addClass(String c){
 		classes.add(c);
 	}
@@ -29,7 +36,7 @@ public class Design {
 		return false;
 	}
 
-	public List<String> getClassNames() {
+	public Set<String> getClassNames() {
 		return classes;
 	}
 	

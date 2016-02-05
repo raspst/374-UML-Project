@@ -19,12 +19,11 @@ import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.analysis.Analyzer;
-import org.objectweb.asm.tree.analysis.SimpleVerifier;
 import org.objectweb.asm.util.Printer;
 import org.objectweb.asm.util.Textifier;
 import org.objectweb.asm.util.TraceMethodVisitor;
 
+import uml.parser.Design;
 import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
@@ -35,11 +34,11 @@ public class ClassContainer {
 	private HashMap<String, JClass> classes;
 	private Queue<String> toParse;
 	private JClass activeClass;
-	private List<String> whitelist;
+	private Design design;
 
-	public ClassContainer(List<String> whitelist) {
+	public ClassContainer(Design d) {
 		this.classes = new HashMap<String, JClass>();
-		this.whitelist = whitelist;
+		design = d;
 		toParse = new LinkedList<String>();
 	}
 
@@ -48,19 +47,15 @@ public class ClassContainer {
 		name = name.replace('.', '/');
 		JClass theclass = new JClass(name);
 		classes.put(name, theclass);
-		boolean listed = false;
-		for (String w : whitelist)
-			if (name.startsWith(w)) {
-				listed = true;
-				break;
-			}
-		if (listed && !name.equals("V") && !name.equals("I") && !name.equals("F") && !name.equals("D")
+		if (design.isWhitelisted(theclass) && !name.equals("V") && !name.equals("I") && !name.equals("F") && !name.equals("D")
 				&& !name.equals("Z") && !name.equals("S") && !name.equals("B") && !name.equals("C") && !name.equals("J")
 				&& !name.equals("void") && !name.equals("int") && !name.equals("float") && !name.equals("double")
 				&& !name.equals("boolean") && !name.equals("short") && !name.equals("byte") && !name.equals("char")
-				&& !name.equals("long"))
+				&& !name.equals("long")){
 			toParse.add(name);
-	}
+			design.addClass(name);
+		}
+		}
 
 	public JClass getClass(String name) {
 		// getObjectType
