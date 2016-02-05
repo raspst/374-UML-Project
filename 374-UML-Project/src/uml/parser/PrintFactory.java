@@ -80,7 +80,11 @@ public class PrintFactory {
 			while (it.hasNext()) {
 				JClass cl = it.next();
 				if (d.isWhitelisted(cl))
-					sb.append(c.getTopName() + "->" + cl.getTopName() + "\n");
+					sb.append(c.getTopName() + "->" + cl.getTopName()); // + "\n");
+					for(String s: c.getPatterns()) {
+						sb.append(c.getAssociationsArrowAnnotation(s) + " ");
+					}
+					sb.append("\n");
 			}
 		}
 		return sb.toString();
@@ -93,7 +97,11 @@ public class PrintFactory {
 			for (JClass cl : c.getUses().values()) {
 				if (d.isWhitelisted(cl))
 					if (!c.getAssociates().contains(cl)) {
-						sb.append(c.getTopName() + "->" + cl.getTopName() + "\n");
+						sb.append(c.getTopName() + "->" + cl.getTopName());// + "\n");
+						for(String s: c.getPatterns()) {
+							sb.append(c.getUsesArrowAnnotation(s) + " ");
+						}
+						sb.append("\n");
 					}
 			}
 		}

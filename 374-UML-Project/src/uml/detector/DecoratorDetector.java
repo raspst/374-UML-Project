@@ -1,7 +1,6 @@
 package uml.detector;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import uml.node.Instruction;
@@ -52,6 +51,7 @@ public class DecoratorDetector extends PatternDetector {
 		// System.out.println(c.getName());
 		if(c.getPatterns().contains("Decorator")) {
 			c.addFillColor("Decorator", "green");
+			c.addAssociatesArrowAnnotation("Decorator", "decorates");
 		}
 		if(c.getPatterns().contains("Component")) {
 			c.addFillColor("Component", "green");
@@ -98,6 +98,7 @@ public class DecoratorDetector extends PatternDetector {
 							//Checks to see if the loaded variable is a parameter and same type as the field getting set
 							if (loc.isParameter() && loc.getType().getName().equals(type.getName())){
 								c.addPattern("Decorator");
+								c.addAssociatesArrowAnnotation("Decorator", "decorates");
 								return true;
 							}
 						}

@@ -15,7 +15,8 @@ public class JClass extends JType {
 	private ArrayList<JClass> interfaces;
 	private ArrayList<JMethod> methods;
 	private ArrayList<String> patterns;
-	private HashMap<String, String> patternToArrow;
+	private HashMap<String, String> patternToUsesArrow;
+	private HashMap<String, String> patternToAssociationsArrow;
 	private HashMap<String, String> patternToColor;
 //	private boolean isSingleton = false;
 
@@ -28,7 +29,8 @@ public class JClass extends JType {
 		this.methods = new ArrayList<JMethod>();
 		interfaces = new ArrayList<JClass>();
 		patterns = new ArrayList<String>();
-		patternToArrow = new HashMap<String, String>();
+		patternToUsesArrow = new HashMap<String, String>();
+		patternToAssociationsArrow = new HashMap<String, String>();
 		patternToColor = new HashMap<String, String>();
 	}
 
@@ -181,12 +183,20 @@ public class JClass extends JType {
 		patternToColor.put(pattern, "style=filled\n\tfillcolor=" + color);
 	}
 	
-	public void addArrowAnnotation(String pattern, String annotation) {
-		patternToArrow.put(pattern, annotation);
+	public void addUsesArrowAnnotation(String pattern, String annotation) {
+		patternToUsesArrow.put(pattern, annotation);
 	}
 	
-	public String getArrowAnnotation(String pattern) {
-		return patternToArrow.get(pattern);
+	public String getUsesArrowAnnotation(String pattern) {
+		return patternToUsesArrow.get(pattern);
+	}
+	
+	public void addAssociatesArrowAnnotation(String pattern, String annotation) {
+		patternToAssociationsArrow.put(pattern, "[label=" + annotation + "]");
+	}
+	
+	public String getAssociationsArrowAnnotation(String pattern) {
+		return patternToAssociationsArrow.get(pattern);
 	}
 	
 	public String getColor(String pattern) {

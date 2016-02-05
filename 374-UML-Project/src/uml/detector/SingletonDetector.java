@@ -16,7 +16,6 @@ public class SingletonDetector extends PatternDetector{
 //		c.setSingleton(true);
 		c.addPattern("Singleton");
 		c.addBorderColor("Singleton", "blue");
-		c.addArrowAnnotation("Singleton", " ");
 //		System.out.println(c.getName());
 	}
 
