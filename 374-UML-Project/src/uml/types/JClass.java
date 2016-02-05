@@ -104,7 +104,7 @@ public class JClass extends JType {
 		StringBuilder s = new StringBuilder();
 		String name = this.getTopName();
 		if (!this.isInterface) {
-//			s.append(name + " [\n\tlabel = \"{");
+			s.append(name + " [\n\tlabel = \"{");
 //			if (this.isSingleton) {
 //				s.append("\tSingleton\\l");
 //			}
@@ -160,6 +160,30 @@ public class JClass extends JType {
 	
 	public void addPattern(String name) {
 		this.patterns.add(name);
+	}
+	
+	public ArrayList<String> getPatterns() {
+		return patterns;
+	}
+	
+	public void addBorderColor(String pattern, String color) {
+		patternToColor.put(pattern, "color=" + color);
+	}
+	
+	public void addFillColor(String pattern, String color) {
+		patternToColor.put(pattern, "fillcolor=" + color);
+	}
+	
+	public void addArrowAnnotation(String pattern, String annotation) {
+		patternToArrow.put(pattern, annotation);
+	}
+	
+	public String getArrowAnnotation(String pattern) {
+		return patternToArrow.get(pattern);
+	}
+	
+	public String getColor(String pattern) {
+		return patternToColor.get(pattern);
 	}
 
 //	public void setSingleton(boolean value) {

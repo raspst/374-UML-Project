@@ -35,6 +35,9 @@ public class PrintFactory {
 //			if(c.isSingleton()) {
 //				sb.append("\tcolor=blue\n");
 //			}
+			for(String s: c.getPatterns()) {
+				sb.append("\t" + c.getColor(s) + "\n");
+			}
 			sb.append("]\n");
 		}
 		return sb.toString();
@@ -46,7 +49,11 @@ public class PrintFactory {
 			JClass c = d.getClass(className);
 			if (d.isWhitelisted(c.getSuper())) {
 				// Don't want to print Object in UML diagram
-				sb.append(c.getTopName() + "->" + c.getSuper().getTopName() + '\n');
+				sb.append(c.getTopName() + "->" + c.getSuper().getTopName() + "[label=");
+				for(String s: c.getPatterns()) {
+					sb.append(c.getArrowAnnotation(s) + " ");
+				}
+				sb.append("]\n");
 			}
 		}
 		return sb.toString();
