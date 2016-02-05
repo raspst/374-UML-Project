@@ -37,6 +37,7 @@ public class JMethod extends JType {
 		return parameters;
 	}
 
+
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
 		s.append(this.getAccess() + " " + this.getTopName() + "(");

@@ -106,10 +106,6 @@ public class JClass extends JType {
 		return this.superclass;
 	}
 
-	public void setDependencies(JClass superclass, ArrayList<JClass> interfaces) {
-		this.superclass = superclass;
-	}
-
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
 		String name = this.getTopName();
