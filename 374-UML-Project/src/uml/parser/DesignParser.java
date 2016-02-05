@@ -13,7 +13,7 @@ import uml.detector.SingletonDetector;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
-		Design d = parseFile("parser.txt");
+		Design d = parseFile("adaptee.txt");
 		d.parse();
 		System.out.println("Method Signature formatting: ");
 		System.out.println("(<args>)<return>");
@@ -28,7 +28,7 @@ public class DesignParser {
 		new SingletonDetector(d);
 		new DecoratorDetector(d);
 		new CompositeDetector(d);
-//		new AdapterDetector(d);
+		new AdapterDetector(d);
 		pf.printContainer();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");
@@ -40,7 +40,7 @@ public class DesignParser {
 		//java/util/Calendar
 		//nc.addClass("parser/test/SingletonTest");
 		//nc.parse();
-		// pf.printContainer();
+//		 pf.printContainer();
 		// BufferedReader b = new BufferedReader(new InputStreamReader(new
 		// ByteArrayInputStream(new byte[2])));
 	}

@@ -1,0 +1,2 @@
+-w java/awt/event/
+java/awt/event/MouseAdapter
