@@ -13,7 +13,7 @@ public class AdapterDetector extends PatternDetector {
 	}
 
 	public void applyChange(JClass c) {
-		c.setSingleton(true);
+//		c.setSingleton(true);
 		System.out.println("ADAPTEE: "+c.getName());
 	}
 

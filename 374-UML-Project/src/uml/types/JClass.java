@@ -14,7 +14,10 @@ public class JClass extends JType {
 	private HashSet<JField> statics;
 	private ArrayList<JClass> interfaces;
 	private ArrayList<JMethod> methods;
-	private boolean isSingleton = false;
+	private ArrayList<String> patterns;
+	private HashMap<String, String> patternToArrow;
+	private HashMap<String, String> patternToColor;
+//	private boolean isSingleton = false;
 
 	public JClass(String name) {
 		super(name);
@@ -24,6 +27,9 @@ public class JClass extends JType {
 		statics = new HashSet<JField>();
 		this.methods = new ArrayList<JMethod>();
 		interfaces = new ArrayList<JClass>();
+		patterns = new ArrayList<String>();
+		patternToArrow = new HashMap<String, String>();
+		patternToColor = new HashMap<String, String>();
 	}
 
 	public void addInterface(JClass i) {
@@ -98,10 +104,10 @@ public class JClass extends JType {
 		StringBuilder s = new StringBuilder();
 		String name = this.getTopName();
 		if (!this.isInterface) {
-			s.append(name + " [\n\tlabel = \"{");
-			if (this.isSingleton) {
-				s.append("\tSingleton\\l");
-			}
+//			s.append(name + " [\n\tlabel = \"{");
+//			if (this.isSingleton) {
+//				s.append("\tSingleton\\l");
+//			}
 			s.append(name + "|");
 		} else {
 			s.append(name + " [\n\tlabel = \"{interface\n" + name + "|");
@@ -151,12 +157,16 @@ public class JClass extends JType {
 		}
 		return null;
 	}
-
-	public void setSingleton(boolean value) {
-		this.isSingleton = value;
+	
+	public void addPattern(String name) {
+		this.patterns.add(name);
 	}
 
-	public boolean isSingleton() {
-		return this.isSingleton;
-	}
+//	public void setSingleton(boolean value) {
+//		this.isSingleton = value;
+//	}
+//
+//	public boolean isSingleton() {
+//		return this.isSingleton;
+//	}
 }

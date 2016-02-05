@@ -13,7 +13,8 @@ public class SingletonDetector extends PatternDetector{
 	}
 	
 	public void applyChange(JClass c){
-		c.setSingleton(true);
+//		c.setSingleton(true);
+		c.addPattern("Singleton");
 //		System.out.println(c.getName());
 	}
 

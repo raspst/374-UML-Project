@@ -13,7 +13,7 @@ public class DecoratorDetector extends PatternDetector {
 	}
 
 	public void applyChange(JClass c) {
-		c.setSingleton(true);
+//		c.setSingleton(true);
 		// System.out.println(c.getName());
 	}
 	//BufferedReader
