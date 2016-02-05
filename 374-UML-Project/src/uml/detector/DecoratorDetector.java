@@ -25,6 +25,7 @@ public class DecoratorDetector extends PatternDetector {
 	public JClass getDecoratee(JClass c){
 		if(hasPattern(c))return getDecoratee(c.getSuper());
 		c.addPattern("Component");
+		c.addFillColor("Component", "green");
 		return c;
 	}
 	
