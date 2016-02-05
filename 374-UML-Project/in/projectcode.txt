@@ -1,0 +1,10 @@
+-w uml/detector/
+-w uml/node/
+-w uml/parser/
+-w uml/types/
+-w uml/visitors/classes/
+uml/detector/*
+uml/node/*
+uml/parser/*
+uml/types/*
+uml/visitors/classes/*
