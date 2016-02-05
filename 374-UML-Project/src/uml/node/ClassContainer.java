@@ -33,7 +33,6 @@ import uml.visitors.classes.ClassFieldVisitor;
 public class ClassContainer {
 	private HashMap<String, JClass> classes;
 	private Queue<String> toParse;
-	private JClass activeClass;
 	private Design design;
 
 	public ClassContainer(Design d) {
@@ -70,6 +69,7 @@ public class ClassContainer {
 		return theClass;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void parse() {
 		try {
 			while (!toParse.isEmpty()) {
@@ -80,14 +80,8 @@ public class ClassContainer {
 				ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, classNode, design);
 				ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, design,c);
 				cr.accept(fieldVisitor, 0);
-				// for (JInterface i : c.getInterfaces())
 				// System.out.println(i.getTopName());
 				for (MethodNode method : (List<MethodNode>) classNode.methods) {
-					/*
-					 * if
-					 * (!Type.getReturnType(method.desc).getClassName().replace(
-					 * ".", "/").equals(c.getName())) continue;
-					 */
 					//new Analyzer(new SimpleVerifier())
 					//newControlFlowEdge()
 					List<LocalVariableNode> vars = (List<LocalVariableNode>) method.localVariables;
@@ -144,11 +138,6 @@ public class ClassContainer {
 					JMethod m = new JMethod(c, method.name, method.access,
 							getClass(Type.getReturnType(method.desc).getClassName()), localVars, commands, method.desc);
 					c.addMethod(m);
-					// System.out.println(m.getAccess() + " " +
-					// m.getReturn().getTopName() + " " + m.getName());
-					// for (JField f : m.getLocalVars())
-					// System.out.println(f.getName() + " " +
-					// f.getType().getTopName());
 				}
 			}
 		} catch (IOException e) {
@@ -174,12 +163,4 @@ public class ClassContainer {
 
 	private static Printer printer = new Textifier();
 	private static TraceMethodVisitor mp = new TraceMethodVisitor(printer);
-
-	public JClass getActiveClass() {
-		return activeClass;
-	}
-
-	public void setActiveClass(JClass c) {
-		activeClass = c;
-	}
 }
