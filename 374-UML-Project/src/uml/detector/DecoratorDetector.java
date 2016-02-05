@@ -76,7 +76,7 @@ public class DecoratorDetector extends PatternDetector {
 					Instruction in = m.getInstructions().get(i);
 					if (in.isPutField()) {
 						//System.out.println(in.putFieldCall()[2]);
-						JClass type = container.getClass(in.putFieldCall()[2]);
+						JClass type = design.getClass(in.putFieldCall()[2]);
 						Instruction prev = m.getInstructions().get(i - 1);
 						int local;
 						// Makes sure the instance variable is or is parent of
