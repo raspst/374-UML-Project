@@ -76,9 +76,16 @@ public class AdapterDetector extends PatternDetector {
 			}
 		}
 		if(passed){
-			System.out.println("ADAPTER: "+c.getName());
-			System.out.println("ADAPTEE: "+field.getType().getName());
-			System.out.println("TARGET: "+c.getInterfaces().get(0).getName());
+//			System.out.println("ADAPTER: "+c.getName());
+			c.addPattern("Adapter");
+			c.addFillColor("Adapter", "red");
+			c.addAssociatesArrowAnnotation("Adapter", "adapts");
+			field.getType().addPattern("Adaptee");
+			field.getType().addFillColor("Adaptee", "red");
+			c.getInterfaces().get(0).addPattern("Target");
+			c.getInterfaces().get(0).addFillColor("Target", "red");
+//			System.out.println("ADAPTEE: "+field.getType().getName());
+//			System.out.println("TARGET: "+c.getInterfaces().get(0).getName());
 		}
 		return passed;
 	}
