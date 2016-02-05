@@ -1,5 +1,7 @@
 package uml.detector;
 
+import java.util.ArrayList;
+
 import uml.node.Instruction;
 import uml.parser.Design;
 import uml.types.JClass;
@@ -14,7 +16,29 @@ public class AdapterDetector extends PatternDetector {
 
 	public void applyChange(JClass c) {
 //		c.setSingleton(true);
-		System.out.println("ADAPTEE: "+c.getName());
+	}
+	
+	/*
+	 * Redundant but useful possibly for other detectors.
+	 */
+	public ArrayList<JClass> getUsers(JClass c){
+		ArrayList<JClass> decendants = new ArrayList<JClass>();
+		out: for(String s : design.getClassNames()){
+			JClass cl = design.getClass(s);
+			for(JField f:cl.getFields())if(f.getType().getName().equals(c.getName())){
+				decendants.add(cl);
+				continue out;
+			}
+			for(JMethod m:cl.getMethods()){
+				for(JField f:m.getParams()){
+					if(f.getType().getName().equals(c.getName())){
+						decendants.add(cl);
+						continue out;
+					}
+				}
+			}
+		}
+		return decendants;
 	}
 
 	public boolean hasPattern(JClass c) {
@@ -24,8 +48,9 @@ public class AdapterDetector extends PatternDetector {
 			//System.out.println(inter.);
 			if(c.getMethods().size()-1!=inter.getMethods().size())return false;
 		}
-		System.out.println(c.getName());
-		//if(c.getInterfaces().size()==0)return false;
+
+		if(c.getInterfaces().size()==0)return false;
+		JField field = null;
 		for(JField f:c.getFields()){
 			for(JMethod m:c.getMethods()){
 				passed=true;
@@ -45,7 +70,15 @@ public class AdapterDetector extends PatternDetector {
 					passed=false;
 					break;
 				}
+				else{
+					field=f;
+				}
 			}
+		}
+		if(passed){
+			System.out.println("ADAPTER: "+c.getName());
+			System.out.println("ADAPTEE: "+field.getType().getName());
+			System.out.println("TARGET: "+c.getInterfaces().get(0).getName());
 		}
 		return passed;
 	}
