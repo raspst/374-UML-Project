@@ -82,7 +82,9 @@ public class PrintFactory {
 				if (d.isWhitelisted(cl))
 					sb.append(c.getTopName() + "->" + cl.getTopName()); // + "\n");
 					for(String s: c.getPatterns()) {
-						sb.append(c.getAssociationsArrowAnnotation(s) + " ");
+						String association = c.getAssociationsArrowAnnotation(s);
+						if(association!=null)
+						sb.append(association + " ");
 					}
 					sb.append("\n");
 			}

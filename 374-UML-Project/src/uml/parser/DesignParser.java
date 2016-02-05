@@ -29,7 +29,7 @@ public class DesignParser {
 		new DecoratorDetector(d);
 		new CompositeDetector(d);
 //		new AdapterDetector(d);
-		//pf.printContainer();
+		pf.printContainer();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");
 		//printCalls(m, 0);

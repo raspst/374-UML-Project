@@ -33,19 +33,6 @@ public class CompositeDetector extends PatternDetector {
 		return c;
 	}
 	
-	public ArrayList<JClass> getDecendants(JClass c){
-		ArrayList<JClass> decendants = new ArrayList<JClass>();
-		for(String s : design.getClassNames()){
-			JClass cl = design.getClass(s);
-			if(cl.getSuper()==c) {
-				decendants.add(cl);
-				cl.addPattern("Decorator");
-				cl.addFillColor("Decorator", "green");
-			}
-		}
-		return decendants;
-	}
-	
 	public void applyChange(JClass c) {
 //		c.setSingleton(true);
 		// System.out.println(c.getName());
