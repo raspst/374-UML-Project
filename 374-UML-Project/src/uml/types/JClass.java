@@ -18,6 +18,7 @@ public class JClass extends JType {
 	private HashMap<String, String> patternToUsesArrow;
 	private HashMap<String, String> patternToAssociationsArrow;
 	private HashMap<String, String> patternToColor;
+	private ArrayList<JClass> descendants;
 //	private boolean isSingleton = false;
 
 	public JClass(String name) {
@@ -32,10 +33,12 @@ public class JClass extends JType {
 		patternToUsesArrow = new HashMap<String, String>();
 		patternToAssociationsArrow = new HashMap<String, String>();
 		patternToColor = new HashMap<String, String>();
+		descendants = new ArrayList<JClass>();
 	}
 
 	public void addInterface(JClass i) {
 		interfaces.add(i);
+		i.descendants.add(this);
 	}
 
 	public ArrayList<JClass> getInterfaces() {
@@ -88,6 +91,11 @@ public class JClass extends JType {
 
 	public void setSuper(JClass s) {
 		superclass = s;
+		s.descendants.add(this);
+	}
+	
+	public ArrayList<JClass> getDescendants(){
+		return descendants;
 	}
 
 	public HashSet<JClass> getAssociates() {
