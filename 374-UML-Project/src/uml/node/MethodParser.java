@@ -33,11 +33,11 @@ public class MethodParser {
 					localVars.add(val, new JField("lv" + val, 2, container.getClass(ret)));
 				// System.out.println("Stored " + localVars.get(val).getName());
 			} else if (s.isSpecial()) {
-				String[] call = s.specialCall();
+				//String[] call = s.specialCall();
 				// System.out.println("Special: " + call[0] + "." + call[1] +
 				// "()");
 			} else if (s.isPutField()) {
-				String[] call = s.putFieldCall();
+				//String[] call = s.putFieldCall();
 				// System.out.println("Put Field: " + call[0] + " " + call[1] +
 				// " " + call[2]);
 			} else if (s.isInvokeStatic()) {
