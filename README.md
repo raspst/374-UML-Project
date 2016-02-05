@@ -68,3 +68,14 @@ FILE FORMAT
 
 To use the Sequence Diagram creator, the parameters (Class name, method name,
 method signature) are passed in main for now.
+
+MILESTONE 5 ADDITIONS
+
+WHO DID WHAT:
+
+Alex did the work with ASM to actually detect the Adapter and Decorator patterns, and did some refactoring of previous code to
+help accomodate changes. He also updated the manual UML diagram.
+
+Steven reworked the annotation system to make it more extensible. Now, when a new detector is written,
+patterns, colors, and annotations are added to JClasses, and these items are now
+automatically printed by the PrintFactory, so adding the patterns etc. is the only thing required.
