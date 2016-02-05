@@ -61,9 +61,9 @@ public class AdapterDetector extends PatternDetector {
 				for(Instruction in : m.getInstructions()){
 					//System.out.println(in.toString());
 					//if(in.isInvokeVirtual())System.out.println(in.invokeVirtualCall()[0]);
-					if(in.isInvokeVirtual()&&container.getClass(in.invokeVirtualCall()[0]).getName().equals(f.getType().getName()))
+					if(in.isInvokeVirtual()&&design.getClass(in.invokeVirtualCall()[0]).getName().equals(f.getType().getName()))
 						has=true;
-					else if(in.isInvokeInterface()&&container.getClass(in.invokeInterfaceCall()[0]).getName().equals(f.getType().getName()))
+					else if(in.isInvokeInterface()&&design.getClass(in.invokeInterfaceCall()[0]).getName().equals(f.getType().getName()))
 							has = true;
 				}
 				if(!has){
