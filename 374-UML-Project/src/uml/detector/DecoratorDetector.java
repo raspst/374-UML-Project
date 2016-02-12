@@ -11,6 +11,7 @@ import uml.types.JMethod;
 
 public class DecoratorDetector extends PatternDetector {
 	public ArrayList<HashSet<String>> patterns = new ArrayList<HashSet<String>>();
+	private static ArrayList<JClass> descendants=new ArrayList<JClass>();
 	public DecoratorDetector(Design d) {
 		super(d);
 	}
@@ -25,25 +26,32 @@ public class DecoratorDetector extends PatternDetector {
 	public JClass getDecoratee(JClass c){
 		if(!c.getSuper().getName().equals("java/lang/Object")&&hasPattern(c.getSuper()))return getDecoratee(c.getSuper());
 		if(!c.getSuper().getName().equals("java/lang/Object"))c=c.getSuper();
-		c.addPattern("Component");
-		c.addFillColor("Component", "green");
 		return c;
 	}
 	
 	public JClass getTopDecorator(JClass c){
-		if(hasPattern(c.getSuper()))return getDecoratee(c.getSuper());
+		if(isDecorator(c.getSuper()))return getTopDecorator(c.getSuper());
 		return c;
 	}
 	
 	public void applyChange(JClass c) {
 //		c.setSingleton(true);
 		// System.out.println(c.getName());
+		c.addPattern("Decorator");
+		c.addAssociatesArrowAnnotation("Decorator", "decorates");
+		JClass cla = getDecoratee(c);
+		cla.addPattern("Component");
+		cla.addFillColor("Component", "green");
 		if(c.getPatterns().contains("Decorator")) {
 			c.addFillColor("Decorator", "green");
 			c.addAssociatesArrowAnnotation("Decorator", "decorates");
 		}
 		if(c.getPatterns().contains("Component")) {
 			c.addFillColor("Component", "green");
+		}
+		for(JClass cl:descendants){
+			cl.addPattern("Decorator");
+			cl.addFillColor("Decorator", "green");
 		}
 	}
 	//BufferedReader
@@ -107,11 +115,15 @@ public class DecoratorDetector extends PatternDetector {
 				}
 			}
 		}
-		if(decorated&&passed){
-			c.addPattern("Decorator");
-			c.addAssociatesArrowAnnotation("Decorator", "decorates");
+		if(!(decorated&&passed))return false;
+		boolean has = false;
+		for(JClass cl:getTopDecorator(c).getDescendants()){
+			if(design.getOriginalClassNames().contains(cl.getName())){
+				has=true;
+				break;
+			}
 		}
-		return decorated&&passed;
+		return has;
 	}
 	
 	public boolean hasPattern(JClass c) {
@@ -119,10 +131,12 @@ public class DecoratorDetector extends PatternDetector {
 			System.out.println("DECORATEE: "+getDecoratee(c).getName());
 			System.out.println("DECORATOR: " + getTopDecorator(c).getName());
 			System.out.println("Subclasses: ");
+			descendants.clear();
 			for(JClass cl:getTopDecorator(c).getDescendants()){
-				cl.addPattern("Decorator");
-				cl.addFillColor("Decorator", "green");
-				System.out.println(cl.getName());
+				if(design.getOriginalClassNames().contains(cl.getName())){
+					descendants.add(cl);
+					System.out.println(cl.getName());
+				}
 			}
 			//System.out.println(c.getSuper().getName());
 			return true;

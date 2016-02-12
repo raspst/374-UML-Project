@@ -11,11 +11,13 @@ import uml.types.JClass;
 public class Design {
 	private List<String> whitelist = new LinkedList<String>();
 	private HashSet<String> classes = new HashSet<String>();
+	private HashSet<String> aboriginalclasses = new HashSet<String>();
 	private ClassContainer container = new ClassContainer(this);
 	
 	public void parse(){
 			for (String className : classes) {
 				container.addClass(className);
+				aboriginalclasses.add(className);
 			}
 			container.parse();
 	}
@@ -38,6 +40,9 @@ public class Design {
 
 	public Set<String> getClassNames() {
 		return classes;
+	}
+	public Set<String> getOriginalClassNames() {
+		return aboriginalclasses;
 	}
 	
 	public JClass getClass(String name){
