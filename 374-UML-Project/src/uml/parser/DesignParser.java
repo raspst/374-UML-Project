@@ -13,7 +13,7 @@ import uml.detector.SingletonDetector;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
-		Design d = parseFile("testcases2.txt");
+		Design d = parseFile("projectcode.txt");
 		d.parse();
 		System.out.println("Method Signature formatting: ");
 		System.out.println("(<args>)<return>");

@@ -3,6 +3,7 @@
 -w uml/parser/
 -w uml/types/
 -w uml/visitors/classes/
+-w org/objectweb/asm/
 uml/detector/*
 uml/node/*
 uml/parser/*

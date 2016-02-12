@@ -23,7 +23,8 @@ public class DecoratorDetector extends PatternDetector {
 	}
 	
 	public JClass getDecoratee(JClass c){
-		if(hasPattern(c))return getDecoratee(c.getSuper());
+		if(!c.getSuper().getName().equals("java/lang/Object")&&hasPattern(c.getSuper()))return getDecoratee(c.getSuper());
+		if(!c.getSuper().getName().equals("java/lang/Object"))c=c.getSuper();
 		c.addPattern("Component");
 		c.addFillColor("Component", "green");
 		return c;
@@ -49,6 +50,7 @@ public class DecoratorDetector extends PatternDetector {
 	//ClassVisitor
 	public boolean isDecorator(JClass c){
 		boolean decorated=false;
+		boolean passed=false;
 		for (JMethod m : c.getMethods()) {
 			if (m.getName().equals("<init>")) {// && m.getAccess().equals("+")
 
@@ -69,9 +71,10 @@ public class DecoratorDetector extends PatternDetector {
 					}
 				}
 				if (!has)
-					return false;
+					continue;
 				// Validates that putField was called on the instance variable
 				// and was set by the parameter
+				has=false;
 				for (int i = 0; i < m.getInstructions().size(); ++i) {
 					Instruction in = m.getInstructions().get(i);
 					if (in.isPutField()) {
@@ -91,8 +94,8 @@ public class DecoratorDetector extends PatternDetector {
 							}
 						}
 					}
-					if(!has) return false;
 				}
+				if(has) passed=true;
 			}
 			else{
 				//Check to see if we have made a decorator like call in at least one of our methods.
@@ -104,16 +107,16 @@ public class DecoratorDetector extends PatternDetector {
 				}
 			}
 		}
-		if(decorated){
+		if(decorated&&passed){
 			c.addPattern("Decorator");
 			c.addAssociatesArrowAnnotation("Decorator", "decorates");
 		}
-		return decorated;
+		return decorated&&passed;
 	}
 	
 	public boolean hasPattern(JClass c) {
 		if(isDecorator(c)){
-			System.out.println("DECORATEE: "+getDecoratee(c.getSuper()).getName());
+			System.out.println("DECORATEE: "+getDecoratee(c).getName());
 			System.out.println("DECORATOR: " + getTopDecorator(c).getName());
 			System.out.println("Subclasses: ");
 			for(JClass cl:getTopDecorator(c).getDescendants()){
