@@ -79,3 +79,12 @@ help accomodate changes. He also updated the manual UML diagram.
 Steven reworked the annotation system to make it more extensible. Now, when a new detector is written,
 patterns, colors, and annotations are added to JClasses, and these items are now
 automatically printed by the PrintFactory, so adding the patterns etc. is the only thing required.
+
+MILESTONE 6 ADDITIONS
+
+Milestone 6 first involved fixing some things from Milestone 5. Alex reworked the detection logic for the Adapter and Decorator
+detectors, and Steven then reworked the way association arrow labels were made to ensure only one label was printed (instead
+of the four that were cropping up).
+
+Alex also implemented the detection logic for the Composite pattern, while Steven added the code to store the patterns
+and display the colors.

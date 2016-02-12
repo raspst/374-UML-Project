@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import uml.detector.AdapterDetector;
+import uml.detector.CompositeDetector;
 import uml.detector.DecoratorDetector;
 import uml.detector.SingletonDetector;
 import uml.parser.Design;
@@ -126,10 +127,12 @@ public class TestUMLElements {
 	Design d2;
 	Design d3;
 	Design d4;
+	Design d5;
 	PrintFactory pf;
 	PrintFactory pf2;
 	PrintFactory pf3;
 	PrintFactory pf4;
+	PrintFactory pf5;
 	@Before
 	public void setup() {
 		d = DesignParser.parseFile("testcases2.txt");
@@ -138,24 +141,35 @@ public class TestUMLElements {
 		new SingletonDetector(d);
 		new DecoratorDetector(d);
 		new AdapterDetector(d);
+		new CompositeDetector(d);
 		d2 = DesignParser.parseFile("testcases3.txt");
 		d2.parse();
 		pf2 = new PrintFactory(d2);
 		new SingletonDetector(d2);
 		new DecoratorDetector(d2);
 		new AdapterDetector(d2);
+		new CompositeDetector(d2);
 		d3 = DesignParser.parseFile("parser.txt");
 		d3.parse();
 		pf3 = new PrintFactory(d3);
 		new SingletonDetector(d3);
 		new DecoratorDetector(d3);
 		new AdapterDetector(d3);
+		new CompositeDetector(d3);
 		d4 = DesignParser.parseFile("adaptee.txt");
 		d4.parse();
 		pf4 = new PrintFactory(d4);
 		new SingletonDetector(d4);
 		new DecoratorDetector(d4);
 		new AdapterDetector(d4);
+		new CompositeDetector(d4);
+		d5 = DesignParser.parseFile("composite.txt");
+		d5.parse();
+		pf5 = new PrintFactory(d5);
+		new SingletonDetector(d5);
+		new DecoratorDetector(d5);
+		new AdapterDetector(d5);
+		new CompositeDetector(d5);
 //		pf.printContainer();
 //		pf2.printContainer();
 //		pf3.printContainer();
@@ -270,6 +284,24 @@ public class TestUMLElements {
 		assert(adapter.getAssociationsArrowAnnotation("Adapter").equals("[label=adapts]"));
 		assert(enumer.getAssociationsArrowAnnotation("Target") == null);
 		assert(iter.getAssociationsArrowAnnotation("Adaptee") == null);
+	}
+	
+	@Test
+	public void checkComposite() {
+		JClass composite = d5.getClass("java/awt/Composite");
+		JClass component = d5.getClass("java/awt/Component");
+		JClass button = d5.getClass("java/awt/Button");
+		JClass check = d5.getClass("java/awt/Checkbox");
+		
+		assert(composite.getPatterns().contains("Composite"));
+		assert(component.getPatterns().contains("Component"));
+		assert(button.getPatterns().contains("Leaf Node"));
+		assert(check.getPatterns().contains("Leaf Node"));
+		
+		assert(composite.getColor("Composite").equals("yellow"));
+		assert(component.getColor("Component").equals("yellow"));
+		assert(button.getColor("Leaf Node").equals("yellow"));
+		assert(check.getColor("Leaf Node").equals("yellow"));
 	}
 //	@Test
 //	public void checkSingleton() {
