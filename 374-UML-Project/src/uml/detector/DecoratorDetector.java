@@ -127,7 +127,7 @@ public class DecoratorDetector extends PatternDetector {
 	}
 	
 	public boolean hasPattern(JClass c) {
-		if(isDecorator(c)){
+		if(isDecorator(c)&&c.equals(getTopDecorator(c))){
 			System.out.println("DECORATEE: "+getDecoratee(c).getName());
 			System.out.println("DECORATOR: " + getTopDecorator(c).getName());
 			System.out.println("Subclasses: ");
