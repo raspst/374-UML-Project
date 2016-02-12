@@ -36,7 +36,10 @@ public class PrintFactory {
 //				sb.append("\tcolor=blue\n");
 //			}
 			for(String s: c.getPatterns()) {
-				sb.append("\t" + c.getColor(s) + "\n");
+				String color = c.getColor(s);
+				if(color != null) {
+					sb.append("\t" + color + "\n");
+				}
 			}
 			sb.append("]\n");
 		}
@@ -79,14 +82,14 @@ public class PrintFactory {
 			Iterator<JClass> it = c.getAssociates().iterator();
 			while (it.hasNext()) {
 				JClass cl = it.next();
-				if (d.isWhitelisted(cl))
+				if (d.isWhitelisted(cl)) {
 					sb.append(c.getTopName() + "->" + cl.getTopName()); // + "\n");
-					for(String s: c.getPatterns()) {
-						String association = c.getAssociationsArrowAnnotation(s);
-						if(association!=null)
+					String association = c.getAssociationsArrowAnnotation(cl.getTopName());
+					if(association != null) {
 						sb.append(association + " ");
 					}
 					sb.append("\n");
+				}
 			}
 		}
 		return sb.toString();

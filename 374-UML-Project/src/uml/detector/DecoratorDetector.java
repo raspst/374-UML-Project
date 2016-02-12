@@ -41,12 +41,11 @@ public class DecoratorDetector extends PatternDetector {
 //		c.addAssociatesArrowAnnotation("Decorator", "decorates");
 		JClass cla = getDecoratee(c);
 		cla.addPattern("Component");
-		cla.addFillColor("Component", "green");
 		if(c.getPatterns().contains("Decorator")) {
 			c.addFillColor("Decorator", "green");
-			c.addAssociatesArrowAnnotation("Decorator", "decorates");
+			c.addAssociatesArrowAnnotation(cla.getTopName(), "decorates");
 		}
-		if(c.getPatterns().contains("Component")) {
+		if(c.getPatterns().contains("Component") && !c.getTopName().equals(cla.getTopName())) {
 			c.addFillColor("Component", "green");
 		}
 		for(JClass cl:descendants){

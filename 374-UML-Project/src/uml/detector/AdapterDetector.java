@@ -20,7 +20,7 @@ public class AdapterDetector extends PatternDetector {
 		//System.out.println("ADAPTER: " + c.getName());
 		c.addPattern("Adapter");
 		c.addFillColor("Adapter", "red");
-		c.addAssociatesArrowAnnotation("Adapter", "adapts");
+		c.addAssociatesArrowAnnotation(adaptee.getTopName(), "adapts");
 		adaptee.addPattern("Adaptee");
 		adaptee.addFillColor("Adaptee", "red");
 		for(JClass in : c.getInterfaces()){
