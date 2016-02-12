@@ -73,6 +73,7 @@ public class CompositeDetector extends PatternDetector {
 			for(JClass cl : c.getSuper().getDescendants()){
 				if(cl!=c)System.out.println(cl.getName());
 			}
+			return true;
 		}
 		/*if(isDecorator(c)){
 			System.out.println("DECORATEE: "+getDecoratee(c.getSuper()).getName());
