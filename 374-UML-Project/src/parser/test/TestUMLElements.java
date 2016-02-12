@@ -212,8 +212,20 @@ public class TestUMLElements {
 		assert(outputStream.getColor("Decorator") == null);
 		assert(outputStream.getColor("Component").equals("green"));
 		
-		assert(filterInputStream.getAssociationsArrowAnnotation("Decorator").equals("[label=decorates]"));
-		assert(filterOutputStream.getAssociationsArrowAnnotation("Decorator").equals("[label=decorates"));
+//		assert(filterInputStream.getAssociationsArrowAnnotation("Decorator").equals("[label=decorates]"));
+//		assert(filterOutputStream.getAssociationsArrowAnnotation("Decorator").equals("[label=decorates"));
+		for(JClass cl: filterInputStream.getAssociates()) {
+			String s = filterInputStream.getAssociationsArrowAnnotation(cl.getTopName());
+			if(s != null) {
+				assert(s.equals("[label=decorates]"));
+			}
+		}
+		for(JClass cl: filterOutputStream.getAssociates()) {
+			String s = filterOutputStream.getAssociationsArrowAnnotation(cl.getTopName());
+			if(s != null) {
+				assert(s.equals("[label=decorates]"));
+			}
+		}
 		assert(decryptionInputStream.getAssociationsArrowAnnotation("Decorator") == null);
 		assert(encryptionOutputStream.getAssociationsArrowAnnotation("Decorator") == null);
 		assert(inputStream.getAssociationsArrowAnnotation("Component") == null);
@@ -224,11 +236,20 @@ public class TestUMLElements {
 	@Test
 	public void checkAdapter() {
 		JClass mouse = d.getClass("java/awt/event/MouseAdapter");
-		assert(mouse.getInterfaces().size() == 3); // Adapter only implements one interface
-		assert(mouse.getFields().isEmpty()); // Adapter would have a field
-		assert(mouse.getPatterns().isEmpty()); // Is not an adapter
-		assert(mouse.getColor("Adapter") == null);
-		assert(mouse.getAssociationsArrowAnnotation("Adapter") == null);
+		assert(mouse.getInterfaces().size() == 3);
+		for(JClass cla: mouse.getInterfaces()) {
+			assert(cla.getPatterns().contains("Target"));
+		}
+		assert(mouse.getFields().isEmpty());
+		assert(mouse.getPatterns().contains("Adapter"));
+		assert(mouse.getColor("Adapter").equals("red"));
+		for(JClass cl: mouse.getAssociates()) {
+			String s = mouse.getAssociationsArrowAnnotation(cl.getTopName());
+			if(s != null) {
+				assert(cl.getPatterns().contains("Adaptee"));
+				assert(s.equals("[label=adapts]"));
+			}
+		}
 		
 		JClass app = d4.getClass("transformer/client/App");
 		JClass adapter = d4.getClass("transformer/client/ArrayListAdapter");
