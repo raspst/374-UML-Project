@@ -10,28 +10,43 @@ import uml.types.JMethod;
 
 public class AdapterDetector extends PatternDetector {
 
+	JClass adaptee=null;
+	
 	public AdapterDetector(Design d) {
 		super(d);
 	}
-
-	public void applyChange(JClass c) {
-//		c.setSingleton(true);
-	}
 	
+	public void applyChange(JClass c) {
+		//System.out.println("ADAPTER: " + c.getName());
+		c.addPattern("Adapter");
+		c.addFillColor("Adapter", "red");
+		c.addAssociatesArrowAnnotation("Adapter", "adapts");
+		adaptee.addPattern("Adaptee");
+		adaptee.addFillColor("Adaptee", "red");
+		c.getInterfaces().get(0).addPattern("Target");
+		for(JClass in : c.getInterfaces())
+			in.addFillColor("Target", "red");
+		//System.out.println("ADAPTEE: " + adaptee.getName());
+		//System.out.println("Targets:");
+		//for(JClass in : c.getInterfaces())
+		//System.out.println(in.getName());
+	}
+
 	/*
 	 * Redundant but useful possibly for other detectors.
 	 */
-	public ArrayList<JClass> getUsers(JClass c){
+	public ArrayList<JClass> getUsers(JClass c) {
 		ArrayList<JClass> decendants = new ArrayList<JClass>();
-		out: for(String s : design.getClassNames()){
+		out: for (String s : design.getClassNames()) {
 			JClass cl = design.getClass(s);
-			for(JField f:cl.getFields())if(f.getType().getName().equals(c.getName())){
-				decendants.add(cl);
-				continue out;
-			}
-			for(JMethod m:cl.getMethods()){
-				for(JField f:m.getParams()){
-					if(f.getType().getName().equals(c.getName())){
+			for (JField f : cl.getFields())
+				if (f.getType().getName().equals(c.getName())) {
+					decendants.add(cl);
+					continue out;
+				}
+			for (JMethod m : cl.getMethods()) {
+				for (JField f : m.getParams()) {
+					if (f.getType().getName().equals(c.getName())) {
 						decendants.add(cl);
 						continue out;
 					}
@@ -42,52 +57,37 @@ public class AdapterDetector extends PatternDetector {
 	}
 
 	public boolean hasPattern(JClass c) {
-		boolean passed = false;
-		//System.out.println(c.getName());
-		for(JClass inter : c.getInterfaces()){
-			//System.out.println(inter.);
-			if(c.getMethods().size()-1!=inter.getMethods().size())return false;
-		}
-
-		if(c.getInterfaces().size()==0)return false;
-		JField field = null;
-		for(JField f:c.getFields()){
-			for(JMethod m:c.getMethods()){
-				passed=true;
-				//System.out.println(m.getName());
-				if(m.getName().equals("<init>"))continue;
+		if (c.getInterfaces().size() == 0)
+			return false;
+		int count = 0;
+		for (JMethod m : c.getMethods()) {
+			if (!m.getName().equals("<init>") && !m.getName().equals("<clinit>")) {
+				++count;
 				boolean has = false;
-				//InputStreamReader
-				for(Instruction in : m.getInstructions()){
-					//System.out.println(in.toString());
-					//if(in.isInvokeVirtual())System.out.println(in.invokeVirtualCall()[0]);
-					if(in.isInvokeVirtual()&&design.getClass(in.invokeVirtualCall()[0]).getName().equals(f.getType().getName()))
-						has=true;
-					else if(in.isInvokeInterface()&&design.getClass(in.invokeInterfaceCall()[0]).getName().equals(f.getType().getName()))
+				out: for (JClass inter : c.getInterfaces()) {
+					for(JMethod method : inter.getMethods()){
+						if(method.getDesc().equals(m.getDesc())){
 							has = true;
+							break out;
+						}
+					}
 				}
-				if(!has){
-					passed=false;
-					break;
-				}
-				else{
-					field=f;
-				}
+				if(!has)return false;
 			}
 		}
-		if(passed){
-//			System.out.println("ADAPTER: "+c.getName());
-			c.addPattern("Adapter");
-			c.addFillColor("Adapter", "red");
-			c.addAssociatesArrowAnnotation("Adapter", "adapts");
-			field.getType().addPattern("Adaptee");
-			field.getType().addFillColor("Adaptee", "red");
-			c.getInterfaces().get(0).addPattern("Target");
-			c.getInterfaces().get(0).addFillColor("Target", "red");
-//			System.out.println("ADAPTEE: "+field.getType().getName());
-//			System.out.println("TARGET: "+c.getInterfaces().get(0).getName());
+		int compare = 0;
+		for (JClass inter : c.getInterfaces())
+			compare += inter.getMethods().size();
+		if (compare != count)
+			return false;
+		for(JField f:c.getFields())adaptee=f.getType();
+		if(adaptee==null){
+			for(JMethod m:c.getMethods())if(m.getParams().size()>0){
+				adaptee=m.getParams().get(0).getType();
+				break;
+			}
 		}
-		return passed;
+		return adaptee!=null;
 	}
 
 }
