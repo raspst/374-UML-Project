@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="13.3">
-  <zoom_level>7</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>714</x>
-      <y>763</y>
-      <w>252</w>
-      <h>154</h>
+      <x>612</x>
+      <y>654</y>
+      <w>216</w>
+      <h>132</h>
     </coordinates>
     <panel_attributes>ClassContainer
 --
@@ -29,42 +29,27 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>763</x>
-      <y>217</y>
-      <w>259</w>
-      <h>518</h>
+      <x>654</x>
+      <y>330</y>
+      <w>222</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>JClass
 --
 -fields: HashSet&lt;JField&gt; 
 -superclass:JClass
--isInterface:boolean
 -uses:HashMap&lt;String, JClass&gt;
--associates: HashSet&lt;JClass&gt;
--statics:HashSet&lt;JField&gt;
--interfaces:ArrayList&lt;JClass&gt;
--methods:ArrayList&lt;JMethod&gt;
 -patterns:ArrayList&lt;String&gt;
 -patternToUsesArrow:HashMap&lt;String, String&gt;
 -patternToAssociationsArrow:HashMap&lt;String, String&gt;
 -patternToColor:HashMap&lt;String, String&gt;
-descendants:ArrayList&lt;JClass&gt; 
 --
-+void addInterface(JClass)
 +ArrayList&lt;JClass&gt; getInterfaces()
 +JMethod getMethod(String,String)
-+ArrayList&lt;JMethod&gt; getMethods()
-+void addMethod(JMethod)
-+boolean isInterface()
-+void setInterface(boolean)
 +JClass getSuper()
 +void setSuper(JClass)
-+ArrayList&lt;JInterface&gt; getInterfaces()
 +JField getField(String)
 +void addField(JField)
-+void addStaticField(JField)
-+ArrayList&lt;JClass&gt; getDescendants()
-+HashSet&lt;JClass&gt; getAssociates()
 +HashSet&lt;JFleld&gt; getFields()
 +void addPattern(String)
 +ArrayList&lt;String&gt; getPatterns()
@@ -86,10 +71,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1057</x>
-      <y>539</y>
-      <w>147</w>
-      <h>133</h>
+      <x>906</x>
+      <y>462</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>JField
 --
@@ -105,10 +90,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>483</x>
-      <y>287</y>
-      <w>189</w>
-      <h>175</h>
+      <x>414</x>
+      <y>246</y>
+      <w>162</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>JMethod
 --
@@ -131,10 +116,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>812</x>
+      <x>696</x>
       <y>0</y>
-      <w>182</w>
-      <h>133</h>
+      <w>156</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>JType
 --
@@ -152,21 +137,21 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>882</x>
-      <y>126</y>
-      <w>21</w>
-      <h>105</h>
+      <x>756</x>
+      <y>108</y>
+      <w>18</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>987</x>
-      <y>56</y>
-      <w>161</w>
-      <h>497</h>
+      <x>846</x>
+      <y>48</y>
+      <w>138</w>
+      <h>426</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;210.0;690.0</additional_attributes>
@@ -174,10 +159,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>581</x>
-      <y>56</y>
-      <w>245</w>
-      <h>245</h>
+      <x>498</x>
+      <y>48</y>
+      <w>210</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>330.0;10.0;10.0;330.0</additional_attributes>
@@ -185,10 +170,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>315</x>
-      <y>826</y>
-      <w>147</w>
-      <h>133</h>
+      <x>270</x>
+      <y>708</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>ClassContainerVisitor
 --
@@ -199,10 +184,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>518</x>
-      <y>1022</y>
-      <w>147</w>
-      <h>133</h>
+      <x>444</x>
+      <y>876</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>ClassDeclarationVisitor
 --
@@ -213,10 +198,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>406</x>
-      <y>952</y>
-      <w>196</w>
-      <h>84</h>
+      <x>348</x>
+      <y>816</y>
+      <w>168</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;260.0;100.0</additional_attributes>
@@ -224,10 +209,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>273</x>
-      <y>1022</y>
-      <w>238</w>
-      <h>147</h>
+      <x>234</x>
+      <y>876</y>
+      <w>204</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>ClassFieldVisitor
 --
@@ -239,9 +224,9 @@ descendants:ArrayList&lt;JClass&gt;
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>1022</y>
-      <w>266</w>
-      <h>126</h>
+      <y>876</y>
+      <w>228</w>
+      <h>108</h>
     </coordinates>
     <panel_attributes>ClassMethodVisitor
 --
@@ -252,10 +237,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
-      <y>952</y>
-      <w>35</w>
-      <h>84</h>
+      <x>324</x>
+      <y>816</y>
+      <w>30</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0;30.0;100.0</additional_attributes>
@@ -263,10 +248,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>119</x>
-      <y>952</y>
-      <w>266</w>
-      <h>84</h>
+      <x>102</x>
+      <y>816</y>
+      <w>228</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>360.0;10.0;10.0;100.0</additional_attributes>
@@ -274,10 +259,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1113</x>
-      <y>994</y>
-      <w>147</w>
-      <h>133</h>
+      <x>954</x>
+      <y>852</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>SingletonDetector
 --
@@ -289,10 +274,10 @@ descendants:ArrayList&lt;JClass&gt;
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1071</x>
-      <y>784</y>
-      <w>175</w>
-      <h>133</h>
+      <x>918</x>
+      <y>672</y>
+      <w>150</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 PatternDetector
@@ -306,10 +291,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1134</x>
-      <y>910</y>
-      <w>63</w>
-      <h>98</h>
+      <x>972</x>
+      <y>780</y>
+      <w>54</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;120.0</additional_attributes>
@@ -317,10 +302,10 @@ PatternDetector
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>651</x>
-      <y>546</y>
-      <w>91</w>
-      <h>98</h>
+      <x>558</x>
+      <y>468</y>
+      <w>78</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>MethodParser
 --
@@ -330,10 +315,10 @@ PatternDetector
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>476</x>
-      <y>504</y>
-      <w>147</w>
-      <h>168</h>
+      <x>408</x>
+      <y>432</y>
+      <w>126</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>Instruction
 --
@@ -355,10 +340,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>616</x>
-      <y>581</y>
-      <w>49</w>
-      <h>21</h>
+      <x>528</x>
+      <y>498</y>
+      <w>42</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
@@ -366,10 +351,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>637</y>
-      <w>63</w>
-      <h>140</h>
+      <x>594</x>
+      <y>546</y>
+      <w>54</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;180.0</additional_attributes>
@@ -377,10 +362,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
-      <y>840</y>
-      <w>175</w>
-      <h>189</h>
+      <x>780</x>
+      <y>720</y>
+      <w>150</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>230.0;10.0;10.0;250.0</additional_attributes>
@@ -388,21 +373,21 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>665</x>
-      <y>336</y>
-      <w>112</w>
-      <h>21</h>
+      <x>570</x>
+      <y>288</y>
+      <w>96</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;140.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>455</y>
-      <w>21</w>
-      <h>63</h>
+      <x>480</x>
+      <y>390</y>
+      <w>18</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
@@ -410,10 +395,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1015</x>
-      <y>602</y>
-      <w>56</w>
-      <h>21</h>
+      <x>870</x>
+      <y>516</y>
+      <w>48</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
@@ -421,10 +406,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>833</x>
-      <y>910</y>
-      <w>21</w>
-      <h>63</h>
+      <x>714</x>
+      <y>780</y>
+      <w>18</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
@@ -432,10 +417,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>854</x>
-      <y>728</y>
-      <w>21</w>
-      <h>49</h>
+      <x>732</x>
+      <y>624</y>
+      <w>18</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
@@ -443,10 +428,10 @@ PatternDetector
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
-      <y>959</y>
-      <w>147</w>
-      <h>133</h>
+      <x>660</x>
+      <y>822</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>Design
 --
@@ -465,10 +450,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>455</x>
-      <y>896</y>
-      <w>329</w>
-      <h>119</h>
+      <x>390</x>
+      <y>768</y>
+      <w>282</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;450.0;150.0</additional_attributes>
@@ -476,10 +461,10 @@ PatternDetector
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>945</x>
-      <y>994</y>
-      <w>161</w>
-      <h>133</h>
+      <x>810</x>
+      <y>852</y>
+      <w>138</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>DecoratorDetector
 --
@@ -495,10 +480,10 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1015</x>
-      <y>910</y>
-      <w>119</w>
-      <h>98</h>
+      <x>870</x>
+      <y>780</y>
+      <w>102</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>150.0;10.0;10.0;120.0</additional_attributes>
@@ -506,10 +491,10 @@ PatternDetector
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1274</x>
-      <y>994</y>
-      <w>147</w>
-      <h>133</h>
+      <x>1092</x>
+      <y>852</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>AdapterDetector
 --
@@ -522,12 +507,75 @@ PatternDetector
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1204</x>
-      <y>910</y>
-      <w>105</w>
-      <h>98</h>
+      <x>1032</x>
+      <y>780</y>
+      <w>90</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;130.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>138</y>
+      <w>180</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>JInterface
+--
+-isInterface:boolean
+-interfaces:ArrayList&lt;JClass&gt;
+-methods:ArrayList&lt;JMethod&gt;
+#associates: HashSet&lt;JClass&gt;
+#descendants:ArrayList&lt;JClass&gt;
+--
++ArrayList&lt;JMethod&gt; getMethods()
++void addMethod(JMethod)
++boolean isInterface()
++void setInterface(boolean)
++HashSet&lt;JClass&gt; getAssociates()
++ArrayList&lt;JClass&gt; getDescendants()
++ArrayList&lt;JInterface&gt; getInterfaces()
++void addInterface(JClass)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>282</y>
+      <w>18</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1140</x>
+      <y>690</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>CompositeDetector
+--
+--
++ boolean hasPattern(JClass)
++ void applyChange(JClass)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1062</x>
+      <y>726</y>
+      <w>90</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
   </element>
 </diagram>

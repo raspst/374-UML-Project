@@ -7,6 +7,7 @@ public class JInterface extends JType{
 
 	private ArrayList<JMethod> methods = new ArrayList<JMethod>();
 	private ArrayList<JClass> interfaces = new ArrayList<JClass>();
+	private boolean isInterface=false;
 	protected HashSet<JClass> associates = new HashSet<JClass>();
 	protected ArrayList<JClass> descendants = new ArrayList<JClass>();
 	public JInterface(String name) {
@@ -40,7 +41,20 @@ public class JInterface extends JType{
 	public ArrayList<JClass> getInterfaces() {
 		return this.interfaces;
 	}
+	
+	public void setInterface(boolean isInterface) {
+		this.isInterface = isInterface;
+	}
+
+	public boolean isInterface() {
+		return isInterface;
+	}
+	
 	public ArrayList<JClass> getDescendants(){
 		return descendants;
+	}
+	
+	public HashSet<JClass> getAssociates() {
+		return associates;
 	}
 }

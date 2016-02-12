@@ -8,7 +8,6 @@ import java.util.Iterator;
 public class JClass extends JInterface {
 	private HashSet<JField> fields;
 	private JClass superclass;
-	private boolean isInterface;
 	private HashMap<String, JClass> uses;
 	private ArrayList<String> patterns;
 	private HashMap<String, String> patternToUsesArrow;
@@ -36,21 +35,9 @@ public class JClass extends JInterface {
 		fields.add(f);
 	}
 
-	public void setInterface(boolean isInterface) {
-		this.isInterface = isInterface;
-	}
-
-	public boolean isInterface() {
-		return isInterface;
-	}
-
 	public void setSuper(JClass s) {
 		superclass = s;
 		s.descendants.add(this);
-	}
-
-	public HashSet<JClass> getAssociates() {
-		return associates;
 	}
 
 	public JClass getSuper() {
@@ -60,7 +47,7 @@ public class JClass extends JInterface {
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
 		String name = this.getTopName();
-		if (!this.isInterface) {
+		if (!isInterface()) {
 			s.append(name + " [\n\tlabel = \"{");
 //			if (this.isSingleton) {
 //				s.append("\tSingleton\\l");
