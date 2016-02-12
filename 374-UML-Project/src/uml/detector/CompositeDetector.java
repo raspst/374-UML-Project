@@ -36,13 +36,13 @@ public class CompositeDetector extends PatternDetector {
 	public void applyChange(JClass c) {
 //		c.setSingleton(true);
 		// System.out.println(c.getName());
-		if(c.getPatterns().contains("Decorator")) {
-			c.addFillColor("Decorator", "green");
-			c.addAssociatesArrowAnnotation("Decorator", "decorates");
-		}
-		if(c.getPatterns().contains("Component")) {
-			c.addFillColor("Component", "green");
-		}
+//		if(c.getPatterns().contains("Decorator")) {
+//			c.addFillColor("Decorator", "green");
+//			c.addAssociatesArrowAnnotation("Decorator", "decorates");
+//		}
+//		if(c.getPatterns().contains("Component")) {
+//			c.addFillColor("Component", "green");
+//		}
 	}
 	//BufferedReader
 	//ClassVisitor	

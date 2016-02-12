@@ -5,61 +5,25 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class JClass extends JType {
+public class JClass extends JInterface {
 	private HashSet<JField> fields;
 	private JClass superclass;
 	private boolean isInterface;
 	private HashMap<String, JClass> uses;
-	private HashSet<JClass> associates;
-	private HashSet<JField> statics;
-	private ArrayList<JClass> interfaces;
-	private ArrayList<JMethod> methods;
 	private ArrayList<String> patterns;
 	private HashMap<String, String> patternToUsesArrow;
 	private HashMap<String, String> patternToAssociationsArrow;
 	private HashMap<String, String> patternToColor;
-	private ArrayList<JClass> descendants;
 //	private boolean isSingleton = false;
 
 	public JClass(String name) {
 		super(name);
 		fields = new HashSet<JField>();
 		uses = new HashMap<String, JClass>();
-		associates = new HashSet<JClass>();
-		statics = new HashSet<JField>();
-		this.methods = new ArrayList<JMethod>();
-		interfaces = new ArrayList<JClass>();
 		patterns = new ArrayList<String>();
 		patternToUsesArrow = new HashMap<String, String>();
 		patternToAssociationsArrow = new HashMap<String, String>();
 		patternToColor = new HashMap<String, String>();
-		descendants = new ArrayList<JClass>();
-	}
-
-	public void addInterface(JClass i) {
-		interfaces.add(i);
-		i.descendants.add(this);
-	}
-
-	public ArrayList<JClass> getInterfaces() {
-		return this.interfaces;
-	}
-
-	public JMethod getMethod(String name, String desc) {
-		for (JMethod m : methods) {
-			if (m.getName().equals(name) && desc.equals(m.getDesc())) {
-				return m;
-			}
-		}
-		return null;
-	}
-
-	public ArrayList<JMethod> getMethods() {
-		return methods;
-	}
-
-	public void addMethod(JMethod method) {
-		this.methods.add(method);
 	}
 
 	public void addField(JField f) {
@@ -70,15 +34,6 @@ public class JClass extends JType {
 			associates.add(f.getType());
 		}
 		fields.add(f);
-	}
-
-	public void addStaticField(JField f) {
-		String name = f.getType().getName();
-		if (name != this.getName() && name != "void" && name != "int" && name != "float" && name != "double"
-				&& name != "boolean" && name != "short" && name != "byte" && name != "char" && name != "long") {
-			associates.add(f.getType());
-		}
-		statics.add(f);
 	}
 
 	public void setInterface(boolean isInterface) {
@@ -92,10 +47,6 @@ public class JClass extends JType {
 	public void setSuper(JClass s) {
 		superclass = s;
 		s.descendants.add(this);
-	}
-	
-	public ArrayList<JClass> getDescendants(){
-		return descendants;
 	}
 
 	public HashSet<JClass> getAssociates() {
@@ -155,15 +106,6 @@ public class JClass extends JType {
 
 	public JField getField(String name) {
 		for (JField f : fields) {
-			if (f.getTopName().equals(name)) {
-				return f;
-			}
-		}
-		return null;
-	}
-
-	public JField getStaticField(String name) {
-		for (JField f : statics) {
 			if (f.getTopName().equals(name)) {
 				return f;
 			}

@@ -24,7 +24,7 @@ public class DecoratorDetector extends PatternDetector {
 	}
 	
 	public JClass getDecoratee(JClass c){
-		if(!c.getSuper().getName().equals("java/lang/Object")&&hasPattern(c.getSuper()))return getDecoratee(c.getSuper());
+		if(!c.getSuper().getName().equals("java/lang/Object")&&isDecorator(c.getSuper()))return getDecoratee(c.getSuper());
 		if(!c.getSuper().getName().equals("java/lang/Object"))c=c.getSuper();
 		return c;
 	}
@@ -38,7 +38,7 @@ public class DecoratorDetector extends PatternDetector {
 //		c.setSingleton(true);
 		// System.out.println(c.getName());
 		c.addPattern("Decorator");
-		c.addAssociatesArrowAnnotation("Decorator", "decorates");
+//		c.addAssociatesArrowAnnotation("Decorator", "decorates");
 		JClass cla = getDecoratee(c);
 		cla.addPattern("Component");
 		cla.addFillColor("Component", "green");
