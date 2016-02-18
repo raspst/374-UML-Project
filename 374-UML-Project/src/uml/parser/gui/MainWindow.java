@@ -13,8 +13,8 @@ import javax.swing.UIManager;
 
 public class MainWindow {
 	
-	public static int APP_DEFAULT_WIDTH = 500;
-	public static int APP_DEFAULT_HEIGHT = 500;
+	public static int APP_DEFAULT_WIDTH = 300;
+	public static int APP_DEFAULT_HEIGHT = 300;
 	
 	protected LandingPanel landingPanel;
 	protected UMLPanel umlPanel;
@@ -33,13 +33,13 @@ public class MainWindow {
 		mainFrame.setSize(APP_DEFAULT_WIDTH, APP_DEFAULT_HEIGHT);
 		cards = new JPanel(new CardLayout());
 		landingPanel = new LandingPanel(this);
-		landingPanel.setFocusable(true);
-		cards.add(landingPanel, "LANDING");
+//		landingPanel.setFocusable(true);
+		cards.add("LANDING", landingPanel);
 		umlPanel = new UMLPanel();
-		umlPanel.setFocusable(true);
-		cards.add(umlPanel, "UML");
+//		umlPanel.setFocusable(true);
+		cards.add("UML", umlPanel);
 		mainFrame.add(cards);
-		mainFrame.pack();
+//		mainFrame.pack();
 		mainFrame.setVisible(true);
 	}
 }

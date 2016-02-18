@@ -36,7 +36,7 @@ public class LandingPanel extends JPanel {
 				// TODO Auto-generated method stub
 				CardLayout c = (CardLayout) w.cards.getLayout();
 				c.show(w.cards, "UML");
-				w.cards.repaint();
+				LandingPanel.this.repaint();
 			}
 
 			@Override

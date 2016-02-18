@@ -10,6 +10,7 @@ public class UMLPanel extends JPanel {
 
 	public UMLPanel() {
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setSize(MainWindow.APP_DEFAULT_WIDTH, MainWindow.APP_DEFAULT_HEIGHT);
 	}
 	
 	public void paintComponent(Graphics g) {
