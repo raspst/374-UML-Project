@@ -27,9 +27,9 @@ public class DesignParser {
 		PrintFactory pf = new PrintFactory(d);
 		new SingletonDetector(d);
 		new DecoratorDetector(d);
-		new CompositeDetector(d);
+		new CompositeDetector(d).searchClasses();
 		new AdapterDetector(d);
-		pf.printContainer();
+		//pf.printContainer();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");
 		//printCalls(m, 0);

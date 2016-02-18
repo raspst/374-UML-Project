@@ -5,6 +5,8 @@ import java.util.HashSet;
 
 import uml.node.Instruction;
 import uml.parser.Design;
+import uml.pattern.CompositeContainer;
+import uml.pattern.PatternContainer;
 import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
@@ -22,34 +24,11 @@ public class CompositeDetector extends PatternDetector {
 			return false;
 	}
 	
-	public JClass getDecoratee(JClass c){
-		if(hasPattern(c))return getDecoratee(c.getSuper());
-		c.addPattern("Component");
-		return c;
-	}
-	
-	public JClass getTopDecorator(JClass c){
-		if(hasPattern(c.getSuper()))return getDecoratee(c.getSuper());
-		return c;
-	}
-	
-	public void applyChange(JClass c) {
-		c.addPattern("Composite");
-		c.getSuper().addPattern("Component");
-		c.getSuper().addFillColor("Component", "yellow");
-		for(JClass cl: c.getSuper().getDescendants()) {
-			cl.addPattern("Leaf Node");
-			cl.addFillColor("Leaf Node", "yellow");
-		}
-//		c.setSingleton(true);
-		// System.out.println(c.getName());
-//		if(c.getPatterns().contains("Decorator")) {
-//			c.addFillColor("Decorator", "green");
-//			c.addAssociatesArrowAnnotation("Decorator", "decorates");
-//		}
+	public PatternContainer applyChange(JClass c) {
 //		if(c.getPatterns().contains("Component")) {
 //			c.addFillColor("Component", "green");
 //		}
+		return new CompositeContainer(c);
 	}
 	//BufferedReader
 	//ClassVisitor	
