@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import uml.node.Instruction;
 import uml.parser.Design;
+import uml.pattern.AdapterContainer;
+import uml.pattern.PatternContainer;
 import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
@@ -16,21 +18,13 @@ public class AdapterDetector extends PatternDetector {
 		super(d);
 	}
 	
-	public void applyChange(JClass c) {
+	public PatternContainer applyChange(JClass c) {
 		//System.out.println("ADAPTER: " + c.getName());
-		c.addPattern("Adapter");
-		c.addFillColor("Adapter", "red");
-		c.addAssociatesArrowAnnotation(adaptee.getTopName(), "adapts");
-		adaptee.addPattern("Adaptee");
-		adaptee.addFillColor("Adaptee", "red");
-		for(JClass in : c.getInterfaces()){
-			in.addPattern("Target");
-			in.addFillColor("Target", "red");
-		}
 		//System.out.println("ADAPTEE: " + adaptee.getName());
 		//System.out.println("Targets:");
 		//for(JClass in : c.getInterfaces())
 		//System.out.println(in.getName());
+		return new AdapterContainer(c,adaptee);
 	}
 
 	/*

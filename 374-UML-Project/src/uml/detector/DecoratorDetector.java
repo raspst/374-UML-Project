@@ -5,13 +5,14 @@ import java.util.HashSet;
 
 import uml.node.Instruction;
 import uml.parser.Design;
+import uml.pattern.DecoratorContainer;
+import uml.pattern.PatternContainer;
 import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
 
 public class DecoratorDetector extends PatternDetector {
 	public ArrayList<HashSet<String>> patterns = new ArrayList<HashSet<String>>();
-	private static ArrayList<JClass> descendants=new ArrayList<JClass>();
 	public DecoratorDetector(Design d) {
 		super(d);
 	}
@@ -34,24 +35,9 @@ public class DecoratorDetector extends PatternDetector {
 		return c;
 	}
 	
-	public void applyChange(JClass c) {
-//		c.setSingleton(true);
-		// System.out.println(c.getName());
-		c.addPattern("Decorator");
+	public PatternContainer applyChange(JClass c) {
 //		c.addAssociatesArrowAnnotation("Decorator", "decorates");
-		JClass cla = getDecoratee(c);
-		cla.addPattern("Component");
-		if(c.getPatterns().contains("Decorator")) {
-			c.addFillColor("Decorator", "green");
-			c.addAssociatesArrowAnnotation(cla.getTopName(), "decorates");
-		}
-		if(c.getPatterns().contains("Component") && !c.getTopName().equals(cla.getTopName())) {
-			c.addFillColor("Component", "green");
-		}
-		for(JClass cl:descendants){
-			cl.addPattern("Decorator");
-			cl.addFillColor("Decorator", "green");
-		}
+		return new DecoratorContainer(c, getDecoratee(c));
 	}
 	//BufferedReader
 	//ClassVisitor
@@ -130,10 +116,8 @@ public class DecoratorDetector extends PatternDetector {
 			System.out.println("DECORATEE: "+getDecoratee(c).getName());
 			System.out.println("DECORATOR: " + getTopDecorator(c).getName());
 			System.out.println("Subclasses: ");
-			descendants.clear();
 			for(JClass cl:getTopDecorator(c).getDescendants()){
 				if(design.getOriginalClassNames().contains(cl.getName())){
-					descendants.add(cl);
 					System.out.println(cl.getName());
 				}
 			}

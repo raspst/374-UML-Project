@@ -2,6 +2,8 @@ package uml.detector;
 
 import uml.node.Instruction;
 import uml.parser.Design;
+import uml.pattern.PatternContainer;
+import uml.pattern.SingletonContainer;
 import uml.types.JClass;
 import uml.types.JField;
 import uml.types.JMethod;
@@ -12,11 +14,8 @@ public class SingletonDetector extends PatternDetector{
 		super(d);
 	}
 	
-	public void applyChange(JClass c){
-//		c.setSingleton(true);
-		c.addPattern("Singleton");
-		c.addBorderColor("Singleton", "blue");
-//		System.out.println(c.getName());
+	public PatternContainer applyChange(JClass c){
+		return new SingletonContainer(c);
 	}
 
 	public boolean hasPattern(JClass c) {
