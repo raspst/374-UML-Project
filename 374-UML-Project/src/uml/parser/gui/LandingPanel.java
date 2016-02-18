@@ -1,5 +1,6 @@
 package uml.parser.gui;
 
+import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -13,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class LandingPanel extends JPanel {
+	protected final MainWindow w;
 
-	public LandingPanel() {
+	public LandingPanel(final MainWindow w) {
+		this.w = w;
 		this.setSize(MainWindow.APP_DEFAULT_WIDTH, MainWindow.APP_DEFAULT_HEIGHT);
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -26,6 +29,41 @@ public class LandingPanel extends JPanel {
 		JButton analyzeButton = new JButton("Analyze");
 		c.gridx = 1;
 		c.gridy = 0;
+		analyzeButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				CardLayout c = (CardLayout) w.cards.getLayout();
+				c.show(w.cards, "UML");
+				w.cards.repaint();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				return;
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				return;
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				return;
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				return;
+			}
+			
+		});
 		this.add(analyzeButton,c);
 		JLabel progressText = new JLabel("Test text");
 		c.gridx = 0;

@@ -32,12 +32,13 @@ public class MainWindow {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setSize(APP_DEFAULT_WIDTH, APP_DEFAULT_HEIGHT);
 		cards = new JPanel(new CardLayout());
-		landingPanel = new LandingPanel();
+		landingPanel = new LandingPanel(this);
 		landingPanel.setFocusable(true);
-		cards.add(landingPanel);
+		cards.add(landingPanel, "LANDING");
 		umlPanel = new UMLPanel();
 		umlPanel.setFocusable(true);
-		cards.add(umlPanel);
+		cards.add(umlPanel, "UML");
+		mainFrame.add(cards);
 		mainFrame.pack();
 		mainFrame.setVisible(true);
 	}
