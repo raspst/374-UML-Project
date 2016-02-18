@@ -1,0 +1,44 @@
+package uml.parser.gui;
+
+import java.awt.CardLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.UIManager;
+
+public class MainWindow {
+	
+	public static int APP_DEFAULT_WIDTH = 500;
+	public static int APP_DEFAULT_HEIGHT = 500;
+	
+	protected LandingPanel landingPanel;
+	protected UMLPanel umlPanel;
+	protected JPanel cards;
+	
+	public void createAndShowGUI() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		JFrame mainFrame = new JFrame("374 Design Parser");
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setSize(APP_DEFAULT_WIDTH, APP_DEFAULT_HEIGHT);
+		cards = new JPanel(new CardLayout());
+		landingPanel = new LandingPanel();
+		landingPanel.setFocusable(true);
+		cards.add(landingPanel);
+		umlPanel = new UMLPanel();
+		umlPanel.setFocusable(true);
+		cards.add(umlPanel);
+		mainFrame.pack();
+		mainFrame.setVisible(true);
+	}
+}
