@@ -1,0 +1,110 @@
+digraph G {
+fontname = "Bitstream Vera Sans"
+fontsize = 8
+node [
+fontname = "Bitstream Vera Sans"fontsize = 8
+shape = "record"
+]edge [
+fontname = "Bitstream Vera Sans"
+fontsize = 8
+]AbstractCollection [
+	label = "{	Composite\l	Leaf Node\lAbstractCollection|# MAX_ARRAY_SIZE : int\l|# iterator() : Iterator\l# size() : int\l+ isEmpty() : boolean\l+ contains(Object,) : boolean\l+ toArray() : Object\l+ toArray(AbstractCollection,) : Object\l# finishToArray(int,Object,) : Object\l# hugeCapacity(int,) : int\l+ add(Object,) : boolean\l+ remove(Object,) : boolean\l+ containsAll(Iterator,) : boolean\l+ addAll(Iterator,) : boolean\l+ removeAll(Collection,) : boolean\l+ retainAll(Collection,) : boolean\l+ clear() : void\l+ toString() : String\l}"
+	style=filled
+	fillcolor=yellow
+]
+Object [
+	label = "{	Component\lObject||}"
+	style=filled
+	fillcolor=yellow
+]
+List [
+	label = "{interface
+	Leaf Node\lList||# size() : int\l# isEmpty() : boolean\l# contains() : boolean\l# iterator() : Iterator\l# toArray() : Object\l# toArray() : Object\l# add() : boolean\l# remove() : boolean\l# containsAll() : boolean\l# addAll() : boolean\l# addAll() : boolean\l# removeAll() : boolean\l# retainAll() : boolean\l# clear() : void\l# equals() : boolean\l# hashCode() : int\l# get() : Object\l# set() : Object\l# add() : void\l# remove() : Object\l# indexOf() : int\l# lastIndexOf() : int\l# listIterator() : ListIterator\l# listIterator() : ListIterator\l# subList() : List\l}"
+	style=filled
+	fillcolor=yellow
+]
+ArrayListAdapter [
+	label = "{	Leaf Node\l	Adapter\lArrayListAdapter|- iter : Iterator\l|+ hasMoreElements() : boolean\l+ nextElement() : Object\l}"
+	style=filled
+	fillcolor=yellow
+	style=filled
+	fillcolor=red
+]
+Collection [
+	label = "{interface
+	Leaf Node\lCollection||# size() : int\l# isEmpty() : boolean\l# contains() : boolean\l# iterator() : Iterator\l# toArray() : Object\l# toArray() : Object\l# add() : boolean\l# remove() : boolean\l# containsAll() : boolean\l# addAll() : boolean\l# removeAll() : boolean\l# retainAll() : boolean\l# clear() : void\l# equals() : boolean\l# hashCode() : int\l}"
+	style=filled
+	fillcolor=yellow
+]
+ListIterator [
+	label = "{interface
+	Leaf Node\lListIterator||# hasNext() : boolean\l# next() : Object\l# hasPrevious() : boolean\l# previous() : Object\l# nextIndex() : int\l# previousIndex() : int\l# remove() : void\l# set() : void\l# add() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+Iterator [
+	label = "{interface
+	Leaf Node\l	Adaptee\lIterator||# hasNext() : boolean\l# next() : Object\l# remove() : void\l}"
+	style=filled
+	fillcolor=yellow
+	style=filled
+	fillcolor=red
+]
+LinearTransformer [
+	label = "{	Leaf Node\lLinearTransformer|- enumTion : Enumeration\l|+ transform(OutputStream,) : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+RandomAccess [
+	label = "{interface
+	Leaf Node\lRandomAccess||}"
+	style=filled
+	fillcolor=yellow
+]
+App [
+	label = "{	Leaf Node\lApp||# main(ArrayList,) : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+Enumeration [
+	label = "{interface
+	Leaf Node\l	Target\lEnumeration||# hasMoreElements() : boolean\l# nextElement() : Object\l}"
+	style=filled
+	fillcolor=yellow
+	style=filled
+	fillcolor=red
+]
+edge [arrowhead = onormal]AbstractCollection->Object
+List->Object
+ArrayListAdapter->Object
+Collection->Object
+ListIterator->Object
+Iterator->Object
+LinearTransformer->Object
+RandomAccess->Object
+App->Object
+Enumeration->Object
+edge [style = dotted]AbstractCollection->Collection
+List->Collection
+ArrayListAdapter->Enumeration
+ListIterator->Iterator
+edge [arrowhead = vee]edge [style = solid]AbstractCollection->Object
+AbstractCollection->AbstractCollection
+AbstractCollection->Collection
+AbstractCollection->Iterator
+List->List
+ArrayListAdapter->List
+ArrayListAdapter->ArrayListAdapter
+ArrayListAdapter->Iterator[label=adapts] 
+Collection->Collection
+ListIterator->ListIterator
+Iterator->Iterator
+LinearTransformer->Object
+LinearTransformer->LinearTransformer
+LinearTransformer->Enumeration
+App->Object
+App->ArrayListAdapter
+App->LinearTransformer
+App->App
+Enumeration->Enumeration
+}

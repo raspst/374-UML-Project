@@ -7,7 +7,7 @@ import java.util.Set;
 import uml.parser.ParserClass;
 import uml.types.JClass;
 
-public abstract class PatternContainer {
+public class PatternContainer {
 	private HashSet<JClass> classes = new HashSet<>();
 	private JClass root;
 	public PatternContainer(JClass root) {
@@ -33,6 +33,8 @@ public abstract class PatternContainer {
 		return classes;
 	}
 
-	public abstract void getAnnotation(ParserClass parserClass);
+	public void getAnnotation(ParserClass parserClass) {
+		
+	}
 
 }

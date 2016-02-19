@@ -99,7 +99,7 @@ public class UMLPanel extends JPanel {
 	public ImageIcon createImage() {
 		BufferedImage img = null;
 		try {
-			img = ImageIO.read(new File("docs/new_diagram.png"));
+			img = ImageIO.read(new File("out/output.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

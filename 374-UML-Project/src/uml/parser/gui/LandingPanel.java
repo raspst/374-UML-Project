@@ -8,9 +8,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -19,10 +22,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import uml.detector.AdapterDetector;
+import uml.detector.CompositeDetector;
+import uml.detector.DecoratorDetector;
+import uml.detector.PatternDetector;
+import uml.detector.SingletonDetector;
+import uml.parser.Design;
+import uml.parser.DesignParser;
+import uml.parser.PatternIterator;
+
 public class LandingPanel extends JPanel {
 	protected MainWindow w;
 	private JLabel progressText;
 	private JProgressBar progressBar;
+	private Design d;
+	private PatternIterator patternIterator;
 
 	public LandingPanel(final MainWindow w) {
 		this.w = w;
@@ -103,10 +117,37 @@ public class LandingPanel extends JPanel {
 			}
 			i++;
 			progressBar.setValue(progressBar.getValue() + 1);
-			JOptionPane.showConfirmDialog(this, "Delay");
 		}
+	}
+	public void executeLoad() {
+		d = DesignParser.parseFile(MainWindow.properties.getProperty("parse-file"));
+		d.parse();
+	}
+	
+	public void executeDetect() {
+//		new SingletonDetector(d);
+//		new DecoratorDetector(d);
+		ArrayList<PatternDetector> pd = new ArrayList<>();
+		pd.add(new CompositeDetector(d));
+		pd.add(new AdapterDetector(d));
+		pd.add(new SingletonDetector(d));
+		pd.add(new DecoratorDetector(d));
+		patternIterator = new PatternIterator(pd, d);
+	}
+	
+	public void executeGenerate() {
+		File out = new File("in/dotFile.dot");
+		try {
+			FileOutputStream os = new FileOutputStream(out);
+			os.write(patternIterator.getGraphViz().getBytes());
+			os.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		String[] command = {MainWindow.properties.getProperty("dot-path"), "-T", "png", "-o", 
-				MainWindow.properties.getProperty("output-folder") + "output.png", MainWindow.properties.getProperty("input-folder") + "mouseAdapter.dot"};
+				MainWindow.properties.getProperty("output-folder") + "output.png", MainWindow.properties.getProperty("input-folder") + "dotFile.dot"};
 		try {
 			Runtime.getRuntime().exec(command);
 		} catch (IOException e) {
@@ -115,16 +156,5 @@ public class LandingPanel extends JPanel {
 		}
 		CardLayout c = (CardLayout) w.cards.getLayout();
 		c.show(w.cards, "UML");
-	}
-	public void executeLoad() {
-		
-	}
-	
-	public void executeDetect() {
-		
-	}
-	
-	public void executeGenerate() {
-		
 	}
 }

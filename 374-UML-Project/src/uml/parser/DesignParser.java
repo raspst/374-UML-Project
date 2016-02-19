@@ -31,7 +31,7 @@ public class DesignParser {
 		ArrayList<PatternDetector> pd = new ArrayList<>();
 		pd.add(new CompositeDetector(d));
 		//pd.add(new AdapterDetector(d));
-		new PatternIterator(pd);
+		new PatternIterator(pd,d);
 		MainWindow w = new MainWindow();
 		w.createAndShowGUI();
 		//pf.printContainer();
