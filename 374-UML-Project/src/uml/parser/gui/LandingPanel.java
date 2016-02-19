@@ -65,7 +65,9 @@ public class LandingPanel extends JPanel {
 	
 	public void loadConfig() {
 		try {
-			FileInputStream in = new FileInputStream("in/config.properties");
+			String name = "in/config.properties";
+			if(System.getProperty("os.name").startsWith("Windows"))name ="in/winconfig.properties";
+			FileInputStream in = new FileInputStream(name);
 			MainWindow.properties.load(in);
 			in.close();
 		} catch (Exception e) {
@@ -90,7 +92,7 @@ public class LandingPanel extends JPanel {
 			progressBar.setValue(progressBar.getValue() + 1);
 			JOptionPane.showConfirmDialog(this, "Delay");
 		}
-		String[] command = {"dot", "-T", "png", "-o", 
+		String[] command = {MainWindow.properties.getProperty("dot-path"), "-T", "png", "-o", 
 				MainWindow.properties.getProperty("output-folder") + "output.png", MainWindow.properties.getProperty("input-folder") + "mouseAdapter.dot"};
 		for(String s: command) {
 			System.out.println(s);
