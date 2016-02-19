@@ -73,8 +73,25 @@ public class LandingPanel extends JPanel {
 			e.printStackTrace();
 		}
 //		System.out.println(MainWindow.properties.getProperty("phases"));
+	}
+	
+	public void runAnalyze() {
+		String phases = MainWindow.properties.getProperty("phases");
+		if(phases == null) {
+			JOptionPane.showMessageDialog(this, "Load configuration file first. If you have already loaded file, an error occurred, and you should try again");
+			return;
+		}
+		String[] sepPhases = phases.split(",");
+		progressBar.setMaximum(sepPhases.length);
+		int i = 1;
+		for(String s: sepPhases) {
+			progressText.setText("Beginning Phase " + i + " : " + s);
+			i++;
+			progressBar.setValue(progressBar.getValue() + 1);
+			JOptionPane.showConfirmDialog(this, "Delay");
+		}
 		String[] command = {"dot", "-T", "png", "-o", 
-				MainWindow.properties.getProperty("output-folder") + "output.png", MainWindow.properties.getProperty("input-folder") + "lab13uml.dot"};
+				MainWindow.properties.getProperty("output-folder") + "output.png", MainWindow.properties.getProperty("input-folder") + "mouseAdapter.dot"};
 		for(String s: command) {
 			System.out.println(s);
 		}
@@ -83,19 +100,6 @@ public class LandingPanel extends JPanel {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	}
-	
-	public void runAnalyze() {
-		String phases = MainWindow.properties.getProperty("phases");
-		String[] sepPhases = phases.split(",");
-		progressBar.setMaximum(sepPhases.length);
-		int i = 1;
-		for(String s: sepPhases) {
-			progressText.setText("Beginning Phase" + i + " : " + s);
-			i++;
-			progressBar.setValue(progressBar.getValue() + 1);
-			JOptionPane.showConfirmDialog(this, "Delay");
 		}
 		CardLayout c = (CardLayout) w.cards.getLayout();
 		c.show(w.cards, "UML");

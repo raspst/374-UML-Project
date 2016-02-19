@@ -38,13 +38,10 @@ public class MainWindow {
 		mainFrame.setSize(APP_DEFAULT_WIDTH, APP_DEFAULT_HEIGHT);
 		cards = new JPanel(new CardLayout());
 		landingPanel = new LandingPanel(this);
-//		landingPanel.setFocusable(true);
 		cards.add("LANDING", landingPanel);
 		umlPanel = new UMLPanel(mainFrame);
-//		umlPanel.setFocusable(true);
 		cards.add("UML", umlPanel);
 		mainFrame.add(cards);
-//		mainFrame.pack();
 		mainFrame.setVisible(true);
 	}
 }
