@@ -15,11 +15,14 @@ import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class LandingPanel extends JPanel {
 	protected MainWindow w;
+	private JLabel progressText;
+	private JProgressBar progressBar;
 
 	public LandingPanel(final MainWindow w) {
 		this.w = w;
@@ -45,20 +48,19 @@ public class LandingPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				CardLayout c = (CardLayout) w.cards.getLayout();
-				c.show(w.cards, "UML");
+				runAnalyze();
 			}
 		});
 		this.add(analyzeButton,c);
-		JLabel progressText = new JLabel("Test text");
+		progressText = new JLabel("Process not started");
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 2;
 		this.add(progressText,c);
-		JProgressBar analyzeProgressBar = new JProgressBar();
+		progressBar = new JProgressBar();
 		c.gridx = 0;
 		c.gridy = 2;
-		this.add(analyzeProgressBar,c);
+		this.add(progressBar,c);
 	}
 	
 	public void loadConfig() {
@@ -82,5 +84,20 @@ public class LandingPanel extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void runAnalyze() {
+		String phases = MainWindow.properties.getProperty("phases");
+		String[] sepPhases = phases.split(",");
+		progressBar.setMaximum(sepPhases.length);
+		int i = 1;
+		for(String s: sepPhases) {
+			progressText.setText("Beginning Phase" + i + " : " + s);
+			i++;
+			progressBar.setValue(progressBar.getValue() + 1);
+			JOptionPane.showConfirmDialog(this, "Delay");
+		}
+		CardLayout c = (CardLayout) w.cards.getLayout();
+		c.show(w.cards, "UML");
 	}
 }

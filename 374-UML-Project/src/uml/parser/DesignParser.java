@@ -10,6 +10,7 @@ import uml.detector.CompositeDetector;
 import uml.detector.DecoratorDetector;
 import uml.detector.PatternDetector;
 import uml.detector.SingletonDetector;
+import uml.parser.gui.MainWindow;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
@@ -31,6 +32,8 @@ public class DesignParser {
 		pd.add(new CompositeDetector(d));
 		//pd.add(new AdapterDetector(d));
 		new PatternIterator(pd);
+		MainWindow w = new MainWindow();
+		w.createAndShowGUI();
 		//pf.printContainer();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");
