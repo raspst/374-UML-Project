@@ -13,6 +13,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -137,6 +144,13 @@ public class LandingPanel extends JPanel {
 	
 	public void executeGenerate() {
 		File out = new File("in/dotFile.dot");
+		WatchService watcher = null;
+		try {
+			watcher = FileSystems.getDefault().newWatchService();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			FileOutputStream os = new FileOutputStream(out);
 			os.write(patternIterator.getGraphViz().getBytes());
@@ -154,6 +168,9 @@ public class LandingPanel extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		UMLPanel umlPanel = new UMLPanel(w.mainFrame, patternIterator);
+//		w.mainFrame.add(umlPanel);
+		w.cards.add("UML",umlPanel);
 		CardLayout c = (CardLayout) w.cards.getLayout();
 		c.show(w.cards, "UML");
 	}

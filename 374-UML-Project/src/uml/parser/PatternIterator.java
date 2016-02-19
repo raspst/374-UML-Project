@@ -62,5 +62,9 @@ public class PatternIterator {
 		}
 	}
 	
+	public HashMap<String, ArrayList<PatternContainer>> getPatterns() {
+		return patterns;
+	}
+	
 
 }

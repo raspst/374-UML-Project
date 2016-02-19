@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -28,13 +29,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+
+import uml.parser.PatternIterator;
+import uml.pattern.PatternContainer;
 
 public class UMLPanel extends JPanel {
 	protected JFrame frame;
+	protected JLabel label;
+	PatternIterator pi;
 
-	public UMLPanel(JFrame frame) {
+	public UMLPanel(JFrame frame, PatternIterator pi) {
 		this.frame = frame;
+		this.pi = pi;
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setSize(MainWindow.APP_DEFAULT_WIDTH, MainWindow.APP_DEFAULT_HEIGHT);
 		this.setLayout(new GridBagLayout());
@@ -43,8 +52,10 @@ public class UMLPanel extends JPanel {
 		JPanel drawPanel = new JPanel();
 		JPanel treePanel = new JPanel();
 		frame.setJMenuBar(createMenuBar());
-		JLabel label = new JLabel();
+		label = new JLabel();
+		label.setText("Loading Image");
 		label.setIcon(createImage());
+		label.setText("");
 		drawPanel.add(label);
 		c.gridx = 0;
 		c.gridy = 0;
@@ -83,28 +94,44 @@ public class UMLPanel extends JPanel {
 	}
 	
 	public JTree createPatternTree() {
-		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Parent");
-		DefaultMutableTreeNode child1 = new DefaultMutableTreeNode("Child1");
-		DefaultMutableTreeNode grandchild1 = new DefaultMutableTreeNode("Grandchild1");
-		DefaultMutableTreeNode child2 = new DefaultMutableTreeNode("Child2");
-		DefaultMutableTreeNode grandchild2 = new DefaultMutableTreeNode("Grandchild2");
-		child1.add(grandchild1);
-		child2.add(grandchild2);
-		top.add(child1);
-		top.add(child2);
-		JTree tree = new JTree(top);
+		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Patterns");
+		for(String p: pi.getPatterns().keySet()) {
+			DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(p);
+			for(PatternContainer pc: pi.getPatterns().get(p)) {
+				TogglableTreeNode child = new TogglableTreeNode(pc.getName(), pi, this, pc);
+				rootNode.add(child);
+			}
+			top.add(rootNode);
+		}
+		final JTree tree = new JTree(top);
+		tree.addTreeSelectionListener(new TreeSelectionListener() {
+
+			@Override
+			public void valueChanged(TreeSelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				if((tree.getLastSelectedPathComponent() instanceof TogglableTreeNode)) {
+					TogglableTreeNode node = (TogglableTreeNode)
+	                        tree.getLastSelectedPathComponent();
+					node.updateImage();
+				}
+			}
+			
+		});
 		return tree;
 	}
 	
 	public ImageIcon createImage() {
 		BufferedImage img = null;
-		try {
-			img = ImageIO.read(new File("out/output.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ImageIcon image;
+		while(img == null) {
+			try {
+				img = ImageIO.read(new File("out/output.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				continue;
+			}
 		}
-		ImageIcon image = new ImageIcon(img.getScaledInstance(600, 600, Image.SCALE_SMOOTH));
+		image = new ImageIcon(img.getScaledInstance(500, 500, Image.SCALE_SMOOTH));
 		return image;
 	}
 	

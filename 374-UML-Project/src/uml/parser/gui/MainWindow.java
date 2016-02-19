@@ -21,7 +21,7 @@ public class MainWindow {
 	public static int APP_DEFAULT_HEIGHT = 768;
 	
 	protected LandingPanel landingPanel;
-	protected UMLPanel umlPanel;
+	protected JFrame mainFrame;
 	protected JPanel cards;
 	protected static Properties properties = new Properties();
 	
@@ -33,14 +33,14 @@ public class MainWindow {
 			e.printStackTrace();
 		}
 		
-		JFrame mainFrame = new JFrame("374 Design Parser");
+		mainFrame = new JFrame("374 Design Parser");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setSize(APP_DEFAULT_WIDTH, APP_DEFAULT_HEIGHT);
 		cards = new JPanel(new CardLayout());
 		landingPanel = new LandingPanel(this);
 		cards.add("LANDING", landingPanel);
-		umlPanel = new UMLPanel(mainFrame);
-		cards.add("UML", umlPanel);
+//		umlPanel = new UMLPanel(mainFrame);
+//		cards.add("UML", umlPanel);
 		mainFrame.add(cards);
 		mainFrame.setVisible(true);
 	}

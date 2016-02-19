@@ -7,104 +7,539 @@ shape = "record"
 ]edge [
 fontname = "Bitstream Vera Sans"
 fontsize = 8
-]AbstractCollection [
-	label = "{	Composite\l	Leaf Node\lAbstractCollection|# MAX_ARRAY_SIZE : int\l|# iterator() : Iterator\l# size() : int\l+ isEmpty() : boolean\l+ contains(Object,) : boolean\l+ toArray() : Object\l+ toArray(AbstractCollection,) : Object\l# finishToArray(int,Object,) : Object\l# hugeCapacity(int,) : int\l+ add(Object,) : boolean\l+ remove(Object,) : boolean\l+ containsAll(Iterator,) : boolean\l+ addAll(Iterator,) : boolean\l+ removeAll(Collection,) : boolean\l+ retainAll(Collection,) : boolean\l+ clear() : void\l+ toString() : String\l}"
+]ImageFilter [
+	label = "{	Adaptee\lImageFilter|# consumer : ImageConsumer\l|+ getFilterInstance(ImageConsumer,) : ImageFilter\l+ setDimensions(int,int,) : void\l+ setProperties(Hashtable,) : void\l+ setColorModel(ColorModel,) : void\l+ setHints(int,) : void\l+ setPixels(int,int,int,int,ColorModel,byte,int,int,) : void\l+ setPixels(int,int,int,int,ColorModel,int,int,int,) : void\l+ imageComplete(int,) : void\l+ resendTopDownLeftRight(ImageProducer,) : void\l+ clone() : Object\l}"
 	style=filled
-	fillcolor=yellow
-]
-Object [
-	label = "{	Component\lObject||}"
-	style=filled
-	fillcolor=yellow
+	fillcolor=red
 ]
 List [
-	label = "{interface
-	Leaf Node\lList||# size() : int\l# isEmpty() : boolean\l# contains() : boolean\l# iterator() : Iterator\l# toArray() : Object\l# toArray() : Object\l# add() : boolean\l# remove() : boolean\l# containsAll() : boolean\l# addAll() : boolean\l# addAll() : boolean\l# removeAll() : boolean\l# retainAll() : boolean\l# clear() : void\l# equals() : boolean\l# hashCode() : int\l# get() : Object\l# set() : Object\l# add() : void\l# remove() : Object\l# indexOf() : int\l# lastIndexOf() : int\l# listIterator() : ListIterator\l# listIterator() : ListIterator\l# subList() : List\l}"
+	label = "{	Leaf Node\lList|# nameCounter : int\l# base : String\l# multipleMode : boolean\l# rows : int\l# visibleIndex : int\l- listSerializedDataVersion : int\l# DEFAULT_VISIBLE_ROWS : int\l# itemListener : ItemListener\l# serialVersionUID : long\l# selected : int\l# items : Vector\l# actionListener : ActionListener\l|# constructComponentName() : String\l+ addNotify() : void\l+ removeNotify() : void\l+ getItemCount() : int\l# countItems() : int\l+ getItem(int,) : String\l# getItemImpl(int,) : String\l# getItems() : String\l+ add(String,) : void\l# addItem(String,) : void\l+ add(String,int,) : void\l# addItem(String,int,) : void\l# replaceItem(String,int,) : void\l+ removeAll() : void\l# clear() : void\l# remove(String,) : void\l+ remove(int,) : void\l# delItem(int,) : void\l# getSelectedIndex() : int\l# getSelectedIndexes() : int\l# getSelectedItem() : String\l# getSelectedItems() : String\l+ getSelectedObjects() : Object\l+ select(int,) : void\l# deselect(int,) : void\l+ isIndexSelected(int,) : boolean\l# isSelected(List,) : boolean\l+ getRows() : int\l+ isMultipleMode() : boolean\l# allowsMultipleSelections() : boolean\l+ setMultipleMode(boolean,) : void\l# setMultipleSelections(List,) : void\l+ getVisibleIndex() : int\l# makeVisible(int,) : void\l+ getPreferredSize(int,) : Dimension\l# preferredSize(List,) : Dimension\l+ getPreferredSize() : Dimension\l# preferredSize() : Dimension\l+ getMinimumSize(int,) : Dimension\l# minimumSize(List,) : Dimension\l+ getMinimumSize() : Dimension\l# minimumSize() : Dimension\l# addItemListener(ItemListener,) : void\l# removeItemListener(ItemListener,) : void\l# getItemListeners() : ItemListener\l# addActionListener(ActionListener,) : void\l# removeActionListener(ActionListener,) : void\l# getActionListeners() : ActionListener\l+ getListeners(Class,) : EventListener\l# eventEnabled(AWTEvent,) : boolean\l# processEvent(AWTEvent,) : void\l# processItemEvent(ItemEvent,) : void\l# processActionEvent(ActionEvent,) : void\l# paramString() : String\l# delItems(List,int,) : void\l- writeObject(List,) : void\l- readObject(List,) : void\l+ getAccessibleContext() : AccessibleContext\l# <clinit>() : void\l}"
 	style=filled
 	fillcolor=yellow
 ]
-ArrayListAdapter [
-	label = "{	Leaf Node\l	Adapter\lArrayListAdapter|- iter : Iterator\l|+ hasMoreElements() : boolean\l+ nextElement() : Object\l}"
-	style=filled
-	fillcolor=yellow
+ComponentOrientation [
+	label = "{	Singleton\lComponentOrientation|# LEFT_TO_RIGHT : ComponentOrientation\l# UNK_BIT : int\l# UNKNOWN : ComponentOrientation\l# HORIZ_BIT : int\l# serialVersionUID : long\l# RIGHT_TO_LEFT : ComponentOrientation\l# LTR_BIT : int\l- orientation : int\l|+ isHorizontal() : boolean\l+ isLeftToRight() : boolean\l# getOrientation(String,) : ComponentOrientation\l# getOrientation(ComponentOrientation,) : ComponentOrientation\l# <clinit>() : void\l}"
+	color=blue
+]
+WindowListener [
+	label = "{interface
+	Target\lWindowListener||# windowOpened() : void\l# windowClosing() : void\l# windowClosed() : void\l# windowIconified() : void\l# windowDeiconified() : void\l# windowActivated() : void\l# windowDeactivated() : void\l}"
 	style=filled
 	fillcolor=red
 ]
-Collection [
-	label = "{interface
-	Leaf Node\lCollection||# size() : int\l# isEmpty() : boolean\l# contains() : boolean\l# iterator() : Iterator\l# toArray() : Object\l# toArray() : Object\l# add() : boolean\l# remove() : boolean\l# containsAll() : boolean\l# addAll() : boolean\l# removeAll() : boolean\l# retainAll() : boolean\l# clear() : void\l# equals() : boolean\l# hashCode() : int\l}"
-	style=filled
-	fillcolor=yellow
-]
-ListIterator [
-	label = "{interface
-	Leaf Node\lListIterator||# hasNext() : boolean\l# next() : Object\l# hasPrevious() : boolean\l# previous() : Object\l# nextIndex() : int\l# previousIndex() : int\l# remove() : void\l# set() : void\l# add() : void\l}"
-	style=filled
-	fillcolor=yellow
-]
-Iterator [
-	label = "{interface
-	Leaf Node\l	Adaptee\lIterator||# hasNext() : boolean\l# next() : Object\l# remove() : void\l}"
-	style=filled
-	fillcolor=yellow
+StringSelection [
+	label = "{	Adapter\lStringSelection|# STRING : int\l- data : String\l# flavors : DataFlavor\l# PLAIN_TEXT : int\l|+ getTransferDataFlavors() : DataFlavor\l+ isDataFlavorSupported(StringSelection,) : boolean\l+ getTransferData(DataFlavor,) : Object\l+ lostOwnership(Clipboard,Transferable,) : void\l# <clinit>() : void\l}"
 	style=filled
 	fillcolor=red
 ]
-LinearTransformer [
-	label = "{	Leaf Node\lLinearTransformer|- enumTion : Enumeration\l|+ transform(OutputStream,) : void\l}"
-	style=filled
-	fillcolor=yellow
+DragSource [
+	label = "{	Singleton\lDragSource|# DefaultLinkDrop : Cursor\l# serialVersionUID : long\l# motionListener : DragSourceMotionListener\l# DefaultCopyNoDrop : Cursor\l# dragSourceMotionListenerK : String\l# DefaultMoveDrop : Cursor\l# dragSourceListenerK : String\l# DefaultCopyDrop : Cursor\l# DefaultMoveNoDrop : Cursor\l# listener : DragSourceListener\l# flavorMap : FlavorMap\l# DefaultLinkNoDrop : Cursor\l# dflt : DragSource\l|# load(String,) : Cursor\l# getDefaultDragSource() : DragSource\l# isDragImageSupported() : boolean\l+ startDrag(DragSourceContext,RuntimeException,DragSource,DragGestureEvent,Cursor,Image,Point,) : void\l+ startDrag(DragGestureEvent,Cursor,Transferable,DragSourceListener,FlavorMap,) : void\l+ startDrag(DragGestureEvent,Cursor,Image,Point,Transferable,DragSourceListener,) : void\l+ startDrag(DragGestureEvent,Cursor,Transferable,DragSourceListener,) : void\l# createDragSourceContext(DragSourceContextPeer,DragGestureEvent,Cursor,Image,Point,Transferable,DragSourceListener,) : DragSourceContext\l+ getFlavorMap() : FlavorMap\l+ createDragGestureRecognizer(Class,Component,int,DragGestureListener,) : DragGestureRecognizer\l+ createDefaultDragGestureRecognizer(Component,int,DragGestureListener,) : DragGestureRecognizer\l+ addDragSourceListener(DragSourceListener,) : void\l+ removeDragSourceListener(DragSourceListener,) : void\l+ getDragSourceListeners() : DragSourceListener\l+ addDragSourceMotionListener(DragSourceMotionListener,) : void\l+ removeDragSourceMotionListener(DragSourceMotionListener,) : void\l+ getDragSourceMotionListeners() : DragSourceMotionListener\l+ getListeners(Class,) : EventListener\l# processDragEnter(DragSourceDragEvent,) : void\l# processDragOver(DragSourceDragEvent,) : void\l# processDropActionChanged(DragSourceDragEvent,) : void\l# processDragExit(DragSourceEvent,) : void\l# processDragDropEnd(DragSourceDropEvent,) : void\l# processDragMouseMoved(DragSourceDragEvent,) : void\l- writeObject(ObjectOutputStream,) : void\l- readObject(DragSource,) : void\l# getDragThreshold() : int\l# <clinit>() : void\l}"
+	color=blue
 ]
-RandomAccess [
-	label = "{interface
-	Leaf Node\lRandomAccess||}"
-	style=filled
-	fillcolor=yellow
-]
-App [
-	label = "{	Leaf Node\lApp||# main(ArrayList,) : void\l}"
-	style=filled
-	fillcolor=yellow
-]
-Enumeration [
-	label = "{interface
-	Leaf Node\l	Target\lEnumeration||# hasMoreElements() : boolean\l# nextElement() : Object\l}"
-	style=filled
-	fillcolor=yellow
+WindowAdapter [
+	label = "{	Adapter\lWindowAdapter||+ windowOpened(WindowEvent,) : void\l+ windowClosing(WindowEvent,) : void\l+ windowClosed(WindowEvent,) : void\l+ windowIconified(WindowEvent,) : void\l+ windowDeiconified(WindowEvent,) : void\l+ windowActivated(WindowEvent,) : void\l+ windowDeactivated(WindowEvent,) : void\l+ windowStateChanged(WindowEvent,) : void\l+ windowGainedFocus(WindowEvent,) : void\l+ windowLostFocus(WindowEvent,) : void\l}"
 	style=filled
 	fillcolor=red
 ]
-edge [arrowhead = onormal]AbstractCollection->Object
-List->Object
-ArrayListAdapter->Object
-Collection->Object
-ListIterator->Object
-Iterator->Object
-LinearTransformer->Object
-RandomAccess->Object
-App->Object
-Enumeration->Object
-edge [style = dotted]AbstractCollection->Collection
-List->Collection
-ArrayListAdapter->Enumeration
-ListIterator->Iterator
-edge [arrowhead = vee]edge [style = solid]AbstractCollection->Object
-AbstractCollection->AbstractCollection
-AbstractCollection->Collection
-AbstractCollection->Iterator
+WindowStateListener [
+	label = "{interface
+	Target\lWindowStateListener||# windowStateChanged() : void\l}"
+	style=filled
+	fillcolor=red
+]
+FilteredImageSource [
+	label = "{	Adapter\lFilteredImageSource|- proxies : Hashtable\l# src : ImageProducer\l# filter : ImageFilter\l|# addConsumer(FilteredImageSource,) : void\l# isConsumer(ImageConsumer,) : boolean\l# removeConsumer(FilteredImageSource,) : void\l+ startProduction(ImageConsumer,) : void\l+ requestTopDownLeftRightResend(FilteredImageSource,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+KeyAdapter [
+	label = "{	Adapter\lKeyAdapter||+ keyTyped(KeyEvent,) : void\l+ keyPressed(KeyEvent,) : void\l+ keyReleased(KeyEvent,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+DragSourceAdapter [
+	label = "{	Adapter\lDragSourceAdapter||+ dragEnter(DragSourceDragEvent,) : void\l+ dragOver(DragSourceDragEvent,) : void\l+ dragMouseMoved(DragSourceDragEvent,) : void\l+ dropActionChanged(DragSourceDragEvent,) : void\l+ dragExit(DragSourceEvent,) : void\l+ dragDropEnd(DragSourceDropEvent,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+WindowFocusListener [
+	label = "{interface
+	Target\lWindowFocusListener||# windowGainedFocus() : void\l# windowLostFocus() : void\l}"
+	style=filled
+	fillcolor=red
+]
+SystemTray [
+	label = "{	Singleton\lSystemTray|# peer : SystemTrayPeer\l# systemTray : SystemTray\l- currentIconID : int\l# EMPTY_TRAY_ARRAY : TrayIcon\l|# getSystemTray() : SystemTray\l# isSupported() : boolean\l+ add(SystemTray,) : void\l+ remove(SystemTray,) : void\l+ getTrayIcons() : TrayIcon\l+ getTrayIconSize() : Dimension\l# addPropertyChangeListener(String,PropertyChangeListener,) : void\l# removePropertyChangeListener(String,PropertyChangeListener,) : void\l# getPropertyChangeListeners(String,) : PropertyChangeListener\l- firePropertyChange(String,Object,Object,) : void\l# getCurrentChangeSupport() : PropertyChangeSupport\l# addNotify() : void\l# checkSystemTrayAllowed() : void\l# initializeSystemTrayIfNeeded() : void\l# access$000(String,Object,Object,Object,) : void\l# <clinit>() : void\l}"
+	color=blue
+]
+HierarchyBoundsAdapter [
+	label = "{	Adapter\lHierarchyBoundsAdapter||+ ancestorMoved(HierarchyEvent,) : void\l+ ancestorResized(HierarchyEvent,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+EllipseIterator [
+	label = "{	Adapter\lEllipseIterator|# w : double\l# index : int\l# y : double\l# ctrlpts : double\l# affine : AffineTransform\l# x : double\l# ncv : double\l# pcv : double\l# CtrlVal : double\l# h : double\l|+ getWindingRule() : int\l+ isDone() : boolean\l+ next() : void\l+ currentSegment(EllipseIterator,) : int\l+ currentSegment(EllipseIterator,) : int\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=red
+]
+FocusListener [
+	label = "{interface
+	Target\lFocusListener||# focusGained() : void\l# focusLost() : void\l}"
+	style=filled
+	fillcolor=red
+]
+double [
+	label = "{	Adaptee\l	Adaptee\l	Adaptee\ldouble||}"
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+]
+AlphaComposite [
+	label = "{	Singleton\lAlphaComposite|# SrcOver : AlphaComposite\l# Xor : AlphaComposite\l# MAX_RULE : int\l# SRC : int\l# extraAlpha : float\l# SRC_ATOP : int\l# rule : int\l# DST_IN : int\l# SRC_OVER : int\l# DST_ATOP : int\l# DST : int\l# MIN_RULE : int\l# Clear : AlphaComposite\l# SRC_OUT : int\l# DstIn : AlphaComposite\l# DST_OVER : int\l# DstOver : AlphaComposite\l# DstOut : AlphaComposite\l# XOR : int\l# SrcOut : AlphaComposite\l# SrcIn : AlphaComposite\l# Src : AlphaComposite\l# SRC_IN : int\l# DST_OUT : int\l# Dst : AlphaComposite\l# SrcAtop : AlphaComposite\l# CLEAR : int\l# DstAtop : AlphaComposite\l|# getInstance(int,) : AlphaComposite\l# getInstance(float,float,) : AlphaComposite\l+ createContext(ColorModel,ColorModel,RenderingHints,) : CompositeContext\l+ getAlpha() : float\l+ getRule() : int\l+ derive(int,) : AlphaComposite\l+ derive(float,) : AlphaComposite\l+ hashCode() : int\l+ equals(Object,) : boolean\l# <clinit>() : void\l}"
+	color=blue
+]
+ComponentAdapter [
+	label = "{	Adapter\lComponentAdapter||+ componentResized(ComponentEvent,) : void\l+ componentMoved(ComponentEvent,) : void\l+ componentShown(ComponentEvent,) : void\l+ componentHidden(ComponentEvent,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+int [
+	label = "{	Adaptee\l	Adaptee\l	Adaptee\lint||}"
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+]
+RoundRectIterator [
+	label = "{	Adapter\lRoundRectIterator|# ah : double\l# ctrlpts : double\l# x : double\l# aw : double\l# index : int\l# types : int\l# acv : double\l# cv : double\l# affine : AffineTransform\l# angle : double\l# h : double\l# a : double\l# b : double\l# c : double\l# y : double\l# w : double\l|+ getWindingRule() : int\l+ isDone() : boolean\l+ next() : void\l+ currentSegment(RoundRectIterator,) : int\l+ currentSegment(RoundRectIterator,) : int\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=red
+]
+QuadIterator [
+	label = "{	Adapter\lQuadIterator|# quad : QuadCurve2D\l# affine : AffineTransform\l# index : int\l|+ getWindingRule() : int\l+ isDone() : boolean\l+ next() : void\l+ currentSegment(QuadIterator,) : int\l+ currentSegment(QuadIterator,) : int\l}"
+	style=filled
+	fillcolor=red
+]
+CubicCurve2D [
+	label = "{	Adaptee\l	Adaptee\lCubicCurve2D||# getX1() : double\l# getY1() : double\l# getP1() : Point2D\l# getCtrlX1() : double\l# getCtrlY1() : double\l# getCtrlP1() : Point2D\l# getCtrlX2() : double\l# getCtrlY2() : double\l# getCtrlP2() : Point2D\l# getX2() : double\l# getY2() : double\l# getP2() : Point2D\l# setCurve() : void\l+ setCurve(double,int,) : void\l+ setCurve(Point2D,Point2D,Point2D,Point2D,) : void\l+ setCurve(Point2D,int,) : void\l+ setCurve(CubicCurve2D,) : void\l# getFlatnessSq(double,double,double,double,double,double,double,double,) : double\l# getFlatness(double,double,double,double,double,double,double,double,) : double\l# getFlatnessSq(int,int,) : double\l# getFlatness(int,int,) : double\l+ getFlatnessSq() : double\l+ getFlatness() : double\l+ subdivide(CubicCurve2D,CubicCurve2D,) : void\l# subdivide(CubicCurve2D,CubicCurve2D,double,) : void\l# subdivide(int,double,int,double,int,double,) : void\l# solveCubic(double,) : int\l# solveCubic(double,double,) : int\l# fixRoots(double,double,double,) : int\l# refineRootWithHint(double,double,double,int,) : double\l# bisectRootWithHint(double,double,double,double,) : double\l# bisectRoot(double,double,double,) : double\l# inInterval(double,double,double,) : boolean\l# within(double,double,double,) : boolean\l# iszero(double,double,) : boolean\l# oppositeSigns(double,double,) : boolean\l# solveEqn(int,double,double,) : double\l# getRootUpperBound(double,) : double\l+ contains(double,double,) : boolean\l+ contains(Point2D,) : boolean\l+ intersects(double,double,double,double,) : boolean\l+ intersects(Rectangle2D,) : boolean\l+ contains(double,double,double,double,) : boolean\l- rectCrossings(double,double,double,double,) : int\l+ contains(Rectangle2D,) : boolean\l+ getBounds() : Rectangle\l+ getPathIterator(AffineTransform,) : PathIterator\l+ getPathIterator(AffineTransform,double,) : PathIterator\l+ clone() : Object\l}"
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+]
+LineIterator [
+	label = "{	Adapter\lLineIterator|# index : int\l# line : Line2D\l# affine : AffineTransform\l|+ getWindingRule() : int\l+ isDone() : boolean\l+ next() : void\l+ currentSegment(LineIterator,) : int\l+ currentSegment(LineIterator,) : int\l}"
+	style=filled
+	fillcolor=red
+]
+MouseMotionListener [
+	label = "{interface
+	Target\l	Target\lMouseMotionListener||# mouseDragged() : void\l# mouseMoved() : void\l}"
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+]
+Transferable [
+	label = "{interface
+	Target\lTransferable||# getTransferDataFlavors() : DataFlavor\l# isDataFlavorSupported() : boolean\l# getTransferData() : Object\l}"
+	style=filled
+	fillcolor=red
+]
+Scrollbar [
+	label = "{	Leaf Node\lScrollbar|# HORIZONTAL : int\l# lineIncrement : int\l# isAdjusting : boolean\l- scrollbarSerializedDataVersion : int\l# value : int\l# visibleAmount : int\l# maximum : int\l# serialVersionUID : long\l# minimum : int\l# adjustmentListener : AdjustmentListener\l# nameCounter : int\l# VERTICAL : int\l# pageIncrement : int\l# orientation : int\l# base : String\l|# initIDs() : void\l# constructComponentName() : String\l+ addNotify() : void\l+ getOrientation() : int\l+ setOrientation(int,) : void\l+ getValue() : int\l+ setValue(int,) : void\l+ getMinimum() : int\l+ setMinimum(int,) : void\l+ getMaximum() : int\l+ setMaximum(int,) : void\l+ getVisibleAmount() : int\l# getVisible() : int\l+ setVisibleAmount(int,) : void\l+ setUnitIncrement(int,) : void\l# setLineIncrement(int,) : void\l+ getUnitIncrement() : int\l# getLineIncrement() : int\l+ setBlockIncrement(int,) : void\l# setPageIncrement(int,) : void\l+ getBlockIncrement() : int\l# getPageIncrement() : int\l+ setValues(ScrollbarPeer,int,Scrollbar,int,) : void\l+ getValueIsAdjusting() : boolean\l+ setValueIsAdjusting(Scrollbar,) : void\l# addAdjustmentListener(AdjustmentListener,) : void\l# removeAdjustmentListener(AdjustmentListener,) : void\l# getAdjustmentListeners() : AdjustmentListener\l+ getListeners(Class,) : EventListener\l# eventEnabled(AWTEvent,) : boolean\l# processEvent(AWTEvent,) : void\l# processAdjustmentEvent(AdjustmentEvent,) : void\l# paramString() : String\l- writeObject(ObjectOutputStream,) : void\l- readObject(Scrollbar,) : void\l+ getAccessibleContext() : AccessibleContext\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+CubicIterator [
+	label = "{	Adapter\lCubicIterator|# index : int\l# affine : AffineTransform\l# cubic : CubicCurve2D\l|+ getWindingRule() : int\l+ isDone() : boolean\l+ next() : void\l+ currentSegment(CubicIterator,) : int\l+ currentSegment(CubicIterator,) : int\l}"
+	style=filled
+	fillcolor=red
+]
+FocusAdapter [
+	label = "{	Adapter\lFocusAdapter||+ focusGained(FocusEvent,) : void\l+ focusLost(FocusEvent,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+Choice [
+	label = "{	Leaf Node\lChoice|# pItems : Vector\l# nameCounter : int\l# itemListener : ItemListener\l- choiceSerializedDataVersion : int\l# base : String\l# selectedIndex : int\l# serialVersionUID : long\l|# constructComponentName() : String\l+ addNotify() : void\l+ getItemCount() : int\l# countItems() : int\l+ getItem(int,) : String\l# getItemImpl(int,) : String\l+ add(String,) : void\l+ addItem(String,) : void\l- insertNoInvalidate(String,int,) : void\l+ insert(String,int,) : void\l+ remove(Choice,) : void\l+ remove(int,) : void\l- removeNoInvalidate(int,) : void\l+ removeAll() : void\l# getSelectedItem() : String\l# getSelectedObjects() : Object\l+ getSelectedIndex() : int\l# select(Choice,) : void\l# select(String,) : void\l# addItemListener(ItemListener,) : void\l# removeItemListener(ItemListener,) : void\l# getItemListeners() : ItemListener\l+ getListeners(Class,) : EventListener\l# eventEnabled(AWTEvent,) : boolean\l# processEvent(AWTEvent,) : void\l# processItemEvent(ItemEvent,) : void\l# paramString() : String\l- writeObject(ObjectOutputStream,) : void\l- readObject(Choice,) : void\l+ getAccessibleContext() : AccessibleContext\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+MouseWheelListener [
+	label = "{interface
+	Target\lMouseWheelListener||# mouseWheelMoved() : void\l}"
+	style=filled
+	fillcolor=red
+]
+Component [
+	label = "{	Component\lComponent|- isFocusTraversableOverridden : int\l- focusable : boolean\l- name : String\l- componentSerializedDataVersion : int\l# mouseListener : MouseListener\l# cursor : Cursor\l# eventCache : EventQueueItem\l# focusTraversalKeys : Set\l# LEFT_ALIGNMENT : float\l# coalesceEventsParams : Class\l# parent : Container\l# minSizeSet : boolean\l# x : int\l# mouseWheelListener : MouseWheelListener\l# font : Font\l# windowStateListenerK : String\l# locale : Locale\l# focusListener : FocusListener\l# valid : boolean\l# maxSize : Dimension\l# graphicsConfig : GraphicsConfiguration\l# componentListener : ComponentListener\l# CENTER_ALIGNMENT : float\l# requestFocusController : RequestFocusController\l# appContext : AppContext\l# hierarchyListenerK : String\l- changeSupport : PropertyChangeSupport\l# background : Color\l- boundsOp : int\l# y : int\l# minSize : Dimension\l# BOTTOM_ALIGNMENT : float\l- nameExplicitlySet : boolean\l# inputMethodListener : InputMethodListener\l# peer : ComponentPeer\l# adjustmentListenerK : String\l# componentOrientation : ComponentOrientation\l# popups : Vector\l# containerListenerK : String\l# itemListenerK : String\l# FOCUS_TRAVERSABLE_SET : int\l# serialVersionUID : long\l# FOCUS_TRAVERSABLE_DEFAULT : int\l# isInc : boolean\l# objectLock : Object\l# actionListenerK : String\l# height : int\l# ignoreRepaint : boolean\l# isPacked : boolean\l# bufferStrategy : BufferStrategy\l# visible : boolean\l# maxSizeSet : boolean\l# keyListener : KeyListener\l# acc : AccessControlContext\l# width : int\l# mouseMotionListener : MouseMotionListener\l# keyListenerK : String\l# $assertionsDisabled : boolean\l# newEventsOnly : boolean\l# FOCUS_TRAVERSABLE_UNKNOWN : int\l# compoundShape : Region\l# eventMask : long\l# ownedWindowK : String\l# prefSizeSet : boolean\l# mixingLog : PlatformLogger\l# componentListenerK : String\l# windowListenerK : String\l# foreground : Color\l# eventLog : PlatformLogger\l# mouseListenerK : String\l# hierarchyListener : HierarchyListener\l# prefSize : Dimension\l# backgroundEraseDisabled : boolean\l# RIGHT_ALIGNMENT : float\l# dropTarget : DropTarget\l# isAddNotifyComplete : boolean\l# windowFocusListenerK : String\l# LOCK : Object\l# windowClosingException : RuntimeException\l# coalesceMap : Map\l# textListenerK : String\l# focusListenerK : String\l# focusTraversalKeyPropertyNames : String\l# mouseMotionListenerK : String\l# hierarchyBoundsListener : HierarchyBoundsListener\l# accessibleContext : AccessibleContext\l# TOP_ALIGNMENT : float\l- focusTraversalKeysEnabled : boolean\l# hierarchyBoundsListenerK : String\l# log : PlatformLogger\l# coalescingEnabled : boolean\l- autoFocusTransferOnDisposal : boolean\l# enabled : boolean\l# mouseWheelListenerK : String\l# inputMethodListenerK : String\l# incRate : int\l# focusLog : PlatformLogger\l# peerFont : Font\l# mixingCutoutRegion : Region\l|# getObjectLock() : Object\l# getAccessControlContext() : AccessControlContext\l# getBoundsOp() : int\l# setBoundsOp(int,) : void\l# initializeFocusTraversalKeys() : void\l# constructComponentName() : String\l+ getName() : String\l+ setName(Component,) : void\l+ getParent() : Container\l# getParent_NoClientCode() : Container\l# getContainer() : Container\l# getPeer() : ComponentPeer\l# setDropTarget(IllegalArgumentException,) : void\l# getDropTarget() : DropTarget\l+ getGraphicsConfiguration() : GraphicsConfiguration\l# getGraphicsConfiguration_NoClientCode() : GraphicsConfiguration\l# setGraphicsConfiguration(GraphicsConfiguration,) : void\l# updateGraphicsData(GraphicsConfiguration,) : boolean\l# checkGD(String,) : void\l# getTreeLock() : Object\l# checkTreeLock() : void\l+ getToolkit() : Toolkit\l# getToolkitImpl() : Toolkit\l+ isValid() : boolean\l+ isDisplayable() : boolean\l+ isVisible() : boolean\l# isVisible_NoClientCode() : boolean\l# isRecursivelyVisible() : boolean\l# pointRelativeToComponent(Point,) : Point\l# findUnderMouseInWindow(PointerInfo,) : Component\l+ getMousePosition() : Point\l# isSameOrAncestorOf(Component,boolean,) : boolean\l+ isShowing() : boolean\l+ isEnabled() : boolean\l# isEnabledImpl() : boolean\l+ setEnabled(boolean,) : void\l# enable() : void\l# enable(boolean,) : void\l# disable() : void\l+ isDoubleBuffered() : boolean\l+ enableInputMethods(InputContext,) : void\l+ setVisible(boolean,) : void\l# show() : void\l# show(boolean,) : void\l# containsFocus() : boolean\l# clearMostRecentFocusOwnerOnHide() : void\l# clearCurrentFocusCycleRootOnHide() : void\l# hide() : void\l+ getForeground() : Color\l+ setForeground(Color,) : void\l+ isForegroundSet() : boolean\l+ getBackground() : Color\l+ setBackground(Color,) : void\l+ isBackgroundSet() : boolean\l+ getFont() : Font\l# getFont_NoClientCode() : Font\l+ setFont(Font,) : void\l+ isFontSet() : boolean\l+ getLocale() : Locale\l+ setLocale(Locale,) : void\l+ getColorModel() : ColorModel\l+ getLocation() : Point\l+ getLocationOnScreen() : Point\l# getLocationOnScreen_NoTreeLock() : Point\l# location() : Point\l- location_NoClientCode() : Point\l+ setLocation(int,int,) : void\l# move(int,int,) : void\l+ setLocation(Point,) : void\l+ getSize() : Dimension\l# size() : Dimension\l+ setSize(int,int,) : void\l# resize(int,int,) : void\l+ setSize(Dimension,) : void\l# resize(Dimension,) : void\l+ getBounds() : Rectangle\l# bounds() : Rectangle\l+ setBounds(int,int,int,int,) : void\l# reshape(boolean,int,int,int,) : void\l- repaintParentIfNeeded(int,int,int,int,) : void\l- reshapeNativePeer(Component,int,int,int,int,) : void\l- notifyNewBounds(ComponentEvent,boolean,) : void\l+ setBounds(Rectangle,) : void\l+ getX() : int\l+ getY() : int\l+ getWidth() : int\l+ getHeight() : int\l+ getBounds(Rectangle,) : Rectangle\l+ getSize(Dimension,) : Dimension\l+ getLocation(Point,) : Point\l+ isOpaque() : boolean\l+ isLightweight() : boolean\l+ setPreferredSize(Component,) : void\l+ isPreferredSizeSet() : boolean\l+ getPreferredSize() : Dimension\l# preferredSize() : Dimension\l+ setMinimumSize(Component,) : void\l+ isMinimumSizeSet() : boolean\l+ getMinimumSize() : Dimension\l# minimumSize() : Dimension\l+ setMaximumSize(Component,) : void\l+ isMaximumSizeSet() : boolean\l+ getMaximumSize() : Dimension\l+ getAlignmentX() : float\l+ getAlignmentY() : float\l+ getBaseline(int,int,) : int\l+ getBaselineResizeBehavior() : Component$BaselineResizeBehavior\l+ doLayout() : void\l# layout() : void\l+ validate() : void\l+ invalidate() : void\l# invalidateParent() : void\l# invalidateIfValid() : void\l+ revalidate() : void\l# revalidateSynchronously() : void\l+ getGraphics() : Graphics\l# getGraphics_NoClientCode() : Graphics\l+ getFontMetrics(Font,) : FontMetrics\l+ setCursor(Cursor,) : void\l# updateCursorImmediately() : void\l+ getCursor() : Cursor\l# getCursor_NoClientCode() : Cursor\l+ isCursorSet() : boolean\l+ paint(Graphics,) : void\l+ update(Graphics,) : void\l+ paintAll(Graphics,) : void\l# lightweightPaint(Graphics,) : void\l# paintHeavyweightComponents(Graphics,) : void\l+ repaint() : void\l+ repaint(long,) : void\l+ repaint(int,int,int,int,) : void\l+ repaint(int,int,int,PaintEvent,Component,) : void\l+ print(Graphics,) : void\l+ printAll(Graphics,) : void\l# lightweightPrint(Graphics,) : void\l# printHeavyweightComponents(Graphics,) : void\l- getInsets_NoClientCode() : Insets\l+ imageUpdate(Image,int,int,int,int,int,) : boolean\l+ createImage(ImageProducer,) : Image\l+ createImage(int,int,) : Image\l+ createVolatileImage(int,int,) : VolatileImage\l+ createVolatileImage(int,int,ImageCapabilities,) : VolatileImage\l+ prepareImage(Image,ImageObserver,) : boolean\l+ prepareImage(Image,int,int,ImageObserver,) : boolean\l+ checkImage(Image,ImageObserver,) : int\l+ checkImage(Image,int,int,ImageObserver,) : int\l# createBufferStrategy(Component,) : void\l# createBufferStrategy(Component,int,) : void\l# getBufferStrategy() : BufferStrategy\l# getBackBuffer() : Image\l+ setIgnoreRepaint(boolean,) : void\l+ getIgnoreRepaint() : boolean\l+ contains(int,int,) : boolean\l# inside(int,int,) : boolean\l+ contains(Point,) : boolean\l+ getComponentAt(int,int,) : Component\l# locate(int,int,) : Component\l+ getComponentAt(Point,) : Component\l# deliverEvent(Event,) : void\l# dispatchEvent(AWTEvent,) : void\l# dispatchEventImpl(InputContext,) : void\l# autoProcessMouseWheel(MouseWheelEvent,) : void\l# dispatchMouseWheelToAncestor(Container,) : boolean\l# checkWindowClosingException() : boolean\l# areInputMethodsEnabled() : boolean\l# eventEnabled(AWTEvent,) : boolean\l# eventTypeEnabled(int,) : boolean\l# postEvent(Event,) : boolean\l# addComponentListener(ComponentListener,) : void\l# removeComponentListener(ComponentListener,) : void\l# getComponentListeners() : ComponentListener\l# addFocusListener(FocusListener,) : void\l# removeFocusListener(FocusListener,) : void\l# getFocusListeners() : FocusListener\l+ addHierarchyListener(Component,) : void\l+ removeHierarchyListener(Component,) : void\l# getHierarchyListeners() : HierarchyListener\l+ addHierarchyBoundsListener(Component,) : void\l+ removeHierarchyBoundsListener(Component,) : void\l# numListening(long,) : int\l# countHierarchyMembers() : int\l# createHierarchyEvents(HierarchyEvent,Component,int,Component,Container,) : int\l# getHierarchyBoundsListeners() : HierarchyBoundsListener\l# adjustListeningChildrenOnParent(long,int,) : void\l# addKeyListener(KeyListener,) : void\l# removeKeyListener(KeyListener,) : void\l# getKeyListeners() : KeyListener\l# addMouseListener(MouseListener,) : void\l# removeMouseListener(MouseListener,) : void\l# getMouseListeners() : MouseListener\l# addMouseMotionListener(MouseMotionListener,) : void\l# removeMouseMotionListener(MouseMotionListener,) : void\l# getMouseMotionListeners() : MouseMotionListener\l# addMouseWheelListener(MouseWheelListener,) : void\l# removeMouseWheelListener(MouseWheelListener,) : void\l# getMouseWheelListeners() : MouseWheelListener\l# addInputMethodListener(InputMethodListener,) : void\l# removeInputMethodListener(InputMethodListener,) : void\l# getInputMethodListeners() : InputMethodListener\l+ getListeners(Class,) : EventListener\l+ getInputMethodRequests() : InputMethodRequests\l+ getInputContext() : InputContext\l# enableEvents(long,) : void\l# disableEvents(long,) : void\l- checkCoalescing() : boolean\l# isCoalesceEventsOverriden(NoSuchMethodException,) : boolean\l# isCoalescingEnabled() : boolean\l# coalesceEvents(AWTEvent,AWTEvent,) : AWTEvent\l# processEvent(AWTEvent,) : void\l# processComponentEvent(Component,) : void\l# processFocusEvent(Component,) : void\l# processKeyEvent(Component,) : void\l# processMouseEvent(Component,) : void\l# processMouseMotionEvent(Component,) : void\l# processMouseWheelEvent(Component,) : void\l# postsOldMouseEvents() : boolean\l# processInputMethodEvent(Component,) : void\l# processHierarchyEvent(Component,) : void\l# processHierarchyBoundsEvent(Component,) : void\l# handleEvent(Event,) : boolean\l# mouseDown(Event,int,int,) : boolean\l# mouseDrag(Event,int,int,) : boolean\l# mouseUp(Event,int,int,) : boolean\l# mouseMove(Event,int,int,) : boolean\l# mouseEnter(Event,int,int,) : boolean\l# mouseExit(Event,int,int,) : boolean\l# keyDown(Event,int,) : boolean\l# keyUp(Event,int,) : boolean\l# action(Event,Object,) : boolean\l+ addNotify() : void\l+ removeNotify() : void\l# gotFocus(Event,Object,) : boolean\l# lostFocus(Event,Object,) : boolean\l# isFocusTraversable() : boolean\l+ isFocusable() : boolean\l+ setFocusable(Component,) : void\l# isFocusTraversableOverridden() : boolean\l+ setFocusTraversalKeys(int,Set,) : void\l+ getFocusTraversalKeys(int,) : Set\l# setFocusTraversalKeys_NoIDCheck(Object,AWTKeyStroke,) : void\l# getFocusTraversalKeys_NoIDCheck(Component,) : Set\l+ areFocusTraversalKeysSet(int,) : boolean\l+ setFocusTraversalKeysEnabled(Component,) : void\l+ getFocusTraversalKeysEnabled() : boolean\l+ requestFocus() : void\l# requestFocus(CausedFocusEvent$Cause,) : boolean\l# requestFocus(boolean,) : boolean\l# requestFocus(boolean,CausedFocusEvent$Cause,) : boolean\l+ requestFocusInWindow() : boolean\l# requestFocusInWindow(CausedFocusEvent$Cause,) : boolean\l# requestFocusInWindow(boolean,) : boolean\l# requestFocusInWindow(boolean,CausedFocusEvent$Cause,) : boolean\l# requestFocusHelper(boolean,boolean,) : boolean\l# requestFocusHelper(boolean,boolean,CausedFocusEvent$Cause,) : boolean\l- isRequestFocusAccepted(boolean,boolean,CausedFocusEvent$Cause,) : boolean\l# setRequestFocusController(RequestFocusController,) : void\l+ getFocusCycleRootAncestor() : Container\l+ isFocusCycleRoot(Container,) : boolean\l# getTraversalRoot() : Container\l+ transferFocus() : void\l# nextFocus() : void\l# transferFocus(boolean,) : boolean\l# getNextFocusCandidate() : Component\l+ transferFocusBackward() : void\l# transferFocusBackward(Component,) : boolean\l+ transferFocusUpCycle() : void\l+ hasFocus() : boolean\l+ isFocusOwner() : boolean\l# setAutoFocusTransferOnDisposal(boolean,) : void\l# isAutoFocusTransferOnDisposal() : boolean\l+ add(PopupMenu,) : void\l+ remove(int,) : void\l# paramString() : String\l+ toString() : String\l+ list() : void\l+ list(PrintStream,) : void\l+ list(Component,PrintStream,) : void\l+ list(PrintWriter,) : void\l+ list(Component,PrintWriter,) : void\l# getNativeContainer() : Container\l+ addPropertyChangeListener(PropertyChangeListener,) : void\l+ removePropertyChangeListener(PropertyChangeListener,) : void\l+ getPropertyChangeListeners() : PropertyChangeListener\l+ addPropertyChangeListener(String,PropertyChangeListener,) : void\l+ removePropertyChangeListener(String,PropertyChangeListener,) : void\l+ getPropertyChangeListeners(String,) : PropertyChangeListener\l# firePropertyChange(Component,String,Object,) : void\l# firePropertyChange(String,boolean,boolean,) : void\l# firePropertyChange(String,int,int,) : void\l+ firePropertyChange(String,byte,byte,) : void\l+ firePropertyChange(String,char,char,) : void\l+ firePropertyChange(String,short,short,) : void\l+ firePropertyChange(String,long,long,) : void\l+ firePropertyChange(String,float,float,) : void\l+ firePropertyChange(String,double,double,) : void\l- doSwingSerialization() : void\l- writeObject(ObjectOutputStream,) : void\l- readObject(OptionalDataException,) : void\l+ setComponentOrientation(ComponentOrientation,) : void\l+ getComponentOrientation() : ComponentOrientation\l+ applyComponentOrientation(ComponentOrientation,) : void\l# canBeFocusOwner() : boolean\l# canBeFocusOwnerRecursively() : boolean\l# relocateComponent() : void\l# getContainingWindow() : Window\l# initIDs() : void\l+ getAccessibleContext() : AccessibleContext\l# getAccessibleIndexInParent() : int\l# getAccessibleStateSet() : AccessibleStateSet\l# isInstanceOf(String,Class,) : boolean\l# areBoundsValid() : boolean\l# applyCompoundShape(ComponentPeer,) : void\l- getAppliedShape() : Region\l# getLocationOnWindow() : Point\l# getNormalShape() : Region\l# getOpaqueShape() : Region\l# getSiblingIndexAbove() : int\l# getHWPeerAboveMe() : ComponentPeer\l# getSiblingIndexBelow() : int\l# isNonOpaqueForMixing() : boolean\l- calculateCurrentShape() : Region\l# applyCurrentShape() : void\l# subtractAndApplyShape(Region,) : void\l# applyCurrentShapeBelowMe() : void\l# subtractAndApplyShapeBelowMe() : void\l# mixOnShowing() : void\l# mixOnHiding(boolean,) : void\l# mixOnReshaping() : void\l# mixOnZOrderChanging(int,Region,) : void\l# mixOnValidating() : void\l# isMixingNeeded() : boolean\l# updateZOrder() : void\l# access$002(Region,Region,) : Region\l# access$100(Component,) : Point\l# access$400(Component,) : Insets\l# access$500(Class,) : boolean\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+Button [
+	label = "{	Leaf Node\lButton|# serialVersionUID : long\l# base : String\l# actionCommand : String\l# label : String\l# nameCounter : int\l# actionListener : ActionListener\l- buttonSerializedDataVersion : int\l|# initIDs() : void\l# constructComponentName() : String\l+ addNotify() : void\l+ getLabel() : String\l+ setLabel(Button,) : void\l+ setActionCommand(String,) : void\l+ getActionCommand() : String\l# addActionListener(ActionListener,) : void\l# removeActionListener(ActionListener,) : void\l# getActionListeners() : ActionListener\l+ getListeners(Class,) : EventListener\l# eventEnabled(AWTEvent,) : boolean\l# processEvent(AWTEvent,) : void\l# processActionEvent(ActionEvent,) : void\l# paramString() : String\l- writeObject(ObjectOutputStream,) : void\l- readObject(Button,) : void\l+ getAccessibleContext() : AccessibleContext\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+MouseAdapter [
+	label = "{	Adapter\lMouseAdapter||+ mouseClicked(MouseEvent,) : void\l+ mousePressed(MouseEvent,) : void\l+ mouseReleased(MouseEvent,) : void\l+ mouseEntered(MouseEvent,) : void\l+ mouseExited(MouseEvent,) : void\l+ mouseWheelMoved(MouseWheelEvent,) : void\l+ mouseDragged(MouseEvent,) : void\l+ mouseMoved(MouseEvent,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+GraphicsEnvironment [
+	label = "{	Singleton\lGraphicsEnvironment|# defaultHeadless : Boolean\l# localEnv : GraphicsEnvironment\l# headless : Boolean\l|# getLocalGraphicsEnvironment() : GraphicsEnvironment\l# createGE() : GraphicsEnvironment\l# isHeadless() : boolean\l# getHeadlessMessage() : String\l# getHeadlessProperty() : boolean\l# checkHeadless() : void\l+ isHeadlessInstance() : boolean\l# getScreenDevices() : GraphicsDevice\l# getDefaultScreenDevice() : GraphicsDevice\l# createGraphics() : Graphics2D\l# getAllFonts() : Font\l# getAvailableFontFamilyNames() : String\l# getAvailableFontFamilyNames() : String\l+ registerFont(Font,) : boolean\l+ preferLocaleFonts() : void\l+ preferProportionalFonts() : void\l+ getCenterPoint() : Point\l+ getMaximumWindowBounds() : Rectangle\l# access$002(Boolean,) : Boolean\l# access$102(Boolean,) : Boolean\l}"
+	color=blue
+]
+Toolkit [
+	label = "{	Singleton\lToolkit|# platformResources : ResourceBundle\l# lightweightMarker : LightweightPeer\l- eventListener : AWTEventListener\l# resources : ResourceBundle\l# LONG_BITS : int\l# enabledOnToolkitMask : long\l# atNames : String\l# desktopPropsSupport : PropertyChangeSupport\l# $assertionsDisabled : boolean\l# desktopProperties : Map\l- listener2SelectiveListener : WeakHashMap\l- calls : int\l# loaded : boolean\l# toolkit : Toolkit\l|# createDesktopPeer() : DesktopPeer\l# createButton() : ButtonPeer\l# createTextField() : TextFieldPeer\l# createLabel() : LabelPeer\l# createList() : ListPeer\l# createCheckbox() : CheckboxPeer\l# createScrollbar() : ScrollbarPeer\l# createScrollPane() : ScrollPanePeer\l# createTextArea() : TextAreaPeer\l# createChoice() : ChoicePeer\l# createFrame() : FramePeer\l# createCanvas() : CanvasPeer\l# createPanel() : PanelPeer\l# createWindow() : WindowPeer\l# createDialog() : DialogPeer\l# createMenuBar() : MenuBarPeer\l# createMenu() : MenuPeer\l# createPopupMenu() : PopupMenuPeer\l# createMenuItem() : MenuItemPeer\l# createFileDialog() : FileDialogPeer\l# createCheckboxMenuItem() : CheckboxMenuItemPeer\l# getMouseInfoPeer() : MouseInfoPeer\l# createComponent(Component,) : LightweightPeer\l# getFontPeer() : FontPeer\l# loadSystemColors(int,) : void\l+ setDynamicLayout(boolean,) : void\l# isDynamicLayoutSet() : boolean\l+ isDynamicLayoutActive() : boolean\l# getScreenSize() : Dimension\l# getScreenResolution() : int\l+ getScreenInsets(GraphicsConfiguration,) : Insets\l# getColorModel() : ColorModel\l# getFontList() : String\l# getFontMetrics() : FontMetrics\l# sync() : void\l# initAssistiveTechnologies() : void\l# loadAssistiveTechnologies() : void\l# getDefaultToolkit() : Toolkit\l# getImage() : Image\l# getImage() : Image\l# createImage() : Image\l# createImage() : Image\l# prepareImage() : boolean\l# checkImage() : int\l# createImage() : Image\l+ createImage(byte,) : Image\l# createImage() : Image\l# getPrintJob() : PrintJob\l+ getPrintJob(Frame,String,JobAttributes,PageAttributes,) : PrintJob\l# beep() : void\l# getSystemClipboard() : Clipboard\l+ getSystemSelection() : Clipboard\l+ getMenuShortcutKeyMask() : int\l+ getLockingKeyState(int,) : boolean\l+ setLockingKeyState(int,boolean,) : void\l# getNativeContainer(Component,) : Container\l+ createCustomCursor(Image,Point,String,) : Cursor\l+ getBestCursorSize(int,int,) : Dimension\l+ getMaximumCursorColors() : int\l+ isFrameStateSupported(int,) : boolean\l# setPlatformResources(ResourceBundle,) : void\l# initIDs() : void\l# loadLibraries() : void\l# getProperty(String,String,) : String\l# getSystemEventQueue() : EventQueue\l# getSystemEventQueueImpl() : EventQueue\l# getEventQueue() : EventQueue\l# createDragSourceContextPeer() : DragSourceContextPeer\l+ createDragGestureRecognizer(Class,DragSource,Component,int,DragGestureListener,) : DragGestureRecognizer\l# getDesktopProperty(Toolkit,) : Object\l# setDesktopProperty(Toolkit,String,) : void\l# lazilyLoadDesktopProperty(String,) : Object\l# initializeDesktopProperties() : void\l+ addPropertyChangeListener(String,PropertyChangeListener,) : void\l+ removePropertyChangeListener(String,PropertyChangeListener,) : void\l+ getPropertyChangeListeners() : PropertyChangeListener\l+ getPropertyChangeListeners(String,) : PropertyChangeListener\l+ isAlwaysOnTopSupported() : boolean\l# isModalityTypeSupported() : boolean\l# isModalExclusionTypeSupported() : boolean\l# deProxyAWTEventListener(AWTEventListener,) : AWTEventListener\l+ addAWTEventListener(Toolkit$SelectiveAWTEventListener,long,) : void\l+ removeAWTEventListener(int,) : void\l# enabledOnToolkit(long,) : boolean\l# countAWTEventListeners(long,) : int\l+ getAWTEventListeners() : AWTEventListener\l+ getAWTEventListeners(int,) : AWTEventListener\l# notifyAWTEventListeners(AWTEvent,) : void\l# mapInputMethodHighlight() : Map\l# createPropertyChangeSupport(Toolkit,) : PropertyChangeSupport\l+ areExtraMouseButtonsEnabled() : boolean\l# access$002(Toolkit,) : Toolkit\l# access$000() : Toolkit\l# access$100(ResourceBundle,) : void\l# access$202(ResourceBundle,) : ResourceBundle\l# <clinit>() : void\l}"
+	color=blue
+]
+HierarchyBoundsListener [
+	label = "{interface
+	Target\lHierarchyBoundsListener||# ancestorMoved() : void\l# ancestorResized() : void\l}"
+	style=filled
+	fillcolor=red
+]
+DragSourceListener [
+	label = "{interface
+	Target\lDragSourceListener||# dragEnter() : void\l# dragOver() : void\l# dropActionChanged() : void\l# dragExit() : void\l# dragDropEnd() : void\l}"
+	style=filled
+	fillcolor=red
+]
+long [
+	label = "{	Adaptee\llong||}"
+	style=filled
+	fillcolor=red
+]
+ColorModel [
+	label = "{	Singleton\lColorModel|- pData : long\l# lg16Toog16Map : Map\l# s8Tol16 : short\l# transparency : int\l# l16Tos8 : byte\l# l8Tos8 : byte\l# is_sRGB : boolean\l# isAlphaPremultiplied : boolean\l# pixel_bits : int\l# supportsAlpha : boolean\l# lg16Toog8Map : Map\l# nBits : int\l# g8Tos8Map : Map\l# numComponents : int\l# loaded : boolean\l# transferType : int\l# s8Tol8 : byte\l# numColorComponents : int\l# colorSpaceType : int\l# colorSpace : ColorSpace\l# maxBits : int\l# RGBdefault : ColorModel\l# g16Tos8Map : Map\l|# loadLibraries() : void\l# initIDs() : void\l# getRGBdefault() : ColorModel\l# hasAlpha() : boolean\l# isAlphaPremultiplied() : boolean\l# getTransferType() : int\l+ getPixelSize() : int\l+ getComponentSize(int,) : int\l+ getComponentSize() : int\l+ getTransparency() : int\l+ getNumComponents() : int\l+ getNumColorComponents() : int\l# getRed() : int\l# getGreen() : int\l# getBlue() : int\l# getAlpha() : int\l+ getRGB(int,) : int\l+ getRed(short,) : int\l+ getGreen(short,) : int\l+ getBlue(short,) : int\l+ getAlpha(short,) : int\l+ getRGB(Object,) : int\l+ getDataElements(int,Object,) : Object\l+ getComponents(int,int,int,) : int\l+ getComponents(Object,int,int,) : int\l+ getUnnormalizedComponents(float,int,ColorModel,float,) : int\l+ getNormalizedComponents(int,float,int,ColorModel,) : float\l+ getDataElement(int,int,) : int\l+ getDataElements(int,int,Object,) : Object\l+ getDataElement(float,int,) : int\l+ getDataElements(float,int,Object,) : Object\l+ getNormalizedComponents(Object,float,int,) : float\l+ equals(ColorModel,) : boolean\l+ hashCode() : int\l# getColorSpace() : ColorSpace\l+ coerceData(WritableRaster,boolean,) : ColorModel\l+ isCompatibleRaster(Raster,) : boolean\l+ createCompatibleWritableRaster(int,int,) : WritableRaster\l+ createCompatibleSampleModel(int,int,) : SampleModel\l+ isCompatibleSampleModel(SampleModel,) : boolean\l+ finalize() : void\l+ getAlphaRaster(WritableRaster,) : WritableRaster\l+ toString() : String\l# getDefaultTransferType(int,) : int\l# isLinearRGBspace(ColorSpace,) : boolean\l# isLinearGRAYspace(ColorSpace,) : boolean\l# getLinearRGB8TosRGB8LUT() : byte\l# getsRGB8ToLinearRGB8LUT() : byte\l# getLinearRGB16TosRGB8LUT() : byte\l# getsRGB8ToLinearRGB16LUT() : short\l# getGray8TosRGB8LUT(int,) : byte\l# getLinearGray16ToOtherGray8LUT(int,) : byte\l# getGray16TosRGB8LUT(int,) : byte\l# getLinearGray16ToOtherGray16LUT(int,) : short\l# <clinit>() : void\l}"
+	color=blue
+]
+Container [
+	label = "{	Composite\l	Leaf Node\lContainer|# eventLog : PlatformLogger\l# focusTraversalPolicy : FocusTraversalPolicy\l# preserveBackgroundColor : Color\l# numOfLWComponents : int\l- focusCycleRoot : boolean\l# numOfHWComponents : int\l# layoutMgr : LayoutManager\l# mixingLog : PlatformLogger\l# serialVersionUID : long\l# SEARCH_HEAVYWEIGHTS : boolean\l# printing : boolean\l# isJavaAwtSmartInvalidate : boolean\l# EMPTY_ARRAY : Component\l# printingThreads : Set\l- dispatcher : LightweightDispatcher\l# descendantsCount : int\l# containerListener : ContainerListener\l# log : PlatformLogger\l# descendUnconditionallyWhenValidating : boolean\l- component : List\l# listeningChildren : int\l# modalAppContext : AppContext\l- focusTraversalPolicyProvider : boolean\l# INCLUDE_SELF : boolean\l- containerSerializedDataVersion : int\l# listeningBoundsChildren : int\l# serialPersistentFields : ObjectStreamField\l# modalComp : Component\l|# initIDs() : void\l# initializeFocusTraversalKeys() : void\l+ getComponentCount() : int\l# countComponents() : int\l+ getComponent(Container,) : Component\l+ getComponents() : Component\l# getComponents_NoClientCode() : Component\l# getComponentsSync() : Component\l+ getInsets() : Insets\l# insets() : Insets\l+ add(Component,) : Component\l+ add(String,Component,) : Component\l+ add(Component,int,) : Component\l- checkAddToSelf(Container,) : void\l- checkNotAWindow(Component,) : void\l- checkAdding(Component,int,) : void\l- removeDelicately(Container,Component,Container,) : boolean\l# canContainFocusOwner(Container,) : boolean\l# hasHeavyweightDescendants() : boolean\l# hasLightweightDescendants() : boolean\l# getHeavyweightContainer() : Container\l# isRemoveNotifyNeeded(Component,Container,Container,) : boolean\l+ setComponentZOrder(int,boolean,) : void\l- reparentTraverse(int,Container,) : void\l- reparentChild(Component,) : void\l- addDelicately(Container,ContainerEvent,Component,) : void\l+ getComponentZOrder(Component,) : int\l+ add(Component,Object,) : void\l+ add(Component,Object,int,) : void\l# addImpl(GraphicsConfiguration,Container,Component,) : void\l# updateGraphicsData(Iterator,) : boolean\l# checkGD(Iterator,) : void\l+ remove(Component,) : void\l+ remove(Container,) : void\l+ removeAll() : void\l# numListening(Iterator,) : int\l# adjustListeningChildren(Container,long,) : void\l# adjustDescendants(int,) : void\l# adjustDecendantsOnParent(int,) : void\l# countHierarchyMembers() : int\l- getListenersCount(int,boolean,) : int\l# createHierarchyEvents(int,Container,int,Component,Container,) : int\l# createChildHierarchyEvents(int,Container,int,) : void\l+ getLayout() : LayoutManager\l+ setLayout(LayoutManager,) : void\l+ doLayout() : void\l# layout() : void\l+ isValidateRoot() : boolean\l# invalidateParent() : void\l+ invalidate() : void\l+ validate() : void\l# validateUnconditionally() : void\l# validateTree() : void\l# invalidateTree() : void\l+ setFont(Font,) : void\l+ getPreferredSize() : Dimension\l# preferredSize() : Dimension\l+ getMinimumSize() : Dimension\l# minimumSize() : Dimension\l+ getMaximumSize() : Dimension\l+ getAlignmentX() : float\l+ getAlignmentY() : float\l+ paint(Graphics,) : void\l+ update(Graphics,) : void\l+ print(Container,) : void\l+ paintComponents(Graphics,) : void\l# lightweightPaint(Graphics,) : void\l# paintHeavyweightComponents(Graphics,) : void\l+ printComponents(Graphics,) : void\l# lightweightPrint(Graphics,) : void\l# printHeavyweightComponents(Graphics,) : void\l# addContainerListener(ContainerListener,) : void\l# removeContainerListener(ContainerListener,) : void\l# getContainerListeners() : ContainerListener\l+ getListeners(Class,) : EventListener\l# eventEnabled(AWTEvent,) : boolean\l# processEvent(AWTEvent,) : void\l# processContainerEvent(ContainerEvent,) : void\l# dispatchEventImpl(AWTEvent,) : void\l# dispatchEventToSelf(AWTEvent,) : void\l# getMouseEventTarget(int,int,boolean,) : Component\l# getDropTargetEventTarget(int,int,boolean,) : Component\l- getMouseEventTarget(int,int,boolean,Container$EventTargetFilter,boolean,) : Component\l- getMouseEventTargetImpl(Component,Component,int,boolean,boolean,Container,) : Component\l# proxyEnableEvents(long,) : void\l# deliverEvent(Event,) : void\l+ getComponentAt(int,int,) : Component\l# locate(int,Component,) : Component\l+ getComponentAt(Point,) : Component\l+ getMousePosition(Container,) : Point\l# isSameOrAncestorOf(Component,boolean,) : boolean\l+ findComponentAt(int,int,) : Component\l# findComponentAt(int,int,boolean,) : Component\l# findComponentAtImpl(int,Component,int,) : Component\l+ findComponentAt(Point,) : Component\l+ addNotify() : void\l+ removeNotify() : void\l+ isAncestorOf(Container,) : boolean\l- startLWModal() : void\l- stopLWModal() : void\l# paramString() : String\l+ list(int,Container,) : void\l+ list(int,Container,) : void\l+ setFocusTraversalKeys(int,Set,) : void\l+ getFocusTraversalKeys(int,) : Set\l+ areFocusTraversalKeysSet(int,) : boolean\l+ isFocusCycleRoot(Container,) : boolean\l- findTraversalRoot() : Container\l# containsFocus() : boolean\l- isParentOf(Component,) : boolean\l# clearMostRecentFocusOwnerOnHide() : void\l# clearCurrentFocusCycleRootOnHide() : void\l# getTraversalRoot() : Container\l+ setFocusTraversalPolicy(Container,) : void\l+ getFocusTraversalPolicy() : FocusTraversalPolicy\l+ isFocusTraversalPolicySet() : boolean\l+ setFocusCycleRoot(Container,) : void\l+ isFocusCycleRoot() : boolean\l# setFocusTraversalPolicyProvider(Container,) : void\l# isFocusTraversalPolicyProvider() : boolean\l+ transferFocusDownCycle() : void\l# preProcessKeyEvent(KeyEvent,) : void\l# postProcessKeyEvent(KeyEvent,) : void\l# postsOldMouseEvents() : boolean\l+ applyComponentOrientation(int,) : void\l+ addPropertyChangeListener(PropertyChangeListener,) : void\l+ addPropertyChangeListener(String,PropertyChangeListener,) : void\l- writeObject(ObjectOutputStream,) : void\l- readObject(Component,) : void\l# getAccessibleAt(AccessibleComponent,) : Accessible\l# getAccessibleChildrenCount() : int\l# getAccessibleChild(Component,) : Accessible\l# increaseComponentCount(int,) : void\l# decreaseComponentCount(int,) : void\l- getTopmostComponentIndex() : int\l- getBottommostComponentIndex() : int\l# getOpaqueShape() : Region\l# recursiveSubtractAndApplyShape(Region,) : void\l# recursiveSubtractAndApplyShape(Region,int,) : void\l# recursiveSubtractAndApplyShape(int,Container,Region,) : void\l# recursiveApplyCurrentShape() : void\l# recursiveApplyCurrentShape(int,) : void\l# recursiveApplyCurrentShape(int,Container,) : void\l- recursiveShowHeavyweightChildren() : void\l- recursiveHideHeavyweightChildren() : void\l- recursiveRelocateHeavyweightChildren(ComponentPeer,) : void\l# isRecursivelyVisibleUpToHeavyweightContainer() : boolean\l# mixOnShowing() : void\l# mixOnHiding(boolean,) : void\l# mixOnReshaping() : void\l# mixOnZOrderChanging(Container,int,) : void\l# mixOnValidating() : void\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+DragSourceMotionListener [
+	label = "{interface
+	Target\lDragSourceMotionListener||# dragMouseMoved() : void\l}"
+	style=filled
+	fillcolor=red
+]
+ImageProducer [
+	label = "{interface
+	Target\lImageProducer||# addConsumer() : void\l# isConsumer() : boolean\l# removeConsumer() : void\l# startProduction() : void\l# requestTopDownLeftRightResend() : void\l}"
+	style=filled
+	fillcolor=red
+]
+Checkbox [
+	label = "{	Leaf Node\lCheckbox|- checkboxSerializedDataVersion : int\l# state : boolean\l# serialVersionUID : long\l# label : String\l# nameCounter : int\l# base : String\l# itemListener : ItemListener\l# group : CheckboxGroup\l|# setStateInternal(boolean,) : void\l# constructComponentName() : String\l+ addNotify() : void\l+ getLabel() : String\l+ setLabel(Checkbox,) : void\l+ getState() : boolean\l+ setState(boolean,) : void\l+ getSelectedObjects() : Object\l+ getCheckboxGroup() : CheckboxGroup\l+ setCheckboxGroup(CheckboxGroup,) : void\l# addItemListener(ItemListener,) : void\l# removeItemListener(ItemListener,) : void\l# getItemListeners() : ItemListener\l+ getListeners(Class,) : EventListener\l# eventEnabled(AWTEvent,) : boolean\l# processEvent(AWTEvent,) : void\l# processItemEvent(ItemEvent,) : void\l# paramString() : String\l- writeObject(ObjectOutputStream,) : void\l- readObject(Checkbox,) : void\l# initIDs() : void\l+ getAccessibleContext() : AccessibleContext\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+RectIterator [
+	label = "{	Adapter\lRectIterator|# y : double\l# w : double\l# h : double\l# index : int\l# x : double\l# affine : AffineTransform\l|+ getWindingRule() : int\l+ isDone() : boolean\l+ next() : void\l+ currentSegment(float,) : int\l+ currentSegment(double,) : int\l}"
+	style=filled
+	fillcolor=red
+]
+ComponentListener [
+	label = "{interface
+	Target\lComponentListener||# componentResized() : void\l# componentMoved() : void\l# componentShown() : void\l# componentHidden() : void\l}"
+	style=filled
+	fillcolor=red
+]
+Canvas [
+	label = "{	Leaf Node\lCanvas|# serialVersionUID : long\l# base : String\l# nameCounter : int\l|# setGraphicsConfiguration(Canvas,) : void\l# constructComponentName() : String\l+ addNotify() : void\l+ paint(Graphics,) : void\l+ update(Graphics,) : void\l# postsOldMouseEvents() : boolean\l+ createBufferStrategy(int,) : void\l+ createBufferStrategy(int,BufferCapabilities,) : void\l+ getBufferStrategy() : BufferStrategy\l+ getAccessibleContext() : AccessibleContext\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+Serializable [
+	label = "{	Target\lSerializable||}"
+	style=filled
+	fillcolor=red
+]
+Raster [
+	label = "{	Decorator\l	Component\lRaster|# numDataElements : int\l# parent : Raster\l# minX : int\l# height : int\l# minY : int\l# dataBuffer : DataBuffer\l# sampleModel : SampleModel\l# sampleModelTranslateY : int\l# numBands : int\l# sampleModelTranslateX : int\l# width : int\l|# initIDs() : void\l# createInterleavedRaster(int,int,int,int,Point,) : WritableRaster\l# createInterleavedRaster(DataBuffer,int,int,int,int,int,int,) : WritableRaster\l# createBandedRaster(int,int,int,int,Point,) : WritableRaster\l# createBandedRaster(DataBuffer,DataBuffer,DataBuffer,int,int,int,int,) : WritableRaster\l# createPackedRaster(DataBuffer,DataBuffer,int,int,int,) : WritableRaster\l# createPackedRaster(int,int,int,DataBuffer,DataBuffer,DataBuffer,) : WritableRaster\l# createInterleavedRaster(int,int,int,int,int,Point,int,) : WritableRaster\l# createBandedRaster(int,int,int,int,int,Point,int,) : WritableRaster\l# createPackedRaster(int,int,int,int,Point,int,) : WritableRaster\l# createPackedRaster(int,int,int,Point,int,) : WritableRaster\l# createRaster(DataBuffer,Point,int,) : Raster\l# createWritableRaster(Point,Point,) : WritableRaster\l# createWritableRaster(DataBuffer,Point,int,) : WritableRaster\l+ getParent() : Raster\l# getSampleModelTranslateX() : int\l# getSampleModelTranslateY() : int\l+ createCompatibleWritableRaster() : WritableRaster\l+ createCompatibleWritableRaster(int,int,) : WritableRaster\l+ createCompatibleWritableRaster(Rectangle,) : WritableRaster\l+ createCompatibleWritableRaster(int,int,int,int,) : WritableRaster\l+ createTranslatedChild(int,int,) : Raster\l+ createChild(Raster,int,int,int,int,int,int,) : Raster\l+ getBounds() : Rectangle\l# getMinX() : int\l# getMinY() : int\l# getWidth() : int\l# getHeight() : int\l# getNumBands() : int\l# getNumDataElements() : int\l# getTransferType() : int\l+ getDataBuffer() : DataBuffer\l+ getSampleModel() : SampleModel\l+ getDataElements(int,int,Object,) : Object\l+ getDataElements(int,int,int,int,Object,) : Object\l+ getPixel(int,int,int,) : int\l+ getPixel(int,int,float,) : float\l+ getPixel(int,int,double,) : double\l+ getPixels(int,int,int,int,int,) : int\l+ getPixels(int,int,int,int,float,) : float\l+ getPixels(int,int,int,int,double,) : double\l+ getSample(int,int,int,) : int\l+ getSampleFloat(int,int,int,) : float\l+ getSampleDouble(int,int,int,) : double\l+ getSamples(int,int,int,int,int,int,) : int\l+ getSamples(int,int,int,int,int,float,) : float\l+ getSamples(int,int,int,int,int,double,) : double\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=green
+]
+ContainerAdapter [
+	label = "{	Adapter\lContainerAdapter||+ componentAdded(ContainerEvent,) : void\l+ componentRemoved(ContainerEvent,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+WindowEvent [
+	label = "{	Adaptee\l	Adaptee\l	Adaptee\l	Adaptee\l	Adaptee\lWindowEvent|# WINDOW_STATE_CHANGED : int\l# WINDOW_LAST : int\l# WINDOW_CLOSING : int\l# WINDOW_FIRST : int\l# opposite : Window\l# WINDOW_ICONIFIED : int\l# WINDOW_DEICONIFIED : int\l# WINDOW_OPENED : int\l# newState : int\l# oldState : int\l# WINDOW_LOST_FOCUS : int\l# WINDOW_CLOSED : int\l# serialVersionUID : long\l# WINDOW_DEACTIVATED : int\l# WINDOW_GAINED_FOCUS : int\l# WINDOW_ACTIVATED : int\l|+ getWindow() : Window\l+ getOppositeWindow() : Window\l+ getOldState() : int\l+ getNewState() : int\l+ paramString() : String\l}"
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+]
+ContainerListener [
+	label = "{interface
+	Target\lContainerListener||# componentAdded() : void\l# componentRemoved() : void\l}"
+	style=filled
+	fillcolor=red
+]
+MouseMotionAdapter [
+	label = "{	Adapter\lMouseMotionAdapter||+ mouseDragged(MouseEvent,) : void\l+ mouseMoved(MouseEvent,) : void\l}"
+	style=filled
+	fillcolor=red
+]
+FocusManager [
+	label = "{	Adapter\lFocusManager|# focusOwner : Component\l# focusRoot : Container\l# serialVersionUID : long\l|}"
+	style=filled
+	fillcolor=red
+]
+MouseListener [
+	label = "{interface
+	Target\lMouseListener||# mouseClicked() : void\l# mousePressed() : void\l# mouseReleased() : void\l# mouseEntered() : void\l# mouseExited() : void\l}"
+	style=filled
+	fillcolor=red
+]
+KeyListener [
+	label = "{interface
+	Target\lKeyListener||# keyTyped() : void\l# keyPressed() : void\l# keyReleased() : void\l}"
+	style=filled
+	fillcolor=red
+]
+WritableRaster [
+	label = "{	Decorator\lWritableRaster||+ getWritableParent() : WritableRaster\l+ createWritableTranslatedChild(int,int,) : WritableRaster\l+ createWritableChild(WritableRaster,int,int,int,int,int,int,) : WritableRaster\l+ setDataElements(int,int,Object,) : void\l+ setDataElements(WritableRaster,int,int,) : void\l+ setDataElements(int,int,int,int,Object,) : void\l+ setRect(Raster,) : void\l+ setRect(int,int,int,) : void\l+ setPixel(int,int,int,) : void\l+ setPixel(int,int,float,) : void\l+ setPixel(int,int,double,) : void\l+ setPixels(int,int,int,int,int,) : void\l+ setPixels(int,int,int,int,float,) : void\l+ setPixels(int,int,int,int,double,) : void\l+ setSample(int,int,int,int,) : void\l+ setSample(int,int,int,float,) : void\l+ setSample(int,int,int,double,) : void\l+ setSamples(int,int,int,int,int,int,) : void\l+ setSamples(int,int,int,int,int,float,) : void\l+ setSamples(int,int,int,int,int,double,) : void\l}"
+	style=filled
+	fillcolor=green
+]
+ClipboardOwner [
+	label = "{interface
+	Target\lClipboardOwner||# lostOwnership() : void\l}"
+	style=filled
+	fillcolor=red
+]
+Label [
+	label = "{	Leaf Node\lLabel|# CENTER : int\l# alignment : int\l# text : String\l# nameCounter : int\l# base : String\l# serialVersionUID : long\l# RIGHT : int\l# LEFT : int\l|- readObject(ObjectInputStream,) : void\l# constructComponentName() : String\l+ addNotify() : void\l+ getAlignment() : int\l# setAlignment(Label,) : void\l+ getText() : String\l+ setText(Label,) : void\l# paramString() : String\l# initIDs() : void\l+ getAccessibleContext() : AccessibleContext\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=yellow
+]
+TextComponent [
+	label = "{	Leaf Node\lTextComponent|- textComponentSerializedDataVersion : int\l# selectionStart : int\l# selectionEnd : int\l# backgroundSetByClientCode : boolean\l# serialVersionUID : long\l# editable : boolean\l# textListener : TextListener\l# text : String\l- checkForEnableIM : boolean\l|- enableInputMethodsIfNecessary() : void\l+ enableInputMethods(boolean,) : void\l# areInputMethodsEnabled() : boolean\l+ getInputMethodRequests() : InputMethodRequests\l+ addNotify() : void\l+ removeNotify() : void\l# setText(String,) : void\l# getText() : String\l# getSelectedText() : String\l+ isEditable() : boolean\l# setEditable(boolean,) : void\l+ getBackground() : Color\l+ setBackground(Color,) : void\l# getSelectionStart() : int\l# setSelectionStart(int,) : void\l# getSelectionEnd() : int\l# setSelectionEnd(int,) : void\l# select(int,int,) : void\l# selectAll() : void\l# setCaretPosition(int,) : void\l# getCaretPosition() : int\l# addTextListener(TextListener,) : void\l# removeTextListener(TextListener,) : void\l# getTextListeners() : TextListener\l+ getListeners(Class,) : EventListener\l# eventEnabled(AWTEvent,) : boolean\l# processEvent(AWTEvent,) : void\l# processTextEvent(TextComponent,) : void\l# paramString() : String\l- canAccessClipboard() : boolean\l- writeObject(ObjectOutputStream,) : void\l- readObject(TextComponent,) : void\l# getIndexAtPoint(Point,) : int\l# getCharacterBounds(int,) : Rectangle\l+ getAccessibleContext() : AccessibleContext\l}"
+	style=filled
+	fillcolor=yellow
+]
+AffineTransform [
+	label = "{	Adaptee\l	Adaptee\l	Adaptee\lAffineTransform|# TYPE_UNIFORM_SCALE : int\l# APPLY_SCALE : int\l# TYPE_FLIP : int\l# APPLY_SHEAR : int\l# TYPE_TRANSLATION : int\l# TYPE_UNKNOWN : int\l# m11 : double\l# HI_IDENTITY : int\l# TYPE_IDENTITY : int\l# TYPE_MASK_ROTATION : int\l# m10 : double\l# TYPE_QUADRANT_ROTATION : int\l# rot90conversion : int\l# m01 : double\l# TYPE_MASK_SCALE : int\l# TYPE_GENERAL_TRANSFORM : int\l# HI_SCALE : int\l# HI_SHIFT : int\l# m12 : double\l# HI_TRANSLATE : int\l# APPLY_TRANSLATE : int\l# type : int\l# APPLY_IDENTITY : int\l# TYPE_GENERAL_ROTATION : int\l# state : int\l# HI_SHEAR : int\l# serialVersionUID : long\l# TYPE_GENERAL_SCALE : int\l# m02 : double\l# m00 : double\l|# getTranslateInstance(double,AffineTransform,) : AffineTransform\l# getRotateInstance(AffineTransform,) : AffineTransform\l# getRotateInstance(double,double,AffineTransform,) : AffineTransform\l# getRotateInstance(double,AffineTransform,) : AffineTransform\l# getRotateInstance(double,double,double,AffineTransform,) : AffineTransform\l# getQuadrantRotateInstance(AffineTransform,) : AffineTransform\l# getQuadrantRotateInstance(double,double,AffineTransform,) : AffineTransform\l# getScaleInstance(double,AffineTransform,) : AffineTransform\l# getShearInstance(double,AffineTransform,) : AffineTransform\l+ getType() : int\l- calculateType() : void\l+ getDeterminant() : double\l# updateState() : void\l- stateError() : void\l+ getMatrix(double,) : void\l+ getScaleX() : double\l+ getScaleY() : double\l+ getShearX() : double\l+ getShearY() : double\l+ getTranslateX() : double\l+ getTranslateY() : double\l+ translate(double,double,) : void\l# rotate90() : void\l# rotate180() : void\l# rotate270() : void\l+ rotate(double,) : void\l+ rotate(double,double,double,) : void\l+ rotate(double,double,) : void\l+ rotate(double,double,double,double,) : void\l+ quadrantRotate(int,) : void\l+ quadrantRotate(int,double,double,) : void\l+ scale(double,double,) : void\l+ shear(double,AffineTransform,) : void\l+ setToIdentity() : void\l+ setToTranslation(double,double,) : void\l+ setToRotation(AffineTransform,) : void\l+ setToRotation(double,double,double,) : void\l+ setToRotation(double,double,) : void\l+ setToRotation(double,double,double,double,) : void\l+ setToQuadrantRotation(int,) : void\l+ setToQuadrantRotation(int,double,double,) : void\l+ setToScale(double,double,) : void\l+ setToShear(double,double,) : void\l+ setTransform(AffineTransform,) : void\l+ setTransform(double,double,double,double,double,double,) : void\l+ concatenate(double,) : void\l+ preConcatenate(double,) : void\l+ createInverse() : AffineTransform\l+ invert() : void\l+ transform(Point2D,Point2D,) : Point2D\l+ transform(double,double,Point2D,AffineTransform,Point2D,) : void\l+ transform(double,double,double,double,double,) : void\l+ transform(double,double,double,double,double,) : void\l+ transform(double,double,double,double,double,) : void\l+ transform(double,double,double,double,double,) : void\l+ inverseTransform(AffineTransform,Point2D,) : Point2D\l+ inverseTransform(double,double,double,double,double,) : void\l+ deltaTransform(Point2D,Point2D,) : Point2D\l+ deltaTransform(double,double,double,double,double,) : void\l+ createTransformedShape(Shape,) : Shape\l# _matround(double,) : double\l+ toString() : String\l+ isIdentity() : boolean\l+ clone() : Object\l+ hashCode() : int\l+ equals(Object,) : boolean\l- writeObject(ObjectOutputStream,) : void\l- readObject(ObjectInputStream,) : void\l# <clinit>() : void\l}"
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+]
+PathIterator [
+	label = "{interface
+	Target\l	Target\l	Target\l	Target\l	Target\l	Target\lPathIterator|# WIND_NON_ZERO : int\l# WIND_EVEN_ODD : int\l# SEG_CUBICTO : int\l# SEG_MOVETO : int\l# SEG_CLOSE : int\l# SEG_LINETO : int\l# SEG_QUADTO : int\l|# getWindingRule() : int\l# isDone() : boolean\l# next() : void\l# currentSegment() : int\l# currentSegment() : int\l}"
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+	style=filled
+	fillcolor=red
+]
+edge [arrowhead = onormal]List->Component
+Scrollbar->Component
+Choice->Component
+Button->Component
+Container->Component
+Checkbox->Component
+Canvas->Component
+WritableRaster->Raster
+Label->Component
+TextComponent->Component
+edge [style = dotted]ComponentOrientation->Serializable
+StringSelection->Transferable
+StringSelection->ClipboardOwner
+DragSource->Serializable
+WindowAdapter->WindowListener
+WindowAdapter->WindowStateListener
+WindowAdapter->WindowFocusListener
+FilteredImageSource->ImageProducer
+KeyAdapter->KeyListener
+DragSourceAdapter->DragSourceListener
+DragSourceAdapter->DragSourceMotionListener
+HierarchyBoundsAdapter->HierarchyBoundsListener
+EllipseIterator->PathIterator
+ComponentAdapter->ComponentListener
+RoundRectIterator->PathIterator
+QuadIterator->PathIterator
+LineIterator->PathIterator
+CubicIterator->PathIterator
+FocusAdapter->FocusListener
+Component->Serializable
+MouseAdapter->MouseListener
+MouseAdapter->MouseWheelListener
+MouseAdapter->MouseMotionListener
+RectIterator->PathIterator
+ContainerAdapter->ContainerListener
+MouseMotionAdapter->MouseMotionListener
+FocusManager->Serializable
+AffineTransform->Serializable
+edge [arrowhead = vee]edge [style = solid]ImageFilter->int
+ImageFilter->ImageFilter
+ImageFilter->ImageProducer
+ImageFilter->ColorModel
 List->List
-ArrayListAdapter->List
-ArrayListAdapter->ArrayListAdapter
-ArrayListAdapter->Iterator[label=adapts] 
-Collection->Collection
-ListIterator->ListIterator
-Iterator->Iterator
-LinearTransformer->Object
-LinearTransformer->LinearTransformer
-LinearTransformer->Enumeration
-App->Object
-App->ArrayListAdapter
-App->LinearTransformer
-App->App
-Enumeration->Enumeration
+List->int
+ComponentOrientation->int
+ComponentOrientation->ComponentOrientation
+WindowListener->WindowListener
+StringSelection->StringSelection
+StringSelection->Transferable
+DragSource->Component
+DragSource->Toolkit
+DragSource->DragSource
+DragSource->DragSourceListener
+DragSource->DragSourceMotionListener
+DragSource->int
+DragSource->Transferable
+WindowAdapter->WindowAdapter
+WindowAdapter->WindowEvent[label=adapts] 
+WindowStateListener->WindowStateListener
+FilteredImageSource->ImageFilter[label=adapts] 
+FilteredImageSource->ImageProducer
+FilteredImageSource->FilteredImageSource
+KeyAdapter->KeyAdapter
+DragSourceAdapter->DragSourceAdapter
+WindowFocusListener->WindowFocusListener
+SystemTray->Toolkit
+SystemTray->SystemTray
+HierarchyBoundsAdapter->HierarchyBoundsAdapter
+EllipseIterator->EllipseIterator
+EllipseIterator->AffineTransform
+EllipseIterator->double[label=adapts] 
+FocusListener->FocusListener
+AlphaComposite->int
+AlphaComposite->AlphaComposite
+AlphaComposite->ColorModel
+ComponentAdapter->ComponentAdapter
+RoundRectIterator->int
+RoundRectIterator->RoundRectIterator
+RoundRectIterator->AffineTransform
+RoundRectIterator->double[label=adapts] 
+QuadIterator->int[label=adapts] 
+QuadIterator->QuadIterator
+QuadIterator->AffineTransform
+QuadIterator->double
+CubicCurve2D->int
+CubicCurve2D->CubicCurve2D
+CubicCurve2D->AffineTransform
+CubicCurve2D->double
+LineIterator->int
+LineIterator->LineIterator
+LineIterator->AffineTransform[label=adapts] 
+LineIterator->double
+MouseMotionListener->MouseMotionListener
+Transferable->Transferable
+Scrollbar->int
+Scrollbar->Scrollbar
+CubicIterator->int
+CubicIterator->CubicIterator
+CubicIterator->CubicCurve2D[label=adapts] 
+CubicIterator->AffineTransform
+CubicIterator->double
+FocusAdapter->FocusAdapter
+Choice->Choice
+Choice->int
+MouseWheelListener->MouseWheelListener
+Component->ComponentOrientation
+Component->FocusListener
+Component->double
+Component->int
+Component->MouseMotionListener
+Component->MouseWheelListener
+Component->Component
+Component->GraphicsEnvironment
+Component->HierarchyBoundsListener
+Component->Toolkit
+Component->long
+Component->Container
+Component->ImageProducer
+Component->ComponentListener
+Component->MouseListener
+Component->KeyListener
+Button->Button
+Button->int
+MouseAdapter->MouseAdapter
+GraphicsEnvironment->GraphicsEnvironment
+Toolkit->Component
+Toolkit->Toolkit
+Toolkit->long
+Toolkit->DragSource
+Toolkit->int
+HierarchyBoundsListener->HierarchyBoundsListener
+DragSourceListener->DragSourceListener
+ColorModel->ColorModel
+ColorModel->WritableRaster
+ColorModel->int
+ColorModel->Raster
+Container->ComponentOrientation
+Container->int
+Container->Component
+Container->long
+Container->Container
+Container->ContainerListener
+DragSourceMotionListener->DragSourceMotionListener
+ImageProducer->ImageProducer
+Checkbox->int
+Checkbox->Checkbox
+RectIterator->RectIterator
+RectIterator->AffineTransform[label=adapts] 
+RectIterator->double
+ComponentListener->ComponentListener
+Canvas->int
+Canvas->Canvas
+Raster->double
+Raster->WritableRaster
+Raster->int
+Raster->Raster[label=decorates] 
+ContainerAdapter->ContainerAdapter
+WindowEvent->int
+WindowEvent->WindowEvent
+ContainerListener->ContainerListener
+MouseMotionAdapter->MouseMotionAdapter
+FocusManager->FocusManager
+FocusManager->Component
+FocusManager->Container
+MouseListener->MouseListener
+KeyListener->KeyListener
+WritableRaster->int
+WritableRaster->double
+WritableRaster->Raster
+WritableRaster->WritableRaster
+ClipboardOwner->ClipboardOwner
+Label->int
+Label->Label
+TextComponent->Toolkit
+TextComponent->int
+TextComponent->TextComponent
+AffineTransform->int
+AffineTransform->AffineTransform
+AffineTransform->double
+AffineTransform->long
+PathIterator->PathIterator
 }
