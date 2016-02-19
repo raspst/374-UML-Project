@@ -3,6 +3,7 @@ package uml.parser.gui;
 import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ public class MainWindow {
 	protected LandingPanel landingPanel;
 	protected UMLPanel umlPanel;
 	protected JPanel cards;
+	protected static Properties properties = new Properties();
 	
 	public void createAndShowGUI() {
 		try {
