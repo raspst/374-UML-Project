@@ -68,6 +68,7 @@ public class LandingPanel extends JPanel {
 			FileInputStream in = new FileInputStream("in/config.properties");
 			MainWindow.properties.load(in);
 			in.close();
+			progressText.setText("Config loaded");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,15 +87,24 @@ public class LandingPanel extends JPanel {
 		int i = 1;
 		for(String s: sepPhases) {
 			progressText.setText("Beginning Phase " + i + " : " + s);
+			if(i == 1) {
+				executeLoad();
+			}
+			else if(i == 2) {
+				executeDetect();
+			}
+			else if(i == 3) {
+				executeGenerate();
+			}
+			else {
+				return;
+			}
 			i++;
 			progressBar.setValue(progressBar.getValue() + 1);
 			JOptionPane.showConfirmDialog(this, "Delay");
 		}
 		String[] command = {"dot", "-T", "png", "-o", 
 				MainWindow.properties.getProperty("output-folder") + "output.png", MainWindow.properties.getProperty("input-folder") + "mouseAdapter.dot"};
-		for(String s: command) {
-			System.out.println(s);
-		}
 		try {
 			Runtime.getRuntime().exec(command);
 		} catch (IOException e) {
@@ -103,5 +113,16 @@ public class LandingPanel extends JPanel {
 		}
 		CardLayout c = (CardLayout) w.cards.getLayout();
 		c.show(w.cards, "UML");
+	}
+	public void executeLoad() {
+		
+	}
+	
+	public void executeDetect() {
+		
+	}
+	
+	public void executeGenerate() {
+		
 	}
 }
