@@ -44,4 +44,9 @@ public class SingletonDetector extends PatternDetector{
 		}
 		return false;
 	}
+	
+	@Override
+	public String getName() {
+		return "Singleton";
+	}
 }

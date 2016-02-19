@@ -83,5 +83,8 @@ public class AdapterDetector extends PatternDetector {
 		}
 		return adaptee!=null;
 	}
-
+	@Override
+	public String getName() {
+		return "Adapter";
+	}
 }

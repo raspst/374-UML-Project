@@ -35,4 +35,6 @@ public abstract class PatternDetector {
 	public Set<JClass> getClasses() {
 		return classes;
 	}
+	
+	public abstract String getName();
 }

@@ -36,5 +36,9 @@ public class PatternContainer {
 	public void getAnnotation(ParserClass parserClass) {
 		
 	}
+	
+	public String getName(){
+		return root.getTopName();
+	}
 
 }

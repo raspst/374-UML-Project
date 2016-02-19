@@ -63,4 +63,9 @@ public class CompositeDetector extends PatternDetector {
 		}*/
 		return false;
 	}
+	
+	@Override
+	public String getName() {
+		return "Composite";
+	}
 }

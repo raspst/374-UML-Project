@@ -126,5 +126,8 @@ public class DecoratorDetector extends PatternDetector {
 		}
 		return false;
 	}
-
+	@Override
+	public String getName() {
+		return "Decorator";
+	}
 }

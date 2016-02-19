@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import uml.detector.AdapterDetector;
 import uml.detector.CompositeDetector;
 import uml.detector.DecoratorDetector;
 import uml.detector.PatternDetector;
@@ -26,11 +27,11 @@ public class DesignParser {
 		/*JMethod m = d.getContainer().parseCalls("DesignParser", "printStack",
 				"(Ljava/util/ArrayList;)Lparser/test/Cat;", 3);*/
 		PrintFactory pf = new PrintFactory(d);
-		new SingletonDetector(d);
-		new DecoratorDetector(d);
 		ArrayList<PatternDetector> pd = new ArrayList<>();
 		pd.add(new CompositeDetector(d));
-		//pd.add(new AdapterDetector(d));
+		pd.add(new AdapterDetector(d));
+		pd.add(new SingletonDetector(d));
+		pd.add(new DecoratorDetector(d));
 		new PatternIterator(pd,d);
 		MainWindow w = new MainWindow();
 		w.createAndShowGUI();
