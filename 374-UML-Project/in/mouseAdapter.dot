@@ -1,0 +1,61 @@
+digraph G {
+fontname = "Bitstream Vera Sans"
+fontsize = 8
+node [
+fontname = "Bitstream Vera Sans"fontsize = 8
+shape = "record"
+]edge [
+fontname = "Bitstream Vera Sans"
+fontsize = 8
+]
+MouseEvent [
+	label = "{MouseEvent|# MOUSE_LAST : int\l# y : int\l# button : int\l# BUTTON3 : int\l# MOUSE_MOVED : int\l# cachedNumberOfButtons : int\l- yAbs : int\l# serialVersionUID : long\l- xAbs : int\l# MOUSE_CLICKED : int\l# clickCount : int\l# popupTrigger : boolean\l# NOBUTTON : int\l# x : int\l# MOUSE_EXITED : int\l# MOUSE_RELEASED : int\l# shouldExcludeButtonFromExtModifiers : boolean\l# MOUSE_PRESSED : int\l# MOUSE_ENTERED : int\l# MOUSE_DRAGGED : int\l# BUTTON2 : int\l# MOUSE_WHEEL : int\l# BUTTON1 : int\l# MOUSE_FIRST : int\l|# initIDs() : void\l+ getLocationOnScreen() : Point\l+ getXOnScreen() : int\l+ getYOnScreen() : int\l+ getModifiersEx() : int\l+ getX() : int\l+ getY() : int\l+ getPoint() : Point\l# translatePoint(int,int,) : void\l+ getClickCount() : int\l+ getButton() : int\l+ isPopupTrigger() : boolean\l# getMouseModifiersText(int,) : String\l+ paramString() : String\l- setNewModifiers() : void\l- setOldModifiers() : void\l- readObject(ObjectInputStream,) : void\l# <clinit>() : void\l}"
+
+]
+ComponentEvent [
+	label = "{ComponentEvent|# COMPONENT_HIDDEN : int\l# COMPONENT_SHOWN : int\l# COMPONENT_LAST : int\l# COMPONENT_RESIZED : int\l# serialVersionUID : long\l# COMPONENT_FIRST : int\l# COMPONENT_MOVED : int\l|+ getComponent() : Component\l+ paramString() : String\l}"
+
+]
+InputEvent [
+	label = "{InputEvent|# canAccessSystemClipboard : boolean\l# META_DOWN_MASK : int\l# logger : PlatformLogger\l# SHIFT_DOWN_MASK : int\l# BUTTON1_MASK : int\l# ALT_DOWN_MASK : int\l# BUTTON3_MASK : int\l# when : long\l# HIGH_MODIFIERS : int\l# CTRL_MASK : int\l# BUTTON2_MASK : int\l# modifiers : int\l# SHIFT_MASK : int\l# BUTTON1_DOWN_MASK : int\l# BUTTON3_DOWN_MASK : int\l# BUTTON_DOWN_MASK : int\l# BUTTON2_DOWN_MASK : int\l# CTRL_DOWN_MASK : int\l# ALT_GRAPH_MASK : int\l# ALT_MASK : int\l# ALT_GRAPH_DOWN_MASK : int\l# serialVersionUID : long\l# META_MASK : int\l# FIRST_HIGH_BIT : int\l# JDK_1_3_MODIFIERS : int\l|# getButtonDownMasks() : int\l# getMaskForButton(int,) : int\l# initIDs() : void\l- canAccessSystemClipboard() : boolean\l+ isShiftDown() : boolean\l+ isControlDown() : boolean\l+ isMetaDown() : boolean\l+ isAltDown() : boolean\l+ isAltGraphDown() : boolean\l+ getWhen() : long\l+ getModifiers() : int\l+ getModifiersEx() : int\l+ consume() : void\l+ isConsumed() : boolean\l# getModifiersExText(int,) : String\l# access$000() : int\l# <clinit>() : void\l}"
+
+]
+MouseWheelEvent [
+	label = "{MouseWheelEvent|# scrollType : int\l# scrollAmount : int\l# WHEEL_BLOCK_SCROLL : int\l# preciseWheelRotation : double\l# wheelRotation : int\l# WHEEL_UNIT_SCROLL : int\l# serialVersionUID : long\l|+ getScrollType() : int\l+ getScrollAmount() : int\l+ getWheelRotation() : int\l+ getPreciseWheelRotation() : double\l+ getUnitsToScroll() : int\l+ paramString() : String\l}"
+
+]
+MouseMotionListener [
+	label = "{interface
+MouseMotionListener||# mouseDragged() : void\l# mouseMoved() : void\l}"
+
+]
+MouseListener [
+	label = "{interface
+MouseListener||# mouseClicked() : void\l# mousePressed() : void\l# mouseReleased() : void\l# mouseEntered() : void\l# mouseExited() : void\l}"
+
+]
+MouseWheelListener [
+	label = "{interface
+MouseWheelListener||# mouseWheelMoved() : void\l}"
+
+]
+MouseAdapter [
+	label = "{MouseAdapter||+ mouseClicked(MouseEvent,) : void\l+ mousePressed(MouseEvent,) : void\l+ mouseReleased(MouseEvent,) : void\l+ mouseEntered(MouseEvent,) : void\l+ mouseExited(MouseEvent,) : void\l+ mouseWheelMoved(MouseWheelEvent,) : void\l+ mouseDragged(MouseEvent,) : void\l+ mouseMoved(MouseEvent,) : void\l}"
+
+]
+
+MouseEvent->InputEvent
+InputEvent->ComponentEvent
+MouseWheelEvent->MouseEvent
+
+edge [style = dotted]
+MouseAdapter->MouseListener
+MouseAdapter->MouseWheelListener
+MouseAdapter->MouseMotionListener
+
+edge [arrowhead = vee]
+
+edge [style = solid]
+
+
+}
