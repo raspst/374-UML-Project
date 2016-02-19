@@ -9,17 +9,18 @@ import java.util.ArrayList;
 import uml.detector.AdapterDetector;
 import uml.detector.CompositeDetector;
 import uml.detector.DecoratorDetector;
+import uml.detector.PatternDetector;
 import uml.detector.SingletonDetector;
 
 public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		Design d = parseFile("composite.txt");
 		d.parse();
-		System.out.println("Method Signature formatting: ");
-		System.out.println("(<args>)<return>");
-		System.out.println("Types:");
-		System.out.println("B-byte C-char D-double F-float I-int J-long");
-		System.out.println("S-short V-void Z-boolean [-array L<class>;");
+//		System.out.println("Method Signature formatting: ");
+//		System.out.println("(<args>)<return>");
+//		System.out.println("Types:");
+//		System.out.println("B-byte C-char D-double F-float I-int J-long");
+//		System.out.println("S-short V-void Z-boolean [-array L<class>;");
 		// JMethod m =
 		// d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
 		/*JMethod m = d.getContainer().parseCalls("DesignParser", "printStack",
@@ -27,8 +28,10 @@ public class DesignParser {
 		PrintFactory pf = new PrintFactory(d);
 		new SingletonDetector(d);
 		new DecoratorDetector(d);
-		new CompositeDetector(d).searchClasses();
-		new AdapterDetector(d);
+		ArrayList<PatternDetector> pd = new ArrayList<>();
+		pd.add(new CompositeDetector(d));
+		//pd.add(new AdapterDetector(d));
+		new PatternIterator(pd);
 		//pf.printContainer();
 		//printStack("java/util/Collections", m, 0);
 		System.out.println("\n");

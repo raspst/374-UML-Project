@@ -1,5 +1,6 @@
 package uml.pattern;
 
+import uml.parser.ParserClass;
 import uml.types.JClass;
 
 public class SingletonContainer extends PatternContainer{
@@ -11,8 +12,7 @@ public class SingletonContainer extends PatternContainer{
 	}
 
 	@Override
-	public String getAnnotation() {
-		return "asdf";
+	public void getAnnotation(ParserClass parserClass) {
 	}
 
 }

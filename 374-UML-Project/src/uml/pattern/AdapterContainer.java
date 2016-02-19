@@ -1,30 +1,30 @@
 package uml.pattern;
 
+import uml.parser.ParserClass;
 import uml.types.JClass;
 
-public class AdapterContainer extends PatternContainer{
+public class AdapterContainer extends PatternContainer {
 	private JClass adaptee;
-	public AdapterContainer(JClass root,JClass adaptee) {
+
+	public AdapterContainer(JClass root, JClass adaptee) {
 		super(root);
-		this.adaptee=adaptee;
+		this.adaptee = adaptee;
 		addClass(adaptee);
-		root.addPattern("Adapter");
-		root.addFillColor("Adapter", "red");
-		root.addAssociatesArrowAnnotation(adaptee.getTopName(), "adapts");
+		addClasses(root.getInterfaces());
+	}
+
+	@Override
+	public void getAnnotation(ParserClass parserClass) {
+		parserClass.addPattern("Adapter");
+		parserClass.addFillColor("Adapter", "red");
+		parserClass.addAssociatesArrowAnnotation(adaptee, "adapts");
+		ParserClass adaptee = parserClass.mapClass(this.adaptee);
 		adaptee.addPattern("Adaptee");
 		adaptee.addFillColor("Adaptee", "red");
-		for(JClass in : root.getInterfaces()){
-			addClass(in);
-			in.addPattern("Target");
-			in.addFillColor("Target", "red");
+		for (ParserClass pin : parserClass.getInterfaces()) {
+			pin.addPattern("Target");
+			pin.addFillColor("Target", "red");
 		}
-	}
-	@Override
-	public String getAnnotation() {
-		for(JClass in : getRoot().getInterfaces()){
-			
-		}
-		return "";
 	}
 
 }

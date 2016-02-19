@@ -1,8 +1,10 @@
 package uml.pattern;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import uml.parser.ParserClass;
 import uml.types.JClass;
 
 public abstract class PatternContainer {
@@ -15,7 +17,9 @@ public abstract class PatternContainer {
 	public void addClass(JClass c) {
 		classes.add(c);
 	}
-
+	public void addClasses(Collection<JClass> classes) {
+		this.classes.addAll(classes);
+	}
 	public void setRoot(JClass root) {
 		addClass(root);
 		this.root = root;
@@ -29,5 +33,6 @@ public abstract class PatternContainer {
 		return classes;
 	}
 
-	public abstract String getAnnotation();
+	public abstract void getAnnotation(ParserClass parserClass);
+
 }

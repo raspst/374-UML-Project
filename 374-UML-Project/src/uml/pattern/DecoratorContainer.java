@@ -1,5 +1,6 @@
 package uml.pattern;
 
+import uml.parser.ParserClass;
 import uml.types.JClass;
 
 public class DecoratorContainer extends PatternContainer{
@@ -25,8 +26,8 @@ public class DecoratorContainer extends PatternContainer{
 		}
 	}
 	@Override
-	public String getAnnotation() {
-		return "asdf";
+	public void getAnnotation(ParserClass parserClass) {
+
 	}
 
 }

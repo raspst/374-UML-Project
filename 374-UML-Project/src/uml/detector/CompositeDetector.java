@@ -45,12 +45,12 @@ public class CompositeDetector extends PatternDetector {
 			}
 		}
 		if(add&&remove){
-			System.out.println("COMPONENT: "+c.getSuper().getName());
-			System.out.println("COMPOSITE: "+c.getName());
-			System.out.println("Leaf Nodes: ");
-			for(JClass cl : c.getSuper().getDescendants()){
-				if(cl!=c)System.out.println(cl.getName());
-			}
+//			System.out.println("COMPONENT: "+c.getSuper().getName());
+//			System.out.println("COMPOSITE: "+c.getName());
+//			System.out.println("Leaf Nodes: ");
+//			for(JClass cl : c.getSuper().getDescendants()){
+//				if(cl!=c)System.out.println(cl.getName());
+//			}
 			return true;
 		}
 		/*if(isDecorator(c)){

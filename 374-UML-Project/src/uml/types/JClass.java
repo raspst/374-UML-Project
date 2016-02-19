@@ -46,33 +46,7 @@ public class JClass extends JInterface {
 
 	public String getGraphViz() {
 		StringBuilder s = new StringBuilder();
-		String name = this.getTopName();
-		if (!isInterface()) {
-			s.append(name + " [\n\tlabel = \"{");
-//			if (this.isSingleton) {
-//				s.append("\tSingleton\\l");
-//			}
-			for(String st: patterns) {
-				s.append("\t" + st + "\\l");
-			}
-			s.append(name + "|");
-		} else {
-			s.append(name + " [\n\tlabel = \"{interface\n"); //name + "|");
-			for(String st: patterns) {
-				s.append("\t" + st + "\\l");
-			}
-			s.append(name + "|");
-		}
-		Iterator<JField> it = fields.iterator();
-		while (it.hasNext()) {
-			s.append(it.next().getGraphViz() + "\\l");
-		}
-		s.append("|");
-		for (int i = 0; i < getMethods().size(); i++) {
-			if (!getMethods().get(i).getName().equals("<init>"))
-				s.append(getMethods().get(i).getGraphViz() + "\\l");
-		}
-		s.append("}\"\n");
+
 		return s.toString();
 	}
 

@@ -1,6 +1,8 @@
 package uml.detector;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import uml.parser.Design;
 import uml.pattern.PatternContainer;
@@ -8,7 +10,7 @@ import uml.types.JClass;
 
 public abstract class PatternDetector {
 	protected Design design;
-
+	private HashSet<JClass> classes=new HashSet<>();
 	public PatternDetector(Design d) {
 		design = d;
 	}
@@ -17,8 +19,11 @@ public abstract class PatternDetector {
 		ArrayList<PatternContainer> containers = new ArrayList<>();
 		for (String cl : design.getClassNames()) {
 			JClass c = design.getClass(cl);
-			if (hasPattern(c))
-				containers.add(applyChange(c));
+			if (hasPattern(c)){
+				PatternContainer container = applyChange(c);
+				containers.add(container);
+				classes.addAll(container.getClasses());
+			}
 		}
 		return containers;
 	}
@@ -26,4 +31,8 @@ public abstract class PatternDetector {
 	public abstract boolean hasPattern(JClass c);
 
 	public abstract PatternContainer applyChange(JClass c);
+	
+	public Set<JClass> getClasses() {
+		return classes;
+	}
 }
