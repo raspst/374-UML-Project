@@ -3,7 +3,6 @@ package uml.types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 
 public class JClass extends JInterface {
 	private HashSet<JField> fields;
@@ -42,12 +41,6 @@ public class JClass extends JInterface {
 
 	public JClass getSuper() {
 		return this.superclass;
-	}
-
-	public String getGraphViz() {
-		StringBuilder s = new StringBuilder();
-
-		return s.toString();
 	}
 
 	public void addUses(JClass usedClass) {

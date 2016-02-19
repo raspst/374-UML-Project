@@ -2,10 +2,8 @@ package uml.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import uml.types.JClass;
-import uml.types.JField;
 
 public class ParserClass {
 	private HashMap<JClass, ParserClass> classMap;
@@ -16,6 +14,7 @@ public class ParserClass {
 	private ArrayList<ParserClass> descendants = new ArrayList<>();
 	private ArrayList<ParserClass> interfaces = new ArrayList<>();
 	private HashMap<String, String> patternToUsesArrow = new HashMap<>();
+	
 	public ParserClass(JClass c, HashMap<JClass, ParserClass> map) {
 		classMap = map;
 		theclass = c;
@@ -52,43 +51,6 @@ public class ParserClass {
 
 	public ArrayList<String> getPatterns() {
 		return patterns;
-	}
-
-	public void printClass() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(theclass.getGraphViz());
-		String name = theclass.getTopName();
-		if (!theclass.isInterface()) {
-			sb.append(name + " [\n\tlabel = \"{");
-			for (String st : patterns) {
-				sb.append("\t" + st + "\\l");
-			}
-			sb.append(name + "|");
-		} else {
-			sb.append(name + " [\n\tlabel = \"{interface\n"); // name + "|");
-			for (String st : patterns) {
-				sb.append("\t" + st + "\\l");
-			}
-			sb.append(name + "|");
-		}
-		Iterator<JField> it = theclass.getFields().iterator();
-		while (it.hasNext()) {
-			sb.append(it.next().getGraphViz() + "\\l");
-		}
-		sb.append("|");
-		for (int i = 0; i < theclass.getMethods().size(); i++) {
-			if (!theclass.getMethods().get(i).getName().equals("<init>"))
-				sb.append(theclass.getMethods().get(i).getGraphViz() + "\\l");
-		}
-		sb.append("}\"\n");
-		for (String s : patterns) {
-			String color = getColor(s);
-			if (color != null) {
-				sb.append("\t" + color + "\n");
-			}
-		}
-		sb.append("]\n");
-		System.out.println(sb.toString());
 	}
 
 	public void addBorderColor(String pattern, String color) {

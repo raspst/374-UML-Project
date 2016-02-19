@@ -31,10 +31,7 @@ public class PrintFactory {
 		StringBuilder sb = new StringBuilder();
 		for (String name : d.getClassNames()) {
 			JClass c = d.getClass(name);
-			sb.append(c.getGraphViz()+'\n');
-//			if(c.isSingleton()) {
-//				sb.append("\tcolor=blue\n");
-//			}
+		//	sb.append(c.getGraphViz()+'\n');
 			for(String s: c.getPatterns()) {
 				String color = c.getColor(s);
 				if(color != null) {

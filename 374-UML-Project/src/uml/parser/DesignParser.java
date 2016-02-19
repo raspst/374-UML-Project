@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import uml.detector.AdapterDetector;
 import uml.detector.CompositeDetector;
 import uml.detector.DecoratorDetector;
 import uml.detector.PatternDetector;

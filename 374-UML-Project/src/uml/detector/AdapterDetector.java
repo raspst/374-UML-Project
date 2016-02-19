@@ -2,7 +2,6 @@ package uml.detector;
 
 import java.util.ArrayList;
 
-import uml.node.Instruction;
 import uml.parser.Design;
 import uml.pattern.AdapterContainer;
 import uml.pattern.PatternContainer;
