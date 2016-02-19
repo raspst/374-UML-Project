@@ -123,7 +123,7 @@ public class LandingPanel extends JPanel {
 				return;
 			}
 			i++;
-			progressBar.setValue(progressBar.getValue() + 1);
+			progressBar.setValue(i);
 		}
 	}
 	public void executeLoad() {

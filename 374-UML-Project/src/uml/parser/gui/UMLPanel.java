@@ -46,29 +46,29 @@ public class UMLPanel extends JPanel {
 		this.pi = pi;
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setSize(MainWindow.APP_DEFAULT_WIDTH, MainWindow.APP_DEFAULT_HEIGHT);
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.VERTICAL;
+		this.setLayout(new GridLayout(1, 2));
+//		GridBagConstraints c = new GridBagConstraints();
+//		c.fill = GridBagConstraints.VERTICAL;
 		JPanel drawPanel = new JPanel();
 		JPanel treePanel = new JPanel();
+		treePanel.setSize(this.getWidth()/3, this.getHeight());
 		frame.setJMenuBar(createMenuBar());
 		label = new JLabel();
 		label.setText("Loading Image");
 		label.setIcon(createImage());
 		label.setText("");
 		drawPanel.add(label);
-		c.gridx = 0;
-		c.gridy = 0;
-		c.weightx = 0.2;
-		c.anchor = GridBagConstraints.WEST;
+//		c.gridx = 0;
+//		c.gridy = 0;
+//		c.weightx = 1;
+//		c.anchor = GridBagConstraints.WEST;
 		treePanel.add(createPatternTree());
-		this.add(treePanel, c);
-		c.gridx = 0;
-		c.gridy = 1;
-		c.weightx = 0.8;
-		c.fill = GridBagConstraints.REMAINDER;
-		c.anchor = GridBagConstraints.EAST;
-		this.add(drawPanel, c);
+		this.add(treePanel);
+//		c.gridx = 0;
+//		c.gridy = 1;
+//		c.fill = GridBagConstraints.HORIZONTAL;
+//		c.anchor = GridBagConstraints.EAST;
+		this.add(drawPanel);
 	}
 	
 	public JMenuBar createMenuBar() {

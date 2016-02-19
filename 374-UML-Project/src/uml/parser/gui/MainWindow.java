@@ -17,8 +17,8 @@ import javax.swing.UIManager;
 
 public class MainWindow {
 	
-	public static int APP_DEFAULT_WIDTH = 1024;
-	public static int APP_DEFAULT_HEIGHT = 768;
+	public static int APP_DEFAULT_WIDTH = 1600;
+	public static int APP_DEFAULT_HEIGHT = 900;
 	
 	protected LandingPanel landingPanel;
 	protected JFrame mainFrame;
