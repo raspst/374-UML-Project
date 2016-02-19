@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class LandingPanel extends JPanel {
-	protected final MainWindow w;
+	protected MainWindow w;
 
 	public LandingPanel(final MainWindow w) {
 		this.w = w;

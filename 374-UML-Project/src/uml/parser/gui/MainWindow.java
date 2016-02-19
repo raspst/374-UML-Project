@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.UIManager;
@@ -35,7 +38,7 @@ public class MainWindow {
 		landingPanel = new LandingPanel(this);
 //		landingPanel.setFocusable(true);
 		cards.add("LANDING", landingPanel);
-		umlPanel = new UMLPanel();
+		umlPanel = new UMLPanel(mainFrame);
 //		umlPanel.setFocusable(true);
 		cards.add("UML", umlPanel);
 		mainFrame.add(cards);

@@ -16,20 +16,58 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class UMLPanel extends JPanel {
+	protected JFrame frame;
 
-	public UMLPanel() {
+	public UMLPanel(JFrame frame) {
+		this.frame = frame;
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		this.setSize(MainWindow.APP_DEFAULT_WIDTH, MainWindow.APP_DEFAULT_HEIGHT);
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.VERTICAL;
 		JPanel drawPanel = new JPanel();
+		frame.setJMenuBar(createMenuBar());
+		JLabel label = new JLabel();
+		label.setIcon(createImage());
+		drawPanel.add(label);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.weightx = 0.2;
+		c.anchor = GridBagConstraints.WEST;
+		this.add(createPatternTree(), c);
+		c.gridx = 0;
+		c.gridy = 1;
+		c.weightx = 0.8;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.EAST;
+		this.add(drawPanel, c);
+	}
+	
+	public JMenuBar createMenuBar() {
+		JMenuBar menuBar = new JMenuBar();
+		JMenu fileMenu = new JMenu("File");
+		JMenu helpMenu = new JMenu("Help");
+		JMenuItem restartItem = new JMenuItem("Reload");
+		JMenuItem aboutItem = new JMenuItem("About");
+		fileMenu.add(restartItem);
+		helpMenu.add(aboutItem);
+		menuBar.add(fileMenu);
+		menuBar.add(helpMenu);
+		return menuBar;
+	}
+	
+	public JTree createPatternTree() {
 		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Parent");
 		DefaultMutableTreeNode child1 = new DefaultMutableTreeNode("Child1");
 		DefaultMutableTreeNode grandchild1 = new DefaultMutableTreeNode("Grandchild1");
@@ -40,9 +78,10 @@ public class UMLPanel extends JPanel {
 		top.add(child1);
 		top.add(child2);
 		JTree tree = new JTree(top);
-		JLabel label = new JLabel();
-//		label.setText("Draw Image Here");
-		
+		return tree;
+	}
+	
+	public ImageIcon createImage() {
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File("docs/new_diagram.png"));
@@ -51,18 +90,6 @@ public class UMLPanel extends JPanel {
 			e.printStackTrace();
 		}
 		ImageIcon image = new ImageIcon(img.getScaledInstance(600, 600, Image.SCALE_SMOOTH));
-		label.setIcon(image);
-		drawPanel.add(label);
-		c.gridx = 0;
-		c.gridy = 0;
-		c.weightx = 0.2;
-		c.anchor = GridBagConstraints.WEST;
-		this.add(tree, c);
-		c.gridx = 0;
-		c.gridy = 1;
-		c.weightx = 0.8;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.EAST;
-		this.add(drawPanel, c);
+		return image;
 	}
 }
