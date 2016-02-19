@@ -1,6 +1,5 @@
 package uml.types;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -8,20 +7,11 @@ public class JClass extends JInterface {
 	private HashSet<JField> fields;
 	private JClass superclass;
 	private HashMap<String, JClass> uses;
-	private ArrayList<String> patterns;
-	private HashMap<String, String> patternToUsesArrow;
-	private HashMap<String, String> patternToAssociationsArrow;
-	private HashMap<String, String> patternToColor;
-//	private boolean isSingleton = false;
 
 	public JClass(String name) {
 		super(name);
 		fields = new HashSet<JField>();
 		uses = new HashMap<String, JClass>();
-		patterns = new ArrayList<String>();
-		patternToUsesArrow = new HashMap<String, String>();
-		patternToAssociationsArrow = new HashMap<String, String>();
-		patternToColor = new HashMap<String, String>();
 	}
 
 	public void addField(JField f) {
@@ -44,10 +34,7 @@ public class JClass extends JInterface {
 	}
 
 	public void addUses(JClass usedClass) {
-		// if (this.getName() !=
-		// usedClass.getName()) {
 		this.uses.put(this.getName(), usedClass);
-		// }
 	}
 
 	public HashMap<String, JClass> getUses() {
@@ -66,48 +53,4 @@ public class JClass extends JInterface {
 		}
 		return null;
 	}
-	
-	public void addPattern(String name) {
-		this.patterns.add(name);
-	}
-	
-	public ArrayList<String> getPatterns() {
-		return patterns;
-	}
-	
-	public void addBorderColor(String pattern, String color) {
-		patternToColor.put(pattern, "color=" + color);
-	}
-	
-	public void addFillColor(String pattern, String color) {
-		patternToColor.put(pattern, "style=filled\n\tfillcolor=" + color);
-	}
-	
-	public void addUsesArrowAnnotation(String pattern, String annotation) {
-		patternToUsesArrow.put(pattern, annotation);
-	}
-	
-	public String getUsesArrowAnnotation(String pattern) {
-		return patternToUsesArrow.get(pattern);
-	}
-	
-	public void addAssociatesArrowAnnotation(String pattern, String annotation) {
-		patternToAssociationsArrow.put(pattern, "[label=" + annotation + "]");
-	}
-	
-	public String getAssociationsArrowAnnotation(String pattern) {
-		return patternToAssociationsArrow.get(pattern);
-	}
-	
-	public String getColor(String pattern) {
-		return patternToColor.get(pattern);
-	}
-
-//	public void setSingleton(boolean value) {
-//		this.isSingleton = value;
-//	}
-//
-//	public boolean isSingleton() {
-//		return this.isSingleton;
-//	}
 }

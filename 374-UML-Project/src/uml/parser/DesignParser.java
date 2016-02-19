@@ -26,7 +26,6 @@ public class DesignParser {
 		// d.getContainer().parseCalls("java/util/Collections","shuffle","(Ljava/util/List;)V",5);
 		/*JMethod m = d.getContainer().parseCalls("DesignParser", "printStack",
 				"(Ljava/util/ArrayList;)Lparser/test/Cat;", 3);*/
-		PrintFactory pf = new PrintFactory(d);
 		ArrayList<PatternDetector> pd = new ArrayList<>();
 		pd.add(new CompositeDetector(d));
 		pd.add(new AdapterDetector(d));
